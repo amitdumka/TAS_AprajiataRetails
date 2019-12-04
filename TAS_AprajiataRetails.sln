@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAS_AprajiataRetails", "TAS_AprajiataRetails\TAS_AprajiataRetails.csproj", "{A9E6CB57-47AB-4EA7-A501-183F9BCC4BD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAS_AprajiataRetails.Tests", "TAS_AprajiataRetails.Tests\TAS_AprajiataRetails.Tests.csproj", "{CE976817-B233-4471-A74C-099899753D05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9E6CB57-47AB-4EA7-A501-183F9BCC4BD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E6CB57-47AB-4EA7-A501-183F9BCC4BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E6CB57-47AB-4EA7-A501-183F9BCC4BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E6CB57-47AB-4EA7-A501-183F9BCC4BD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE976817-B233-4471-A74C-099899753D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE976817-B233-4471-A74C-099899753D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE976817-B233-4471-A74C-099899753D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE976817-B233-4471-A74C-099899753D05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82ABA427-E86A-4540-889E-2197F2939734}
+	EndGlobalSection
+EndGlobal
