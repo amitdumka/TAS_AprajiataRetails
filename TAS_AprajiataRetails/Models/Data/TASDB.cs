@@ -69,11 +69,11 @@ namespace TAS_AprajiataRetails.Models.Data
     }
    
     //TODO: Remove this
-    public class PayMode
-    {
-        public int PayModeId { get; set; }
-        public string PayModeName { set; get; }
-    }
+    //public class PayMode
+    //{
+    //    public int PayModeId { get; set; }
+    //    public string PayModeName { set; get; }
+    //}
     public class CashInHand
     {
         public int CashInHandId { get; set; }
@@ -89,67 +89,95 @@ namespace TAS_AprajiataRetails.Models.Data
     public class CashInBank
     {
         public int CashInBankId { get; set; }
+        [Display(Name = "Cash-in-Bank Date")]
         public DateTime CIBDate { get; set; }
+        [Display(Name = "Openning Balance")]
         public double OpenningBalance { get; set; }
+        [Display(Name = "ClosingBalance")]
         public double ClosingBalance { get; set; }
+        [Display(Name = "Cash-in-bank Amount")]
         public double CashInBankAmount { get; set; }
     }
     public class CashInward
     {
         public int CashInwardId { get; set; }
-        public DateTime dateTime { get; set; }
+        [Display(Name = "Inward Date")]
+        public DateTime InwardDate { get; set; }
+        [Display(Name = "Reciept From"), Required]
         public string RecieptFrom { get; set; }
         public double Amount { get; set; }
+        [Display(Name = "Reciept No")]
         public string SlipNo { get; set; }
     }
     public class HomeExpense
     {
         public int HomeExpenseId { get; set; }
-        public DateTime dateTime { get; set; }
+        [Display(Name = "Date")]
+        public DateTime Date { get; set; }
+        [Display(Name = "Paid To")]
         public string PaidTo { get; set; }
         public double Amount { get; set; }
+        [Display(Name = "Slip No")]
         public string SlipNo { get; set; }
     }
     public class OtherHomeExpense
     {
         public int OtherHomeExpenseId { get; set; }
-        public DateTime dateTime { get; set; }
+        [Display(Name = "Date")]
+        public DateTime Date { get; set; }
+        [Display(Name = "Paid To")]
         public string PaidTo { get; set; }
         public double Amount { get; set; }
+        [Display(Name = "Slip No")]
         public string SlipNo { get; set; }
         public string Remarks { get; set; }
     }
     public class AmitKumarExpense
     {
         public int AmitKumarExpenseId { get; set; }
-        public DateTime dateTime { get; set; }
+        [Display(Name = "Payment Date")]
+        public DateTime Date { get; set; }
+        [Display(Name = "Paid To")]
         public string PaidTo { get; set; }
         public double Amount { get; set; }
+        [Display(Name = "Slip No")]
         public string SlipNo { get; set; }
     }
     public class DailySale
     {
         public int DailySaleId { get; set; }
+        [Display(Name = "Sale Date")]
         public DateTime SaleDate { get; set; }
+        [Display(Name = "Invoice No")]
         public string InvNo { get; set; }
         public double Amount { get; set; }
+        [Display(Name = "Payment Mode")]
         public string PayMode { get; set; }
+        [Display(Name = "Cash Amount")]
         public double CashAmount { get; set; }
         public string Salesman { get; set; }
+        [Display(Name = "Is Due")]
         public bool IsDues { get; set; }
+        [Display(Name = "Is Manual Bill")]
         public bool IsManualBill { get; set; }
+        [Display(Name = "Is Tailoring Bill")]
         public bool IsTailingBill { get; set; }
         public string Remarks { get; set; }
     }
     public class Expenses
     {
         public int ExpensesId { get; set; }
+        [Display(Name = "Expense Date")]
         public DateTime ExpDate { get; set; }
         public string Particulars { get; set; }
         public double Amount { get; set; }
-        public string PayMode { get; set; }
+        [Display(Name = "Payment Mode")]
+        public PayModes PayMode { get; set; }
+        [Display(Name = "Payment Details")]
         public string PaymentDetails { get; set; }
+        [Display(Name = "Paid By")]
         public string PaidBy { get; set; }
+        [Display(Name = "Paid To")]
         public string PaidTo { get; set; }
         public string Remarks { get; set; }
 
@@ -251,19 +279,30 @@ namespace TAS_AprajiataRetails.Models.Data
     public class Emp
     {
         public int EmpId { get; set; }
+        [Display(Name = "Staff Name")]
         public string StaffName { get; set; }
+        [Display(Name = "Mobile No")]
         public string Mobileno { get; set; }
+        [Display(Name = "Joining Date")]
         public DateTime JoiningDate { get; set; }
+        [Display(Name = "Leaving Date")]
+        public DateTime LeavingDate { get; set; }
+        [Display(Name = "Is Working")]
+        public bool IsWorking { get; set; }
 
     }
     public class SalaryPayment
     {
         public int SalaryPaymentId { get; set; }
+        [Display(Name = "OpenningBalance")]
         public string StaffName { get; set; }
+        [Display(Name = "OpenningBalance")]
         public string SalaryMonth { get; set; }
+        [Display(Name = "OpenningBalance")]
         public DateTime PaymentDate { get; set; }
         public double Amount { get; set; }
-        public string PayMode { get; set; }
+        [Display(Name = "OpenningBalance")]
+        public PayModes PayMode { get; set; }
         public string Details { get; set; }
 
 
@@ -327,6 +366,6 @@ namespace TAS_AprajiataRetails.Models.Data
         public DbSet<CashInward> CashInwards { get; set; }
         public DbSet<CashInHand> CashInHands { get; set; }
         public DbSet<CashInBank> CashInBanks { get; set; }
-        public DbSet<PayMode> PayModes { get; set; }
+        //public DbSet<PayMode> PayModes { get; set; }
     }
 }
