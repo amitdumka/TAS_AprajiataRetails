@@ -196,16 +196,33 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\index.html" />
+    <Content Include="Scripts\JavaScript.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery-ui.structure.css" />
+    <Content Include="Scripts\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jquery-ui.theme.css" />
+    <Content Include="Scripts\jquery-ui.theme.min.css" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\LICENSE.txt" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ui-icons_444444_256x240.png" />
+    <Content Include="Scripts\ui-icons_555555_256x240.png" />
+    <Content Include="Scripts\ui-icons_777620_256x240.png" />
+    <Content Include="Scripts\ui-icons_777777_256x240.png" />
+    <Content Include="Scripts\ui-icons_cc0000_256x240.png" />
+    <Content Include="Scripts\ui-icons_ffffff_256x240.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -245,6 +262,7 @@
     <Content Include="Views\DailySales\Details.cshtml" />
     <Content Include="Views\DailySales\Edit.cshtml" />
     <Content Include="Views\DailySales\Index.cshtml" />
+    <Content Include="Scripts\package.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

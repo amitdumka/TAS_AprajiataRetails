@@ -17,7 +17,7 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: DailySales
         public ActionResult Index()
         {
-            var dailySales = db.DailySales.Include(d => d.Salesman);
+            var dailySales = db.DailySales.Include(d => d.Salesman).OrderByDescending(c=>c.SaleDate).ThenByDescending(c=>c.DailySaleId);
             return View(dailySales.ToList());
         }
 
@@ -33,14 +33,16 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(dailySale);
+            //return View(dailySale);
+            return PartialView(dailySale);
         }
 
         // GET: DailySales/Create
         public ActionResult Create()
         {
             ViewBag.SalesmanId = new SelectList(db.Salesmen, "SalesmanId", "SalesmanName");
-            return View();
+            //return View();
+            return PartialView();
         }
 
         // POST: DailySales/Create
@@ -59,6 +61,7 @@ namespace TAS_AprajiataRetails.Controllers
 
             ViewBag.SalesmanId = new SelectList(db.Salesmen, "SalesmanId", "SalesmanName", dailySale.SalesmanId);
             return View(dailySale);
+            //return PartialView(dailySale);
         }
 
         // GET: DailySales/Edit/5
@@ -74,7 +77,8 @@ namespace TAS_AprajiataRetails.Controllers
                 return HttpNotFound();
             }
             ViewBag.SalesmanId = new SelectList(db.Salesmen, "SalesmanId", "SalesmanName", dailySale.SalesmanId);
-            return View(dailySale);
+            //return View(dailySale);
+            return PartialView(dailySale);
         }
 
         // POST: DailySales/Edit/5
@@ -106,7 +110,8 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(dailySale);
+            // return View(dailySale);
+            return PartialView(dailySale);
         }
 
         // POST: DailySales/Delete/5
