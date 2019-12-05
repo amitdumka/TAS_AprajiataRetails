@@ -2,12 +2,14 @@
 using System.Linq;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TAS_AprajiataRetails.Models.Data
 {
     //Enum Section
 
-    public enum PayModes { Cash, Card , RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points,Others,Coupons  };
+    public enum PayModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons };
 
     // Utils Section 
     public class Utils
@@ -53,7 +55,7 @@ namespace TAS_AprajiataRetails.Models.Data
     public class EndOfDay
     {
         public int EndOfDayId { get; set; }
-        
+
         [Display(Name = "EOD Date")]
         public DateTime EOD_Date { get; set; }
         public float Shirting { get; set; }
@@ -67,7 +69,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public int Access { get; set; }
         public int Tailoring { get; set; }
     }
-   
+
     //TODO: Remove this
     //public class PayMode
     //{
@@ -146,23 +148,48 @@ namespace TAS_AprajiataRetails.Models.Data
     public class DailySale
     {
         public int DailySaleId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Sale Date")]
         public DateTime SaleDate { get; set; }
+
         [Display(Name = "Invoice No")]
         public string InvNo { get; set; }
-        public double Amount { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+
         [Display(Name = "Payment Mode")]
-        public string PayMode { get; set; }
+        public PayModes PayMode { get; set; }
+
         [Display(Name = "Cash Amount")]
-        public double CashAmount { get; set; }
-        public string Salesman { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal CashAmount { get; set; }
+
+        [ForeignKey("Salesman")]
+        public int SalesmanId { get; set; }
+        public virtual Salesman Salesman { get; set; }
+
         [Display(Name = "Is Due")]
-        public bool IsDues { get; set; }
+        public bool IsDue { get; set; }
+
         [Display(Name = "Is Manual Bill")]
         public bool IsManualBill { get; set; }
+
         [Display(Name = "Is Tailoring Bill")]
-        public bool IsTailingBill { get; set; }
+        public bool IsTailoringBill { get; set; }
         public string Remarks { get; set; }
+
+        
+        
+    }
+    
+    public class Salesman
+    {
+        public int SalesmanId { get; set; }
+        public string SalesmanName { get; set; }
+
+        public virtual ICollection<DailySale> DailySales { get; set; }
     }
     public class Expenses
     {
@@ -192,6 +219,17 @@ namespace TAS_AprajiataRetails.Models.Data
         public string PayMode { get; set; }
         public string Details { get; set; }
         public string Remarks { get; set; }
+    }
+    public class Bank
+    {
+        public int BankId { get; set; }
+       public string BankName { get; set; }
+    }
+    public class AccountNumber
+    {
+        public int AccountNumberId { get; set; }
+        public int BankId { get; set; }
+        public string Account { get; set; }
     }
     public class TalioringBooking
     {
@@ -276,9 +314,9 @@ namespace TAS_AprajiataRetails.Models.Data
         public double SaleAdjustest { get; set; }
         public double TotalFixedSale { get; set; }
     }
-    public class Emp
+    public class Employee
     {
-        public int EmpId { get; set; }
+        public int EmployeeId { get; set; }
         [Display(Name = "Staff Name")]
         public string StaffName { get; set; }
         [Display(Name = "Mobile No")]
@@ -338,11 +376,11 @@ namespace TAS_AprajiataRetails.Models.Data
         public double YearlyBooking { get; set; }
         public double YearlyUnit { get; set; }
     }
-
+   
     // DBContext Sections
     public class AprajitaRetailsContext : DbContext
     {
-        public AprajitaRetailsContext() : base("DB_TAS_Dumka")
+        public AprajitaRetailsContext() : base("AprajitaRetails")
         {
             Database.SetInitializer<AprajitaRetailsContext>(new CreateDatabaseIfNotExists<AprajitaRetailsContext>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AprajitaRetailsContext, Migrations.Configuration>());
@@ -356,7 +394,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public DbSet<TalioringBooking> TalioringBookings { get; set; }
         public DbSet<TalioringDelivery> TalioringDeliveries { get; set; }
         public DbSet<Attendences> Attendences { get; set; }
-        public DbSet<Emp> Emps { get; set; }
+        public DbSet<Employee> Employees { get; set; } // Changed from Orignail
         public DbSet<AdvancePayment> AdvancePayments { get; set; }
         public DbSet<AdvanceReceipt> AdvanceReceipts { get; set; }
         public DbSet<SalaryPayment> SalaryPayments { get; set; }
@@ -366,6 +404,11 @@ namespace TAS_AprajiataRetails.Models.Data
         public DbSet<CashInward> CashInwards { get; set; }
         public DbSet<CashInHand> CashInHands { get; set; }
         public DbSet<CashInBank> CashInBanks { get; set; }
-        //public DbSet<PayMode> PayModes { get; set; }
+        public DbSet<Bank> Banks { get; set; }
+        //public DbSet<PayMode> PayModes { get; set; }// Changed from Orignail
+
+        //Version 2
+
+        public DbSet<Salesman> Salesmen { get; set; }
     }
 }
