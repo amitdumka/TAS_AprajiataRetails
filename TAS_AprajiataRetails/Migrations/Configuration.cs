@@ -27,15 +27,26 @@ namespace TAS_AprajiataRetails.Migrations
             context.Salesmen.AddOrUpdate(new Salesman() { SalesmanId = 2, SalesmanName = "Mukesh Mandal" });
             context.Salesmen.AddOrUpdate(new Salesman() { SalesmanId = 3, SalesmanName = "Manager" });
             var modes = new List<TranscationMode>() {
-                new TranscationMode(){Transcation="Home Expenses",TranscationModeId=1},
-                new TranscationMode(){Transcation="Ohter Home Expenses",TranscationModeId=2},
-                new TranscationMode(){Transcation="Mukesh(HomeStaff)",TranscationModeId=3},
-                new TranscationMode(){Transcation="Amit Kumar",TranscationModeId=4},
-                new TranscationMode(){Transcation="Amit Kumar Expenses",TranscationModeId=5},
-                new TranscationMode(){Transcation="CashIn",TranscationModeId=6},
-                new TranscationMode(){Transcation="CashOut",TranscationModeId=7},
+                new TranscationMode(){Transcation="Home Expenses",TranscationModeId=1 },
+                new TranscationMode(){Transcation="Ohter Home Expenses" ,TranscationModeId=2},
+                new TranscationMode(){Transcation="Mukesh(HomeStaff)" ,TranscationModeId=3},
+                new TranscationMode(){Transcation="Amit Kumar" ,TranscationModeId=4},
+                new TranscationMode(){Transcation="Amit Kumar Expenses" ,TranscationModeId=5},
+                new TranscationMode(){Transcation="CashIn" ,TranscationModeId=6},
+                new TranscationMode(){Transcation="CashOut" ,TranscationModeId=7},
             };
             modes.ForEach(s => context.TranscationModes.AddOrUpdate(s));
+
+            var banks = new List<Bank>() { 
+                new Bank(){BankId= 1, BankName="SBI"},
+                new Bank(){BankId= 2, BankName="ICICI"},
+                new Bank(){BankId= 3, BankName="Bandhan Bank"},
+                new Bank(){ BankId=4, BankName="PNB"},
+                new Bank(){BankId= 5, BankName="BOB"},
+                new Bank(){ BankId=6, BankName="Axis"},
+                new Bank(){BankId= 7, BankName="HDFC"},
+            };
+            banks.ForEach(s => context.Banks.AddOrUpdate(s));
             context.SaveChanges();
         }
     }
@@ -46,7 +57,28 @@ namespace TAS_AprajiataRetails.Migrations
         {
             context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Sanjeev Mishra" });
             context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Mukesh Mandal" });
-            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Manager Old" });
+            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Manager" });
+            var modes = new List<TranscationMode>() {
+                new TranscationMode(){Transcation="Home Expenses"},
+                new TranscationMode(){Transcation="Ohter Home Expenses" },
+                new TranscationMode(){Transcation="Mukesh(HomeStaff)" },
+                new TranscationMode(){Transcation="Amit Kumar" },
+                new TranscationMode(){Transcation="Amit Kumar Expenses" },
+                new TranscationMode(){Transcation="CashIn" },
+                new TranscationMode(){Transcation="CashOut" },
+            };
+            modes.ForEach(s => context.TranscationModes.AddOrUpdate(s));
+
+            var banks = new List<Bank>() {
+                new Bank(){ BankName="SBI"},
+                new Bank(){  BankName="ICICI"},
+                new Bank(){  BankName="Bandhan Bank"},
+                new Bank(){  BankName="PNB"},
+                new Bank(){  BankName="BOB"},
+                new Bank(){  BankName="Axis"},
+                new Bank(){  BankName="HDFC"},
+            };
+            banks.ForEach(s => context.Banks.AddOrUpdate(s));
 
             context.SaveChanges();
         }

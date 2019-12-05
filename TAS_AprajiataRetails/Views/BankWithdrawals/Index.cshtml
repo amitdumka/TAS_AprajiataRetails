@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.BankWithdrawal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepoDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SignedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InNameOf)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.Account)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepoDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SignedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InNameOf)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BankWithdrawalId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BankWithdrawalId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BankWithdrawalId })
+        </td>
+    </tr>
+}
+
+</table>

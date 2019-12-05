@@ -168,7 +168,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountNumbersController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
+    <Compile Include="Controllers\BankDepositsController.cs" />
+    <Compile Include="Controllers\BankWithdrawalsController.cs" />
     <Compile Include="Controllers\CashPaymentsController.cs" />
     <Compile Include="Controllers\CashReceiptsController.cs" />
     <Compile Include="Controllers\DailySalesController.cs" />
@@ -204,6 +207,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\AprajiataRetails - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\index.html" />
     <Content Include="Scripts\JavaScript.js" />
@@ -307,6 +311,21 @@
     <Content Include="Views\Attendances\Details.cshtml" />
     <Content Include="Views\Attendances\Edit.cshtml" />
     <Content Include="Views\Attendances\Index.cshtml" />
+    <Content Include="Views\AccountNumbers\Create.cshtml" />
+    <Content Include="Views\AccountNumbers\Delete.cshtml" />
+    <Content Include="Views\AccountNumbers\Details.cshtml" />
+    <Content Include="Views\AccountNumbers\Edit.cshtml" />
+    <Content Include="Views\AccountNumbers\Index.cshtml" />
+    <Content Include="Views\BankDeposits\Create.cshtml" />
+    <Content Include="Views\BankDeposits\Delete.cshtml" />
+    <Content Include="Views\BankDeposits\Details.cshtml" />
+    <Content Include="Views\BankDeposits\Edit.cshtml" />
+    <Content Include="Views\BankDeposits\Index.cshtml" />
+    <Content Include="Views\BankWithdrawals\Create.cshtml" />
+    <Content Include="Views\BankWithdrawals\Delete.cshtml" />
+    <Content Include="Views\BankWithdrawals\Details.cshtml" />
+    <Content Include="Views\BankWithdrawals\Edit.cshtml" />
+    <Content Include="Views\BankWithdrawals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

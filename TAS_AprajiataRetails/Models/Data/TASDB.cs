@@ -333,24 +333,7 @@ namespace TAS_AprajiataRetails.Models.Data
     }
 
     // Tables
-    public class EndOfDay
-    {
-        public int EndOfDayId { get; set; }
-
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "EOD Date")]
-        public DateTime EOD_Date { get; set; }
-        public float Shirting { get; set; }
-        public float Suiting { get; set; }
-        public int USPA { get; set; }
-        [Display(Name = "FM/Arrow/Others")]
-        public int FM_Arrow { get; set; }
-        [Display(Name = "Arvind RTW")]
-        public int RWT { get; set; }
-        [Display(Name = "Accessories")]
-        public int Access { get; set; }
-        public int Tailoring { get; set; }
-    }
+    
 
     //TODO: Remove this
     //public class PayMode
@@ -426,28 +409,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public string Remarks { get; set; }
 
     }
-    public class BankDeposit
-    {
-        public int BankDepositId { get; set; }
-        public DateTime DepoDate { get; set; }
-        public string BankName { get; set; }
-        public string AccountNo { get; set; }
-        public double Amount { get; set; }
-        public string PayMode { get; set; }
-        public string Details { get; set; }
-        public string Remarks { get; set; }
-    }
-    public class Bank
-    {
-        public int BankId { get; set; }
-        public string BankName { get; set; }
-    }
-    public class AccountNumber
-    {
-        public int AccountNumberId { get; set; }
-        public int BankId { get; set; }
-        public string Account { get; set; }
-    }
+    
     public class TalioringBooking
     {
         public int TalioringBookingId { get; set; }

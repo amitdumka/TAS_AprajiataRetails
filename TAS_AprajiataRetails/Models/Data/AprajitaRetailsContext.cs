@@ -42,9 +42,19 @@ namespace TAS_AprajiataRetails.Models.Data
 
         //Payroll
         public DbSet<Attendance> Attendances { get; set; }
-        public DbSet<Employee> Employees { get; set; } 
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<SalaryPayment> Salaries { get; set; }
         public DbSet<StaffAdvancePayment> StaffAdvancePayments { get; set; }
         public DbSet<StaffAdvanceReceipt> StaffAdvanceReceipts { get; set; }
-    }
+
+        //Banking
+        public DbSet<Bank>Banks{get;set;}
+        public DbSet<AccountNumber>BankAccounts{get;set;}
+        public DbSet<BankDeposit>BankDeposits{get;set;}
+        public DbSet<BankWithdrawal> Withdrawals { get; set; }
+
+
+        //Others
+        public DbSet<EndOfDay> EndOfDays { get; set; }
+}
 }

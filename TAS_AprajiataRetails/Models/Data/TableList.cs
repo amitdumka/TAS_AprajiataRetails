@@ -229,7 +229,6 @@ namespace TAS_AprajiataRetails.Models.Data
 
     }
 
-
     public class StaffAdvancePayment
     {
         public int StaffAdvancePaymentId { get; set; }
@@ -270,5 +269,96 @@ namespace TAS_AprajiataRetails.Models.Data
         public string Details { get; set; }
     }
 
+    public enum BankPayModes { Cash, Card, Cheques, RTGS, NEFT, IMPS, Wallets,Others}
+    public class BankDeposit
+    {
+        public int BankDepositId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Deposit Date")]
+        public DateTime DepoDate { get; set; }
+
+        public int AccountNumberId { get; set; }
+        public  AccountNumber Account { get; set; }
+   
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+        
+        [Display(Name ="Payment Mode")]
+        public BankPayModes PayMode { get; set; }
+
+        [Display(Name ="Transcation Details")]
+        public string Details { get; set; }
+        public string Remarks { get; set; }
+    }
+    public class Bank
+    {
+        public int BankId { get; set; }
+        [Display(Name ="Bank Name")]
+        public string BankName { get; set; }
+
+        public ICollection<AccountNumber> Accounts { get; set; }
+    }
+    public class AccountNumber
+    {
+        public int AccountNumberId { get; set; }
+     
+        [Display(Name ="Bank Name")]
+        public int BankId { get; set; }
+        public Bank Bank { get; set; }
+        
+        [Display(Name ="Account Number")]
+        public string Account { get; set; }
+
+        public ICollection<BankDeposit> Deposits { get; set; }
+        public ICollection<BankWithdrawal> Withdrawals { get; set; }
+    }
+
+    public class BankWithdrawal
+    {
+        public int BankWithdrawalId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Withdrawal Date")]
+        public DateTime DepoDate { get; set; }
+
+        public int AccountNumberId { get; set; }
+        public AccountNumber Account { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+                
+        [Display(Name = "Cheque Details")]
+        public string ChequeNo { get; set; }
+        [Display(Name = "Signed By")]
+        public string SignedBy { get; set; }
+        [Display(Name = "Approved By")]
+        public string ApprovedBy { get; set; }
+        [Display(Name = "Self/Named")]
+        public string InNameOf { get; set; }
+    }
+
+    public class EndOfDay
+    {
+        public int EndOfDayId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "EOD Date")]
+        public DateTime EOD_Date { get; set; }
+
+        public float Shirting { get; set; }
+        public float Suiting { get; set; }
+        public int USPA { get; set; }
+
+        [Display(Name = "FM/Arrow/Others")]
+        public int FM_Arrow { get; set; }
+
+        [Display(Name = "Arvind RTW")]
+        public int RWT { get; set; }
+
+        [Display(Name = "Accessories")]
+        public int Access { get; set; }
+        public int Tailoring { get; set; }
+    }
 
 }
