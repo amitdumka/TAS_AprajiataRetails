@@ -13,11 +13,40 @@ namespace TAS_AprajiataRetails.Controllers
     public class DailySalesController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
+        private void ProcessAccounts( DailySale dailySale)
+        {
+            if (!dailySale.IsDue)
+            {
+                if (dailySale.PayMode == PayModes.Cash && dailySale.CashAmount > 0)
+                {
+                    Utils.UpDateCashInHand(db, dailySale.SaleDate, dailySale.CashAmount);
 
+                }
+                //TODO: in future make it more robust
+                if (dailySale.PayMode != PayModes.Cash && dailySale.PayMode != PayModes.Coupons && dailySale.PayMode != PayModes.Points)
+                {
+                    Utils.UpDateCashInBank(db, dailySale.SaleDate, dailySale.Amount - dailySale.CashAmount);
+                }
+            }
+            else
+            {
+                DuesList dl = new DuesList() { Amount = dailySale.Amount, DailySale = dailySale };
+                db.DuesLists.Add(dl);
+            }
+
+        }
         // GET: DailySales
         public ActionResult Index()
         {
-            var dailySales = db.DailySales.Include(d => d.Salesman).OrderByDescending(c=>c.SaleDate).ThenByDescending(c=>c.DailySaleId);
+            var dailySales = db.DailySales.Include(d => d.Salesman).Where(c=>DbFunctions.TruncateTime( c.SaleDate)== DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c=>c.SaleDate).ThenByDescending(c=>c.DailySaleId);
+            var totalSale = dailySales.Where(c => c.IsManualBill == false).Sum(c => c.Amount);
+            var totalManualSale = dailySales.Where(c => c.IsManualBill == true).Sum(c => c.Amount);
+            var totalMonthlySale = db.DailySales.Where(c => DbFunctions.TruncateTime(c.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Sum(c => c.Amount);
+            var duesamt= db.DuesLists.Where(c=>c.IsRecovered==false).Sum(c => c.Amount);
+            ViewBag.TodaySale = totalSale;
+            ViewBag.ManualSale = totalManualSale;
+            ViewBag.MonthlySale = totalMonthlySale;
+            ViewBag.DuesAmount = duesamt;
             return View(dailySales.ToList());
         }
 
@@ -41,8 +70,10 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult Create()
         {
             ViewBag.SalesmanId = new SelectList(db.Salesmen, "SalesmanId", "SalesmanName");
+            DailySale dailySale = new DailySale();
+            dailySale.SaleDate = DateTime.Today;
             //return View();
-            return PartialView();
+            return PartialView(dailySale);
         }
 
         // POST: DailySales/Create
@@ -54,6 +85,7 @@ namespace TAS_AprajiataRetails.Controllers
         {
             if (ModelState.IsValid)
             {
+                ProcessAccounts(dailySale);
                 db.DailySales.Add(dailySale);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -90,6 +122,8 @@ namespace TAS_AprajiataRetails.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: check is required if Amount is changed so need to verify with old data. 
+                ProcessAccounts(dailySale);
                 db.Entry(dailySale).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
