@@ -1,6 +1,7 @@
 namespace TAS_AprajiataRetails.Migrations
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -22,11 +23,20 @@ namespace TAS_AprajiataRetails.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             //new Salesman() {SalesmanName="Manager" };
-            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Sanjeev Mishra" });
-            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Mukesh Mandal" });
-            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Manager" });
-
-            //context.SaveChanges();
+            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanId=1, SalesmanName = "Sanjeev Mishra" });
+            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanId = 2, SalesmanName = "Mukesh Mandal" });
+            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanId = 3, SalesmanName = "Manager" });
+            var modes = new List<TranscationMode>() {
+                new TranscationMode(){Transcation="Home Expenses",TranscationModeId=1},
+                new TranscationMode(){Transcation="Ohter Home Expenses",TranscationModeId=2},
+                new TranscationMode(){Transcation="Mukesh(HomeStaff)",TranscationModeId=3},
+                new TranscationMode(){Transcation="Amit Kumar",TranscationModeId=4},
+                new TranscationMode(){Transcation="Amit Kumar Expenses",TranscationModeId=5},
+                new TranscationMode(){Transcation="CashIn",TranscationModeId=6},
+                new TranscationMode(){Transcation="CashOut",TranscationModeId=7},
+            };
+            modes.ForEach(s => context.TranscationModes.AddOrUpdate(s));
+            context.SaveChanges();
         }
     }
 
@@ -34,9 +44,9 @@ namespace TAS_AprajiataRetails.Migrations
     {
         protected override void Seed(AprajitaRetailsContext context)
         {
-            context.Salesmen.Add(new Salesman() { SalesmanName = "Sanjeev Mishra" });
-            context.Salesmen.Add(new Salesman() { SalesmanName = "Mukesh Mandal" });
-            context.Salesmen.Add(new Salesman() { SalesmanName = "Manager" });
+            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Sanjeev Mishra" });
+            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Mukesh Mandal" });
+            context.Salesmen.AddOrUpdate(new Salesman() { SalesmanName = "Manager Old" });
 
             context.SaveChanges();
         }

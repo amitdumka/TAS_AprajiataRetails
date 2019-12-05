@@ -1,0 +1,274 @@
+﻿using System;
+using System.Linq;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TAS_AprajiataRetails.Models.Data
+{
+    public enum PayModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons };
+    public enum AttUnits { Present, Absent, HalfDay, Sunday };
+    public enum SalaryComponet { NetSalary, LastPcs, WOWBill, SundaySalary, Incentive, Others }
+
+    public class TranscationMode
+    {
+        [Display(Name = "Mode")]
+        public int TranscationModeId { get; set; }
+        //[Index(IsUnique = true)]
+        [Display(Name = "Transcation Mode")]
+        public string Transcation { get; set; }
+
+        public virtual ICollection<CashReceipt> CashReceipts { get; set; }
+        public virtual ICollection<CashPayment> CashPayments { get; set; }
+        //Modes Name  write Seed 
+        // Amit Kumar , Mukesh, HomeExp, OtherHomeExpenses,CashInOut
+    }
+    public class CashReceipt
+    {
+        public int CashReceiptId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Receipt Date")]
+        public DateTime InwardDate { get; set; }
+
+        [Display(Name = "Mode")]
+        public int TranscationModeId { get; set; }
+        public TranscationMode Mode { get; set; }
+
+        [Display(Name = "Receipt From"), Required]
+        public string ReceiptFrom { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+        [Display(Name = "Receipt No")]
+        public string SlipNo { get; set; }
+
+    }
+    public class CashPayment
+    {
+        public int CashPaymentId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Payment Date")]
+        public DateTime PaymentDate { get; set; }
+       
+        [Display(Name = "Mode")]
+        public int TranscationModeId { get; set; }
+        public TranscationMode Mode { get; set; }
+
+        [Display(Name = "Paid To"), Required]
+        public string PaidTo { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+        [Display(Name = "Reciept No")]
+        public string SlipNo { get; set; }
+
+    }
+    public class CashInHand
+    {
+        public int CashInHandId { get; set; }
+        [Index(IsUnique = true)]
+        [Display(Name = "Cash-in-hand Date")]
+        public DateTime CIHDate { get; set; }
+        [Display(Name = "Openning Balance")]
+        public decimal OpenningBalance { get; set; }
+        [Display(Name = "ClosingBalance")]
+        public decimal ClosingBalance { get; set; }
+        [Display(Name = "Cash-In Amount")]
+        public decimal CashIn { get; set; }
+        [Display(Name = "Cash-Out Amount")]
+        public decimal CashOut { get; set; }
+    }
+    public class CashInBank
+    {
+        public int CashInBankId { get; set; }
+        [Display(Name = "Cash-in-Bank Date")]
+        [Index(IsUnique = true)]
+        public DateTime CIBDate { get; set; }
+        [Display(Name = "Openning Balance")]
+        public decimal OpenningBalance { get; set; }
+        [Display(Name = "ClosingBalance")]
+        public decimal ClosingBalance { get; set; }
+        public decimal CashIn { get; set; }
+        [Display(Name = "Cash-Out Amount")]
+        public decimal CashOut { get; set; }
+    }
+    public class DailySale
+    {
+        public int DailySaleId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Sale Date")]
+        public DateTime SaleDate { get; set; }
+
+        [Display(Name = "Invoice No")]
+        public string InvNo { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+
+        [Display(Name = "Payment Mode")]
+        public PayModes PayMode { get; set; }
+
+        [Display(Name = "Cash Amount")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal CashAmount { get; set; }
+
+        [ForeignKey("Salesman")]
+        public int SalesmanId { get; set; }
+        public virtual Salesman Salesman { get; set; }
+
+        [Display(Name = "Is Due")]
+        public bool IsDue { get; set; }
+
+        [Display(Name = "Is Manual Bill")]
+        public bool IsManualBill { get; set; }
+
+        [Display(Name = "Is Tailoring Bill")]
+        public bool IsTailoringBill { get; set; }
+        public string Remarks { get; set; }
+
+        //public virtual DuesList DuesList { get; set; }
+
+    }
+
+    public class Salesman
+    {
+        public int SalesmanId { get; set; }
+        [Display(Name = "Salesman")]
+        public string SalesmanName { get; set; }
+
+        public virtual ICollection<DailySale> DailySales { get; set; }
+    }
+    public class DuesList
+    {
+        public int DuesListId { get; set; }
+        public decimal Amount { get; set; }
+        [Display(Name = "Is Paid")]
+        public bool IsRecovered { get; set; }
+        public int DailySaleId { get; set; }
+        public virtual DailySale DailySale { get; set; }
+    }
+
+
+    public class Employee
+    {
+        public int EmployeeId { get; set; }
+        
+        [Display(Name = "Staff Name")]
+        public string StaffName { get; set; }
+        
+        [Display(Name = "Mobile No"), Phone]
+        public string MobileNo { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Joining Date")]
+        public DateTime JoiningDate { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Leaving Date")]
+        public DateTime? LeavingDate { get; set; }
+        
+        [Display(Name = "Is Working")]
+        public bool IsWorking { get; set; }
+
+        public ICollection<Attendance> Attendances { get; set; }
+        public ICollection<SalaryPayment> SalaryPayments { get; set; }
+        public ICollection<StaffAdvancePayment> AdvancePayments { get; set; }
+        public ICollection<StaffAdvanceReceipt> AdvanceReceipts { get; set; }
+
+    }
+
+    public class Attendance
+    {
+        public int AttendanceId { get; set; }
+        
+        [Display(Name ="Staff Name")]
+        public int EmployeeId { get; set; }
+        public  Employee Employee { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Attendance Date")]
+        public DateTime AttDate { get; set; }
+        
+        [Display(Name = "Entry Time")]
+        public string EntryTime { get; set; }
+        
+        public  AttUnits Status { get; set; }
+        public string Remarks { get; set; }
+
+    }
+
+    public class SalaryPayment
+    {
+        public int SalaryPaymentId { get; set; }
+
+        [Display(Name = "Staff Name")]
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
+
+        [Display(Name = "Salary/Year")]
+        public string SalaryMonth { get; set; }
+
+        [Display(Name ="Payment Reason")]
+        public SalaryComponet SalaryComponet { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Payment Date")]
+        public DateTime PaymentDate { get; set; }
+        
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+        
+        [Display(Name = "Payment Mode")]
+        public PayModes PayMode { get; set; }
+        
+        public string Details { get; set; }
+
+
+    }
+
+
+    public class StaffAdvancePayment
+    {
+        public int StaffAdvancePaymentId { get; set; }
+        
+        [Display(Name = "Staff Name")]
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Payment Date")]
+        public DateTime PaymentDate { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+
+        [Display(Name = "Payment Mode")]
+        public PayModes PayMode { get; set; }
+
+        public string Details { get; set; }
+    }
+    public class StaffAdvanceReceipt
+    {
+        public int StaffAdvanceReceiptId { get; set; }
+
+        [Display(Name = "Staff Name")]
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
+       
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Receipt Date")]
+        public DateTime ReceiptDate { get; set; }
+        
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+
+        [Display(Name = "Payment Mode")]
+        public PayModes PayMode { get; set; }
+        public string Details { get; set; }
+    }
+
+
+}

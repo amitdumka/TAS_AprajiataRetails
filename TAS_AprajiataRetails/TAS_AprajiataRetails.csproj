@@ -168,16 +168,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AttendancesController.cs" />
+    <Compile Include="Controllers\CashPaymentsController.cs" />
+    <Compile Include="Controllers\CashReceiptsController.cs" />
     <Compile Include="Controllers\DailySalesController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SalaryPaymentsController.cs" />
+    <Compile Include="Controllers\StaffAdvancePaymentsController.cs" />
+    <Compile Include="Controllers\StaffAdvanceReceiptsController.cs" />
     <Compile Include="Dump\DumpClass.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Data\AprajitaRetailsContext.cs" />
     <Compile Include="Models\Data\Person.cs" />
+    <Compile Include="Models\Data\TableList.cs" />
     <Compile Include="Models\Data\TASDB.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -263,6 +272,41 @@
     <Content Include="Views\DailySales\Edit.cshtml" />
     <Content Include="Views\DailySales\Index.cshtml" />
     <Content Include="Scripts\package.json" />
+    <Content Include="Views\CashPayments\Create.cshtml" />
+    <Content Include="Views\CashPayments\Delete.cshtml" />
+    <Content Include="Views\CashPayments\Details.cshtml" />
+    <Content Include="Views\CashPayments\Edit.cshtml" />
+    <Content Include="Views\CashPayments\Index.cshtml" />
+    <Content Include="Views\CashReceipts\Create.cshtml" />
+    <Content Include="Views\CashReceipts\Delete.cshtml" />
+    <Content Include="Views\CashReceipts\Details.cshtml" />
+    <Content Include="Views\CashReceipts\Edit.cshtml" />
+    <Content Include="Views\CashReceipts\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\SalaryPayments\Create.cshtml" />
+    <Content Include="Views\SalaryPayments\Delete.cshtml" />
+    <Content Include="Views\SalaryPayments\Details.cshtml" />
+    <Content Include="Views\SalaryPayments\Edit.cshtml" />
+    <Content Include="Views\SalaryPayments\Index.cshtml" />
+    <Content Include="Views\StaffAdvancePayments\Create.cshtml" />
+    <Content Include="Views\StaffAdvancePayments\Delete.cshtml" />
+    <Content Include="Views\StaffAdvancePayments\Details.cshtml" />
+    <Content Include="Views\StaffAdvancePayments\Edit.cshtml" />
+    <Content Include="Views\StaffAdvancePayments\Index.cshtml" />
+    <Content Include="Views\StaffAdvanceReceipts\Create.cshtml" />
+    <Content Include="Views\StaffAdvanceReceipts\Delete.cshtml" />
+    <Content Include="Views\StaffAdvanceReceipts\Details.cshtml" />
+    <Content Include="Views\StaffAdvanceReceipts\Edit.cshtml" />
+    <Content Include="Views\StaffAdvanceReceipts\Index.cshtml" />
+    <Content Include="Views\Attendances\Create.cshtml" />
+    <Content Include="Views\Attendances\Delete.cshtml" />
+    <Content Include="Views\Attendances\Details.cshtml" />
+    <Content Include="Views\Attendances\Edit.cshtml" />
+    <Content Include="Views\Attendances\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

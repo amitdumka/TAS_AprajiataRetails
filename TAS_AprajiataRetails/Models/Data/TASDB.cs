@@ -7,14 +7,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TAS_AprajiataRetails.Models.Data
 {
-    //Enum Section
-
-    public enum PayModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons };
+   
 
     // Utils Section 
     public class Utils
     {
-       
+
 
         public static void ProcessOpenningClosingBalance(AprajitaRetailsContext db, DateTime date, bool isclosing = false, bool saveit = false)
         {
@@ -192,7 +190,7 @@ namespace TAS_AprajiataRetails.Models.Data
 
             if (yesterday != null)
             {
-                yesterday.ClosingBalance = yesterday.OpenningBalance + yesterday.CashIn - yesterday.CashOut;             
+                yesterday.ClosingBalance = yesterday.OpenningBalance + yesterday.CashIn - yesterday.CashOut;
                 today.ClosingBalance = today.OpenningBalance = yesterday.ClosingBalance;
                 db.CashInHands.Add(today);
                 if (saveit) db.SaveChanges();
@@ -339,6 +337,7 @@ namespace TAS_AprajiataRetails.Models.Data
     {
         public int EndOfDayId { get; set; }
 
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "EOD Date")]
         public DateTime EOD_Date { get; set; }
         public float Shirting { get; set; }
@@ -359,43 +358,18 @@ namespace TAS_AprajiataRetails.Models.Data
     //    public int PayModeId { get; set; }
     //    public string PayModeName { set; get; }
     //}
-    public class CashInHand
-    {
-        public int CashInHandId { get; set; }
-        [Index(IsUnique = true)]
-        [Display(Name = "Cash-in-hand Date")]
-        public DateTime CIHDate { get; set; }
-        [Display(Name = "Openning Balance")]
-        public decimal OpenningBalance { get; set; }
-        [Display(Name = "ClosingBalance")]
-        public decimal ClosingBalance { get; set; }
-        [Display(Name = "Cash-In Amount")]
-        public decimal CashIn { get; set; }
-        [Display(Name = "Cash-Out Amount")]
-        public decimal CashOut { get; set; }
-    }
-    public class CashInBank
-    {
-        public int CashInBankId { get; set; }
-        [Display(Name = "Cash-in-Bank Date")]
-        [Index(IsUnique = true)]
-        public DateTime CIBDate { get; set; }
-        [Display(Name = "Openning Balance")]
-        public decimal OpenningBalance { get; set; }
-        [Display(Name = "ClosingBalance")]
-        public decimal ClosingBalance { get; set; }
-        public decimal CashIn { get; set; }
-        [Display(Name = "Cash-Out Amount")]
-        public decimal CashOut { get; set; }
-    }
     public class CashInward
     {
         public int CashInwardId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Inward Date")]
         public DateTime InwardDate { get; set; }
         [Display(Name = "Reciept From"), Required]
         public string RecieptFrom { get; set; }
-        public double Amount { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
         [Display(Name = "Reciept No")]
         public string SlipNo { get; set; }
     }
@@ -433,53 +407,7 @@ namespace TAS_AprajiataRetails.Models.Data
         [Display(Name = "Slip No")]
         public string SlipNo { get; set; }
     }
-    public class DailySale
-    {
-        public int DailySaleId { get; set; }
 
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Sale Date")]
-        public DateTime SaleDate { get; set; }
-
-        [Display(Name = "Invoice No")]
-        public string InvNo { get; set; }
-
-        [DataType(DataType.Currency), Column(TypeName = "money")]
-        public decimal Amount { get; set; }
-
-        [Display(Name = "Payment Mode")]
-        public PayModes PayMode { get; set; }
-
-        [Display(Name = "Cash Amount")]
-        [DataType(DataType.Currency), Column(TypeName = "money")]
-        public decimal CashAmount { get; set; }
-
-        [ForeignKey("Salesman")]
-        public int SalesmanId { get; set; }
-        public virtual Salesman Salesman { get; set; }
-
-        [Display(Name = "Is Due")]
-        public bool IsDue { get; set; }
-
-        [Display(Name = "Is Manual Bill")]
-        public bool IsManualBill { get; set; }
-
-        [Display(Name = "Is Tailoring Bill")]
-        public bool IsTailoringBill { get; set; }
-        public string Remarks { get; set; }
-
-        //public virtual DuesList DuesList { get; set; }
-
-    }
-
-    public class Salesman
-    {
-        public int SalesmanId { get; set; }
-        [Display(Name = "Salesman")]
-        public string SalesmanName { get; set; }
-
-        public virtual ICollection<DailySale> DailySales { get; set; }
-    }
     public class Expenses
     {
         public int ExpensesId { get; set; }
@@ -575,16 +503,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public string RecieptSlipNo { get; set; }
         public string PayMode { get; set; }
     }
-    public class Attendences
-    {
-        public int AttendencesId { get; set; }
-        public string StaffName { get; set; }
-        public string Remarks { get; set; }
-        public DateTime AttDate { get; set; }
-        public string EntryTime { get; set; }
-        public double AttUnit { get; set; }
-
-    }
+    
     public class DailySaleReport
     {
         public double DailySale { get; set; }
@@ -603,55 +522,41 @@ namespace TAS_AprajiataRetails.Models.Data
         public double SaleAdjustest { get; set; }
         public double TotalFixedSale { get; set; }
     }
-    public class Employee
-    {
-        public int EmployeeId { get; set; }
-        [Display(Name = "Staff Name")]
-        public string StaffName { get; set; }
-        [Display(Name = "Mobile No")]
-        public string Mobileno { get; set; }
-        [Display(Name = "Joining Date")]
-        public DateTime JoiningDate { get; set; }
-        [Display(Name = "Leaving Date")]
-        public DateTime LeavingDate { get; set; }
-        [Display(Name = "Is Working")]
-        public bool IsWorking { get; set; }
-
-    }
-    public class SalaryPayment
-    {
-        public int SalaryPaymentId { get; set; }
-        [Display(Name = "OpenningBalance")]
-        public string StaffName { get; set; }
-        [Display(Name = "OpenningBalance")]
-        public string SalaryMonth { get; set; }
-        [Display(Name = "OpenningBalance")]
-        public DateTime PaymentDate { get; set; }
-        public double Amount { get; set; }
-        [Display(Name = "OpenningBalance")]
-        public PayModes PayMode { get; set; }
-        public string Details { get; set; }
+   
+    //public class SalaryPayment
+    //{
+    //    public int SalaryPaymentId { get; set; }
+    //    [Display(Name = "OpenningBalance")]
+    //    public string StaffName { get; set; }
+    //    [Display(Name = "OpenningBalance")]
+    //    public string SalaryMonth { get; set; }
+    //    [Display(Name = "OpenningBalance")]
+    //    public DateTime PaymentDate { get; set; }
+    //    public double Amount { get; set; }
+    //    [Display(Name = "OpenningBalance")]
+    //    public PayModes PayMode { get; set; }
+    //    public string Details { get; set; }
 
 
-    }
-    public class AdvancePayment
-    {
-        public int AdvancePaymentId { get; set; }
-        public string StaffName { get; set; }
-        public DateTime PaymentDate { get; set; }
-        public double Amount { get; set; }
-        public string PayMode { get; set; }
-        public string Details { get; set; }
-    }
-    public class AdvanceReceipt
-    {
-        public int AdvanceReceiptId { get; set; }
-        public string StaffName { get; set; }
-        public DateTime PaymentDate { get; set; }
-        public double Amount { get; set; }
-        public string PayMode { get; set; }
-        public string Details { get; set; }
-    }
+    //}
+    //public class AdvancePayment
+    //{
+    //    public int AdvancePaymentId { get; set; }
+    //    public string StaffName { get; set; }
+    //    public DateTime PaymentDate { get; set; }
+    //    public double Amount { get; set; }
+    //    public string PayMode { get; set; }
+    //    public string Details { get; set; }
+    //}
+    //public class AdvanceReceipt
+    //{
+    //    public int AdvanceReceiptId { get; set; }
+    //    public string StaffName { get; set; }
+    //    public DateTime PaymentDate { get; set; }
+    //    public double Amount { get; set; }
+    //    public string PayMode { get; set; }
+    //    public string Details { get; set; }
+    //}
     public class TailoringReport
     {
         public double TodaySale { get; set; }
@@ -664,49 +569,5 @@ namespace TAS_AprajiataRetails.Models.Data
         public double MonthlyUnit { get; set; }
         public double YearlyBooking { get; set; }
         public double YearlyUnit { get; set; }
-    }
-    public class DuesList
-    {
-        public int DuesListId { get; set; }
-        public decimal Amount { get; set; }
-        [Display(Name ="Is Paid")]
-        public bool IsRecovered { get; set; }
-        public int DailySaleId { get; set; }
-        public virtual DailySale DailySale { get; set; }
-    }
-    // DBContext Sections
-    public class AprajitaRetailsContext : DbContext
-    {
-        public AprajitaRetailsContext() : base("AprajitaRetails")
-        {
-            Database.SetInitializer<AprajitaRetailsContext>(new CreateDatabaseIfNotExists<AprajitaRetailsContext>());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AprajitaRetailsContext, Migrations.Configuration>());
-        }
-
-        public DbSet<DailySale> DailySales { get; set; }
-        public DbSet<Expenses> Expenses { get; set; }
-        public DbSet<BankDeposit> BankDeposits { get; set; }
-        public DbSet<Payments> Payments { get; set; }
-        public DbSet<Recipets> Recipets { get; set; }
-        public DbSet<TalioringBooking> TalioringBookings { get; set; }
-        public DbSet<TalioringDelivery> TalioringDeliveries { get; set; }
-        public DbSet<Attendences> Attendences { get; set; }
-        public DbSet<Employee> Employees { get; set; } // Changed from Orignail
-        public DbSet<AdvancePayment> AdvancePayments { get; set; }
-        public DbSet<AdvanceReceipt> AdvanceReceipts { get; set; }
-        public DbSet<SalaryPayment> SalaryPayments { get; set; }
-        public DbSet<HomeExpense> HomeExpenses { get; set; }
-        public DbSet<OtherHomeExpense> OtherHomeExpenses { get; set; }
-        public DbSet<AmitKumarExpense> AmitKumarExpenses { get; set; }
-        public DbSet<CashInward> CashInwards { get; set; }
-        public DbSet<CashInHand> CashInHands { get; set; }
-        public DbSet<CashInBank> CashInBanks { get; set; }
-        public DbSet<Bank> Banks { get; set; }
-        //public DbSet<PayMode> PayModes { get; set; }// Changed from Orignail
-
-        //Version 2
-
-        public DbSet<Salesman> Salesmen { get; set; }
-        public DbSet<DuesList> DuesLists { get; set; }
     }
 }

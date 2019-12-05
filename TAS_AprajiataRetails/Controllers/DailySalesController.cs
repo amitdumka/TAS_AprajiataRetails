@@ -13,7 +13,7 @@ namespace TAS_AprajiataRetails.Controllers
     public class DailySalesController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
-        private void ProcessAccounts( DailySale dailySale)
+        private void ProcessAccounts(DailySale dailySale)
         {
             if (!dailySale.IsDue)
             {
@@ -38,15 +38,21 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: DailySales
         public ActionResult Index()
         {
-            var dailySales = db.DailySales.Include(d => d.Salesman).Where(c=>DbFunctions.TruncateTime( c.SaleDate)== DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c=>c.SaleDate).ThenByDescending(c=>c.DailySaleId);
-            var totalSale = dailySales.Where(c => c.IsManualBill == false).Sum(c => c.Amount);
-            var totalManualSale = dailySales.Where(c => c.IsManualBill == true).Sum(c => c.Amount);
-            var totalMonthlySale = db.DailySales.Where(c => DbFunctions.TruncateTime(c.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Sum(c => c.Amount);
-            var duesamt= db.DuesLists.Where(c=>c.IsRecovered==false).Sum(c => c.Amount);
+            var dailySales = db.DailySales.Include(d => d.Salesman).Where(c => DbFunctions.TruncateTime(c.SaleDate) == DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c => c.SaleDate).ThenByDescending(c => c.DailySaleId);
+            var totalSale = dailySales.Where(c => c.IsManualBill == false).Sum(c => (decimal?)c.Amount) ?? 0;
+            var totalManualSale = dailySales.Where(c => c.IsManualBill == true).Sum(c => (decimal?)c.Amount) ?? 0;
+            var totalMonthlySale = db.DailySales.Where(c => DbFunctions.TruncateTime(c.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Sum(c => (decimal?)c.Amount) ?? 0;
+            var duesamt = db.DuesLists.Where(c => c.IsRecovered == false).Sum(c => (decimal?)c.Amount) ?? 0;
+            var cashinhand = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault();
+
             ViewBag.TodaySale = totalSale;
             ViewBag.ManualSale = totalManualSale;
             ViewBag.MonthlySale = totalMonthlySale;
             ViewBag.DuesAmount = duesamt;
+            if (cashinhand != null)
+                ViewBag.CashInHand = (decimal?)(cashinhand.OpenningBalance + cashinhand.CashIn - cashinhand.CashOut) ?? 0;
+            else
+                ViewBag.CashInHand = 0.00;
             return View(dailySales.ToList());
         }
 
