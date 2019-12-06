@@ -38,6 +38,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Cash In/Out</a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Expenses", "Index", "Expenses")</li>
+                            <li>@Html.ActionLink("Cash Expenses", "Index", "PettyCashExpenses")</li>
                             <li>@Html.ActionLink("Payments", "Index", "CashPayments")</li>
                             <li>@Html.ActionLink("Receipts", "Index", "CashReceipts")</li>
                             <li>@Html.ActionLink("Bank Deposit", "Index", "BankDeposits")</li>
@@ -46,12 +47,34 @@
 
                     </li>
                     <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Tailoring</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Tailoring Booking", "Index", "Tailorings")</li>
+                            <li>@Html.ActionLink("Tailoring Delivery", "Index", "Tailoring")</li>
+                            <li>@Html.ActionLink("Tailoring Salary Payments", "Index", "Tailoring")</li>
+                            <li>@Html.ActionLink("Tailoring FeedBacks", "Index", "Tailoring")</li>
+                            <li>@Html.ActionLink("Tailoring Materials", "Index", "Tailoring")</li>
+                        </ul>
+
+                    </li>
+
+                    <li class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Banking</a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Bank Deposits", "Index", "BankDeposits")</li>
                             <li>@Html.ActionLink("Bank Accounts", "Index", "AccountNumbers")</li>
                             <li>@Html.ActionLink("Cheques", "Index", "")</li>
                             <li>@Html.ActionLink("Cash Withdrawals", "Index", "BankWithdrawals")</li>
+                        </ul>
+
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Adminstration</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Suspense", "Index", "SuspenseAccounts")</li>
+                            @*<li>@Html.ActionLink("Bank Accounts", "Index", "AccountNumbers")</li>
+                                <li>@Html.ActionLink("Cheques", "Index", "")</li>
+                                <li>@Html.ActionLink("Cash Withdrawals", "Index", "BankWithdrawals")</li>*@
                         </ul>
 
                     </li>

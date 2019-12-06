@@ -330,85 +330,35 @@ namespace TAS_AprajiataRetails.Models.Data
 
             }
         }
+        public static void UpdateSuspenseAccount(AprajitaRetailsContext db, DateTime dateTime, decimal Amount, bool isOut, string referanceDetails, bool saveit = false)
+        {
+            //TODO: Implement This  Suspense Account
+        }
     }
 
     // Tables
     
 
-    //TODO: Remove this
-    //public class PayMode
+   
+
+    //public class Expenses
     //{
-    //    public int PayModeId { get; set; }
-    //    public string PayModeName { set; get; }
+    //    public int ExpensesId { get; set; }
+    //    [Display(Name = "Expense Date")]
+    //    public DateTime ExpDate { get; set; }
+    //    public string Particulars { get; set; }
+    //    public double Amount { get; set; }
+    //    [Display(Name = "Payment Mode")]
+    //    public PayModes PayMode { get; set; }
+    //    [Display(Name = "Payment Details")]
+    //    public string PaymentDetails { get; set; }
+    //    [Display(Name = "Paid By")]
+    //    public string PaidBy { get; set; }
+    //    [Display(Name = "Paid To")]
+    //    public string PaidTo { get; set; }
+    //    public string Remarks { get; set; }
+
     //}
-    public class CashInward
-    {
-        public int CashInwardId { get; set; }
-
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Inward Date")]
-        public DateTime InwardDate { get; set; }
-        [Display(Name = "Reciept From"), Required]
-        public string RecieptFrom { get; set; }
-
-        [DataType(DataType.Currency), Column(TypeName = "money")]
-        public decimal Amount { get; set; }
-        [Display(Name = "Reciept No")]
-        public string SlipNo { get; set; }
-    }
-    public class HomeExpense
-    {
-        public int HomeExpenseId { get; set; }
-        [Display(Name = "Date")]
-        public DateTime Date { get; set; }
-        [Display(Name = "Paid To")]
-        public string PaidTo { get; set; }
-        public double Amount { get; set; }
-        [Display(Name = "Slip No")]
-        public string SlipNo { get; set; }
-    }
-    public class OtherHomeExpense
-    {
-        public int OtherHomeExpenseId { get; set; }
-        [Display(Name = "Date")]
-        public DateTime Date { get; set; }
-        [Display(Name = "Paid To")]
-        public string PaidTo { get; set; }
-        public double Amount { get; set; }
-        [Display(Name = "Slip No")]
-        public string SlipNo { get; set; }
-        public string Remarks { get; set; }
-    }
-    public class AmitKumarExpense
-    {
-        public int AmitKumarExpenseId { get; set; }
-        [Display(Name = "Payment Date")]
-        public DateTime Date { get; set; }
-        [Display(Name = "Paid To")]
-        public string PaidTo { get; set; }
-        public double Amount { get; set; }
-        [Display(Name = "Slip No")]
-        public string SlipNo { get; set; }
-    }
-
-    public class Expenses
-    {
-        public int ExpensesId { get; set; }
-        [Display(Name = "Expense Date")]
-        public DateTime ExpDate { get; set; }
-        public string Particulars { get; set; }
-        public double Amount { get; set; }
-        [Display(Name = "Payment Mode")]
-        public PayModes PayMode { get; set; }
-        [Display(Name = "Payment Details")]
-        public string PaymentDetails { get; set; }
-        [Display(Name = "Paid By")]
-        public string PaidBy { get; set; }
-        [Display(Name = "Paid To")]
-        public string PaidTo { get; set; }
-        public string Remarks { get; set; }
-
-    }
     
     public class TalioringBooking
     {

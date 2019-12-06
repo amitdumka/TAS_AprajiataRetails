@@ -11,24 +11,12 @@ namespace TAS_AprajiataRetails.Models.Data
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AprajitaRetailsContext, Migrations.Configuration>());
         }
 
-        //public DbSet<Expenses> Expenses { get; set; }
-        //public DbSet<BankDeposit> BankDeposits { get; set; }
+       
         //public DbSet<Payments> Payments { get; set; }
         //public DbSet<Recipets> Recipets { get; set; }
         //public DbSet<TalioringBooking> TalioringBookings { get; set; }
         //public DbSet<TalioringDelivery> TalioringDeliveries { get; set; }
-        //public DbSet<Attendences> Attendences { get; set; }
-        //public DbSet<Employee> Employees { get; set; } // Changed from Orignail
-        //public DbSet<AdvancePayment> AdvancePayments { get; set; }
-        //public DbSet<AdvanceReceipt> AdvanceReceipts { get; set; }
-        //public DbSet<SalaryPayment> SalaryPayments { get; set; }
-        //public DbSet<HomeExpense> HomeExpenses { get; set; }
-        //public DbSet<OtherHomeExpense> OtherHomeExpenses { get; set; }
-        //public DbSet<AmitKumarExpense> AmitKumarExpenses { get; set; }
-        //public DbSet<CashInward> CashInwards { get; set; }
-        //public DbSet<Bank> Banks { get; set; }
-        ////public DbSet<PayMode> PayModes { get; set; }// Changed from Orignail
-
+       
         ////Version 2
         public DbSet<DailySale> DailySales { get; set; }
         public DbSet<CashInHand> CashInHands { get; set; }
@@ -48,13 +36,21 @@ namespace TAS_AprajiataRetails.Models.Data
         public DbSet<StaffAdvanceReceipt> StaffAdvanceReceipts { get; set; }
 
         //Banking
-        public DbSet<Bank>Banks{get;set;}
-        public DbSet<AccountNumber>BankAccounts{get;set;}
-        public DbSet<BankDeposit>BankDeposits{get;set;}
+        public DbSet<Bank> Banks { get; set; }
+        public DbSet<AccountNumber> BankAccounts { get; set; }
+        public DbSet<BankDeposit> BankDeposits { get; set; }
         public DbSet<BankWithdrawal> Withdrawals { get; set; }
 
 
         //Others
         public DbSet<EndOfDay> EndOfDays { get; set; }
-}
+
+        //Expenses
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<PettyCashExpense> CashExpenses { get; set; }
+
+        //Suspense
+        public DbSet<SuspenseAccount> Suspenses { get; set; }
+
+    }
 }

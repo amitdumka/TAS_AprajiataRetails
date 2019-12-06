@@ -7,10 +7,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TAS_AprajiataRetails.Models.Data
 {
-    public enum PayModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons };
+    //TODO: Add Support for Mix Payment
+    public enum PayModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments };
+    public enum PaymentModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Others };
     public enum AttUnits { Present, Absent, HalfDay, Sunday };
     public enum SalaryComponet { NetSalary, LastPcs, WOWBill, SundaySalary, Incentive, Others }
+    public enum BankPayModes { Cash, Card, Cheques, RTGS, NEFT, IMPS, Wallets, Others }
 
+    // Daily Sale  and Cash Management
     public class TranscationMode
     {
         [Display(Name = "Mode")]
@@ -52,7 +56,7 @@ namespace TAS_AprajiataRetails.Models.Data
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Payment Date")]
         public DateTime PaymentDate { get; set; }
-       
+
         [Display(Name = "Mode")]
         public int TranscationModeId { get; set; }
         public TranscationMode Mode { get; set; }
@@ -152,14 +156,14 @@ namespace TAS_AprajiataRetails.Models.Data
         public virtual DailySale DailySale { get; set; }
     }
 
-
+    //Payroll
     public class Employee
     {
         public int EmployeeId { get; set; }
-        
+
         [Display(Name = "Staff Name")]
         public string StaffName { get; set; }
-        
+
         [Display(Name = "Mobile No"), Phone]
         public string MobileNo { get; set; }
 
@@ -169,7 +173,7 @@ namespace TAS_AprajiataRetails.Models.Data
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Leaving Date")]
         public DateTime? LeavingDate { get; set; }
-        
+
         [Display(Name = "Is Working")]
         public bool IsWorking { get; set; }
 
@@ -177,25 +181,27 @@ namespace TAS_AprajiataRetails.Models.Data
         public ICollection<SalaryPayment> SalaryPayments { get; set; }
         public ICollection<StaffAdvancePayment> AdvancePayments { get; set; }
         public ICollection<StaffAdvanceReceipt> AdvanceReceipts { get; set; }
+        public ICollection<PettyCashExpense> CashExpenses { get; set; }
+        public ICollection<Expense> Expenses { get; set; }
 
     }
 
     public class Attendance
     {
         public int AttendanceId { get; set; }
-        
-        [Display(Name ="Staff Name")]
+
+        [Display(Name = "Staff Name")]
         public int EmployeeId { get; set; }
-        public  Employee Employee { get; set; }
+        public Employee Employee { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Attendance Date")]
         public DateTime AttDate { get; set; }
-        
+
         [Display(Name = "Entry Time")]
         public string EntryTime { get; set; }
-        
-        public  AttUnits Status { get; set; }
+
+        public AttUnits Status { get; set; }
         public string Remarks { get; set; }
 
     }
@@ -211,19 +217,19 @@ namespace TAS_AprajiataRetails.Models.Data
         [Display(Name = "Salary/Year")]
         public string SalaryMonth { get; set; }
 
-        [Display(Name ="Payment Reason")]
+        [Display(Name = "Payment Reason")]
         public SalaryComponet SalaryComponet { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Payment Date")]
         public DateTime PaymentDate { get; set; }
-        
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal Amount { get; set; }
-        
+
         [Display(Name = "Payment Mode")]
         public PayModes PayMode { get; set; }
-        
+
         public string Details { get; set; }
 
 
@@ -232,7 +238,7 @@ namespace TAS_AprajiataRetails.Models.Data
     public class StaffAdvancePayment
     {
         public int StaffAdvancePaymentId { get; set; }
-        
+
         [Display(Name = "Staff Name")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
@@ -256,11 +262,11 @@ namespace TAS_AprajiataRetails.Models.Data
         [Display(Name = "Staff Name")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
-       
+
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Receipt Date")]
         public DateTime ReceiptDate { get; set; }
-        
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal Amount { get; set; }
 
@@ -269,7 +275,8 @@ namespace TAS_AprajiataRetails.Models.Data
         public string Details { get; set; }
     }
 
-    public enum BankPayModes { Cash, Card, Cheques, RTGS, NEFT, IMPS, Wallets,Others}
+    //Banking Section
+    
     public class BankDeposit
     {
         public int BankDepositId { get; set; }
@@ -279,22 +286,22 @@ namespace TAS_AprajiataRetails.Models.Data
         public DateTime DepoDate { get; set; }
 
         public int AccountNumberId { get; set; }
-        public  AccountNumber Account { get; set; }
-   
+        public AccountNumber Account { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal Amount { get; set; }
-        
-        [Display(Name ="Payment Mode")]
+
+        [Display(Name = "Payment Mode")]
         public BankPayModes PayMode { get; set; }
 
-        [Display(Name ="Transcation Details")]
+        [Display(Name = "Transcation Details")]
         public string Details { get; set; }
         public string Remarks { get; set; }
     }
     public class Bank
     {
         public int BankId { get; set; }
-        [Display(Name ="Bank Name")]
+        [Display(Name = "Bank Name")]
         public string BankName { get; set; }
 
         public ICollection<AccountNumber> Accounts { get; set; }
@@ -302,12 +309,12 @@ namespace TAS_AprajiataRetails.Models.Data
     public class AccountNumber
     {
         public int AccountNumberId { get; set; }
-     
-        [Display(Name ="Bank Name")]
+
+        [Display(Name = "Bank Name")]
         public int BankId { get; set; }
         public Bank Bank { get; set; }
-        
-        [Display(Name ="Account Number")]
+
+        [Display(Name = "Account Number")]
         public string Account { get; set; }
 
         public ICollection<BankDeposit> Deposits { get; set; }
@@ -327,7 +334,7 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal Amount { get; set; }
-                
+
         [Display(Name = "Cheque Details")]
         public string ChequeNo { get; set; }
         [Display(Name = "Signed By")]
@@ -361,4 +368,85 @@ namespace TAS_AprajiataRetails.Models.Data
         public int Tailoring { get; set; }
     }
 
+
+    //Expenses
+    public class Expense
+    {
+        public int ExpenseId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Expense Date")]
+        public DateTime ExpDate { get; set; }
+
+        public string Particulars { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+
+        [Display(Name = "Payment Mode")]
+        public PaymentModes PayMode { get; set; }
+
+        [Display(Name = "Payment Details")]
+        public string PaymentDetails { get; set; }
+
+        [Display(Name = "Paid By")]
+        public int EmployeeId { get; set; }
+        public virtual Employee PaidBy { get; set; }
+
+        [Display(Name = "Paid To")]
+        public string PaidTo { get; set; }
+
+        public string Remarks { get; set; }
+
+    }
+       
+    public class PettyCashExpense
+    {
+        public int PettyCashExpenseId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Expense Date")]
+        public DateTime ExpDate { get; set; }
+
+        [Display(Name = "Expense Details")]
+        public string Particulars { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+
+        [Display(Name = "Paid By")]
+        public int EmployeeId { get; set; }
+        public virtual Employee PaidBy { get; set; }
+
+
+        [Display(Name = "Paid To")]
+        public string PaidTo { get; set; }
+
+        [Display(Name = "Remarks/Details")]
+        public string Remarks { get; set; }
+
+    }
+
+
+    //Suspenses
+    public class SuspenseAccount
+    {
+        public int SuspenseAccountId { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date")]
+        public DateTime EntryDate { get; set; }
+        [Display(Name = "ReferanceDetails")]
+        public string ReferanceDetails { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        [Display(Name ="In Amount(+)")]
+        public decimal InAmount { get; set; }
+        [Display(Name = "Out Amount(-)")]
+        public decimal OutAmount { get; set; }
+        [Display(Name = "Is Cleared")]
+        public bool IsCleared { get; set; }
+        [Display(Name = "Cleared Details")]
+        public string ClearedDetails { get; set; }
+        [Display(Name = "Review By")]
+        public string ReviewBy { get; set; }
+    }
 }

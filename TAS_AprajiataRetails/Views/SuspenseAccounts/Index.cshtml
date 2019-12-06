@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.SuspenseAccount>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferanceDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OutAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCleared)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClearedDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EntryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferanceDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OutAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCleared)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClearedDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SuspenseAccountId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SuspenseAccountId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SuspenseAccountId })
+        </td>
+    </tr>
+}
+
+</table>

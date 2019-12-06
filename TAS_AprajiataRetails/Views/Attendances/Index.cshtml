@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Daily Attendance</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -29,29 +29,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.StaffName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AttDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EntryTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remarks)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AttendanceId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AttendanceId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AttendanceId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.StaffName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EntryTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AttendanceId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AttendanceId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AttendanceId })
+            </td>
+        </tr>
+    }
 
 </table>

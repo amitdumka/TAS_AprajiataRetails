@@ -34,6 +34,7 @@ namespace TAS_AprajiataRetails.Migrations
                 new TranscationMode(){Transcation="Amit Kumar Expenses" ,TranscationModeId=5},
                 new TranscationMode(){Transcation="CashIn" ,TranscationModeId=6},
                 new TranscationMode(){Transcation="CashOut" ,TranscationModeId=7},
+                new TranscationMode(){Transcation="Regular" ,TranscationModeId=8},
             };
             modes.ForEach(s => context.TranscationModes.AddOrUpdate(s));
 

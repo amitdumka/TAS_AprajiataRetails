@@ -10,116 +10,114 @@ using TAS_AprajiataRetails.Models.Data;
 
 namespace TAS_AprajiataRetails.Controllers
 {
-    public class CashPaymentsController : Controller
+    public class PettyCashExpensesController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
 
-        
-        // GET: CashPayments
+        // GET: PettyCashExpenses
         public ActionResult Index()
         {
-            var cashPayments = db.CashPayments.Include(c => c.Mode);
-            return View(cashPayments.ToList());
+            var cashExpenses = db.CashExpenses.Include(p => p.PaidBy);
+            return View(cashExpenses.ToList());
         }
 
-        // GET: CashPayments/Details/5
+        // GET: PettyCashExpenses/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CashPayment cashPayment = db.CashPayments.Find(id);
-            if (cashPayment == null)
+            PettyCashExpense pettyCashExpense = db.CashExpenses.Find(id);
+            if (pettyCashExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(cashPayment);
+            return View(pettyCashExpense);
         }
 
-        // GET: CashPayments/Create
+        // GET: PettyCashExpenses/Create
         public ActionResult Create()
         {
-            ViewBag.TranscationModeId = new SelectList(db.TranscationModes, "TranscationModeId", "Transcation");
+            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "StaffName");
             return View();
         }
 
-        // POST: CashPayments/Create
+        // POST: PettyCashExpenses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CashPaymentId,PaymentDate,TranscationModeId,PaidTo,Amount,SlipNo")] CashPayment cashPayment)
+        public ActionResult Create([Bind(Include = "PettyCashExpenseId,ExpDate,Particulars,Amount,EmployeeId,PaidTo,Remarks")] PettyCashExpense pettyCashExpense)
         {
             if (ModelState.IsValid)
             {
-                
-                db.CashPayments.Add(cashPayment);
-                Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, cashPayment.Amount);
+                db.CashExpenses.Add(pettyCashExpense);
+                Utils.UpDateCashOutHand(db, pettyCashExpense.ExpDate, pettyCashExpense.Amount); 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TranscationModeId = new SelectList(db.TranscationModes, "TranscationModeId", "Transcation", cashPayment.TranscationModeId);
-            return View(cashPayment);
+            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "StaffName", pettyCashExpense.EmployeeId);
+            return View(pettyCashExpense);
         }
 
-        // GET: CashPayments/Edit/5
+        // GET: PettyCashExpenses/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CashPayment cashPayment = db.CashPayments.Find(id);
-            if (cashPayment == null)
+            PettyCashExpense pettyCashExpense = db.CashExpenses.Find(id);
+            if (pettyCashExpense == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TranscationModeId = new SelectList(db.TranscationModes, "TranscationModeId", "Transcation", cashPayment.TranscationModeId);
-            return View(cashPayment);
+            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "StaffName", pettyCashExpense.EmployeeId);
+            return View(pettyCashExpense);
         }
 
-        // POST: CashPayments/Edit/5
+        // POST: PettyCashExpenses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CashPaymentId,PaymentDate,TranscationModeId,PaidTo,Amount,SlipNo")] CashPayment cashPayment)
+        public ActionResult Edit([Bind(Include = "PettyCashExpenseId,ExpDate,Particulars,Amount,EmployeeId,PaidTo,Remarks")] PettyCashExpense pettyCashExpense)
         {
             if (ModelState.IsValid)
             {
-                Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, cashPayment.Amount);
-                db.Entry(cashPayment).State = EntityState.Modified;
+                Utils.UpDateCashOutHand(db, pettyCashExpense.ExpDate, pettyCashExpense.Amount);
+                db.Entry(pettyCashExpense).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TranscationModeId = new SelectList(db.TranscationModes, "TranscationModeId", "Transcation", cashPayment.TranscationModeId);
-            return View(cashPayment);
+            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "StaffName", pettyCashExpense.EmployeeId);
+            return View(pettyCashExpense);
         }
 
-        // GET: CashPayments/Delete/5
+        // GET: PettyCashExpenses/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CashPayment cashPayment = db.CashPayments.Find(id);
-            if (cashPayment == null)
+            PettyCashExpense pettyCashExpense = db.CashExpenses.Find(id);
+            if (pettyCashExpense == null)
             {
                 return HttpNotFound();
             }
-            return View(cashPayment);
+            return View(pettyCashExpense);
         }
 
-        // POST: CashPayments/Delete/5
+        // POST: PettyCashExpenses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CashPayment cashPayment = db.CashPayments.Find(id);
-            db.CashPayments.Remove(cashPayment);
+            PettyCashExpense pettyCashExpense = db.CashExpenses.Find(id);
+            db.CashExpenses.Remove(pettyCashExpense);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

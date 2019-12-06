@@ -1,4 +1,4 @@
-﻿@model TAS_AprajiataRetails.Models.Data.CashReceipt
+﻿@model TAS_AprajiataRetails.Models.Data.PettyCashExpense
 
 @{
     ViewBag.Title = "Delete";
@@ -8,31 +8,31 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Cash Receipt</h4>
+    <h4>Petty Cash Expense</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Mode.Transcation)
+            @*@Html.DisplayNameFor(model => model.PaidBy.StaffName)*@ Paid By
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Mode.Transcation)
+            @Html.DisplayFor(model => model.PaidBy.StaffName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.InwardDate)
+            @Html.DisplayNameFor(model => model.ExpDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.InwardDate)
+            @Html.DisplayFor(model => model.ExpDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReceiptFrom)
+            @Html.DisplayNameFor(model => model.Particulars)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ReceiptFrom)
+            @Html.DisplayFor(model => model.Particulars)
         </dd>
 
         <dt>
@@ -44,11 +44,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SlipNo)
+            @Html.DisplayNameFor(model => model.PaidTo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SlipNo)
+            @Html.DisplayFor(model => model.PaidTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
         </dd>
 
     </dl>

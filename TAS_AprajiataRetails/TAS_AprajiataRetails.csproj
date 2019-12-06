@@ -176,11 +176,14 @@
     <Compile Include="Controllers\CashReceiptsController.cs" />
     <Compile Include="Controllers\DailySalesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PettyCashExpensesController.cs" />
     <Compile Include="Controllers\SalaryPaymentsController.cs" />
     <Compile Include="Controllers\StaffAdvancePaymentsController.cs" />
     <Compile Include="Controllers\StaffAdvanceReceiptsController.cs" />
+    <Compile Include="Controllers\SuspenseAccountsController.cs" />
     <Compile Include="Dump\DumpClass.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,7 +191,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Data\AprajitaRetailsContext.cs" />
-    <Compile Include="Models\Data\Person.cs" />
     <Compile Include="Models\Data\TableList.cs" />
     <Compile Include="Models\Data\TASDB.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -326,6 +328,21 @@
     <Content Include="Views\BankWithdrawals\Details.cshtml" />
     <Content Include="Views\BankWithdrawals\Edit.cshtml" />
     <Content Include="Views\BankWithdrawals\Index.cshtml" />
+    <Content Include="Views\Expenses\Create.cshtml" />
+    <Content Include="Views\Expenses\Delete.cshtml" />
+    <Content Include="Views\Expenses\Details.cshtml" />
+    <Content Include="Views\Expenses\Edit.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
+    <Content Include="Views\PettyCashExpenses\Create.cshtml" />
+    <Content Include="Views\PettyCashExpenses\Delete.cshtml" />
+    <Content Include="Views\PettyCashExpenses\Details.cshtml" />
+    <Content Include="Views\PettyCashExpenses\Edit.cshtml" />
+    <Content Include="Views\PettyCashExpenses\Index.cshtml" />
+    <Content Include="Views\SuspenseAccounts\Create.cshtml" />
+    <Content Include="Views\SuspenseAccounts\Delete.cshtml" />
+    <Content Include="Views\SuspenseAccounts\Details.cshtml" />
+    <Content Include="Views\SuspenseAccounts\Edit.cshtml" />
+    <Content Include="Views\SuspenseAccounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
