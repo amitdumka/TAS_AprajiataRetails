@@ -48,6 +48,8 @@ namespace TAS_AprajiataRetails.Models.Data
         //Expenses
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<PettyCashExpense> CashExpenses { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
 
         //Suspense
         public DbSet<SuspenseAccount> Suspenses { get; set; }

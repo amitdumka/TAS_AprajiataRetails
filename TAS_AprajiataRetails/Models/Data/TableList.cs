@@ -276,7 +276,7 @@ namespace TAS_AprajiataRetails.Models.Data
     }
 
     //Banking Section
-    
+
     public class BankDeposit
     {
         public int BankDepositId { get; set; }
@@ -368,6 +368,27 @@ namespace TAS_AprajiataRetails.Models.Data
         public int Tailoring { get; set; }
     }
 
+    //Suspenses
+    public class SuspenseAccount
+    {
+        public int SuspenseAccountId { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date")]
+        public DateTime EntryDate { get; set; }
+        [Display(Name = "ReferanceDetails")]
+        public string ReferanceDetails { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        [Display(Name = "In Amount(+)")]
+        public decimal InAmount { get; set; }
+        [Display(Name = "Out Amount(-)")]
+        public decimal OutAmount { get; set; }
+        [Display(Name = "Is Cleared")]
+        public bool IsCleared { get; set; }
+        [Display(Name = "Cleared Details")]
+        public string ClearedDetails { get; set; }
+        [Display(Name = "Review By")]
+        public string ReviewBy { get; set; }
+    }
 
     //Expenses
     public class Expense
@@ -399,7 +420,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public string Remarks { get; set; }
 
     }
-       
+
     public class PettyCashExpense
     {
         public int PettyCashExpenseId { get; set; }
@@ -428,25 +449,53 @@ namespace TAS_AprajiataRetails.Models.Data
     }
 
 
-    //Suspenses
-    public class SuspenseAccount
+
+
+    public class Payment
     {
-        public int SuspenseAccountId { get; set; }
+        public int PaymentId { get; set; }
+
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date")]
-        public DateTime EntryDate { get; set; }
-        [Display(Name = "ReferanceDetails")]
-        public string ReferanceDetails { get; set; }
+        [Display(Name = "Payment Date")]
+        public DateTime PayDate { get; set; }
+
+        [Display(Name = "Payment Party")]
+        public string PaymentPartry { get; set; }
+        [Display(Name = "Payment Mode")]
+        public PaymentModes PayMode { get; set; }
+        [Display(Name = "Payment Details")]
+        public string PaymentDetails { get; set; }
         [DataType(DataType.Currency), Column(TypeName = "money")]
-        [Display(Name ="In Amount(+)")]
-        public decimal InAmount { get; set; }
-        [Display(Name = "Out Amount(-)")]
-        public decimal OutAmount { get; set; }
-        [Display(Name = "Is Cleared")]
-        public bool IsCleared { get; set; }
-        [Display(Name = "Cleared Details")]
-        public string ClearedDetails { get; set; }
-        [Display(Name = "Review By")]
-        public string ReviewBy { get; set; }
+        public decimal Amount { get; set; }
+        [Display(Name = "Payment Slip No")]
+        public string PaymentSlipNo { get; set; }
+
+        public string Remarks { get; set; }
+
+    }
+    public class Receipt
+    {
+        public int ReceiptId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+
+        [Display(Name = "Expense Date")]
+        public DateTime RecieptDate { get; set; }
+
+        [Display(Name = "Receipt From ")]
+        public string ReceiptFrom { get; set; }
+
+
+        [Display(Name = "Payment Mode")]
+        public PaymentModes PayMode { get; set; }
+        [Display(Name = "Receipt Details ")]
+        public string ReceiptDetails { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal Amount { get; set; }
+        [Display(Name = "Receipt Slip No ")]
+        public string RecieptSlipNo { get; set; }
+        public string Remarks { get; set; }
+
     }
 }

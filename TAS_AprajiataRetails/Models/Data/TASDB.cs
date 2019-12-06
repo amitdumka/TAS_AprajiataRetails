@@ -392,29 +392,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public double Amount { get; set; }
 
     }
-    public class Payments
-    {
-        public int PaymentsId { get; set; }
-        public DateTime PayDate { get; set; }
-        public string PaymentParties { get; set; }
-        public string PaymentDetails { get; set; }
-        public string Remarks { get; set; }
-        public double Amount { get; set; }
-        public string PaymentSlipNo { get; set; }
-        public string PayMode { get; set; }
-
-    }
-    public class Recipets
-    {
-        public int RecipetsId { get; set; }
-        public DateTime RecieptDate { get; set; }
-        public string RecieptFrom { get; set; }
-        public string RecieptDetails { get; set; }
-        public string Remarks { get; set; }
-        public double Amount { get; set; }
-        public string RecieptSlipNo { get; set; }
-        public string PayMode { get; set; }
-    }
+    
     
     public class DailySaleReport
     {
@@ -435,40 +413,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public double TotalFixedSale { get; set; }
     }
    
-    //public class SalaryPayment
-    //{
-    //    public int SalaryPaymentId { get; set; }
-    //    [Display(Name = "OpenningBalance")]
-    //    public string StaffName { get; set; }
-    //    [Display(Name = "OpenningBalance")]
-    //    public string SalaryMonth { get; set; }
-    //    [Display(Name = "OpenningBalance")]
-    //    public DateTime PaymentDate { get; set; }
-    //    public double Amount { get; set; }
-    //    [Display(Name = "OpenningBalance")]
-    //    public PayModes PayMode { get; set; }
-    //    public string Details { get; set; }
-
-
-    //}
-    //public class AdvancePayment
-    //{
-    //    public int AdvancePaymentId { get; set; }
-    //    public string StaffName { get; set; }
-    //    public DateTime PaymentDate { get; set; }
-    //    public double Amount { get; set; }
-    //    public string PayMode { get; set; }
-    //    public string Details { get; set; }
-    //}
-    //public class AdvanceReceipt
-    //{
-    //    public int AdvanceReceiptId { get; set; }
-    //    public string StaffName { get; set; }
-    //    public DateTime PaymentDate { get; set; }
-    //    public double Amount { get; set; }
-    //    public string PayMode { get; set; }
-    //    public string Details { get; set; }
-    //}
+    
     public class TailoringReport
     {
         public double TodaySale { get; set; }
