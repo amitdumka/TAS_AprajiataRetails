@@ -84,6 +84,15 @@ namespace TAS_AprajiataRetails.Models.Data
         public decimal CashIn { get; set; }
         [Display(Name = "Cash-Out Amount")]
         public decimal CashOut { get; set; }
+
+        [Display(Name = "CashInHand")]
+        public decimal InHand
+        {
+            get
+            {
+                return OpenningBalance + CashIn - CashOut;
+            }
+        }
     }
     public class CashInBank
     {
@@ -98,6 +107,15 @@ namespace TAS_AprajiataRetails.Models.Data
         public decimal CashIn { get; set; }
         [Display(Name = "Cash-Out Amount")]
         public decimal CashOut { get; set; }
+
+        [Display(Name = "CashInBank")]
+        public decimal InHand
+        {
+            get
+            {
+                return OpenningBalance + CashIn - CashOut;
+            }
+        }
     }
     public class DailySale
     {

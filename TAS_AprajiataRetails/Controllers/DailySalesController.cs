@@ -43,16 +43,18 @@ namespace TAS_AprajiataRetails.Controllers
             var totalManualSale = dailySales.Where(c => c.IsManualBill == true).Sum(c => (decimal?)c.Amount) ?? 0;
             var totalMonthlySale = db.DailySales.Where(c => DbFunctions.TruncateTime(c.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Sum(c => (decimal?)c.Amount) ?? 0;
             var duesamt = db.DuesLists.Where(c => c.IsRecovered == false).Sum(c => (decimal?)c.Amount) ?? 0;
-            var cashinhand = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault();
+            //var cashinhands = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault();
+            var cashinhand = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault().InHand;
 
             ViewBag.TodaySale = totalSale;
             ViewBag.ManualSale = totalManualSale;
             ViewBag.MonthlySale = totalMonthlySale;
             ViewBag.DuesAmount = duesamt;
-            if (cashinhand != null)
-                ViewBag.CashInHand = (decimal?)(cashinhand.OpenningBalance + cashinhand.CashIn - cashinhand.CashOut) ?? 0;
-            else
-                ViewBag.CashInHand = 0.00;
+            ViewBag.CashInHand = cashinhand;
+           // if (cashinhands != null)
+           // ViewBag.CashInHands = (decimal?)(cashinhands.OpenningBalance + cashinhands.CashIn - cashinhands.CashOut) ?? 0;
+           //else
+           //    ViewBag.CashInHands = 0.00;
             return View(dailySales.ToList());
         }
 

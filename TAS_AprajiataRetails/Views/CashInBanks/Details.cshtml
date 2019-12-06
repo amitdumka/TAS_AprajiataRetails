@@ -1,0 +1,58 @@
+﻿@model TAS_AprajiataRetails.Models.Data.CashInBank
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CashInBank</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CIBDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CIBDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpenningBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpenningBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClosingBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClosingBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashOut)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CashInBankId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

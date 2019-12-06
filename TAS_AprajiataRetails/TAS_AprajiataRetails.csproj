@@ -172,6 +172,8 @@
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BankDepositsController.cs" />
     <Compile Include="Controllers\BankWithdrawalsController.cs" />
+    <Compile Include="Controllers\CashInBanksController.cs" />
+    <Compile Include="Controllers\CashInHandsController.cs" />
     <Compile Include="Controllers\CashPaymentsController.cs" />
     <Compile Include="Controllers\CashReceiptsController.cs" />
     <Compile Include="Controllers\DailySalesController.cs" />
@@ -355,6 +357,16 @@
     <Content Include="Views\Receipts\Details.cshtml" />
     <Content Include="Views\Receipts\Edit.cshtml" />
     <Content Include="Views\Receipts\Index.cshtml" />
+    <Content Include="Views\CashInBanks\Create.cshtml" />
+    <Content Include="Views\CashInBanks\Delete.cshtml" />
+    <Content Include="Views\CashInBanks\Details.cshtml" />
+    <Content Include="Views\CashInBanks\Edit.cshtml" />
+    <Content Include="Views\CashInBanks\Index.cshtml" />
+    <Content Include="Views\CashInHands\Create.cshtml" />
+    <Content Include="Views\CashInHands\Delete.cshtml" />
+    <Content Include="Views\CashInHands\Details.cshtml" />
+    <Content Include="Views\CashInHands\Edit.cshtml" />
+    <Content Include="Views\CashInHands\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
