@@ -150,6 +150,9 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [Display(Name = "Is Tailoring Bill")]
         public bool IsTailoringBill { get; set; }
+
+        [Display(Name = "Is Sale Return")]
+        public bool IsSaleReturn { get; set; }
         public string Remarks { get; set; }
 
         //public virtual DuesList DuesList { get; set; }

@@ -15,23 +15,41 @@ namespace TAS_AprajiataRetails.Controllers
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
         private void ProcessAccounts(DailySale dailySale)
         {
-            if (!dailySale.IsDue)
+            if (!dailySale.IsSaleReturn)
+            {
+                if (!dailySale.IsDue)
+                {
+                    if (dailySale.PayMode == PayModes.Cash && dailySale.CashAmount > 0)
+                    {
+                        Utils.UpDateCashInHand(db, dailySale.SaleDate, dailySale.CashAmount);
+
+                    }
+                    //TODO: in future make it more robust
+                    if (dailySale.PayMode != PayModes.Cash && dailySale.PayMode != PayModes.Coupons && dailySale.PayMode != PayModes.Points)
+                    {
+                        Utils.UpDateCashInBank(db, dailySale.SaleDate, dailySale.Amount - dailySale.CashAmount);
+                    }
+                }
+                else
+                {
+                    DuesList dl = new DuesList() { Amount = dailySale.Amount, DailySale = dailySale };
+                    db.DuesLists.Add(dl);
+                }
+            }
+            else
             {
                 if (dailySale.PayMode == PayModes.Cash && dailySale.CashAmount > 0)
                 {
-                    Utils.UpDateCashInHand(db, dailySale.SaleDate, dailySale.CashAmount);
+                    Utils.UpDateCashOutHand(db, dailySale.SaleDate, dailySale.CashAmount);
 
                 }
                 //TODO: in future make it more robust
                 if (dailySale.PayMode != PayModes.Cash && dailySale.PayMode != PayModes.Coupons && dailySale.PayMode != PayModes.Points)
                 {
-                    Utils.UpDateCashInBank(db, dailySale.SaleDate, dailySale.Amount - dailySale.CashAmount);
+                    Utils.UpDateCashOutBank(db, dailySale.SaleDate, dailySale.Amount - dailySale.CashAmount);
                 }
-            }
-            else
-            {
-                DuesList dl = new DuesList() { Amount = dailySale.Amount, DailySale = dailySale };
-                db.DuesLists.Add(dl);
+                dailySale.Amount = 0 - dailySale.Amount;
+
             }
 
         }
@@ -89,7 +107,7 @@ namespace TAS_AprajiataRetails.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DailySaleId,SaleDate,InvNo,Amount,PayMode,CashAmount,SalesmanId,IsDue,IsManualBill,IsTailoringBill,Remarks")] DailySale dailySale)
+        public ActionResult Create([Bind(Include = "DailySaleId,SaleDate,InvNo,Amount,PayMode,CashAmount,SalesmanId,IsDue,IsManualBill,IsTailoringBill,IsSaleReturn,Remarks")] DailySale dailySale)
         {
             if (ModelState.IsValid)
             {
@@ -126,7 +144,7 @@ namespace TAS_AprajiataRetails.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DailySaleId,SaleDate,InvNo,Amount,PayMode,CashAmount,SalesmanId,IsDue,IsManualBill,IsTailoringBill,Remarks")] DailySale dailySale)
+        public ActionResult Edit([Bind(Include = "DailySaleId,SaleDate,InvNo,Amount,PayMode,CashAmount,SalesmanId,IsDue,IsManualBill,IsTailoringBill,IsSaleReturn,Remarks")] DailySale dailySale)
         {
             if (ModelState.IsValid)
             {
@@ -150,6 +168,7 @@ namespace TAS_AprajiataRetails.Controllers
             DailySale dailySale = db.DailySales.Find(id);
             if (dailySale == null)
             {
+              
                 return HttpNotFound();
             }
             // return View(dailySale);

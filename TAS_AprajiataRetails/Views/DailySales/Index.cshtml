@@ -36,20 +36,20 @@
             @Html.DisplayNameFor(model => model.PayMode)
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.CashAmount)
-            </th>*@
+            @Html.DisplayNameFor(model => model.CashAmount)
+        </th>*@
         @*<th>
-                @Html.DisplayNameFor(model => model.IsDue)
-            </th>*@
+            @Html.DisplayNameFor(model => model.IsDue)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.IsManualBill)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.IsTailoringBill)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Remarks)
-            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.IsSaleReturn)
+        </th>
+        @*    <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Salesman.SalesmanName)
         </th>
@@ -82,9 +82,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsManualBill)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.IsTailoringBill)
-                </td>*@
+            <td>
+                    @Html.DisplayFor(modelItem => item.IsSaleReturn)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Salesman.SalesmanName)
             </td>
