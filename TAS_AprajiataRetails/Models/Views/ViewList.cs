@@ -1,40 +1,97 @@
-﻿namespace TAS_AprajiataRetails.Models.Views
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using TAS_AprajiataRetails.Models.Data;
+
+namespace TAS_AprajiataRetails.Models.Views
 {
     public class ManaulSaleReport
     {
-        public double DailySale { get; set; }
-        public double MonthlySale { get; set; }
-        public double YearlySale { get; set; }
-        public double PendingSale { get; set; }
-        public double SaleAdjustest { get; set; }
-        public double TotalFixedSale { get; set; }
+        public decimal DailySale { get; set; }
+        public decimal MonthlySale { get; set; }
+        public decimal YearlySale { get; set; }
+        public decimal PendingSale { get; set; }
+        public decimal SaleAdjustest { get; set; }
+        public decimal TotalFixedSale { get; set; }
     }
 
 
     public class TailoringReport
     {
-        public double TodaySale { get; set; }
-        public double MonthlySale { get; set; }
-        public double YearlySale { get; set; }
-        public double QuaterlySale { get; set; }
+        public decimal TodaySale { get; set; }
+        public decimal MonthlySale { get; set; }
+        public decimal YearlySale { get; set; }
+        public decimal QuaterlySale { get; set; }
 
-        public double TodayBooking { get; set; }
-        public double TodayUnit { get; set; }
+        public decimal TodayBooking { get; set; }
+        public decimal TodayUnit { get; set; }
 
-        public double MonthlyBooking { get; set; }
-        public double MonthlyUnit { get; set; }
+        public decimal MonthlyBooking { get; set; }
+        public decimal MonthlyUnit { get; set; }
 
-        public double YearlyBooking { get; set; }
-        public double YearlyUnit { get; set; }
+        public decimal YearlyBooking { get; set; }
+        public decimal YearlyUnit { get; set; }
     }
 
     public class DailySaleReport
     {
-        public double DailySale { get; set; }
-        public double MonthlySale { get; set; }
-        public double YearlySale { get; set; }
-        public double WeeklySale { get; set; }
-        public double QuaterlySale { get; set; }
+        public decimal DailySale { get; set; }
+        public decimal MonthlySale { get; set; }
+        public decimal YearlySale { get; set; }
+        public decimal WeeklySale { get; set; }
+        public decimal QuaterlySale { get; set; }
 
+    }
+
+
+    public class EndofDayDetails
+    {
+       // public EndOfDay EndofDay { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "DSR Date")]
+        public DateTime EOD_Date { get; set; }
+
+        public float Shirting { get; set; }
+        public float Suiting { get; set; }
+        public int USPA { get; set; }
+
+        [Display(Name = "FM/Arrow/Others")]
+        public int FM_Arrow { get; set; }
+
+        [Display(Name = "Arvind RTW")]
+        public int RWT { get; set; }
+
+        [Display(Name = "Accessories")]
+        public int Access { get; set; }
+        [Display(Name = "Cash at Store")]
+        public decimal CashInHand { get; set; }
+
+        [Display(Name ="Total Sale")]
+        public decimal TodaySale { get; set; }
+        [Display(Name = "Card Sale")]
+        public decimal TodayCardSale { get; set; }
+        [Display(Name = "OtherMode Sale")]
+        public decimal TodayOtherSale { get; set; }
+        [Display(Name = "Manual Sale")]
+        public decimal TodayManualSale { get; set; }
+
+        [Display(Name = "Tailoring Delivery Sale")]
+        public decimal TodayTailoringSale { get; set; }
+        [Display(Name = "Tailoring Booking ")]
+        public int TodayTailoringBooking { get; set; }
+        [Display(Name = "Total Unit")]
+        public int TodayTotalUnit { get; set; }
+
+        [Display(Name = "Total Expenses")]
+        public decimal TodayTotalExpenses { get; set; }
+        [Display(Name = "Total Payments")]
+        public decimal TotalPayments { get; set; }
+        [Display(Name = "Total Receipts")]
+        public decimal TotalReceipts { get; set; }
+
+        [Display(Name = "Cash In Hand")]
+        public decimal TodayCashInHand { get; set; }
+       
+        
     }
 }

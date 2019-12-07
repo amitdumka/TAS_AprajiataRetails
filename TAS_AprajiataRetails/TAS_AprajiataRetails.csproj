@@ -185,6 +185,7 @@
     <Compile Include="Controllers\CashReceiptsController.cs" />
     <Compile Include="Controllers\DailySalesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\EndOfDaysController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\Data\AprajitaRetailsContext.cs" />
     <Compile Include="Models\Data\TableList.cs" />
     <Compile Include="Models\Data\TASDB.cs" />
+    <Compile Include="Models\Helpers\Reports.cs" />
     <Compile Include="Models\Helpers\Utils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -419,6 +421,12 @@
     <Content Include="Views\TalioringBookings\Details.cshtml" />
     <Content Include="Views\TalioringBookings\Edit.cshtml" />
     <Content Include="Views\TalioringBookings\Index.cshtml" />
+    <Content Include="Views\EndOfDays\Create.cshtml" />
+    <Content Include="Views\EndOfDays\Delete.cshtml" />
+    <Content Include="Views\EndOfDays\Details.cshtml" />
+    <Content Include="Views\EndOfDays\Edit.cshtml" />
+    <Content Include="Views\EndOfDays\Index.cshtml" />
+    <Content Include="Views\EndOfDays\DailySaleReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

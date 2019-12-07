@@ -377,6 +377,7 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "EOD Date")]
+        [Index(IsUnique = true)]
         public DateTime EOD_Date { get; set; }
 
         public float Shirting { get; set; }
@@ -391,7 +392,8 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [Display(Name = "Accessories")]
         public int Access { get; set; }
-        public int Tailoring { get; set; }
+        [Display(Name = "Cash at Store")]
+        public decimal CashInHand { get; set; }
     }
 
     //Suspenses

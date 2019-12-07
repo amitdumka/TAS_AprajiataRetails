@@ -51,6 +51,13 @@ namespace TAS_AprajiataRetails.Models.Helpers
         }
 
 
+        public static void CreateNextDayOpenningBalance(AprajitaRetailsContext db, DateTime date, bool saveit = false)
+        {
+            date = date.AddDays(1);// Next Day
+            ProcessOpenningClosingBalance(db, date, false, saveit); //TODO: many lines is repeating so create inline call or make new function
+            ProcessOpenningClosingBankBalance(db, date, false, saveit);//TODO: many lines is repeating so create inline call or make new function
+        }
+
         public static void ProcessOpenningClosingBalance(AprajitaRetailsContext db, DateTime date, bool isclosing = false, bool saveit = false)
         {
             if (!isclosing)
@@ -386,8 +393,6 @@ namespace TAS_AprajiataRetails.Models.Helpers
             }
         }
     }
-
-
 
 
 }

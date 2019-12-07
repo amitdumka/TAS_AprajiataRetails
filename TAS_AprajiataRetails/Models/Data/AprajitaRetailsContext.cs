@@ -36,9 +36,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public DbSet<BankDeposit> BankDeposits { get; set; }
         public DbSet<BankWithdrawal> Withdrawals { get; set; }
 
-
-        //Others
-        public DbSet<EndOfDay> EndOfDays { get; set; }
+             
 
         //Expenses
         public DbSet<Expense> Expenses { get; set; }
@@ -61,5 +59,8 @@ namespace TAS_AprajiataRetails.Models.Data
         public DbSet<TalioringBooking> Bookings { get; set; }
         public DbSet<TalioringDelivery> Deliveries { get; set; }
 
+
+        //End of Day
+        public DbSet<EndOfDay>EndOfDays { get; set; }
     }
 }
