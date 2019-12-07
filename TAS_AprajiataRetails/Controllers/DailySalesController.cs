@@ -1,18 +1,23 @@
-﻿using System;
+﻿using NLog.Fluent;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using TAS_AprajiataRetails.Models.Data;
+using TAS_AprajiataRetails.Models.Helpers;
 
 namespace TAS_AprajiataRetails.Controllers
 {
     public class DailySalesController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
+        CultureInfo c = CultureInfo.GetCultureInfo("In");
         private void ProcessAccounts(DailySale dailySale)
         {
             if (!dailySale.IsSaleReturn)
@@ -53,26 +58,92 @@ namespace TAS_AprajiataRetails.Controllers
             }
 
         }
+
+
+
         // GET: DailySales
-        public ActionResult Index()
+        public ActionResult Index(int? id, string salesmanId, string searchString, DateTime? SaleDate)
         {
             var dailySales = db.DailySales.Include(d => d.Salesman).Where(c => DbFunctions.TruncateTime(c.SaleDate) == DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c => c.SaleDate).ThenByDescending(c => c.DailySaleId);
+            if (id != null && id == 101)
+            {
+                dailySales = db.DailySales.Include(d => d.Salesman).OrderByDescending(c => c.SaleDate).ThenByDescending(c => c.DailySaleId);
+            }
+            //Fixed Query
             var totalSale = dailySales.Where(c => c.IsManualBill == false).Sum(c => (decimal?)c.Amount) ?? 0;
             var totalManualSale = dailySales.Where(c => c.IsManualBill == true).Sum(c => (decimal?)c.Amount) ?? 0;
             var totalMonthlySale = db.DailySales.Where(c => DbFunctions.TruncateTime(c.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Sum(c => (decimal?)c.Amount) ?? 0;
             var duesamt = db.DuesLists.Where(c => c.IsRecovered == false).Sum(c => (decimal?)c.Amount) ?? 0;
-            //var cashinhands = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault();
-            var cashinhand = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault().InHand;
 
+            var cashinhand = (decimal)0.00;
+            try
+            {
+                cashinhand = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault().InHand;
+            }
+            catch (Exception)
+            {
+                Utils.ProcessOpenningClosingBalance(db, DateTime.Today, false, true);
+                cashinhand = (decimal)0.00;
+                Log.Error("Cash In Hand is null");
+            }
+
+
+            // Fixed UI
             ViewBag.TodaySale = totalSale;
             ViewBag.ManualSale = totalManualSale;
             ViewBag.MonthlySale = totalMonthlySale;
             ViewBag.DuesAmount = duesamt;
             ViewBag.CashInHand = cashinhand;
-           // if (cashinhands != null)
-           // ViewBag.CashInHands = (decimal?)(cashinhands.OpenningBalance + cashinhands.CashIn - cashinhands.CashOut) ?? 0;
-           //else
-           //    ViewBag.CashInHands = 0.00;
+
+            // By Salesman
+            var salesmanList = new List<string>();
+            var smQry = from d in db.Salesmen
+                        orderby d.SalesmanName
+                        select d.SalesmanName;
+            salesmanList.AddRange(smQry.Distinct());
+            ViewBag.salesmanId = new SelectList(salesmanList);
+
+            //By Date
+
+            var dateList = new List<DateTime>();
+            var opdQry = from d in db.DailySales
+                         orderby d.SaleDate
+                         select d.SaleDate;
+            dateList.AddRange(opdQry.Distinct());
+            ViewBag.dateID = new SelectList(dateList);
+
+            //By Invoice No Search
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var dls = db.DailySales.Include(d => d.Salesman).Where(c => c.InvNo == searchString);
+                return View(dls);
+
+            }
+            else if (!String.IsNullOrEmpty(salesmanId) || SaleDate != null)
+            {
+                 IEnumerable<DailySale> DailySales;
+
+                if (SaleDate != null)
+                {
+                    DailySales = db.DailySales.Include(d => d.Salesman).Where(c => DbFunctions.TruncateTime(c.SaleDate) == DbFunctions.TruncateTime(SaleDate)).OrderByDescending(c => c.DailySaleId);
+                }
+                else
+                {
+                    DailySales= db.DailySales.Include(d => d.Salesman).Where(c => DbFunctions.TruncateTime(c.SaleDate) == DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c => c.SaleDate).ThenByDescending(c => c.DailySaleId);
+                }
+
+                if (!String.IsNullOrEmpty(salesmanId))
+                {
+                    DailySales = DailySales.Where(c => c.Salesman.SalesmanName == salesmanId);
+                }
+
+                return View(DailySales.ToList());
+                
+            }
+
+            
+
             return View(dailySales.ToList());
         }
 
@@ -149,7 +220,7 @@ namespace TAS_AprajiataRetails.Controllers
             if (ModelState.IsValid)
             {
                 //TODO: check is required if Amount is changed so need to verify with old data. 
-                ProcessAccounts(dailySale);
+                //TODO: Rectifed This  ProcessAccounts(dailySale);
                 db.Entry(dailySale).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -168,7 +239,7 @@ namespace TAS_AprajiataRetails.Controllers
             DailySale dailySale = db.DailySales.Find(id);
             if (dailySale == null)
             {
-              
+
                 return HttpNotFound();
             }
             // return View(dailySale);

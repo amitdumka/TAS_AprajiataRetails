@@ -11,12 +11,7 @@ namespace TAS_AprajiataRetails.Models.Data
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AprajitaRetailsContext, Migrations.Configuration>());
         }
 
-       
-        //public DbSet<Payments> Payments { get; set; }
-        //public DbSet<Recipets> Recipets { get; set; }
-        //public DbSet<TalioringBooking> TalioringBookings { get; set; }
-        //public DbSet<TalioringDelivery> TalioringDeliveries { get; set; }
-       
+
         ////Version 2
         public DbSet<DailySale> DailySales { get; set; }
         public DbSet<CashInHand> CashInHands { get; set; }
@@ -53,6 +48,18 @@ namespace TAS_AprajiataRetails.Models.Data
 
         //Suspense
         public DbSet<SuspenseAccount> Suspenses { get; set; }
+
+
+        //Tailoring
+
+        public DbSet<TailorAttendance> TailorAttendances { get; set; }
+        public DbSet<TailoringEmployee> Tailors { get; set; }
+        public DbSet<TailoringSalaryPayment> TailoringSalaries { get; set; }
+        public DbSet<TailoringStaffAdvancePayment> TailoringStaffAdvancePayments { get; set; }
+        public DbSet<TailoringStaffAdvanceReceipt> TailoringStaffAdvanceReceipts { get; set; }
+
+        public DbSet<TalioringBooking> Bookings { get; set; }
+        public DbSet<TalioringDelivery> Deliveries { get; set; }
 
     }
 }

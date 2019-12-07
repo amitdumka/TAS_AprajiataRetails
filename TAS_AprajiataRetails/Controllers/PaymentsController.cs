@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TAS_AprajiataRetails.Models.Data;
+using TAS_AprajiataRetails.Models.Helpers;
 
 namespace TAS_AprajiataRetails.Controllers
 {
@@ -99,7 +100,7 @@ namespace TAS_AprajiataRetails.Controllers
         {
             if (ModelState.IsValid)
             {
-                ProcessAccounts(payment);
+                //TODO: Rectifed This   ProcessAccounts(payment);
                 db.Entry(payment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

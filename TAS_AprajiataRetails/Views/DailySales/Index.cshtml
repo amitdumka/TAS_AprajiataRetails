@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.DailySale>
-
 @{
     ViewBag.Title = "Index";
 }
@@ -7,16 +6,27 @@
 <h2>Daily Sale</h2>
 <br />
 <div>
-    <h4 class="text-success">Today Sale  : @ViewBag.TodaySale         Manual Sale: @ViewBag.ManualSale        Monthly Sale: @ViewBag.MonthlySale</h4>
-    <h4 class="text-danger">Total Dues  : @ViewBag.DuesAmount         Cash-In-Hand: @ViewBag.CashInHand</h4>
+    <h4 class="text-success">Today Sale  : @string.Format("{0:C}", ViewBag.TodaySale)         Manual Sale: @string.Format("{0:C}", ViewBag.ManualSale)       Monthly Sale: @string.Format("{0:C}", ViewBag.MonthlySale)</h4>
+    <h4 class="text-danger">Total Dues  : @string.Format("{0:C}", ViewBag.DuesAmount)        Cash-In-Hand: @string.Format("{0:C}", ViewBag.CashInHand)</h4>
     <div class="column"></div>
     <div class="column"></div>
 
 
 </div>
-
-
-
+<div>
+    @using (Html.BeginForm("Index", "DailySales", FormMethod.Get))
+    {
+    <p>
+        Salesman: @Html.DropDownList("salesmanId", "All")
+        By Date: @Html.EditorFor(model => model.FirstOrDefault().SaleDate, new { htmlAttributes = new { @value = DateTime.Now.ToShortDateString() } })
+        @Html.ValidationMessageFor(model => model.FirstOrDefault().SaleDate, "", new { @class = "text-danger" })
+        | Or By InvoiceNo: @Html.TextBox("SearchString")
+        <input type="submit" value="Filter" /><br />
+        @Html.ActionLink("     All Invoice", "Index", new { id = 101 }) |  @Html.ActionLink("     Today", "Index", new { id = 0 })
+    </p>
+        
+    }
+</div>
 <p>
     @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
 </p>
@@ -36,11 +46,11 @@
             @Html.DisplayNameFor(model => model.PayMode)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.CashAmount)
-        </th>*@
+                @Html.DisplayNameFor(model => model.CashAmount)
+            </th>*@
         @*<th>
-            @Html.DisplayNameFor(model => model.IsDue)
-        </th>*@
+                @Html.DisplayNameFor(model => model.IsDue)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.IsManualBill)
         </th>
@@ -48,8 +58,8 @@
             @Html.DisplayNameFor(model => model.IsSaleReturn)
         </th>
         @*    <th>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </th>*@
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Salesman.SalesmanName)
         </th>
@@ -83,8 +93,8 @@
                 @Html.DisplayFor(modelItem => item.IsManualBill)
             </td>
             <td>
-                    @Html.DisplayFor(modelItem => item.IsSaleReturn)
-                </td>
+                @Html.DisplayFor(modelItem => item.IsSaleReturn)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Salesman.SalesmanName)
             </td>
@@ -93,8 +103,8 @@
                 </td>*@
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.DailySaleId }, new { data_modal = "" }) |*@
-                @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "" }) |
-                @*@Html.ActionLink("Delete", "Delete", new { id = item.DailySaleId }, new { data_modal = "" })*@
+                @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "" }) 
+                @*|@Html.ActionLink("Delete", "Delete", new { id = item.DailySaleId }, new { data_modal = "" })*@
             </td>
         </tr>
 

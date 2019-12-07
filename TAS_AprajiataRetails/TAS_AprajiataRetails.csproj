@@ -46,9 +46,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.8\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -188,6 +195,13 @@
     <Compile Include="Controllers\StaffAdvancePaymentsController.cs" />
     <Compile Include="Controllers\StaffAdvanceReceiptsController.cs" />
     <Compile Include="Controllers\SuspenseAccountsController.cs" />
+    <Compile Include="Controllers\TailorAttendancesController.cs" />
+    <Compile Include="Controllers\TailoringEmployeesController.cs" />
+    <Compile Include="Controllers\TailoringSalaryPaymentsController.cs" />
+    <Compile Include="Controllers\TailoringStaffAdvancePaymentsController.cs" />
+    <Compile Include="Controllers\TailoringStaffAdvanceReceiptsController.cs" />
+    <Compile Include="Controllers\TalioringBookingsController.cs" />
+    <Compile Include="Controllers\TalioringDeliveriesController.cs" />
     <Compile Include="Dump\DumpClass.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,10 +211,13 @@
     <Compile Include="Models\Data\AprajitaRetailsContext.cs" />
     <Compile Include="Models\Data\TableList.cs" />
     <Compile Include="Models\Data\TASDB.cs" />
+    <Compile Include="Models\Helpers\Utils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Views\ViewList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="works\Jobs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -367,10 +384,44 @@
     <Content Include="Views\CashInHands\Details.cshtml" />
     <Content Include="Views\CashInHands\Edit.cshtml" />
     <Content Include="Views\CashInHands\Index.cshtml" />
+    <Content Include="Views\TailorAttendances\Create.cshtml" />
+    <Content Include="Views\TailorAttendances\Delete.cshtml" />
+    <Content Include="Views\TailorAttendances\Details.cshtml" />
+    <Content Include="Views\TailorAttendances\Edit.cshtml" />
+    <Content Include="Views\TailorAttendances\Index.cshtml" />
+    <Content Include="Views\TailoringEmployees\Create.cshtml" />
+    <Content Include="Views\TailoringEmployees\Delete.cshtml" />
+    <Content Include="Views\TailoringEmployees\Details.cshtml" />
+    <Content Include="Views\TailoringEmployees\Edit.cshtml" />
+    <Content Include="Views\TailoringEmployees\Index.cshtml" />
+    <Content Include="Views\TailoringSalaryPayments\Create.cshtml" />
+    <Content Include="Views\TailoringSalaryPayments\Delete.cshtml" />
+    <Content Include="Views\TailoringSalaryPayments\Details.cshtml" />
+    <Content Include="Views\TailoringSalaryPayments\Edit.cshtml" />
+    <Content Include="Views\TailoringSalaryPayments\Index.cshtml" />
+    <Content Include="Views\TailoringStaffAdvancePayments\Create.cshtml" />
+    <Content Include="Views\TailoringStaffAdvancePayments\Delete.cshtml" />
+    <Content Include="Views\TailoringStaffAdvancePayments\Details.cshtml" />
+    <Content Include="Views\TailoringStaffAdvancePayments\Edit.cshtml" />
+    <Content Include="Views\TailoringStaffAdvancePayments\Index.cshtml" />
+    <Content Include="Views\TailoringStaffAdvanceReceipts\Create.cshtml" />
+    <Content Include="Views\TailoringStaffAdvanceReceipts\Delete.cshtml" />
+    <Content Include="Views\TailoringStaffAdvanceReceipts\Details.cshtml" />
+    <Content Include="Views\TailoringStaffAdvanceReceipts\Edit.cshtml" />
+    <Content Include="Views\TailoringStaffAdvanceReceipts\Index.cshtml" />
+    <Content Include="Views\TalioringDeliveries\Create.cshtml" />
+    <Content Include="Views\TalioringDeliveries\Delete.cshtml" />
+    <Content Include="Views\TalioringDeliveries\Details.cshtml" />
+    <Content Include="Views\TalioringDeliveries\Edit.cshtml" />
+    <Content Include="Views\TalioringDeliveries\Index.cshtml" />
+    <Content Include="Views\TalioringBookings\Create.cshtml" />
+    <Content Include="Views\TalioringBookings\Delete.cshtml" />
+    <Content Include="Views\TalioringBookings\Details.cshtml" />
+    <Content Include="Views\TalioringBookings\Edit.cshtml" />
+    <Content Include="Views\TalioringBookings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

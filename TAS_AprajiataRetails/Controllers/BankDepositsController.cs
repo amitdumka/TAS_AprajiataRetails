@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TAS_AprajiataRetails.Models.Data;
+using TAS_AprajiataRetails.Models.Helpers;
 
 namespace TAS_AprajiataRetails.Controllers
 {
@@ -104,7 +105,8 @@ namespace TAS_AprajiataRetails.Controllers
         {
             if (ModelState.IsValid)
             {
-                ProcessAccounts(bankDeposit);
+                //TODO: Rectifed This ProcessAccounts(bankDeposit);
+                bankDeposit.Remarks = bankDeposit.Remarks + " Edit, Match with original data";
                 db.Entry(bankDeposit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
