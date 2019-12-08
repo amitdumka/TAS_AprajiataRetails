@@ -70,7 +70,7 @@ namespace TAS_AprajiataRetails.Models
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Full Name")]
+        [Display(Name = "User Name")]
         public string FullName { get; set; }
 
         [Required]

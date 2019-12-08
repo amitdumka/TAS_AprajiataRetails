@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TAS_AprajiataRetails.Models.Data;
 
@@ -15,20 +16,37 @@ namespace TAS_AprajiataRetails.Models.Views
     }
 
 
+    public class MasterViewReport
+    {
+        public DailySaleReport SaleReport { get; set; }
+        public TailoringReport TailoringReport { get; set; }
+        public List<EmployeeInfo> EmpInfoList { get; set; }
+        public ManaulSaleReport ManaulSale { get; set; }
+
+    }
+
+
     public class TailoringReport
     {
+        [Display(Name ="Today")]
         public decimal TodaySale { get; set; }
+        [Display(Name = "Montly")]
         public decimal MonthlySale { get; set; }
+        [Display(Name = "Yearly")]
         public decimal YearlySale { get; set; }
-        public decimal QuaterlySale { get; set; }
+        //public decimal QuaterlySale { get; set; }
 
+        [Display(Name = "Booking")]
         public decimal TodayBooking { get; set; }
+        [Display(Name = "Items")]
         public decimal TodayUnit { get; set; }
-
+        [Display(Name = "Booking")]
         public decimal MonthlyBooking { get; set; }
+        [Display(Name = "Items")]
         public decimal MonthlyUnit { get; set; }
-
+        [Display(Name = "Booking")]
         public decimal YearlyBooking { get; set; }
+        [Display(Name = "Itemst")]
         public decimal YearlyUnit { get; set; }
     }
 

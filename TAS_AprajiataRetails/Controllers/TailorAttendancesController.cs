@@ -10,6 +10,7 @@ using TAS_AprajiataRetails.Models.Data;
 
 namespace TAS_AprajiataRetails.Controllers
 {
+    [Authorize]
     public class TailorAttendancesController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();

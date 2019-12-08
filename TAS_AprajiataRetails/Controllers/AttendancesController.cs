@@ -10,6 +10,7 @@ using TAS_AprajiataRetails.Models.Data;
 
 namespace TAS_AprajiataRetails.Controllers
 {
+    [Authorize]
     public class AttendancesController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
@@ -17,7 +18,7 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: Attendances
         public ActionResult Index()
         {
-            var attendances = db.Attendances.Include(a => a.Employee).Where(c=>DbFunctions.TruncateTime(c.AttDate)==DbFunctions.TruncateTime(DateTime.Today));
+            var attendances = db.Attendances.Include(a => a.Employee).Where(c=>DbFunctions.TruncateTime(c.AttDate)==DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c=>c.AttDate);
             return View(attendances.ToList());
         }
 

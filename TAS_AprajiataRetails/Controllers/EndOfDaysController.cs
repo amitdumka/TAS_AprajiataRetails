@@ -10,6 +10,7 @@ using TAS_AprajiataRetails.Models.Views;
 
 namespace TAS_AprajiataRetails.Controllers
 {
+    [Authorize]
     public class EndOfDaysController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();

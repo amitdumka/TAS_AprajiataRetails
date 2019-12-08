@@ -14,6 +14,7 @@ using TAS_AprajiataRetails.Models.Helpers;
 
 namespace TAS_AprajiataRetails.Controllers
 {
+    [Authorize]
     public class DailySalesController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();

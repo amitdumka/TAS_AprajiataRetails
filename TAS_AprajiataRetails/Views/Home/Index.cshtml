@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TAS_AprajiataRetails.Models.Views.MasterViewReport
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -12,18 +13,83 @@
     <div class="col-md-4">
         <h2>Sale Record</h2>
         <p>
-            Your Sale Record will be Displayed here.
+
+            @if (Model.SaleReport != null && Context.User.Identity.IsAuthenticated)
+            {
+                <table class="table table-responsive table-striped text-info">
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.SaleReport.DailySale)</td>
+                        <td>@Html.DisplayFor(model => model.SaleReport.DailySale)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.SaleReport.MonthlySale)</td>
+                        <td>@Html.DisplayFor(model => model.SaleReport.MonthlySale)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.SaleReport.YearlySale)</td>
+                        <td>@Html.DisplayFor(model => model.SaleReport.YearlySale)</td>
+                    </tr>
+
+                </table>
+            }
+            else
+            {
+            <h5>  Sale Data (Registered Users Only).</h5>
+            }
+
+            <br />
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
+            <p><a class="btn btn-default" href="/DailySales/Index">Details &raquo;</a></p>
+        </div>
     <div class="col-md-4">
         <h2>Tailoring</h2>
-        <p>Your Tailoring Data will be Displayed Here.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <p>
+            @if (Model.TailoringReport != null && Context.User.Identity.IsAuthenticated)
+            {
+                <table class="table table-responsive table-striped text-info">
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.TodaySale)</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.TodaySale)</td>
+
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.TodayBooking)</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.TodayBooking)</td>
+                        
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.TodayUnit)</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.TodayUnit)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.MonthlySale)</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.MonthlySale)</td>
+
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.MonthlyBooking)</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.MonthlyBooking)</td>
+                        
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.MonthlyUnit   )</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.MonthlyUnit)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.YearlySale)</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.YearlySale)</td>
+
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.YearlyBooking)</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.YearlyBooking)</td>
+
+                        <td>@Html.DisplayNameFor(model => model.TailoringReport.YearlyUnit)</td>
+                        <td>@Html.DisplayFor(model => model.TailoringReport.YearlyUnit)</td>
+                    </tr>
+
+                </table>
+            }
+            else
+            {
+                     <h5>  Tailoring Data (Registered Users Only).</h5>
+            }
+        </p>
+        <p><a class="btn btn-default" href="/TalioringBookings">Booking List &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Accounting</h2>
-        <p>All Accounting Data will be displayed here.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <div class="col-md-4">
+            <h2>Accounting</h2>
+            <p>All Accounting Data will be displayed here.</p>
+            <p><a class="btn btn-default" href="">Learn more &raquo;</a></p>
+        </div>
     </div>
-</div>

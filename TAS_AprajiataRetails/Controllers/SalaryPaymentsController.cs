@@ -11,6 +11,7 @@ using TAS_AprajiataRetails.Models.Helpers;
 
 namespace TAS_AprajiataRetails.Controllers
 {
+    [Authorize]
     public class SalaryPaymentsController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
