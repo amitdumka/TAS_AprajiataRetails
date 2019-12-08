@@ -38,8 +38,27 @@ namespace TAS_AprajiataRetails.Controllers
                 }
                 else
                 {
-                    DuesList dl = new DuesList() { Amount = dailySale.Amount, DailySale = dailySale };
+                    decimal dueAmt = 0;
+                    if (dailySale.Amount != dailySale.CashAmount)
+                    {
+                        dueAmt = dailySale.Amount - dailySale.CashAmount;
+                    }
+                    else
+                        dueAmt = dailySale.Amount;
+
+                    DuesList dl = new DuesList() { Amount = dueAmt, DailySale = dailySale, DailySaleId = dailySale.DailySaleId };
                     db.DuesLists.Add(dl);
+
+                    if (dailySale.PayMode == PayModes.Cash && dailySale.CashAmount > 0)
+                    {
+                        Utils.UpDateCashInHand(db, dailySale.SaleDate, dailySale.CashAmount);
+
+                    }
+                    //TODO: in future make it more robust
+                    if (dailySale.PayMode != PayModes.Cash && dailySale.PayMode != PayModes.Coupons && dailySale.PayMode != PayModes.Points)
+                    {
+                        Utils.UpDateCashInBank(db, dailySale.SaleDate, dailySale.Amount - dailySale.CashAmount);
+                    }
                 }
             }
             else
@@ -123,7 +142,7 @@ namespace TAS_AprajiataRetails.Controllers
             }
             else if (!String.IsNullOrEmpty(salesmanId) || SaleDate != null)
             {
-                 IEnumerable<DailySale> DailySales;
+                IEnumerable<DailySale> DailySales;
 
                 if (SaleDate != null)
                 {
@@ -131,7 +150,7 @@ namespace TAS_AprajiataRetails.Controllers
                 }
                 else
                 {
-                    DailySales= db.DailySales.Include(d => d.Salesman).Where(c => DbFunctions.TruncateTime(c.SaleDate) == DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c => c.SaleDate).ThenByDescending(c => c.DailySaleId);
+                    DailySales = db.DailySales.Include(d => d.Salesman).Where(c => DbFunctions.TruncateTime(c.SaleDate) == DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c => c.SaleDate).ThenByDescending(c => c.DailySaleId);
                 }
 
                 if (!String.IsNullOrEmpty(salesmanId))
@@ -140,10 +159,10 @@ namespace TAS_AprajiataRetails.Controllers
                 }
 
                 return View(DailySales.ToList());
-                
+
             }
 
-            
+
 
             return View(dailySales.ToList());
         }

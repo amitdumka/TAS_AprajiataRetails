@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TAS_AprajiataRetails.Models.Data;
 
 namespace TAS_AprajiataRetails.Models.Views
@@ -136,5 +137,21 @@ namespace TAS_AprajiataRetails.Models.Views
         public decimal TodayCashInHand { get; set; }
 
 
+    }
+
+
+
+
+    public class CashBook
+    {
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true), Display(Name ="Date")]
+        public DateTime EDate { get; set; }
+        public string Particulars { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal CashIn { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal CashOut { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal CashBalance { get; set; }
     }
 }

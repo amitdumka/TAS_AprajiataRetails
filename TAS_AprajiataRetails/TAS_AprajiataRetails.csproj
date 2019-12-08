@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\BankDepositsController.cs" />
     <Compile Include="Controllers\BankWithdrawalsController.cs" />
+    <Compile Include="Controllers\CashBookController.cs" />
     <Compile Include="Controllers\CashInBanksController.cs" />
     <Compile Include="Controllers\CashInHandsController.cs" />
     <Compile Include="Controllers\CashPaymentsController.cs" />
@@ -427,6 +428,8 @@
     <Content Include="Views\EndOfDays\Edit.cshtml" />
     <Content Include="Views\EndOfDays\Index.cshtml" />
     <Content Include="Views\EndOfDays\DailySaleReport.cshtml" />
+    <Content Include="Views\CashBook\Index.cshtml" />
+    <Content Include="Views\CashBook\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

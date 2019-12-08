@@ -14,7 +14,7 @@ namespace TAS_AprajiataRetails.Controllers
     public class TailoringSalaryPaymentsController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
-
+        
         // GET: TailoringSalaryPayments
         public ActionResult Index()
         {
