@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using TAS_AprajiataRetails.Models.Data;
@@ -31,6 +32,26 @@ namespace TAS_AprajiataRetails.Models.Helpers
         public static void GetAccoutingRecord()
         {
 
+        }
+
+
+        public static void GetEmpInfo()
+        {
+            using (AprajitaRetailsContext db= new AprajitaRetailsContext())
+            {
+                //List<EmployeeInfo> EmpInfoList = new List<EmployeeInfo>();
+                //var emps= db.Employees.Where(c=>DbFunctions.TruncateTime( c.AttDate).Value.Month== DbFunctions.TruncateTime(DateTime.Today).Value.Month);
+                //foreach (var emp in emps)
+                //{
+                //    EmployeeInfo info = new EmployeeInfo()
+                //    {
+                //        Name=emp.Employee.StaffName
+                //    };
+
+                //}
+                
+
+            }
         }
     }
 

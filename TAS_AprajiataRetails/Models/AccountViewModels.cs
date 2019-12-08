@@ -49,8 +49,8 @@ namespace TAS_AprajiataRetails.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
+        [Display(Name = "Email/UserName")]
+       // [EmailAddress]  //TODO: Changed By Amit Kumar
         public string Email { get; set; }
 
         [Required]

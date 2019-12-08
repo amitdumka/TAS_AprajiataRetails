@@ -34,18 +34,43 @@ namespace TAS_AprajiataRetails.Models.Views
 
     public class DailySaleReport
     {
+
+        [Display(Name = "Today")]
         public decimal DailySale { get; set; }
+        [Display(Name = "Monthly")]
         public decimal MonthlySale { get; set; }
+        [Display(Name = "Yearly")]
         public decimal YearlySale { get; set; }
+        [Display(Name = "Weekly")]
         public decimal WeeklySale { get; set; }
+        [Display(Name = "Quarterly")]
         public decimal QuaterlySale { get; set; }
+
+    }
+
+    public class EmployeeInfo
+    {
+        [Display(Name = "Staff Name")]
+        public string Name { get; set; }
+        [Display(Name = "Present Today")]
+        public string Present { get; set; }
+        [Display(Name = "No of Days Present")]
+        public double PresentDays { get; set; }
+        [Display(Name = "No of Days Absent")]
+        public double AbsentDays { get; set; }
+        [Display(Name = "Ratio Of Attenadance")]
+        public double Ratio { get; set; }
+        [Display(Name = "Current Month Sale")]
+        public decimal TotalSale { get; set; }
+        [Display(Name = "No Of Bills")]
+        public int NoOfBills { get; set; }
 
     }
 
 
     public class EndofDayDetails
     {
-       // public EndOfDay EndofDay { get; set; }
+        // public EndOfDay EndofDay { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "DSR Date")]
@@ -66,7 +91,7 @@ namespace TAS_AprajiataRetails.Models.Views
         [Display(Name = "Cash at Store")]
         public decimal CashInHand { get; set; }
 
-        [Display(Name ="Total Sale")]
+        [Display(Name = "Total Sale")]
         public decimal TodaySale { get; set; }
         [Display(Name = "Card Sale")]
         public decimal TodayCardSale { get; set; }
@@ -91,7 +116,7 @@ namespace TAS_AprajiataRetails.Models.Views
 
         [Display(Name = "Cash In Hand")]
         public decimal TodayCashInHand { get; set; }
-       
-        
+
+
     }
 }

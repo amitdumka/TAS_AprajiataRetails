@@ -17,7 +17,7 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: Attendances
         public ActionResult Index()
         {
-            var attendances = db.Attendances.Include(a => a.Employee);
+            var attendances = db.Attendances.Include(a => a.Employee).Where(c=>DbFunctions.TruncateTime(c.AttDate)==DbFunctions.TruncateTime(DateTime.Today));
             return View(attendances.ToList());
         }
 
