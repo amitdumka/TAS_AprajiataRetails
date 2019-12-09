@@ -497,7 +497,7 @@ namespace TAS_AprajiataRetails.Models.Helpers
                     CashBook b = new CashBook() { EDate = item.PaymentDate, CashIn = 0, CashOut = item.Amount, CashBalance = 0 };
                     book.Add(b);
                 }
-               return UpdateCorrectCashInHand_DB(book,db);
+               return UpdateCashInHand_DB(db,book);
 
             }//end of using
 
@@ -567,6 +567,61 @@ namespace TAS_AprajiataRetails.Models.Helpers
             return orderBook.ToList();
 
 
+        }
+
+
+        public static void ClearCashInHand(AprajitaRetailsContext db, DateTime date)
+        {
+            var cih = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate).Value.Month == DbFunctions.TruncateTime(date).Value.Month);
+
+            foreach (var item in cih)
+            {
+                item.CashIn = item.CashOut = item.ClosingBalance = item.OpenningBalance = 0;
+                db.Entry(item).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+        }
+
+        public static void DeleteCashInHandForMonth(AprajitaRetailsContext db, DateTime date)
+        {
+            var cih = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate).Value.Month == DbFunctions.TruncateTime(date).Value.Month);
+            db.CashInHands.RemoveRange(cih);
+            db.SaveChanges();
+
+
+        }
+
+
+
+        public static List<CashBook> UpdateCashInHand_DB(AprajitaRetailsContext db, List<CashBook> books)
+        {
+            
+            IEnumerable<CashBook> orderBook = books.OrderBy(c => c.EDate);
+            CashInHand cashInHand=null;
+            DateTime startDate = orderBook.First().EDate;
+            DeleteCashInHandForMonth(db, startDate);
+
+            foreach (var item in orderBook)
+            {
+                if (startDate != item.EDate || cashInHand==null)
+                {
+                    db.SaveChanges();
+                    cashInHand = new CashInHand() {
+                        CIHDate = item.EDate, OpenningBalance = 0, CashIn = item.CashIn, CashOut = item.CashOut,
+                        ClosingBalance = 0
+                    };
+                }
+                else
+                {
+                    cashInHand.CashIn = item.CashIn;
+                    cashInHand.CashOut = item.CashOut;
+                }
+
+                
+            }
+            db.SaveChanges();
+
+            return orderBook.ToList();
         }
 
 
