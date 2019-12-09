@@ -54,10 +54,23 @@ namespace TAS_AprajiataRetails.Models.Helpers
         }
 
 
-        public static void GetEmpInfo()
+        public static List<EmpStatus>  GetEmpInfo()
         {
             using (AprajitaRetailsContext db = new AprajitaRetailsContext())
             {
+                List<EmpStatus> statsList = new List<EmpStatus>();
+                var emps = db.Attendances.Include(c =>c.Employee).Where(c => DbFunctions.TruncateTime(c.AttDate) == DbFunctions.TruncateTime(DateTime.Today));
+
+                foreach (var item in emps)
+                {
+                    EmpStatus a = new EmpStatus() { StaffName = item.Employee.StaffName };
+                    if (item.Status == AttUnits.Present)
+                        a.isPresent = true;
+                    else a.isPresent = false;
+                    statsList.Add(a);
+                }
+
+                return statsList;
                 //List<EmployeeInfo> EmpInfoList = new List<EmployeeInfo>();
                 //var emps= db.Employees.Where(c=>DbFunctions.TruncateTime( c.AttDate).Value.Month== DbFunctions.TruncateTime(DateTime.Today).Value.Month);
                 //foreach (var emp in emps)
@@ -497,91 +510,94 @@ namespace TAS_AprajiataRetails.Models.Helpers
                     CashBook b = new CashBook() { EDate = item.PaymentDate, CashIn = 0, CashOut = item.Amount, CashBalance = 0 };
                     book.Add(b);
                 }
-               return UpdateCashInHand_DB(db,book);
+                book= UpdateCashInHand_DB(db, book);
+                Utils.CashInHandCorrectionForMonth(date);
+                return book;
 
             }//end of using
 
         }
 
-        public static List<CashBook> UpdateCorrectCashInHand_DB(List<CashBook> books, AprajitaRetailsContext db)
-        {
-            
-            IEnumerable<CashBook> orderBook = books.OrderBy(c => c.EDate);
+        //public static List<CashBook> UpdateCorrectCashInHand_DB(List<CashBook> books, AprajitaRetailsContext db)
+        //{
 
-            decimal bal = 0;
-            DateTime dDate = orderBook.First().EDate.AddDays(-1);
+        //    IEnumerable<CashBook> orderBook = books.OrderBy(c => c.EDate);
 
-            var cIh = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(dDate)).FirstOrDefault();
-            if (cIh != null)
-            {
-                bal =cIh.ClosingBalance= cIh.OpenningBalance + cIh.CashIn - cIh.CashOut;
-            }
-            dDate = orderBook.First().EDate;
-            cIh=db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(dDate)).FirstOrDefault();
-            if (cIh == null)
-            {
-                Utils.CreateCashInHand(db, dDate, 0, 0, true);
-            }
-            else
-            {
-                cIh.CashIn = 0;
-                cIh.CashOut = 0;
-                cIh.OpenningBalance = bal;
-                cIh.ClosingBalance = cIh.OpenningBalance + cIh.CashIn - cIh.CashOut;
+        //    decimal bal = 0;
+        //    DateTime dDate = orderBook.First().EDate.AddDays(-1);
 
-            }
-            db.SaveChanges();
-            DateTime tDate = dDate.AddDays(-1);
-            var cashInHandList = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) > DbFunctions.TruncateTime(tDate));
+        //    var cIh = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(dDate)).FirstOrDefault();
+        //    if (cIh != null)
+        //    {
+        //        bal = cIh.ClosingBalance = cIh.OpenningBalance + cIh.CashIn - cIh.CashOut;
+        //    }
+        //    dDate = orderBook.First().EDate;
+        //    cIh = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(dDate)).FirstOrDefault();
+        //    if (cIh == null)
+        //    {
+        //        Utils.CreateCashInHand(db, dDate, 0, 0, true);
+        //    }
+        //    else
+        //    {
+        //        cIh.CashIn = 0;
+        //        cIh.CashOut = 0;
+        //        cIh.OpenningBalance = bal;
+        //        cIh.ClosingBalance = cIh.OpenningBalance + cIh.CashIn - cIh.CashOut;
 
-            decimal opibal = 0;
-            foreach (var item in orderBook)
-            {
-                if (dDate != item.EDate)
-                {
-                    dDate = item.EDate;
-                    CashInHand cs = cashInHandList.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(item.EDate)).FirstOrDefault();
-                    
-                    cs.CashIn =item.CashIn;
-                    cs.CashOut = item.CashOut;
+        //    }
+        //    db.SaveChanges();
+        //    DateTime tDate = dDate.AddDays(-1);
+        //    var cashInHandList = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) > DbFunctions.TruncateTime(tDate));
 
-                    tDate = item.EDate.AddDays(-1);
-                    cs.OpenningBalance = opibal;
-                    opibal= cs.ClosingBalance = cs.OpenningBalance + cs.CashIn - cs.CashOut;
-                    
-                    db.Entry(cs).State = EntityState.Modified;
-                }
-                else
-                {
-                    CashInHand cs = cashInHandList.Where(c => DbFunctions.TruncateTime(c.CIHDate) == item.EDate).FirstOrDefault();
-                    cs.CashIn = item.CashIn;
-                    cs.CashOut = item.CashOut;
-                    opibal=cs.ClosingBalance = cs.OpenningBalance + cs.CashIn - cs.CashOut;
-                    db.Entry(cs).State = EntityState.Modified;
-                }
+        //    decimal opibal = 0;
+        //    foreach (var item in orderBook)
+        //    {
+        //        if (dDate != item.EDate)
+        //        {
+        //            dDate = item.EDate;
+        //            CashInHand cs = cashInHandList.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(item.EDate)).FirstOrDefault();
 
-                item.CashBalance = bal + item.CashIn - item.CashOut;
-                bal = item.CashBalance;
-            }
-            db.SaveChanges();
-            return orderBook.ToList();
+        //            cs.CashIn = item.CashIn;
+        //            cs.CashOut = item.CashOut;
 
+        //            tDate = item.EDate.AddDays(-1);
+        //            cs.OpenningBalance = opibal;
+        //            opibal = cs.ClosingBalance = cs.OpenningBalance + cs.CashIn - cs.CashOut;
 
-        }
+        //            db.Entry(cs).State = EntityState.Modified;
+        //        }
+        //        else
+        //        {
+        //            CashInHand cs = cashInHandList.Where(c => DbFunctions.TruncateTime(c.CIHDate) == item.EDate).FirstOrDefault();
+        //            cs.CashIn = item.CashIn;
+        //            cs.CashOut = item.CashOut;
+        //            opibal = cs.ClosingBalance = cs.OpenningBalance + cs.CashIn - cs.CashOut;
+        //            db.Entry(cs).State = EntityState.Modified;
+        //        }
+
+        //        item.CashBalance = bal + item.CashIn - item.CashOut;
+        //        bal = item.CashBalance;
+        //    }
+        //    db.SaveChanges();
+        //    return orderBook.ToList();
 
 
-        public static void ClearCashInHand(AprajitaRetailsContext db, DateTime date)
-        {
-            var cih = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate).Value.Month == DbFunctions.TruncateTime(date).Value.Month);
+        //}
 
-            foreach (var item in cih)
-            {
-                item.CashIn = item.CashOut = item.ClosingBalance = item.OpenningBalance = 0;
-                db.Entry(item).State = EntityState.Modified;
-            }
-            db.SaveChanges();
-        }
 
+        //public static void ClearCashInHand(AprajitaRetailsContext db, DateTime date)
+        //{
+        //    var cih = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate).Value.Month == DbFunctions.TruncateTime(date).Value.Month);
+
+        //    foreach (var item in cih)
+        //    {
+        //        item.CashIn = item.CashOut = item.ClosingBalance = item.OpenningBalance = 0;
+        //        db.Entry(item).State = EntityState.Modified;
+        //    }
+        //    db.SaveChanges();
+        //}
+
+        //Function in use
         public static void DeleteCashInHandForMonth(AprajitaRetailsContext db, DateTime date)
         {
             var cih = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate).Value.Month == DbFunctions.TruncateTime(date).Value.Month);
@@ -592,33 +608,52 @@ namespace TAS_AprajiataRetails.Models.Helpers
         }
 
 
-
+        //Function used
         public static List<CashBook> UpdateCashInHand_DB(AprajitaRetailsContext db, List<CashBook> books)
         {
-            
+
             IEnumerable<CashBook> orderBook = books.OrderBy(c => c.EDate);
-            CashInHand cashInHand=null;
+            CashInHand cashInHand = null;
             DateTime startDate = orderBook.First().EDate;
             DeleteCashInHandForMonth(db, startDate);
 
             foreach (var item in orderBook)
             {
-                if (startDate != item.EDate || cashInHand==null)
+                if (cashInHand == null)
                 {
                     db.SaveChanges();
-                    cashInHand = new CashInHand() {
-                        CIHDate = item.EDate, OpenningBalance = 0, CashIn = item.CashIn, CashOut = item.CashOut,
+                    cashInHand = new CashInHand()
+                    {
+                        CIHDate = item.EDate,
+                        OpenningBalance = 0,
+                        CashIn = item.CashIn,
+                        CashOut = item.CashOut,
                         ClosingBalance = 0
                     };
                 }
+                else if (startDate != item.EDate && cashInHand != null)
+                {
+                    db.CashInHands.Add(cashInHand);
+                    db.SaveChanges();
+                    cashInHand = new CashInHand()
+                    {
+                        CIHDate = item.EDate,
+                        OpenningBalance = 0,
+                        CashIn = item.CashIn,
+                        CashOut = item.CashOut,
+                        ClosingBalance = 0
+                    };
+                    startDate = item.EDate;
+                }
                 else
                 {
-                    cashInHand.CashIn = item.CashIn;
-                    cashInHand.CashOut = item.CashOut;
+                    cashInHand.CashIn += item.CashIn;
+                    cashInHand.CashOut += item.CashOut;
                 }
 
-                
+
             }
+            db.CashInHands.Add(cashInHand);
             db.SaveChanges();
 
             return orderBook.ToList();

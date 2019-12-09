@@ -14,8 +14,9 @@ namespace TAS_AprajiataRetails.Models.Helpers
         {
             using (AprajitaRetailsContext db = new AprajitaRetailsContext())
             {
-                //if (forDate == null) forDate = DateTime.Today;
+                
                 IEnumerable<CashInHand> cashs = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate).Value.Month == DbFunctions.TruncateTime(forDate).Value.Month).OrderBy(c => c.CIHDate);
+                
                 decimal cBal = 0;
 
                 if (cashs != null && cashs.Count() > 0)

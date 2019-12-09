@@ -23,6 +23,7 @@ namespace TAS_AprajiataRetails.Models.Views
         public TailoringReport TailoringReport { get; set; }
         public List<EmployeeInfo> EmpInfoList { get; set; }
         public ManaulSaleReport ManaulSale { get; set; }
+        public List<EmpStatus> PresentEmp { get; set; }
 
     }
 
@@ -86,6 +87,12 @@ namespace TAS_AprajiataRetails.Models.Views
 
     }
 
+
+    public class EmpStatus
+    {
+        public string StaffName { get; set;}
+        public bool isPresent { get; set; }
+    }
 
     public class EndofDayDetails
     {

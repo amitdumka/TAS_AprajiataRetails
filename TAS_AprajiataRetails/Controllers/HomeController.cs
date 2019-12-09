@@ -15,6 +15,7 @@ namespace TAS_AprajiataRetails.Controllers
             MasterViewReport reportView = new MasterViewReport();
             reportView.SaleReport = Reports.GetSaleRecord();
             reportView.TailoringReport = Reports.GetTailoringReport();
+            reportView.PresentEmp = Reports.GetEmpInfo();
             return View(reportView);
         }
 

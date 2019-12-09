@@ -22,11 +22,13 @@ namespace TAS_AprajiataRetails.works
         {
             //Your dream goes here.
             Utils.JobOpeningClosingBalance();
+            Utils.CashInHandCorrectionForMonth(DateTime.Today);
         }
 
         public static void HourlyJob(object state)
         {
             //Your dream goes here.
+           // Utils.CashInHandCorrectionForMonth(DateTime.Today);
         }
         public static void TwoHourlyJob(object state)
         {
