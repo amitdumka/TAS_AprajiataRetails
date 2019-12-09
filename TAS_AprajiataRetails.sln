@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetailsWebAPi.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetailsService", "AprajitaRetailsService\AprajitaRetailsService.csproj", "{264EDBA6-70DC-4C14-80F4-AA87A686C5DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpProject", "DumpProject\DumpProject.csproj", "{F4EBAB06-9944-4337-8A6C-48AD432429AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetailMonitor", "AprajitaRetailMonitor\AprajitaRetailMonitor.csproj", "{15D4A665-0594-421A-A8DF-38173FFBE10C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{264EDBA6-70DC-4C14-80F4-AA87A686C5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{264EDBA6-70DC-4C14-80F4-AA87A686C5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{264EDBA6-70DC-4C14-80F4-AA87A686C5DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4EBAB06-9944-4337-8A6C-48AD432429AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4EBAB06-9944-4337-8A6C-48AD432429AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4EBAB06-9944-4337-8A6C-48AD432429AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4EBAB06-9944-4337-8A6C-48AD432429AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15D4A665-0594-421A-A8DF-38173FFBE10C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15D4A665-0594-421A-A8DF-38173FFBE10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15D4A665-0594-421A-A8DF-38173FFBE10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15D4A665-0594-421A-A8DF-38173FFBE10C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
