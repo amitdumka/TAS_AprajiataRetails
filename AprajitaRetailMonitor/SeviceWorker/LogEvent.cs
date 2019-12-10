@@ -1,5 +1,7 @@
 ﻿namespace AprajitaRetailMonitor.SeviceWorker
 {
+
+    // No bug or error on this class
     public class LogEvent
     {
         static LogEvent( )

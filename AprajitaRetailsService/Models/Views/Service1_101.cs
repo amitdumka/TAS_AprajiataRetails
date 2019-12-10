@@ -1,15 +1,18 @@
-﻿//using AprajitaRetails.Utils;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.ServiceProcess;
+﻿
 
-namespace AprajitaRetailMonitor
+using System.ServiceProcess;
+using System.Runtime.InteropServices;
+using AprajitaRetailsService.SericeWorker;
+using AprajitaRetailsService.Models.Data;
+//using System.ServiceProcess;
+
+namespace AprajitaRetailsService.Models.Views
 {
-   
-    public partial class Service1 : ServiceBase
+    public partial class Service1_101 : ServiceBase
     {
         private System.Diagnostics.EventLog eventLog1;
-        private int eventId = 1;
+
+        //private int eventId = 1;
         public Watcher fileWatcher1;//, fileWatcher2;
 
         public enum ServiceState
@@ -36,11 +39,11 @@ namespace AprajitaRetailMonitor
         };
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        private static extern bool SetServiceStatus( System.IntPtr handle, ref ServiceStatus serviceStatus );
+        private static extern bool SetServiceStatus(System.IntPtr handle, ref ServiceStatus serviceStatus);
 
-        public Service1( )
+        public Service1_101()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
             eventLog1 = new System.Diagnostics.EventLog();
             if (!System.Diagnostics.EventLog.SourceExists("AprajitaRetailsMonitor"))
@@ -51,19 +54,24 @@ namespace AprajitaRetailMonitor
             eventLog1.Source = "AprajitaRetailsMonitor";
             eventLog1.Log = "AprajitaRetailsLog";
             fileWatcher1 = new Watcher(eventLog1);
-            // fileWatcher2 = new Watcher(eventLog1);
+            //fileWatcher2 = new Watcher(eventLog1);
+            //if (!SetUpDataBase.IsApplicationDirPresent())
+            //{
+            //    SetUpDataBase.CreateApplicationDir();
+            //}
         }
 
-        protected override void OnStart( string[] args )
+        protected override void OnStart(string[] args)
         {
             // Update the service state to Start Pending.
-            ServiceStatus serviceStatus = new ServiceStatus();
-            serviceStatus.dwCurrentState = ServiceState.SERVICE_START_PENDING;
-            serviceStatus.dwWaitHint = 100000;
+            ServiceStatus serviceStatus = new ServiceStatus
+            {
+                dwCurrentState = ServiceState.SERVICE_START_PENDING,
+                dwWaitHint = 100000
+            };
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
 
             eventLog1.WriteEntry("In OnStart");
-            //Code between this line
 
             fileWatcher1.Watch(PathList.InvoiceXMLFile, PathList.InvoiceXMLPath);
             // fileWatcher2.Watch(PathList.TabletSaleXMLFile, PathList.TabletSaleXMLPath);
@@ -72,12 +80,14 @@ namespace AprajitaRetailMonitor
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
         }
 
-        protected override void OnStop( )
+        protected override void OnStop()
         {
             // Update the service state to Start Pending.
-            ServiceStatus serviceStatus = new ServiceStatus();
-            serviceStatus.dwCurrentState = ServiceState.SERVICE_START_PENDING;
-            serviceStatus.dwWaitHint = 100000;
+            ServiceStatus serviceStatus = new ServiceStatus
+            {
+                dwCurrentState = ServiceState.SERVICE_START_PENDING,
+                dwWaitHint = 100000
+            };
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
             eventLog1.WriteEntry("In OnStop");
             //User code above line
@@ -87,24 +97,37 @@ namespace AprajitaRetailMonitor
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
         }
 
-        public void OnTimer( object sender, System.Timers.ElapsedEventArgs args )
-        {
-            // TODO: Insert monitoring activities here.
-            eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
-        }
-
-        protected override void OnContinue( )
+        protected override void OnContinue()
         {
             eventLog1.WriteEntry("In OnContinue.");
         }
     }
 
-    public class PathList
-    {
-        public const string InvoiceXMLPath = "C:\\Capillary";
-        public const string TabletSaleXMLPath = "D:\\VoyagerRetail\\TabletSale";
-        public const string InvoiceXMLFile = "invoice.xml";
-        public const string TabletSaleXMLFile = "TabletBill.XML";
-        public const string TailoringHubXMLPath = "D:\\VoyagerRetail\\TailoringHub";
-    }
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+//public class VoygerXMLToLinqDB
+//{
+//    private readonly DataTable vbTable;
+//    //private static readonly Clients client = CurrentClient.LoggedClient;
+
+//    public VoygerXMLToLinqDB( )
+//    {
+//        vbTable=new DataTable( "VoyBill" );
+//    }
+//}
+

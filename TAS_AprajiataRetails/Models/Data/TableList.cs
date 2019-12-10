@@ -531,7 +531,22 @@ namespace TAS_AprajiataRetails.Models.Data
         public string ReviewBy { get; set; }
     }
 
-    //Expenses
+    public class ChequesLog
+    {
+        public int ChequesLogId { get; set; }
+        public string BankName { get; set; }
+        public string AccountNumber { get; set; }
+        public DateTime? ChequesDate { get; set; }
+        public DateTime? DepositDate { get; set; }
+        public DateTime? ClearedDate { get; set; }
+        public string IssuedBy { get; set; }
+        public string IssuedTo { get; set; }
+        public decimal Amount { get; set; }
+        public bool IsPDC { get; set; }
+        public bool IsIssuedByAprajitaRetails { get; set; }
+        public bool IsDepositedOnAprajitaRetails { get; set; }
+        public string Remarks { get; set; }
+    }
 
 
 

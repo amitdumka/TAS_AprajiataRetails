@@ -4,13 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Daily Attendance</h2>
+<h2 class="text-danger">Daily Attendance</h2>
 
 <p>
      @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
 </p>
-<table class="table">
-    <tr>
+<table class="table  table-bordered table-condensed  table-hover bg-info  ">
+    <tr class="bg-success" >
         <th>
             @Html.DisplayNameFor(model => model.Employee.StaffName)
         </th>
@@ -48,17 +48,17 @@
                 @Html.DisplayFor(modelItem => item.Remarks)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AttendanceId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AttendanceId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AttendanceId })
+                @Html.ActionLink("Edit", "Edit", new { id = item.AttendanceId },new { data_modal = "" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AttendanceId },new { data_modal = "" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AttendanceId },new { data_modal = "" })
             </td>
         </tr>
     }
 
 </table>
 <!-- modal placeholder-->
-<div id='myModal' class='modal fade in'>
-    <div class="modal-dialog">
+<div id='myModal' class='modal fade in '>
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div id='myModalContent'></div>
         </div>

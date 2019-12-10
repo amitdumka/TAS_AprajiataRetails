@@ -4,102 +4,104 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+    <div class="bg-success">
+        <h2 class="text-danger">Details</h2>
 
-<div>
-    <h4>DailySale</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Salesman.SalesmanName)
-        </dt>
+        <div>
+            <h4 class="text-warning text-right">Invoice    <small> .</small></h4>
+            <hr />
+            <dl class="dl-horizontal text-primary text-justify table-bordered bg-info ">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Salesman.SalesmanName)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Salesman.SalesmanName)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Salesman.SalesmanName)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SaleDate)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SaleDate)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SaleDate)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.SaleDate)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.InvNo)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.InvNo)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.InvNo)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.InvNo)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Amount)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PayMode)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PayMode)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PayMode)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.PayMode)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CashAmount)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CashAmount)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CashAmount)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CashAmount)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDue)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsDue)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsDue)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.IsDue)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsManualBill)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsManualBill)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsManualBill)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.IsManualBill)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsTailoringBill)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsTailoringBill)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsTailoringBill)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsSaleReturn)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IsTailoringBill)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsSaleReturn)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsSaleReturn)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.IsSaleReturn)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Remarks)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Remarks)
+                </dd>
 
-    </dl>
-</div>
-<p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.DailySaleId }) |*@
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            </dl>
+        </div>
+        <p>
+            @*@Html.ActionLink("Edit", "Edit", new { id = Model.DailySaleId }) |*@
+            @Html.ActionLink("Back to List", "Index", null, new { @class="btn btn-warning"})
+        </p>
+    </div>

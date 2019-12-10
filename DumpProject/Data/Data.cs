@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.Linq;
+using System.Data.Linq.Mapping;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace DumpProject.Data
 {
@@ -14,28 +23,28 @@ namespace DumpProject.Data
     {
         static LogEvent()
         {
-            eventLog = new System.Diagnostics.EventLog()
-            {
-                Source = "AprajitaRetailsDataBase",
-                Log = "AprajitaRetailsLog"
-            };
-            if (!System.Diagnostics.EventLog.SourceExists("AprajitaRetailsDataBase"))
-            {
-                System.Diagnostics.EventLog.CreateEventSource(
-                    "AprajitaRetailsDataBase", "AprajitaRetailsLog");
-            }
-            eventLog.WriteEntry("LogEvent: LogEntry Constructer called");
+            //eventLog = new System.Diagnostics.EventLog()
+            //{
+            //    Source = "AprajitaRetailsDataBase",
+            //    Log = "AprajitaRetailsLog"
+            //};
+            //if (!System.Diagnostics.EventLog.SourceExists("AprajitaRetailsDataBase"))
+            //{
+            //    System.Diagnostics.EventLog.CreateEventSource(
+            //        "AprajitaRetailsDataBase", "AprajitaRetailsLog");
+            //}
+            //eventLog.WriteEntry("LogEvent: LogEntry Constructer called");
         }
 
-        public static System.Diagnostics.EventLog eventLog = new System.Diagnostics.EventLog()
-        {
-            Source = "AprajitaRetailsDataBase",
-            Log = "AprajitaRetailsLog"
-        };
+        //public static System.Diagnostics.EventLog eventLog = new System.Diagnostics.EventLog()
+        //{
+        //    Source = "AprajitaRetailsDataBase",
+        //    Log = "AprajitaRetailsLog"
+        //};
 
         public static void WriteEvent(string entryLog)
         {
-            eventLog.WriteEntry(entryLog);
+           /// eventLog.WriteEntry(entryLog);
         }
     }
 
@@ -52,15 +61,15 @@ namespace DumpProject.Data
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
+//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Data;
+//using System.Data.Linq;
+//using System.Data.Linq.Mapping;
+//using System.Linq;
+//using System.Linq.Expressions;
+//using System.Reflection;
 
 
 [global::System.Data.Linq.Mapping.DatabaseAttribute(Name = "VoygerDatabase")]

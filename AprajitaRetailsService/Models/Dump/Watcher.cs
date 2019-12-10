@@ -1,4 +1,5 @@
-﻿using AprajitaRetailMonitor.SeviceWorker;
+﻿using AprajitaRetailsService.Models.Data;
+using AprajitaRetailsService.SericeWorker;
 using System.IO;
 
 namespace AprajitaRetailMonitor
@@ -73,7 +74,7 @@ namespace AprajitaRetailMonitor
                 if (NoOfEvent == 1)
                 {
                     eventLog1.WriteEntry(" Event No: # " + NoOfEvent + " , Process File : " + e.FullPath);
-                    ServiceAction.InsertInvoiceXML(e.FullPath, eventLog1);
+                    ServiceAction.InsertInvoiceXML(e.FullPath, 1);
                     //eventLog1.WriteEntry(" Event No: 1 is now # " + NoOfEvent);
                 }
                 else

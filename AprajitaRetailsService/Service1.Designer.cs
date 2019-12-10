@@ -28,10 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.fileSystemWatcher2 = new System.IO.FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher2)).BeginInit();
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            // 
+            // fileSystemWatcher2
+            // 
+            this.fileSystemWatcher2.EnableRaisingEvents = true;
+            // 
+            // Service1
+            // 
             this.ServiceName = "Service1";
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher2)).EndInit();
+
         }
 
         #endregion
+
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.IO.FileSystemWatcher fileSystemWatcher2;
     }
 }

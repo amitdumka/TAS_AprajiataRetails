@@ -1,21 +1,48 @@
-﻿using AprajitaRetailMonitor.SeviceWorker;
+﻿using AprajitaRetailsService.Models.Data;
+//using AprajitaRetailsDB.DataBase.Voyager;
+//using System.Collections.Generic;
+//using System.Linq;
+
+
+//using AprajitaRetailMonitor.SeviceWorker.Common;
+//using AprajitaRetailsDB.DataBase.Voyager;
+//using AprajitaRetailsDB.DataTypes;
+//using System;
+//using System.Data;
 using System.IO;
 
-namespace AprajitaRetailMonitor
+//using AprajitaRetails.Utils;
+//using CyberN.Utility;
+//using System.ServiceProcess;
+
+namespace AprajitaRetailsService.SericeWorker
 {
-    // No Know Bugs on this class
     public class Watcher
     {
         public static int NoOfEvent = 0;
         private static System.Diagnostics.EventLog eventLog1;
 
-        public Watcher( System.Diagnostics.EventLog eventLog )
+        public static int DBType { get; private set; }
+
+        /// <summary>
+        /// watching and using EF6
+        /// </summary>
+        /// <param name="eventLog"></param>
+        public Watcher(System.Diagnostics.EventLog eventLog)
         {
             eventLog1 = eventLog;
             NoOfEvent = 0;
+            DBType = 2; //Default EF6
         }
 
-        public void Watch( string filter, string folder )
+        public Watcher(System.Diagnostics.EventLog eventLog, int dbType)
+        {
+            eventLog1 = eventLog;
+            NoOfEvent = 0;
+            DBType = dbType;
+        }
+
+        public void Watch(string filter, string folder)
         {
             // If a directory is not specified, exit program.
             if (filter == "" && folder == "")
@@ -49,20 +76,20 @@ namespace AprajitaRetailMonitor
             watcher.EnableRaisingEvents = true;
         }
 
-        private static void OnDeleted( object source, FileSystemEventArgs e )
+        private static void OnDeleted(object source, FileSystemEventArgs e)
         {
             // Specify what is done when a file is changed, created, or deleted.
             eventLog1.WriteEntry(" Deleted File: " + e.FullPath + " # " + e.ChangeType);
         }
 
-        private static void OnCreated( object source, FileSystemEventArgs e )
+        private static void OnCreated(object source, FileSystemEventArgs e)
         {
             // Specify what is done when a file is changed, created, or deleted.
             eventLog1.WriteEntry(" created File: " + e.FullPath + " # " + e.ChangeType);
         }
 
         // Define the event handlers.
-        private static void OnChanged( object source, FileSystemEventArgs e )
+        private static void OnChanged(object source, FileSystemEventArgs e)
         {
             // Specify what is done when a file is changed, created, or deleted.
             // eventLog1.WriteEntry("File: " + e.FullPath + " # " + e.ChangeType);
@@ -73,12 +100,12 @@ namespace AprajitaRetailMonitor
                 if (NoOfEvent == 1)
                 {
                     eventLog1.WriteEntry(" Event No: # " + NoOfEvent + " , Process File : " + e.FullPath);
-                    ServiceAction.InsertInvoiceXML(e.FullPath, eventLog1);
+                    ServiceAction.InsertInvoiceXML(e.FullPath, DBType);
                     //eventLog1.WriteEntry(" Event No: 1 is now # " + NoOfEvent);
                 }
                 else
                 {
-                    // eventLog1.WriteEntry("Second Entry Exit...");
+                    eventLog1.WriteEntry("Second Entry Exit..." + NoOfEvent);
                     return;
                 }
             }
@@ -88,11 +115,40 @@ namespace AprajitaRetailMonitor
             }
         }
 
-        private static void OnRenamed( object source, RenamedEventArgs e )
+        private static void OnRenamed(object source, RenamedEventArgs e)
         {
             // Specify what is done when a file is renamed.
             eventLog1.WriteEntry("File/ renamed to " + e.OldFullPath + "//" + e.FullPath);
             //TODO: Not Needed in our context
         }
     }
+
+    
+
+      
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+//public class VoygerXMLToLinqDB
+//{
+//    private readonly DataTable vbTable;
+//    //private static readonly Clients client = CurrentClient.LoggedClient;
+
+//    public VoygerXMLToLinqDB( )
+//    {
+//        vbTable=new DataTable( "VoyBill" );
+//    }
+//}
+
