@@ -47,14 +47,14 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(bankWithdrawal);
+            return PartialView(bankWithdrawal);
         }
 
         // GET: BankWithdrawals/Create
         public ActionResult Create()
         {
             ViewBag.AccountNumberId = new SelectList(db.BankAccounts, "AccountNumberId", "Account");
-            return View();
+            return PartialView();
         }
 
         // POST: BankWithdrawals/Create
@@ -108,7 +108,7 @@ namespace TAS_AprajiataRetails.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AccountNumberId = new SelectList(db.BankAccounts, "AccountNumberId", "Account", bankWithdrawal.AccountNumberId);
-            return View(bankWithdrawal);
+            return PartialView(bankWithdrawal);
         }
 
         // GET: BankWithdrawals/Delete/5

@@ -48,41 +48,145 @@ namespace TAS_AprajiataRetails.Models.Helpers
 
         }
 
-        public static void GetAccoutingRecord()
+        public static AccountsInfo GetAccoutingRecord()
         {
 
+            using (AprajitaRetailsContext db = new AprajitaRetailsContext())
+            {
+                AccountsInfo info = new AccountsInfo();
+                CashInHand cih = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault();
+
+                if (cih != null)
+                {
+                    info.CashInHand = cih.InHand; info.CashIn = cih.CashIn; info.CashOut = cih.CashOut;
+                    info.OpenningBal = cih.OpenningBalance;
+                }
+
+                CashInBank cib = db.CashInBanks.Where(c => DbFunctions.TruncateTime(c.CIBDate) == DbFunctions.TruncateTime(DateTime.Today)).FirstOrDefault();
+                if (cib != null)
+                {
+                    info.CashToBank = cib.CashIn; info.CashFromBank = cib.CashOut;
+                    info.CashInBank = cib.InHand;
+
+                }
+
+                var CashExp = db.CashExpenses.Where(c => DbFunctions.TruncateTime(c.ExpDate) == DbFunctions.TruncateTime(DateTime.Today));
+                var CashPay = db.CashPayments.Where(c => DbFunctions.TruncateTime(c.PaymentDate) == DbFunctions.TruncateTime(DateTime.Today));
+
+                if (CashExp != null)
+                {
+                    info.TotalCashPayments = (decimal?)CashExp.Sum(c => (decimal?)c.Amount) ?? 0;
+                }
+                if (CashPay != null)
+                {
+                    info.TotalCashPayments += (decimal?)CashPay.Sum(c => (decimal?)c.Amount) ?? 0;
+                }
+                return info;
+            }
         }
 
 
-        public static List<EmpStatus>  GetEmpInfo()
+        public static List<EmployeeInfo> GetEmpInfo()
         {
             using (AprajitaRetailsContext db = new AprajitaRetailsContext())
             {
-                List<EmpStatus> statsList = new List<EmpStatus>();
-                var emps = db.Attendances.Include(c =>c.Employee).Where(c => DbFunctions.TruncateTime(c.AttDate) == DbFunctions.TruncateTime(DateTime.Today));
+                //List<EmpStatus> statsList = new List<EmpStatus>();
+                var emps = db.Attendances.Include(c => c.Employee).
+                    Where(c => DbFunctions.TruncateTime(c.AttDate) == DbFunctions.TruncateTime(DateTime.Today)).OrderByDescending(c => c.Employee.StaffName);
+
+                var empPresent = db.Attendances.Include(c => c.Employee)
+                    .Where(c => c.Status == AttUnits.Present && DbFunctions.TruncateTime(c.AttDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month)
+                    .GroupBy(c => c.Employee.StaffName).OrderBy(c => c.Key).Select(g => new { StaffName = g.Key, Days = g.Count() }).ToList();
+
+                var empAbsent = db.Attendances.Include(c => c.Employee)
+                    .Where(c => c.Status == AttUnits.Absent && DbFunctions.TruncateTime(c.AttDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month)
+                     .GroupBy(c => c.Employee.StaffName).OrderBy(c => c.Key).Select(g => new { StaffName = g.Key, Days = g.Count() }).ToList();
+
+                var totalSale = db.DailySales.Include(c => c.Salesman).Where(c => DbFunctions.TruncateTime(c.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Select(a => new { StaffName = a.Salesman.SalesmanName, Amount = a.Amount }).ToList();
+
+                List<EmployeeInfo> infoList = new List<EmployeeInfo>();
 
                 foreach (var item in emps)
                 {
-                    EmpStatus a = new EmpStatus() { StaffName = item.Employee.StaffName };
-                    if (item.Status == AttUnits.Present)
-                        a.isPresent = true;
-                    else a.isPresent = false;
-                    statsList.Add(a);
+                    if (item.Employee.StaffName != "Amit Kumar")
+                    {
+                        EmployeeInfo info = new EmployeeInfo()
+                        {
+                            Name = item.Employee.StaffName, AbsentDays = 0, NoOfBills = 0, Present = "", PresentDays = 0, Ratio = 0,
+                            TotalSale = 0
+                        };
+
+                        if (item.Status == AttUnits.Present)
+                            info.Present = "Present";
+                        else info.Present = "Absent";
+
+                        try
+                        {
+
+                            if (empPresent != null)
+                            {
+                                var pd = empPresent.Where(c => c.StaffName == info.Name).FirstOrDefault();
+                                if (pd != null)
+                                  info.PresentDays = pd.Days;
+                                 else info.PresentDays = 0;
+                                
+                            }
+                            else
+                            {
+                                info.PresentDays = 0;
+                            }
+
+                            if (empAbsent != null)
+                            {
+                                var ad = empAbsent.Where(c => c.StaffName == info.Name).FirstOrDefault();
+                                if (ad != null)
+                                    info.AbsentDays = ad.Days;
+                                else info.AbsentDays = 0;
+                               
+                            }
+                            else info.AbsentDays = 0;
+
+                            //var ts = db.DailySales.Include(c=>c.Salesman ).Where (c => c.Salesman.SalesmanName == info.Name && DbFunctions.TruncateTime(c.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).ToList();
+                            if (totalSale != null)
+                            {
+                                var ts = totalSale.Where(c => c.StaffName == info.Name).ToList();
+                                info.TotalSale = (decimal?)ts.Sum(c => (decimal?)c.Amount) ?? 0;
+                                info.NoOfBills = (int?)ts.Count() ?? 0;
+                            }
+
+                            if (info.PresentDays > 0 && info.TotalSale > 0)
+                            {
+                                info.Ratio = Math.Round( (double)info.TotalSale / info.PresentDays,2);
+                            }
+
+                        }
+                        catch (Exception)
+                        {
+                            Log.Error().Message("empresent exception");
+                        }
+                           
+
+                            // var ts = db.DailySales.Where(c => c.Salesman.SalesmanName == info.Name && DbFunctions.TruncateTime(c.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month);
+
+                            //if (ts != null )
+                            //{
+                            //    info.TotalSale =(decimal?) ts.Sum(c =>(decimal?) c.Amount)??0;
+                            //    info.NoOfBills =(int?) ts.Count()??0;
+                            //}
+
+                            //if (info.PresentDays > 0 && info.TotalSale > 0)
+                            //{
+                            //    info.Ratio = (double)info.TotalSale / info.PresentDays;
+                            //}
+
+
+
+                            infoList.Add(info);
+                    }
+
+
                 }
-
-                return statsList;
-                //List<EmployeeInfo> EmpInfoList = new List<EmployeeInfo>();
-                //var emps= db.Employees.Where(c=>DbFunctions.TruncateTime( c.AttDate).Value.Month== DbFunctions.TruncateTime(DateTime.Today).Value.Month);
-                //foreach (var emp in emps)
-                //{
-                //    EmployeeInfo info = new EmployeeInfo()
-                //    {
-                //        Name=emp.Employee.StaffName
-                //    };
-
-                //}
-
-
+                return infoList;
             }
         }
 
@@ -510,7 +614,7 @@ namespace TAS_AprajiataRetails.Models.Helpers
                     CashBook b = new CashBook() { EDate = item.PaymentDate, CashIn = 0, CashOut = item.Amount, CashBalance = 0 };
                     book.Add(b);
                 }
-                book= UpdateCashInHand_DB(db, book);
+                book = UpdateCashInHand_DB(db, book);
                 Utils.CashInHandCorrectionForMonth(date);
                 return book;
 

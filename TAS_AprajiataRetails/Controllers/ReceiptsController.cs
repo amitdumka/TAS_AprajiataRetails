@@ -51,13 +51,13 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(receipt);
+            return PartialView(receipt);
         }
 
         // GET: Receipts/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Receipts/Create

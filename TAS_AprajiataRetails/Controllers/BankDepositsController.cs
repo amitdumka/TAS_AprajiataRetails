@@ -52,14 +52,14 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(bankDeposit);
+            return PartialView(bankDeposit);
         }
 
         // GET: BankDeposits/Create
         public ActionResult Create()
         {
             ViewBag.AccountNumberId = new SelectList(db.BankAccounts, "AccountNumberId", "Account");
-            return View();
+            return PartialView();
         }
 
         // POST: BankDeposits/Create

@@ -34,14 +34,14 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(talioringDelivery);
+            return PartialView(talioringDelivery);
         }
 
         // GET: TalioringDeliveries/Create
         public ActionResult Create()
         {
             ViewBag.TalioringBookingId = new SelectList(db.Bookings, "TalioringBookingId", "CustName");
-            return View();
+            return PartialView();
         }
 
         // POST: TalioringDeliveries/Create

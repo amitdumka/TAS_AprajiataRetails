@@ -33,13 +33,13 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cashInHand);
+            return PartialView(cashInHand);
         }
 
         // GET: CashInHands/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: CashInHands/Create

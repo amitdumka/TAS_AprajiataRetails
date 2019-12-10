@@ -22,8 +22,9 @@ namespace TAS_AprajiataRetails.Models.Views
         public DailySaleReport SaleReport { get; set; }
         public TailoringReport TailoringReport { get; set; }
         public List<EmployeeInfo> EmpInfoList { get; set; }
-        public ManaulSaleReport ManaulSale { get; set; }
-        public List<EmpStatus> PresentEmp { get; set; }
+       // public ManaulSaleReport ManaulSale { get; set; }
+        //public List<EmpStatus> PresentEmp { get; set; }
+        public AccountsInfo AccountsInfo { get; set; }
 
     }
 
@@ -72,16 +73,22 @@ namespace TAS_AprajiataRetails.Models.Views
     {
         [Display(Name = "Staff Name")]
         public string Name { get; set; }
+
         [Display(Name = "Present Today")]
         public string Present { get; set; }
+        
         [Display(Name = "No of Days Present")]
         public double PresentDays { get; set; }
+        
         [Display(Name = "No of Days Absent")]
         public double AbsentDays { get; set; }
+        
         [Display(Name = "Ratio Of Attenadance")]
         public double Ratio { get; set; }
+        
         [Display(Name = "Current Month Sale")]
         public decimal TotalSale { get; set; }
+        
         [Display(Name = "No Of Bills")]
         public int NoOfBills { get; set; }
 
@@ -91,7 +98,7 @@ namespace TAS_AprajiataRetails.Models.Views
     public class EmpStatus
     {
         public string StaffName { get; set;}
-        public bool isPresent { get; set; }
+        public bool IsPresent { get; set; }
     }
 
     public class EndofDayDetails
@@ -146,7 +153,25 @@ namespace TAS_AprajiataRetails.Models.Views
 
     }
 
-
+    public class AccountsInfo
+    {
+        [Display(Name ="Cash-In-Hand")]
+        public decimal CashInHand { get; set; }
+        [Display(Name = "Openning Balance")]
+        public decimal OpenningBal { get; set; }
+        [Display(Name = "Income")]
+        public decimal CashIn { get; set; }
+        [Display(Name = "Expenses")]
+        public decimal CashOut { get; set; }
+        [Display(Name = "Cash Payments")]
+        public decimal TotalCashPayments { get; set; }
+        [Display(Name = "Bank Balance")]
+        public decimal CashInBank { get; set; }
+        [Display(Name = "Deposited")]
+        public decimal CashToBank { get; set;}
+        [Display(Name = "Withdrawal")]
+        public decimal CashFromBank { get; set; }
+    }
 
 
     public class CashBook

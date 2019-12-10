@@ -7,7 +7,7 @@
 <h2>Bookings</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
 </p>
 <table class="table">
     <tr>
@@ -71,71 +71,98 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TryDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookingSlipNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalAmount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShirtQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShirtPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PantQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PantPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CoatQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CoatPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KurtaQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KurtaPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BundiQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BundiPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Others)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OthersPrice)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TalioringBookingId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TalioringBookingId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TalioringBookingId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingSlipNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShirtQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShirtPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PantQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PantPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoatQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoatPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KurtaQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KurtaPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BundiQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BundiPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Others)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OthersPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TalioringBookingId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TalioringBookingId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TalioringBookingId })
+            </td>
+        </tr>
+    }
 
 </table>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("a[data-modal]").on("click", function (e) {
+                $('#myModalContent').load(this.href, function () {
+                    $('#myModal').modal({
+                        keyboard: true
+                    }, 'show');
+                });
+                return false;
+            });
+        });
+
+    </script>
+}

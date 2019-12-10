@@ -12,10 +12,13 @@ namespace TAS_AprajiataRetails.Controllers
     {
         public ActionResult Index()
         {
-            MasterViewReport reportView = new MasterViewReport();
-            reportView.SaleReport = Reports.GetSaleRecord();
-            reportView.TailoringReport = Reports.GetTailoringReport();
-            reportView.PresentEmp = Reports.GetEmpInfo();
+            MasterViewReport reportView = new MasterViewReport
+            {
+                SaleReport = Reports.GetSaleRecord(),
+                TailoringReport = Reports.GetTailoringReport(),
+                EmpInfoList = Reports.GetEmpInfo(),
+                AccountsInfo = Reports.GetAccoutingRecord()
+            };
             return View(reportView);
         }
 

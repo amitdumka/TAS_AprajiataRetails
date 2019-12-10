@@ -50,13 +50,13 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(payment);
+            return PartialView(payment);
         }
 
         // GET: Payments/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Payments/Create

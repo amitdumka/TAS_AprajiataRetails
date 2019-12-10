@@ -33,13 +33,13 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cashInBank);
+            return   PartialView(cashInBank);
         }
 
         // GET: CashInBanks/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: CashInBanks/Create
@@ -71,7 +71,7 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cashInBank);
+            return PartialView(cashInBank);
         }
 
         // POST: CashInBanks/Edit/5

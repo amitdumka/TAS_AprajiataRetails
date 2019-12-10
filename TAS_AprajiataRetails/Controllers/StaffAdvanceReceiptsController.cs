@@ -52,14 +52,14 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(staffAdvanceReceipt);
+            return PartialView(staffAdvanceReceipt);
         }
 
         // GET: StaffAdvanceReceipts/Create
         public ActionResult Create()
         {
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "StaffName");
-            return View();
+            return PartialView();
         }
 
         // POST: StaffAdvanceReceipts/Create

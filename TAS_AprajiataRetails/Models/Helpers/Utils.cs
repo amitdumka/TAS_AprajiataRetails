@@ -65,7 +65,7 @@ namespace TAS_AprajiataRetails.Models.Helpers
             {
                 CashInHand today;
                 today = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(date)).FirstOrDefault();
-                //TODO:One Day Back
+                
                 DateTime yDate = date.AddDays(-1);
                 CashInHand yesterday = db.CashInHands.Where(c => DbFunctions.TruncateTime(c.CIHDate) == DbFunctions.TruncateTime(yDate)).FirstOrDefault();
 
@@ -266,7 +266,7 @@ namespace TAS_AprajiataRetails.Models.Helpers
             CashInBank yesterday = db.CashInBanks.Where(c => c.CIBDate == yDate).FirstOrDefault();
 
 
-            today = new CashInBank() { CashIn = 0, CashOut = 0, CIBDate = date, ClosingBalance = 0, OpenningBalance = 0 };
+            today = new CashInBank() { CashIn = inAmt, CashOut = outAmt, CIBDate = date, ClosingBalance = 0, OpenningBalance = 0 };
 
             if (yesterday != null)
             {

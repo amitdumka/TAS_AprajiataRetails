@@ -33,13 +33,13 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(suspenseAccount);
+            return PartialView(suspenseAccount);
         }
 
         // GET: SuspenseAccounts/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: SuspenseAccounts/Create

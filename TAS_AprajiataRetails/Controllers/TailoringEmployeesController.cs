@@ -33,13 +33,13 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tailoringEmployee);
+            return PartialView(tailoringEmployee);
         }
 
         // GET: TailoringEmployees/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: TailoringEmployees/Create

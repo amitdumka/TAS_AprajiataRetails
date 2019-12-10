@@ -35,14 +35,14 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cashReceipt);
+            return PartialView(cashReceipt);
         }
 
         // GET: CashReceipts/Create
         public ActionResult Create()
         {
             ViewBag.TranscationModeId = new SelectList(db.TranscationModes, "TranscationModeId", "Transcation");
-            return View();
+            return PartialView();
         }
 
         // POST: CashReceipts/Create

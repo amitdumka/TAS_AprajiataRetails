@@ -33,7 +33,7 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(talioringBooking);
+            return PartialView(talioringBooking);
         }
 
         // GET: TalioringBookings/Create
@@ -43,7 +43,7 @@ namespace TAS_AprajiataRetails.Controllers
             booking.BookingDate = DateTime.Today;
             booking.TryDate = DateTime.Today.AddDays(3);
             booking.DeliveryDate = DateTime.Today.AddDays(6);
-            return View(booking);
+            return PartialView(booking);
         }
 
         // POST: TalioringBookings/Create

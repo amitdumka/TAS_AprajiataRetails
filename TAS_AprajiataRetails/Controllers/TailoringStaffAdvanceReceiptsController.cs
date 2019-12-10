@@ -34,14 +34,14 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tailoringStaffAdvanceReceipt);
+            return PartialView(tailoringStaffAdvanceReceipt);
         }
 
         // GET: TailoringStaffAdvanceReceipts/Create
         public ActionResult Create()
         {
             ViewBag.TailoringEmployeeId = new SelectList(db.Tailors, "TailoringEmployeeId", "StaffName");
-            return View();
+            return PartialView();
         }
 
         // POST: TailoringStaffAdvanceReceipts/Create

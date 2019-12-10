@@ -3,15 +3,15 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>The Arvind Store, Dumka</h1>
-    <p class="lead">Aprajita Retails Daily Store Management Software.</p>
+<div class="jumbotron text-right ">
+    <h1 class="text-left display-4">The Arvind Store, Dumka</h1>
+    <p class="lead text-success">Aprajita Retails Daily Store Management Software.</p>
     <p><a href="https://www.thearvindstore.com/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Sale Record</h2>
+        <h2 class="text-primary">Sale Record</h2>
         <p>
 
             @if (Model.SaleReport != null && Context.User.Identity.IsAuthenticated)
@@ -42,7 +42,7 @@
         <p><a class="btn btn-default" href="/DailySales/Index">Details &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Tailoring</h2>
+        <h2 class="text-primary">Tailoring</h2>
         <p>
             @if (Model.TailoringReport != null && Context.User.Identity.IsAuthenticated)
             {
@@ -87,29 +87,116 @@
         </p>
         <p><a class="btn btn-default" href="/TalioringBookings">Booking List &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Accounting</h2>
-        <p>All Accounting Data will be displayed here.</p>
-        <p><a class="btn btn-default" href="">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Employee</h2>
-        <p> <h4 class="text-success">Present Employee</h4>
-            @if (Model.PresentEmp != null && Context.User.Identity.IsAuthenticated)
+    <div class=" col-md-4">
+        <h2 class="text-primary">Accounting</h2>
+        <p >
+            @if (Model.AccountsInfo != null &&  Context.User.Identity.IsAuthenticated)
             {
-                foreach (var item in Model.PresentEmp)
-                {
-                    if (item.isPresent)
-                    {
-            
-                        @item.StaffName
-                        <br />
-            
-                    }
+            <dl class="dl-horizontal table-striped bg-info">
+                <dt class="text-primary">@Html.DisplayNameFor(model => model.AccountsInfo.OpenningBal)</dt>
+                <dd class="text-primary">@Html.DisplayFor(model => model.AccountsInfo.OpenningBal)</dd>
 
-                }
+                <dt class="text-success">@Html.DisplayNameFor(model => model.AccountsInfo.CashInHand)</dt>
+                <dd class="text-success">@Html.DisplayFor(model => model.AccountsInfo.CashInHand)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.AccountsInfo.CashIn)</dt>
+                <dd>@Html.DisplayFor(model => model.AccountsInfo.CashIn)</dd>
+
+                <dt class="text-danger">@Html.DisplayNameFor(model => model.AccountsInfo.CashOut)</dt>
+                <dd class="text-danger">@Html.DisplayFor(model => model.AccountsInfo.CashOut)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.AccountsInfo.TotalCashPayments)</dt>
+                <dd>@Html.DisplayFor(model => model.AccountsInfo.TotalCashPayments)</dd>
+               
+                <hr />
+                <dt class="text-success">@Html.DisplayNameFor(model => model.AccountsInfo.CashInBank)</dt>
+                <dd class="text-success">@Html.DisplayFor(model => model.AccountsInfo.CashInBank)</dd>
+
+                <dt class="text-primary">@Html.DisplayNameFor(model => model.AccountsInfo.CashToBank)</dt>
+                <dd class="text-primary">@Html.DisplayFor(model => model.AccountsInfo.CashToBank)</dd>
+
+                <dt class="text-danger">@Html.DisplayNameFor(model => model.AccountsInfo.CashFromBank)</dt>
+                <dd class="text-danger">@Html.DisplayFor(model => model.AccountsInfo.CashFromBank)</dd>
+
+
+
+
+            </dl>
+
+
             }
         </p>
         <p><a class="btn btn-default" href="">Learn more &raquo;</a></p>
     </div>
+
+
+</div>
+
+<div class="row">
+    <h2 class="text-success">Employees Info</h2>
+    <hr class="text-info" />
+    @if (Model.EmpInfoList != null && Model.EmpInfoList.Count>0 && Context.User.Identity.IsAuthenticated)
+    {
+        foreach (var item in Model.EmpInfoList)
+        {
+            <div class="col-md-4">
+                <h3 class="text-primary @*text-capitalize*@">@Html.DisplayFor(model => item.Name)</h3>
+                <p>
+                    <dl class="dl-horizontal">
+                        @*<dt>@Html.DisplayNameFor(model => item.Name)</dt>
+                            <dd>@Html.DisplayFor(model => item.Name)</dd>*@
+                        @if (item.Present == "Present")
+                        {
+                            <dt class="text-success">@Html.DisplayNameFor(model => item.Present)</dt>
+                            <dd class="text-success">@Html.DisplayFor(model => item.Present)</dd>
+                        }
+                        else
+                        {
+                            <dt class="text-danger">@Html.DisplayNameFor(model => item.Present)</dt>
+                            <dd class="text-danger">@Html.DisplayFor(model => item.Present)</dd>
+                        }
+                        <dt>@Html.DisplayNameFor(model => item.PresentDays)</dt>
+                        <dd>@Html.DisplayFor(model => item.PresentDays)</dd>
+                        <dt>@Html.DisplayNameFor(model => item.AbsentDays)</dt>
+                        <dd>@Html.DisplayFor(model => item.AbsentDays)</dd>
+                        <dt>@Html.DisplayNameFor(model => item.Ratio)</dt>
+                        <dd>@Html.DisplayFor(model => item.Ratio)</dd>
+                        <dt>@Html.DisplayNameFor(model => item.NoOfBills)</dt>
+                        <dd>@Html.DisplayFor(model => item.NoOfBills)</dd>
+                        <dt>@Html.DisplayNameFor(model => item.TotalSale)</dt>
+                        <dd>@Html.DisplayFor(model => item.TotalSale)</dd>
+                    </dl>
+                </p>
+                <p><a class="btn btn-default" href="">Learn more &raquo;</a></p>
+            </div>
+        }
+    }
+    else
+    {
+        <br /><br />
+        <h5>No Employee are Present Today.</h5>
+    }
+
+
+    @*<div class="col-md-4">
+            <h2>Employee</h2>
+            <p>
+                <h4 class="text-success">Absent Employee</h4>
+                @if (Model.PresentEmp != null && Context.User.Identity.IsAuthenticated)
+                {
+                    foreach (var item in Model.PresentEmp)
+                    {
+                        if (item.isPresent == false)
+                        {
+
+                            @item.StaffName
+                            <br />
+
+                        }
+
+                    }
+                }
+            </p>
+            <p><a class="btn btn-default" href="">Learn more &raquo;</a></p>
+        </div>*@
 </div>

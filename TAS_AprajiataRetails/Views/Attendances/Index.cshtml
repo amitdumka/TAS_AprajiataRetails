@@ -7,7 +7,7 @@
 <h2>Daily Attendance</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+     @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
 </p>
 <table class="table">
     <tr>
@@ -56,3 +56,29 @@
     }
 
 </table>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("a[data-modal]").on("click", function (e) {
+                $('#myModalContent').load(this.href, function () {
+                    $('#myModal').modal({
+                        keyboard: true
+                    }, 'show');
+                });
+                return false;
+            });
+        });
+
+    </script>
+}
