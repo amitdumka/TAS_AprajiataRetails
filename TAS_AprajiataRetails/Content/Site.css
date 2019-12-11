@@ -98,7 +98,7 @@ textarea {
         font-family: Arial;
         font-size: 15px;
         background-color: transparent;
-        text-shadow: 1px 1px 1px #ffffff;
+        /*text-shadow: 1px 1px 1px #ffffff;*/
     }
 
     .navbar-inverse .navbar-nav > li > a:hover,

@@ -184,7 +184,9 @@
     <Compile Include="Controllers\CashInHandsController.cs" />
     <Compile Include="Controllers\CashPaymentsController.cs" />
     <Compile Include="Controllers\CashReceiptsController.cs" />
+    <Compile Include="Controllers\ChequesLogsController.cs" />
     <Compile Include="Controllers\DailySalesController.cs" />
+    <Compile Include="Controllers\DueRecoverdsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EndOfDaysController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
@@ -430,6 +432,16 @@
     <Content Include="Views\EndOfDays\DailySaleReport.cshtml" />
     <Content Include="Views\CashBook\Index.cshtml" />
     <Content Include="Views\CashBook\Details.cshtml" />
+    <Content Include="Views\ChequesLogs\Create.cshtml" />
+    <Content Include="Views\ChequesLogs\Delete.cshtml" />
+    <Content Include="Views\ChequesLogs\Details.cshtml" />
+    <Content Include="Views\ChequesLogs\Edit.cshtml" />
+    <Content Include="Views\ChequesLogs\Index.cshtml" />
+    <Content Include="Views\DueRecoverds\Create.cshtml" />
+    <Content Include="Views\DueRecoverds\Delete.cshtml" />
+    <Content Include="Views\DueRecoverds\Details.cshtml" />
+    <Content Include="Views\DueRecoverds\Edit.cshtml" />
+    <Content Include="Views\DueRecoverds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

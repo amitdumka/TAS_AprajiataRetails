@@ -47,7 +47,7 @@
             }
         </tr>
         <tr>
-            <th > @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" , @class="btn btn-success "})</th>
+            <th > @Html.ActionLink("Create New ", "Create",null, new { data_modal = "" , @class="btn btn-success "})</th>
             <th> @Html.ActionLink("     All Invoice", "Index", new { id = 101 } ,new {  @class="btn btn-info"})</th>
             <th> @Html.ActionLink("     Today", "Index", new { id = 0 }, new {  @class="btn btn-info"})</th>
         </tr>
@@ -55,23 +55,7 @@
     </table>
 
 </div>
-@*<div>
-        @using (Html.BeginForm("Index", "DailySales", FormMethod.Get))
-        {
-            <p>
-                Salesman: @Html.DropDownList("salesmanId", "All")
-                By Date: @Html.EditorFor(model => model.FirstOrDefault().SaleDate, new { htmlAttributes = new { @value = DateTime.Now.ToShortDateString() } })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().SaleDate, "", new { @class = "text-danger" })
-                | Or By InvoiceNo: @Html.TextBox("SearchString")
-                <input type="submit" value="Filter" /><br />
-                @Html.ActionLink("     All Invoice", "Index", new { id = 101 }) |  @Html.ActionLink("     Today", "Index", new { id = 0 })
-            </p>
 
-        }
-    </div>
-    <p>
-        @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
-    </p>*@
 <table class="table  table-bordered table-condensed  table-hover bg-info  ">
     <tr class="bg-success">
 
@@ -131,7 +115,7 @@
 
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.DailySaleId }, new { data_modal = "" }) |*@
-                @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "" })
+                @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "" , @class="btn btn-info " })
                 @*|@Html.ActionLink("Delete", "Delete", new { id = item.DailySaleId }, new { data_modal = "" })*@
             </td>
         </tr>

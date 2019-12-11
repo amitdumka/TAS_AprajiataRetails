@@ -339,8 +339,12 @@ namespace TAS_AprajiataRetails.Models.Data
         public DateTime? RecoveryDate { get; set; }
         public int DailySaleId { get; set; }
         public virtual DailySale DailySale { get; set; }
+
+        public bool IsPartialRecovery { get; set; }
+
+        public virtual ICollection<DueRecoverd> Recoverds { get; set; }
     }
-    
+
     // Daily Sale  and Cash Management
 
 
@@ -534,22 +538,53 @@ namespace TAS_AprajiataRetails.Models.Data
     public class ChequesLog
     {
         public int ChequesLogId { get; set; }
+        [Display(Name ="Bank Name")]
         public string BankName { get; set; }
+        [Display(Name = "Account No")]
         public string AccountNumber { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Cheque Date")]
         public DateTime? ChequesDate { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Deposit Date")]
         public DateTime? DepositDate { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Cleared Date")]
         public DateTime? ClearedDate { get; set; }
+        [Display(Name = "By")]
         public string IssuedBy { get; set; }
+        [Display(Name = "To")]
         public string IssuedTo { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal Amount { get; set; }
+        [Display(Name = "PDC")]
         public bool IsPDC { get; set; }
+        [Display(Name = "By Aprajita Retails")]
         public bool IsIssuedByAprajitaRetails { get; set; }
+        [Display(Name = "To Aprajita Retails")]
         public bool IsDepositedOnAprajitaRetails { get; set; }
         public string Remarks { get; set; }
     }
 
 
+    public class DueRecoverd
+    {
+        public int DueRecoverdId { get; set; }
 
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Recovery Date")]
+        public DateTime PaidDate { get; set; }
+
+        public int DuesListId { get; set; }
+        public virtual DuesList DuesList {get;set;}
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal AmountPaid { get; set; }
+        [Display(Name ="Is Partial Payment")]
+        public bool IsPartialPayment { get; set; }
+        public PaymentModes Modes { get; set; }
+        public string Remarks { get; set; }
+
+    }
 
 
     //TODO: List

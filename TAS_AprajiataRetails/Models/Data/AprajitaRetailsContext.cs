@@ -62,5 +62,11 @@ namespace TAS_AprajiataRetails.Models.Data
 
         //End of Day
         public DbSet<EndOfDay>EndOfDays { get; set; }
+
+
+        //Others
+
+        public DbSet<DueRecoverd>Recoverds { get; set; }
+        public DbSet<ChequesLog>Cheques { get; set; }
     }
 }
