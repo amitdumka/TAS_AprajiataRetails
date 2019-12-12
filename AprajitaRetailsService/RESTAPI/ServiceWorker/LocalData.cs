@@ -11,12 +11,10 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
 {
     class LocalData
     {
-        public static void InsertBillData(VoygerBill voygerBill)
+        public  void InsertBillData(VoygerBill voygerBill)
         {
-            LogEvent.WriteEvent("insert bill data _with_EF6");
             if (voygerBill != null)
             {
-                LogEvent.WriteEvent(" voy bil is not null");
                 if (voygerBill.bill.BillType != null)
                 {
                     LogEvent.WriteEvent("bill tye: " + voygerBill.bill.BillType);
@@ -31,7 +29,7 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
 
             using (voyDatabase = new VoyagerContext())
             {
-                LogEvent.WriteEvent("Voyager DB is connected");
+                
                 // TODO:Need to Check line below here
                 var v = from vyb in voyDatabase.VoyBills
                         where vyb.BillNumber == bill.BillNumber && vyb.BillTime == bill.BillTime
@@ -39,14 +37,15 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
 
                 if (v.Count() > 0)
                 {
-                    LogEvent.WriteEvent("Invoice all ready Present in file");
+                    LogEvent.WriteEvent($"Invoice all ready Present in file {v.FirstOrDefault().VoyBillId},{bill.BillNumber}");
                     return;
                 }
+                else { LogEvent.WriteEvent($"Invoice is new with bill no {bill.BillNumber}"); }
 
                 voyDatabase.VoyBills.Add(bill);
                 if (voyDatabase.SaveChanges() > 0)
                 {
-                    LogEvent.WriteEvent("Bill is saved!!!");
+                    LogEvent.WriteEvent($"Bill with ID: {bill.VoyBillId} is saved!!! ");
                 }
                 else
                 {
@@ -55,26 +54,26 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
                 foreach (LineItem item in lineItemList)
                 {
                     item.VoyBillId = bill.VoyBillId;
-                    voyDatabase.LineItems.Add(item);//.InsertOnSubmit( item );
+                    voyDatabase.LineItems.Add(item);
                 }
-                LogEvent.WriteEvent("Inserted LinesItem");
+             //   LogEvent.WriteEvent("Inserted LinesItem");
                 foreach (VPaymentMode item in paymentList)
                 {
                     item.VoyBillId = bill.VoyBillId;
                     voyDatabase.VPaymentModes.Add(item);
                 }
-                LogEvent.WriteEvent("Inserted payments");
+              //  LogEvent.WriteEvent("Inserted payments");
                 InsertDataLog dataLog = new InsertDataLog()
                 {
                     BillNumber = bill.BillNumber,
                     Remark = "First Step",
                     VoyBillId = bill.VoyBillId,
                 };
-                LogEvent.WriteEvent("Inserted Datalog");
+                LogEvent.WriteEvent("Inserted Datalog,payments,LinesItem,payments");
                 voyDatabase.InsertDataLogs.Add(dataLog);
 
                 voyDatabase.SaveChanges();
-                LogEvent.WriteEvent("VoyBill is added with BillId: " + bill.VoyBillId + "and BillNo: " + bill.BillNumber);
+                LogEvent.WriteEvent("VoyBill is added with BillId: [" + bill.VoyBillId + "]and BillNo: [" + bill.BillNumber+"]");
             }
         }
     }

@@ -163,7 +163,7 @@ namespace TAS_AprajiataRetails.Models.Helpers
                     else
                     {
                         if (db.CashInBanks.Count() > 0)
-                            throw new Exception();
+                            throw new Exception();// TODO: Solve This Problem
                         else
                         {
                             today.ClosingBalance = today.OpenningBalance = 0;
@@ -184,7 +184,7 @@ namespace TAS_AprajiataRetails.Models.Helpers
                     else
                     {
                         if (db.CashInBanks.Count() > 1)
-                            throw new Exception();
+                            throw new Exception();// TODO: Solve This Bugs
                         else
                         {
                             today.ClosingBalance = today.OpenningBalance = 0;

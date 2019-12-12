@@ -83,12 +83,16 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
                 if (NoOfEvent == 1)
                 {
                     eventLog1.WriteEntry(" Event No: # " + NoOfEvent + " , Process File : " + e.FullPath);
-                    ServiceAction.InsertInvoiceXML(e.FullPath);
+                    using (ServiceAction serviceAction = new ServiceAction())
+                    {
+                        serviceAction.InsertInvoiceXML(e.FullPath);
+                    }
+
                     //eventLog1.WriteEntry(" Event No: 1 is now # " + NoOfEvent);
                 }
                 else
                 {
-                    eventLog1.WriteEntry("Second Entry Exit..." + NoOfEvent);
+                    //eventLog1.WriteEntry("Second Entry Exit..." + NoOfEvent);
                     return;
                 }
             }

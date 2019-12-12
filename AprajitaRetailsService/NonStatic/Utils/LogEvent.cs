@@ -20,7 +20,7 @@ namespace AprajitaRetailsService.RESTAPI.Utils
                 System.Diagnostics.EventLog.CreateEventSource(
                     "AprajitaRetailsService", "AprajitaRetailsLog");
             }
-            eventLog.WriteEntry("LogEvent: LogEntry Constructer called");
+           
         }
 
         public static System.Diagnostics.EventLog eventLog = new System.Diagnostics.EventLog()
@@ -32,6 +32,19 @@ namespace AprajitaRetailsService.RESTAPI.Utils
         public static void WriteEvent(string entryLog)
         {
             eventLog.WriteEntry(entryLog);
+           
+        }
+        public static void Error(string entryLog)
+        {
+            eventLog.WriteEntry(entryLog, System.Diagnostics.EventLogEntryType.Error);
+        }
+        public static void Info(string entryLog)
+        {
+            eventLog.WriteEntry(entryLog, System.Diagnostics.EventLogEntryType.Information);
+        }
+        public static void Warning(string entryLog)
+        {
+            eventLog.WriteEntry(entryLog, System.Diagnostics.EventLogEntryType.Warning);
         }
     }
 }

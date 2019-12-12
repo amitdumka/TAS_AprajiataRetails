@@ -9,7 +9,8 @@ namespace AprajitaRetailsService.RESTAPI.Data
 {
     public class DataConstant
     {
-        public static readonly string API_URL = "http://localhost:64195/";
+        public static readonly string API_URL = "http://localhost:54215/";
+        public static readonly string RemoteAPI_URL = "https://aprajiataretails.azurewebsites.net/";
     }
 
     public enum SaleInvoiceTypes
@@ -39,6 +40,10 @@ namespace AprajitaRetailsService.RESTAPI.Data
         public static readonly int BankTransfer = 8;
         public static readonly int Others = 9;
 
+        /// <summary>
+        /// Static function for return List Object
+        /// </summary>
+        /// <returns></returns>
         public static List<string> ToList()
         {
             List<string> list = new List<string>();

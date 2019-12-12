@@ -67,7 +67,7 @@ namespace AprajitaRetailsService
             };
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
 
-            eventLog1.WriteEntry("In OnStart");
+            eventLog1.WriteEntry("Watcher Serive Started");
 
             fileWatcher1.Watch(PathList.InvoiceXMLFile, PathList.InvoiceXMLPath);
             // fileWatcher2.Watch(PathList.TabletSaleXMLFile, PathList.TabletSaleXMLPath);
@@ -85,7 +85,7 @@ namespace AprajitaRetailsService
                 dwWaitHint = 100000
             };
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
-            eventLog1.WriteEntry("In OnStop");
+            eventLog1.WriteEntry("Watcher Service got stopped.");
             //User code above line
 
             // Update the service state to Running.

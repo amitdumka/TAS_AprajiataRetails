@@ -7,15 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAS_AprajiataRetails", "TAS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAS_AprajiataRetails.Tests", "TAS_AprajiataRetails.Tests\TAS_AprajiataRetails.Tests.csproj", "{CE976817-B233-4471-A74C-099899753D05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetailsWebAPi", "AprajitaRetailsWebAPi\AprajitaRetailsWebAPi.csproj", "{2524CB73-06FB-4F28-BF30-B532CF6ADE96}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetailsWebAPi.Tests", "AprajitaRetailsWebAPi.Tests\AprajitaRetailsWebAPi.Tests.csproj", "{6C7EAD39-BAA0-49D2-B3D7-30DBCA1CB413}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetailsService", "AprajitaRetailsService\AprajitaRetailsService.csproj", "{264EDBA6-70DC-4C14-80F4-AA87A686C5DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpProject", "DumpProject\DumpProject.csproj", "{F4EBAB06-9944-4337-8A6C-48AD432429AA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetailMonitor", "AprajitaRetailMonitor\AprajitaRetailMonitor.csproj", "{15D4A665-0594-421A-A8DF-38173FFBE10C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +25,6 @@ Global
 		{CE976817-B233-4471-A74C-099899753D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE976817-B233-4471-A74C-099899753D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE976817-B233-4471-A74C-099899753D05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2524CB73-06FB-4F28-BF30-B532CF6ADE96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2524CB73-06FB-4F28-BF30-B532CF6ADE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2524CB73-06FB-4F28-BF30-B532CF6ADE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2524CB73-06FB-4F28-BF30-B532CF6ADE96}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C7EAD39-BAA0-49D2-B3D7-30DBCA1CB413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C7EAD39-BAA0-49D2-B3D7-30DBCA1CB413}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C7EAD39-BAA0-49D2-B3D7-30DBCA1CB413}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C7EAD39-BAA0-49D2-B3D7-30DBCA1CB413}.Release|Any CPU.Build.0 = Release|Any CPU
 		{264EDBA6-70DC-4C14-80F4-AA87A686C5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{264EDBA6-70DC-4C14-80F4-AA87A686C5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{264EDBA6-70DC-4C14-80F4-AA87A686C5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,10 +33,6 @@ Global
 		{F4EBAB06-9944-4337-8A6C-48AD432429AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4EBAB06-9944-4337-8A6C-48AD432429AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4EBAB06-9944-4337-8A6C-48AD432429AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15D4A665-0594-421A-A8DF-38173FFBE10C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15D4A665-0594-421A-A8DF-38173FFBE10C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15D4A665-0594-421A-A8DF-38173FFBE10C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15D4A665-0594-421A-A8DF-38173FFBE10C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

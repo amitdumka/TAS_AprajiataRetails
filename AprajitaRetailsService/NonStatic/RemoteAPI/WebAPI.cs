@@ -50,7 +50,7 @@ namespace AprajitaRetailsService.RESTAPI.RemoteAPI
 
         }
 
-        public static async Task UploadBill(VoyagerBillInfo bill)
+        private async Task UploadBill(VoyagerBillInfo bill)
         {
             // Update port # in the following line.
             client.BaseAddress = new Uri(DataConstant.API_URL);
@@ -58,6 +58,7 @@ namespace AprajitaRetailsService.RESTAPI.RemoteAPI
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
+            LogEvent.WriteEvent($"Invoice Uploader with bill {bill.InvoiceNo} with Base address {client.BaseAddress.AbsoluteUri} .");
 
             try
             {
@@ -68,32 +69,47 @@ namespace AprajitaRetailsService.RESTAPI.RemoteAPI
             {
 
                 LogEvent.WriteEvent("UploadBill: " + e.Message);
+                LogEvent.WriteEvent("UpLoadBillError:" + e.StackTrace);
             }
         }
 
-        public static async Task<Uri> AddBill(VoyagerBillInfo bill)
+        private async Task<Uri> AddBill(VoyagerBillInfo bill)
         {
 
             HttpResponseMessage response = await client.PostAsJsonAsync("api/VoyagerBills", bill);
+            LogEvent.WriteEvent("Header:" + response.Headers.ToString());
+            LogEvent.WriteEvent(response.Content.ToString());
+            LogEvent.WriteEvent("Status Code:" + response.StatusCode.ToString());
+
             response.EnsureSuccessStatusCode();
+
             if (response.IsSuccessStatusCode)
                 LogEvent.WriteEvent("Invocie is saved: " + bill.InvoiceNo);
             return response.Headers.Location;
         }
 
-        public static async Task Upload(VoygerBill vBill)
+        public async Task Upload(VoygerBill vBill)
         {
             //TODO: Here implement or add function to convert payment mode to PayModes unit. so less amount of data will be uploaded
             VoyagerBillInfo bill = new VoyagerBillInfo()
             {
-                 Amount=(decimal) vBill.bill.BillAmount, BillDate=vBill.bill.BillTime??DateTime.Now,
-                 ImportDate= DateTime.Now,InvoiceNo=vBill.bill.BillNumber, IsUsed=false,PayModes=0
+                Amount = (decimal)vBill.bill.BillAmount,
+                BillDate = vBill.bill.BillTime ?? DateTime.Now,
+                ImportDate = DateTime.Now,
+                InvoiceNo = vBill.bill.BillNumber,
+                IsUsed = false,
+                PayModes = 0
 
             };
+            LogEvent.WriteEvent($"UploadFunctionStated with: {bill.VoyagerBillId}");
 
             await UploadBill(bill);
 
         }
+
+
+
+
 
     }
 }
