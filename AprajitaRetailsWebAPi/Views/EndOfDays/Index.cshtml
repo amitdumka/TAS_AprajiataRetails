@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.EndOfDay>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+     @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EOD_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Shirting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Suiting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USPA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FM_Arrow)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RWT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Access)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CashInHand)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EOD_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Shirting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suiting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USPA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FM_Arrow)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RWT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Access)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CashInHand)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.EndOfDayId }) |*@
+            @Html.ActionLink("Details", "Details", new { id=item.EndOfDayId }) 
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.EndOfDayId })*@
+        </td>
+    </tr>
+}
+
+</table>

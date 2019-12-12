@@ -1,0 +1,92 @@
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.BankDeposit>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Bank Deposit</h2>
+
+<p>
+     @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepoDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayMode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Account)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepoDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayMode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.BankDepositId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.BankDepositId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.BankDepositId })*@
+            </td>
+        </tr>
+    }
+
+</table>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("a[data-modal]").on("click", function (e) {
+                $('#myModalContent').load(this.href, function () {
+                    $('#myModal').modal({
+                        keyboard: true
+                    }, 'show');
+                });
+                return false;
+            });
+        });
+
+    </script>
+}

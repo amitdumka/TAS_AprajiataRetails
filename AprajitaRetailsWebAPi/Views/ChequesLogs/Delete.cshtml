@@ -1,0 +1,122 @@
+﻿@model TAS_AprajiataRetails.Models.Data.ChequesLog
+
+@{
+    ViewBag.Title = "Delete";
+}
+    <div class="bg-success">
+        <h2 class="text-danger">Delete</h2>
+
+        <h3 class="text-warning">Are you sure you want to delete this?</h3>
+        <div>
+            <h4 class="text-success">Cheque Log Deletion</h4>
+            <hr />
+            <dl class="dl-horizontal bg-info">
+                <dt>
+                    @Html.DisplayNameFor(model => model.BankName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BankName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AccountNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AccountNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ChequesDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ChequesDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DepositDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DepositDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ClearedDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ClearedDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IssuedBy)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IssuedBy)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IssuedTo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IssuedTo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Amount)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsPDC)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsPDC)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsIssuedByAprajitaRetails)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsIssuedByAprajitaRetails)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsDepositedOnAprajitaRetails)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsDepositedOnAprajitaRetails)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Remarks)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" /> 
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-warning" })
+                </div>
+            }
+        </div>
+</div>

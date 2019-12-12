@@ -1,15 +1,7 @@
-﻿using AprajitaRetailsService.Models.Data;
-using AprajitaRetailsService.SericeWorker;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
+﻿using AprajitaRetailsService.RESTAPI.Data;
+using AprajitaRetailsService.RESTAPI.ServiceWorker;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 
 
 //TODO: Code To be Added on this file

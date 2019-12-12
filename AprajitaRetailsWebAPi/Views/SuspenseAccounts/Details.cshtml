@@ -1,0 +1,74 @@
+﻿@model TAS_AprajiataRetails.Models.Data.SuspenseAccount
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SuspenseAccount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReferanceDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReferanceDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OutAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OutAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCleared)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCleared)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClearedDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClearedDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReviewBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SuspenseAccountId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

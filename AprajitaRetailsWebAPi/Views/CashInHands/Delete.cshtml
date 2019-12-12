@@ -1,0 +1,64 @@
+﻿@model TAS_AprajiataRetails.Models.Data.CashInHand
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CashInHand</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CIHDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CIHDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpenningBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpenningBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClosingBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClosingBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashOut)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

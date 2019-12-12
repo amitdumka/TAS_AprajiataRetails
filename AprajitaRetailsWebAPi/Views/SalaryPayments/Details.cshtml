@@ -1,0 +1,74 @@
+﻿@model TAS_AprajiataRetails.Models.Data.SalaryPayment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SalaryPayment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.StaffName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.StaffName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryMonth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryMonth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryComponet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryComponet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayMode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayMode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SalaryPaymentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

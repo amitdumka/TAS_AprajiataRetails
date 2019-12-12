@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Views.CashBook>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    @using (Html.BeginForm("Details", "CashBook", FormMethod.Get))
+    {
+    <p>
+        @Html.Editor("id", new { id = 100 })
+        By Date: @Html.EditorFor(model => model.FirstOrDefault().EDate, new { htmlAttributes = new { @value = DateTime.Now.ToShortDateString() } })
+        @Html.ValidationMessageFor(model => model.FirstOrDefault().EDate, "", new { @class = "text-danger" })
+        <input type="submit" value="Filter" /><br />
+
+    </p>
+
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Particulars)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CashIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CashOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CashBalance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Particulars)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CashIn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CashOut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CashBalance)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

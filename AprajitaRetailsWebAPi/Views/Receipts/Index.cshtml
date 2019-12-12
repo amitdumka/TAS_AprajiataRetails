@@ -1,0 +1,96 @@
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.Receipt>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Receipts</h2>
+
+<p>
+     @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RecieptDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayMode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecieptSlipNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecieptDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayMode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecieptSlipNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.ReceiptId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ReceiptId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ReceiptId })*@
+            </td>
+        </tr>
+    }
+
+</table>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("a[data-modal]").on("click", function (e) {
+                $('#myModalContent').load(this.href, function () {
+                    $('#myModal').modal({
+                        keyboard: true
+                    }, 'show');
+                });
+                return false;
+            });
+        });
+
+    </script>
+}

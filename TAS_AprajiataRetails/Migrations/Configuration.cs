@@ -52,6 +52,17 @@ namespace TAS_AprajiataRetails.Migrations
         }
     }
 
+    internal sealed class VoyConfiguration : DbMigrationsConfiguration<TAS_AprajiataRetails.Models.Data.Voy.VoyDB>
+    {
+        public VoyConfiguration()
+        {
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+
+        }
+    }
+
+
     //public class AprajitaRetailsInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<AprajitaRetailsContext>
     //{
     //    protected override void Seed(AprajitaRetailsContext context)
