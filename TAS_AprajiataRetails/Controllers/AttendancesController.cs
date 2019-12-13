@@ -75,7 +75,7 @@ namespace TAS_AprajiataRetails.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "StaffName", attendance.EmployeeId);
-            return View(attendance);
+            return PartialView(attendance);
         }
 
         // POST: Attendances/Edit/5
@@ -107,7 +107,7 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(attendance);
+            return PartialView(attendance);
         }
 
         // POST: Attendances/Delete/5

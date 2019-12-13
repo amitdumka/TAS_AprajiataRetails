@@ -1,25 +1,25 @@
 ﻿@model IEnumerable<TAS_AprajiataRetails.Models.Views.CashBook>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cash Book";
 }
 
-<h2>Index</h2>
+<h2>Cash Book</h2>
 
 <div>
     @using (Html.BeginForm("Index", "CashBook", FormMethod.Get))
     {
-        <p>
+        <p class="">
           
             By Date: @Html.EditorFor(model => model.FirstOrDefault().EDate, new { htmlAttributes = new { @value = DateTime.Now.ToShortDateString() } })
             @Html.ValidationMessageFor(model => model.FirstOrDefault().EDate, "", new { @class = "text-danger" })
-            <input type="submit" value="Filter" /><br />
+            <input type="submit" value="Filter" class="btn btn-primary"/><br />
             
         </p>
 
     }
 </div>
-<table class="table">
+<table class="table table-striped table-bordered table-condensed  bg-warning">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.EDate)
@@ -30,38 +30,57 @@
         <th>
             @Html.DisplayNameFor(model => model.CashIn)
         </th>
-        <th>
+        <th class="text-danger">
             @Html.DisplayNameFor(model => model.CashOut)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CashBalance)
         </th>
-        <th></th>
+        
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EDate)
+<tr class="bg-info">
+    <td>
+        @Html.DisplayFor(modelItem => item.EDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Particulars)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CashIn)
+    </td>
+    @if (item.CashOut > 0)
+    {
+        <td class="text-danger">
+            @Html.DisplayFor(modelItem => item.CashOut)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Particulars)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CashIn)
-        </td>
+    }
+    else
+    {
         <td>
             @Html.DisplayFor(modelItem => item.CashOut)
         </td>
-        <td>
+    }
+
+    @if (item.CashBalance < 0)
+    {
+        <td class="text-danger">
             @Html.DisplayFor(modelItem => item.CashBalance)
         </td>
-        @*<td>
+
+    }else{
+    <td class="text-success">
+        @Html.DisplayFor(modelItem => item.CashBalance)
+    </td>
+    }
+
+    @*<td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>*@
-    </tr>
+</tr>
 }
 
 </table>
