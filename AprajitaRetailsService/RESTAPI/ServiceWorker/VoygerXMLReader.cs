@@ -93,7 +93,7 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
                                 }
                             }
                             LogEvent.WriteEvent("returing vbill with No: " + vBill.bill.BillNumber);
-                            dataSet.Reset();
+                            
                             dataSet.Clear();
                             dataSet.Dispose();
                             tr.Close();
@@ -103,9 +103,12 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
                         else
                         {
                             LogEvent.Warning("It doesnt have any VoyBill");
-                            dataSet.Reset();
+                            
                             dataSet.Clear();
                             dataSet.Dispose();
+                            tr.Close();
+                            tr.Dispose();
+                           
                             return null; // Error: Incase failed to read or no data present
                         }
 
@@ -141,6 +144,7 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
         {
             vBill.bill.CustomerName = (string)table.Rows[0][VBEle.customername];
             vBill.bill.CustomerMobile = (string)table.Rows[0][VBEle.mobile];
+            table.EndLoadData();
         }
 
         /// <summary>
@@ -169,6 +173,7 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
 
                 vBill.AddLineItem(lineItem);
             }
+            table.EndLoadData();
         }
 
         private  void ReadBill(DataTable table)
@@ -180,7 +185,7 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
             vBill.bill.BillAmount = Double.Parse((string)table.Rows[0][VBEle.bill_amount]);//5
             vBill.bill.BillGrossAmount = Double.Parse((string)table.Rows[0][VBEle.bill_gross_amount]);//6
             vBill.bill.BillDiscount = Double.Parse((string)table.Rows[0][VBEle.bill_discount]);//7
-            
+            table.EndLoadData();
         }
 
         /// <summary>
@@ -200,6 +205,7 @@ namespace AprajitaRetailsService.RESTAPI.ServiceWorker
                 };
                 vBill.AddPaymentMode(vPayMode);
             }
+            table.EndLoadData();
             return id;
         }
 

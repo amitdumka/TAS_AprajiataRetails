@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using AprajitaRetailsService.RESTAPI.Utils;
 using AprajitaRetailsService.RESTAPI.Data;
 using AprajitaRetailsService.RESTAPI.View;
+using System.Linq;
 
 namespace AprajitaRetailsService.RESTAPI.RemoteAPI
 {
@@ -78,13 +79,25 @@ namespace AprajitaRetailsService.RESTAPI.RemoteAPI
 
             HttpResponseMessage response = await client.PostAsJsonAsync("api/VoyagerBills", bill);
             LogEvent.WriteEvent("Header:" + response.Headers.ToString());
-            LogEvent.WriteEvent(response.Content.ToString());
+            LogEvent.WriteEvent("Content:"+response.Content.ToString());
             LogEvent.WriteEvent("Status Code:" + response.StatusCode.ToString());
 
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)
+            {
                 LogEvent.WriteEvent("Invocie is saved: " + bill.InvoiceNo);
+                using (VoyagerContext db= new VoyagerContext())
+                {
+                    InsertDataLog log= db.InsertDataLogs.Where(c => c.BillNumber == bill.InvoiceNo).FirstOrDefault();
+                    log.Remark = response.Content.ToString();
+                    db.Entry(log).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    
+                    
+
+                }
+            }
             return response.Headers.Location;
         }
 
