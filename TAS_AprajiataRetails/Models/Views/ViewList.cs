@@ -32,10 +32,13 @@ namespace TAS_AprajiataRetails.Models.Views
     public class TailoringReport
     {
         [Display(Name ="Today")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TodaySale { get; set; }
         [Display(Name = "Montly")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal MonthlySale { get; set; }
         [Display(Name = "Yearly")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal YearlySale { get; set; }
         //public decimal QuaterlySale { get; set; }
 
@@ -57,13 +60,22 @@ namespace TAS_AprajiataRetails.Models.Views
     {
 
         [Display(Name = "Today")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal DailySale { get; set; }
+
         [Display(Name = "Monthly")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal MonthlySale { get; set; }
+        
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         [Display(Name = "Yearly")]
         public decimal YearlySale { get; set; }
+        
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         [Display(Name = "Weekly")]
         public decimal WeeklySale { get; set; }
+        
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         [Display(Name = "Quarterly")]
         public decimal QuaterlySale { get; set; }
 
@@ -87,6 +99,7 @@ namespace TAS_AprajiataRetails.Models.Views
         public double Ratio { get; set; }
         
         [Display(Name = "Current Month Sale")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalSale { get; set; }
         
         [Display(Name = "No Of Bills")]
@@ -125,15 +138,20 @@ namespace TAS_AprajiataRetails.Models.Views
         public decimal CashInHand { get; set; }
 
         [Display(Name = "Total Sale")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TodaySale { get; set; }
         [Display(Name = "Card Sale")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TodayCardSale { get; set; }
         [Display(Name = "OtherMode Sale")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TodayOtherSale { get; set; }
         [Display(Name = "Manual Sale")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TodayManualSale { get; set; }
 
         [Display(Name = "Tailoring Delivery Sale")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TodayTailoringSale { get; set; }
         [Display(Name = "Tailoring Booking ")]
         public int TodayTailoringBooking { get; set; }
@@ -141,13 +159,17 @@ namespace TAS_AprajiataRetails.Models.Views
         public int TodayTotalUnit { get; set; }
 
         [Display(Name = "Total Expenses")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TodayTotalExpenses { get; set; }
         [Display(Name = "Total Payments")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalPayments { get; set; }
         [Display(Name = "Total Receipts")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalReceipts { get; set; }
 
         [Display(Name = "Cash In Hand")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TodayCashInHand { get; set; }
 
 
@@ -156,20 +178,28 @@ namespace TAS_AprajiataRetails.Models.Views
     public class AccountsInfo
     {
         [Display(Name ="Cash-In-Hand")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CashInHand { get; set; }
         [Display(Name = "Openning Balance")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal OpenningBal { get; set; }
         [Display(Name = "Income")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CashIn { get; set; }
         [Display(Name = "Expenses")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CashOut { get; set; }
         [Display(Name = "Cash Payments")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalCashPayments { get; set; }
         [Display(Name = "Bank Balance")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CashInBank { get; set; }
         [Display(Name = "Deposited")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CashToBank { get; set;}
         [Display(Name = "Withdrawal")]
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CashFromBank { get; set; }
     }
 

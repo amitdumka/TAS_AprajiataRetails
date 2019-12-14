@@ -18,7 +18,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voy
 
     }
 
-    public enum PayModes { CA, DC, CC, Mix,Wal, CRD, OTH}
+    public enum VPayModes { CA, DC, CC, Mix,Wal, CRD, OTH}
 
     public class VoyagerBill
     {
@@ -26,7 +26,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voy
         public string InvoiceNo { get; set; }
         public DateTime BillDate { get; set; }
         public decimal Amount { get; set; }
-        public PayModes PayModes { get; set; }
+        public VPayModes PayModes { get; set; }
         public DateTime ImportDate { get; set; }
         public bool IsUsed { get; set; }
     }

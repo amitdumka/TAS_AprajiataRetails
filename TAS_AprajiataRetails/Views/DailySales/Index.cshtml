@@ -34,22 +34,22 @@
                 <td class=""><strong> Salesman: @Html.DropDownList("salesmanId", "All")</strong></td>
                 <td>
                     <strong>
-                        By Date: @Html.EditorFor(model => model.FirstOrDefault().SaleDate, new{htmlAttributes = new { @value = DateTime.Now.ToShortDateString() }})
+                        By Date: @Html.EditorFor(model => model.FirstOrDefault().SaleDate, new { htmlAttributes = new { @value = DateTime.Now.ToShortDateString() } })
                         @Html.ValidationMessageFor(model => model.FirstOrDefault().SaleDate, "", new { @class = "text-danger" })
                     </strong>
                 </td>
                 <td>
                     <strong>
-                        Or By InvoiceNo: @Html.TextBox("SearchString")
-                        <input type="submit" value="Filter" class="btn btn-info " />
+                        Or
+                        <span class="glyphicon glyphicon-search"> </span>  By InvoiceNo: @Html.TextBox("SearchString") <input type="submit" value="Filter" class=" btn btn-warning " />
                     </strong>
                 </td>
             }
         </tr>
         <tr>
-            <th > @Html.ActionLink("Create New ", "Create",null, new { data_modal = "" , @class="btn btn-success "})</th>
-            <th> @Html.ActionLink("     All Invoice", "Index", new { id = 101 } ,new {  @class="btn btn-info"})</th>
-            <th> @Html.ActionLink("     Today", "Index", new { id = 0 }, new {  @class="btn btn-info"})</th>
+            <th> @Html.ActionLink("Create New ", "Create", null, new { data_modal = "", @class = "btn btn-success " })</th>
+            <th> @Html.ActionLink("     All Invoice", "Index", new { id = 101 }, new { @class = "btn btn-info" })</th>
+            <th> @Html.ActionLink("     Today", "Index", new { id = 0 }, new { @class = "btn btn-info" })</th>
         </tr>
 
     </table>
@@ -87,38 +87,157 @@
 
     @foreach (var item in Model)
     {
+        if (item.IsDue)
+        {
+            <tr class="bg-danger">
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayMode)
+                </td>
 
-        <tr>
+                <td class="text-center">
+                    @if (item.IsManualBill)
+                    {
+                        <p class="glyphicon glyphicon-check text-danger "></p>}
+                    @*@Html.DisplayFor(modelItem => item.IsManualBill)*@
+                </td>
+                <td class="text-center">
+                    @if (item.IsSaleReturn)
+                    {<p class="glyphicon glyphicon-check text-danger "></p>}
+                    @*@Html.DisplayFor(modelItem => item.IsSaleReturn)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salesman.SalesmanName)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.SaleDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayMode)
-            </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.DailySaleId }, new { data_modal = "" }) |*@
+                    @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "", @class = "btn btn-info " })
+                    @*|@Html.ActionLink("Delete", "Delete", new { id = item.DailySaleId }, new { data_modal = "" })*@
+                </td>
+            </tr>
+        }
+        else if (item.IsTailoringBill)
+        {
+            <tr class="bg-warning">
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayMode)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.IsManualBill)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsSaleReturn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salesman.SalesmanName)
-            </td>
+                <td class="text-center">
+                    @if (item.IsManualBill)
+                    {
+                        <p class="glyphicon glyphicon-check text-danger "></p>}
+                    @*@Html.DisplayFor(modelItem => item.IsManualBill)*@
+                </td>
+                <td class="text-center">
+                    @if (item.IsSaleReturn)
+                    {<p class="glyphicon glyphicon-check text-danger "></p>}
+                    @*@Html.DisplayFor(modelItem => item.IsSaleReturn)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salesman.SalesmanName)
+                </td>
 
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.DailySaleId }, new { data_modal = "" }) |*@
-                @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "" , @class="btn btn-info " })
-                @*|@Html.ActionLink("Delete", "Delete", new { id = item.DailySaleId }, new { data_modal = "" })*@
-            </td>
-        </tr>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.DailySaleId }, new { data_modal = "" }) |*@
+                    @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "", @class = "btn btn-info " })
+                    @*|@Html.ActionLink("Delete", "Delete", new { id = item.DailySaleId }, new { data_modal = "" })*@
+                </td>
+            </tr>
+        }
+        else if (item.IsManualBill)
+        {
+            <tr class="bg-primary">
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayMode)
+                </td>
+
+                <td class="text-center">
+
+                    <p class="glyphicon glyphicon-check  "></p>
+                    @*@Html.DisplayFor(modelItem => item.IsManualBill)*@
+                </td>
+                <td class="text-center">
+                    @if (item.IsSaleReturn)
+                    {<p class="glyphicon glyphicon-check text-danger "></p>}
+                    @*@Html.DisplayFor(modelItem => item.IsSaleReturn)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salesman.SalesmanName)
+                </td>
+
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.DailySaleId }, new { data_modal = "" }) |*@
+                    @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "", @class = "btn btn-info " })
+                    @*|@Html.ActionLink("Delete", "Delete", new { id = item.DailySaleId }, new { data_modal = "" })*@
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayMode)
+                </td>
+
+                <td class="text-center">
+                    @if (item.IsManualBill)
+                    {<p class="glyphicon glyphicon-check text-danger "></p>}
+                </td>
+                <td class="text-center">
+                    @if (item.IsSaleReturn)
+                    {<p class="glyphicon glyphicon-check text-danger "></p>}
+                    @*@Html.DisplayFor(modelItem => item.IsSaleReturn)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salesman.SalesmanName)
+                </td>
+
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.DailySaleId }, new { data_modal = "" }) |*@
+                    @Html.ActionLink("Details", "Details", new { id = item.DailySaleId }, new { data_modal = "", @class = "btn btn-info " })
+                    @*|@Html.ActionLink("Delete", "Delete", new { id = item.DailySaleId }, new { data_modal = "" })*@
+                </td>
+            </tr>
+        }
+
+
 
     }
 
