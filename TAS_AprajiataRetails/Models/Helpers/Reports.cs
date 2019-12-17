@@ -1,4 +1,4 @@
-﻿using NLog.Fluent;
+﻿//using NLog.Fluent;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -162,7 +162,7 @@ namespace TAS_AprajiataRetails.Models.Helpers
                         }
                         catch (Exception)
                         {
-                            Log.Error().Message("empresent exception");
+                           // Log.Error().Message("empresent exception");
                         }
                            
 

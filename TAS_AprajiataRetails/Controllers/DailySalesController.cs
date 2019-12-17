@@ -1,4 +1,4 @@
-﻿using NLog.Fluent;
+﻿//using NLog.Fluent;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,6 +19,11 @@ namespace TAS_AprajiataRetails.Controllers
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
         CultureInfo c = CultureInfo.GetCultureInfo("In");
+
+        /// <summary>
+        /// ProcessAccounts Handle Cash/Bank flow and update related tables
+        /// </summary>
+        /// <param name="dailySale"></param>
         private void ProcessAccounts(DailySale dailySale)
         {
             if (!dailySale.IsSaleReturn)
@@ -79,6 +84,26 @@ namespace TAS_AprajiataRetails.Controllers
 
         }
 
+        private void ProcessAccountDelete(DailySale dailySale)
+        {
+            if (dailySale.PayMode == PayModes.Cash && dailySale.CashAmount > 0)
+            {
+                Utils.UpDateCashInHand(db, dailySale.SaleDate, 0-dailySale.CashAmount);
+            }
+            else if (dailySale.PayMode != PayModes.Cash && dailySale.PayMode != PayModes.Coupons && dailySale.PayMode != PayModes.Points)
+            {
+                Utils.UpDateCashInBank(db, dailySale.SaleDate, 0-dailySale.CashAmount);
+            }
+            else
+            {
+                //TODO: Add this option in Create and Edit also
+                // Handle when payment is done by Coupons and Points. 
+                //Need to create table to create Coupn and Royalty point.
+                // Points will go in head for Direct Expenses 
+                // Coupon Table will be colloum for TAS Coupon and Apajita Retails. 
+                throw new Exception(); 
+            }
+        }
 
 
         // GET: DailySales
@@ -104,7 +129,7 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 Utils.ProcessOpenningClosingBalance(db, DateTime.Today, false, true);
                 cashinhand = (decimal)0.00;
-                Log.Error("Cash In Hand is null");
+                //Log.Error("Cash In Hand is null");
             }
 
 
@@ -272,6 +297,7 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             DailySale dailySale = db.DailySales.Find(id);
+            ProcessAccountDelete(dailySale);
             db.DailySales.Remove(dailySale);
             db.SaveChanges();
             return RedirectToAction("Index");

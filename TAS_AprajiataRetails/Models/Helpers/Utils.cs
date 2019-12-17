@@ -3,7 +3,7 @@ using System.Linq;
 using System.Data.Entity;
 using TAS_AprajiataRetails.Models.Data;
 using System.Collections.Generic;
-using NLog.Fluent;
+//using NLog.Fluent;
 
 namespace TAS_AprajiataRetails.Models.Helpers
 {
@@ -35,12 +35,12 @@ namespace TAS_AprajiataRetails.Models.Helpers
                     }
                     try
                     {
-                        Log.Info("No of CashInhand Changes :"+ db.SaveChanges());
+                        //Log.Info("No of CashInhand Changes :"+ db.SaveChanges());
                     }
                     catch (Exception)
                     {
 
-                        Log.Info("CashInHand Correction failed");
+                       // Log.Info("CashInHand Correction failed");
                     }
                    
                 }
