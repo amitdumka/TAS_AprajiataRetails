@@ -16,14 +16,19 @@ namespace TAS_AprajiataRetails.Controllers
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
 
-        private void ProcessAccounts(BankWithdrawal objectName)
+        private void ProcessAccounts(BankWithdrawal objectName, bool IsIn)
         {
-
-            
+            if (IsIn)
+            {
                 Utils.UpDateCashInHand(db, objectName.DepoDate, objectName.Amount);
                 Utils.UpDateCashOutBank(db, objectName.DepoDate, objectName.Amount);
-            
-            
+            }
+            else
+            {
+                Utils.UpDateCashInHand(db, objectName.DepoDate, 0-objectName.Amount);
+                Utils.UpDateCashOutBank(db, objectName.DepoDate, 0-objectName.Amount);
+            }
+          
 
 
 
@@ -67,7 +72,7 @@ namespace TAS_AprajiataRetails.Controllers
             if (ModelState.IsValid)
             {
                 db.Withdrawals.Add(bankWithdrawal);
-                ProcessAccounts(bankWithdrawal);
+                ProcessAccounts(bankWithdrawal, true);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -132,6 +137,7 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             BankWithdrawal bankWithdrawal = db.Withdrawals.Find(id);
+            ProcessAccounts(bankWithdrawal, false);
             db.Withdrawals.Remove(bankWithdrawal);
             db.SaveChanges();
             return RedirectToAction("Index");

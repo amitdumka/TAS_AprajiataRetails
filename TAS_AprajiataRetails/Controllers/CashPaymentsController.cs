@@ -91,7 +91,7 @@ namespace TAS_AprajiataRetails.Controllers
         {
             if (ModelState.IsValid)
             {
-                Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, cashPayment.Amount);
+               //TODO: Edit in cash balance need to update Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, cashPayment.Amount);
                 db.Entry(cashPayment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -121,6 +121,7 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             CashPayment cashPayment = db.CashPayments.Find(id);
+            Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, 0-cashPayment.Amount);
             db.CashPayments.Remove(cashPayment);
             db.SaveChanges();
             return RedirectToAction("Index");

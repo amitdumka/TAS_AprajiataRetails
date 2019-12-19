@@ -137,6 +137,7 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             BankDeposit bankDeposit = db.BankDeposits.Find(id);
+            Utils.UpDateCashOutHand(db, bankDeposit.DepoDate, 0-bankDeposit.Amount);
             db.BankDeposits.Remove(bankDeposit);
             db.SaveChanges();
             return RedirectToAction("Index");

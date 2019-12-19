@@ -14,28 +14,28 @@ namespace TAS_AprajiataRetails.works
         public static void DailyJob(object state)
         {
             //Your dream goes here.
-          Utils.JobOpeningClosingBalance();
-         // Utils.CashInHandCorrectionForMonth(DateTime.Today);
+            Utils.JobOpeningClosingBalance();
+            Utils.CashInHandCorrectionForMonth(DateTime.Today);
         }
 
         public static void HalfDayJob(object state)
         {
             //Your dream goes here.
-         Utils.JobOpeningClosingBalance();
-           //Utils.CashInHandCorrectionForMonth(DateTime.Today);
+            Utils.JobOpeningClosingBalance();
+            Utils.CashInHandCorrectionForMonth(DateTime.Today);
         }
 
         public static void HourlyJob(object state)
         {
             //Your dream goes here.
-           // Utils.CashInHandCorrectionForMonth(DateTime.Today);
+            // Utils.CashInHandCorrectionForMonth(DateTime.Today);
         }
         public static void TwoHourlyJob(object state)
         {
             //Your dream goes here.
-           Utils.JobOpeningClosingBalance();
-            
-            
+            Utils.JobOpeningClosingBalance();
+
+
         }
     }
     public sealed class Scheduler
@@ -52,7 +52,7 @@ namespace TAS_AprajiataRetails.works
 
             TimerCallback callbackHourly = new TimerCallback(Jobs.HourlyJob);
             Timer hourlyTimer = new Timer(callbackHourly, null, TimeSpan.Zero, TimeSpan.FromHours(1.0));
-           
+
             TimerCallback callbackTwoHourly = new TimerCallback(Jobs.HourlyJob);
             Timer twoHourlyTimer = new Timer(callbackTwoHourly, null, TimeSpan.Zero, TimeSpan.FromHours(2.0));
         }

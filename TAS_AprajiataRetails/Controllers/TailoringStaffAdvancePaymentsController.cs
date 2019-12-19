@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TAS_AprajiataRetails.Models.Data;
+using TAS_AprajiataRetails.Models.Helpers;
 
 namespace TAS_AprajiataRetails.Controllers
 {
@@ -14,6 +15,40 @@ namespace TAS_AprajiataRetails.Controllers
     public class TailoringStaffAdvancePaymentsController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
+
+
+        private void ProcessAccounts(TailoringStaffAdvancePayment objectName, bool isIn)
+        {
+
+            if (isIn)
+            {
+                if (objectName.PayMode == PayModes.Cash)
+                {
+                    Utils.UpDateCashOutHand(db, objectName.PaymentDate, objectName.Amount);
+
+                }
+                //TODO: in future make it more robust
+                if (objectName.PayMode != PayModes.Cash && objectName.PayMode != PayModes.Coupons && objectName.PayMode != PayModes.Points)
+                {
+                    Utils.UpDateCashOutBank(db, objectName.PaymentDate, objectName.Amount);
+                }
+            }
+            else
+            {
+                if (objectName.PayMode == PayModes.Cash)
+                {
+                    Utils.UpDateCashOutHand(db, objectName.PaymentDate, 0 - objectName.Amount);
+
+                }
+                //TODO: in future make it more robust
+                if (objectName.PayMode != PayModes.Cash && objectName.PayMode != PayModes.Coupons && objectName.PayMode != PayModes.Points)
+                {
+                    Utils.UpDateCashOutBank(db, objectName.PaymentDate, 0 - objectName.Amount);
+                }
+            }
+
+
+        }
 
         // GET: TailoringStaffAdvancePayments
         public ActionResult Index()
@@ -54,6 +89,7 @@ namespace TAS_AprajiataRetails.Controllers
             if (ModelState.IsValid)
             {
                 db.TailoringStaffAdvancePayments.Add(tailoringStaffAdvancePayment);
+                ProcessAccounts(tailoringStaffAdvancePayment, true);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -116,8 +152,9 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             TailoringStaffAdvancePayment tailoringStaffAdvancePayment = db.TailoringStaffAdvancePayments.Find(id);
+            ProcessAccounts(tailoringStaffAdvancePayment, false);
             db.TailoringStaffAdvancePayments.Remove(tailoringStaffAdvancePayment);
-            db.SaveChanges();
+                        db.SaveChanges();
             return RedirectToAction("Index");
         }
 
