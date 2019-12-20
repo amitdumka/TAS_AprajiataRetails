@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.DueRecoverd>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Due Recovered";
 }
 
-<h2>Index</h2>
+<h2>Due Recovered</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DuesList.DuesListId)
+            @Html.DisplayNameFor(model => model.DuesList.DailySale.InvNo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PaidDate)
@@ -35,7 +35,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DuesList.DuesListId)
+            @Html.DisplayFor(modelItem => item.DuesList.DailySale.InvNo)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PaidDate)

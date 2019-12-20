@@ -114,7 +114,8 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: DueRecoverds
         public ActionResult Index()
         {
-            var recoverds = db.Recoverds.Include(d => d.DuesList);
+            var recoverds = db.Recoverds.Include(d => d.DuesList).Include(d=>d.DuesList.DailySale);
+            
             return View(recoverds.ToList());
         }
 
@@ -136,7 +137,10 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: DueRecoverds/Create
         public ActionResult Create()
         {
-            ViewBag.DuesListId = new SelectList(db.DuesLists, "DuesListId", "DuesListId");
+            var dueList = db.DuesLists.Include(c=>c.DailySale).Where(c => !c.IsRecovered).ToList();
+            
+            ViewBag.DuesListId = new SelectList (dueList, "DuesListId", "DailySale.InvNo");
+            //dueList.First().DailySale.InvNo;
             return View();
         }
 
