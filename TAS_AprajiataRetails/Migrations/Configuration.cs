@@ -62,6 +62,25 @@ namespace TAS_AprajiataRetails.Migrations
         }
     }
 
+    internal sealed class AccountsConfiguration : DbMigrationsConfiguration<TAS_AprajiataRetails.Models.Data.Accounts.AccountsContext>
+    {
+        public AccountsConfiguration()
+        {
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+
+        }
+    }
+
+    internal sealed class VoyagerConfiguration : DbMigrationsConfiguration<TAS_AprajiataRetails.Models.Data.Voyagers.VoyagerContext>
+    {
+        public VoyagerConfiguration()
+        {
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+
+        }
+    }
 
     //public class AprajitaRetailsInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<AprajitaRetailsContext>
     //{

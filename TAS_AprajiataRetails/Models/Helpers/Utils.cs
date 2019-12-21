@@ -36,6 +36,7 @@ namespace TAS_AprajiataRetails.Models.Helpers
                     try
                     {
                         //Log.Info("No of CashInhand Changes :"+ db.SaveChanges());
+                        db.SaveChanges();
                     }
                     catch (Exception)
                     {
