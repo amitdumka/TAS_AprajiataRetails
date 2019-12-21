@@ -275,10 +275,13 @@
     <Compile Include="Controllers\EndOfDaysController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LedgerEntriesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PartiesController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\PettyCashExpensesController.cs" />
     <Compile Include="Controllers\ReceiptsController.cs" />
+    <Compile Include="Controllers\RoleAssignController.cs" />
     <Compile Include="Controllers\SalaryPaymentsController.cs" />
     <Compile Include="Controllers\SalesmenAPIController.cs" />
     <Compile Include="Controllers\StaffAdvancePaymentsController.cs" />
@@ -298,9 +301,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Data\Accounts\AccountsContext.cs" />
     <Compile Include="Models\Data\AprajitaRetailsContext.cs" />
     <Compile Include="Models\Data\TableList.cs" />
     <Compile Include="Models\Data\TASDB.cs" />
+    <Compile Include="Models\Data\Voyagers\VoyagerContext.cs" />
     <Compile Include="Models\Data\Voy\VoyDB.cs" />
     <Compile Include="Models\Helpers\Reports.cs" />
     <Compile Include="Models\Helpers\Utils.cs" />
@@ -661,9 +666,20 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_Layout4.cshtml" />
     <Content Include="Views\Home\Index4.cshtml" />
+    <Content Include="Views\Parties\Create.cshtml" />
+    <Content Include="Views\Parties\Delete.cshtml" />
+    <Content Include="Views\Parties\Details.cshtml" />
+    <Content Include="Views\Parties\Edit.cshtml" />
+    <Content Include="Views\Parties\Index.cshtml" />
+    <Content Include="Views\LedgerEntries\Create.cshtml" />
+    <Content Include="Views\LedgerEntries\Delete.cshtml" />
+    <Content Include="Views\LedgerEntries\Details.cshtml" />
+    <Content Include="Views\LedgerEntries\Edit.cshtml" />
+    <Content Include="Views\LedgerEntries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\RoleAssign\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
