@@ -14,15 +14,15 @@ namespace TAS_AprajiataRetails.works
         public static void DailyJob(object state)
         {
             //Your dream goes here.
-            Utils.JobOpeningClosingBalance();
-            Utils.CashInHandCorrectionForMonth(DateTime.Today);
+           // Utils.JobOpeningClosingBalance();
+           // Utils.CashInHandCorrectionForMonth(DateTime.Today);
         }
 
         public static void HalfDayJob(object state)
         {
             //Your dream goes here.
-            Utils.JobOpeningClosingBalance();
-            Utils.CashInHandCorrectionForMonth(DateTime.Today);
+          //  Utils.JobOpeningClosingBalance();
+          //  Utils.CashInHandCorrectionForMonth(DateTime.Today);
         }
 
         public static void HourlyJob(object state)
@@ -33,7 +33,7 @@ namespace TAS_AprajiataRetails.works
         public static void TwoHourlyJob(object state)
         {
             //Your dream goes here.
-            Utils.JobOpeningClosingBalance();
+          //  Utils.JobOpeningClosingBalance();
 
 
         }

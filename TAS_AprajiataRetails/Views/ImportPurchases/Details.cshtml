@@ -1,0 +1,154 @@
+﻿@model TAS_AprajiataRetails.Models.Data.Voyagers.ImportPurchase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ImportPurchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GRNNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GRNNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GRNDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GRNDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Barcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Barcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StyleCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StyleCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRPValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRPValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDataConsumed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDataConsumed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImportTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImportTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ImportPurchaseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

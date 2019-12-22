@@ -8,7 +8,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public AprajitaRetailsContext() : base("AprajitaRetails")
         {
             Database.SetInitializer<AprajitaRetailsContext>(new CreateDatabaseIfNotExists<AprajitaRetailsContext>());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AprajitaRetailsContext, Migrations.Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<AprajitaRetailsContext, Migrations.Configuration>());
         }
 
 

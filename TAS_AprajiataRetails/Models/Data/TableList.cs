@@ -8,11 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TAS_AprajiataRetails.Models.Data
 {
     //TODO: Add Support for Mix Payment
-    public enum PayModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments };
-    public enum PaymentModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Others };
-    public enum AttUnits { Present, Absent, HalfDay, Sunday };
-    public enum SalaryComponet { NetSalary, LastPcs, WOWBill, SundaySalary, Incentive, Others }
-    public enum BankPayModes { Cash, Card, Cheques, RTGS, NEFT, IMPS, Wallets, Others }
+    
+    
     public class TranscationMode
     {
         [Display(Name = "Mode")]

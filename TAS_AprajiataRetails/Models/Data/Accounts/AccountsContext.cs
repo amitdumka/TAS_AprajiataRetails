@@ -22,7 +22,7 @@ namespace TAS_AprajiataRetails.Models.Data.Accounts
 
 
     //Tables 
-    public enum LedgerType { Credit, Debit, Income, Expenses, Assests, Bank, Loan, Purchase, Sale, Vendor, Customer }
+  
     public class LedgerMaster
     {
         public int LedgerMasterId { get; set; }

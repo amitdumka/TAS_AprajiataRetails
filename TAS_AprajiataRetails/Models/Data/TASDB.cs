@@ -5,8 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TAS_AprajiataRetails.Models.Data
 {
-
-    //Tailoring 
+    //Tailoring
     public class TailoringEmployee
     {
         public int TailoringEmployeeId { get; set; }
@@ -20,6 +19,7 @@ namespace TAS_AprajiataRetails.Models.Data
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Joining Date")]
         public DateTime JoiningDate { get; set; }
+
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Leaving Date")]
         public DateTime? LeavingDate { get; set; }
@@ -27,15 +27,11 @@ namespace TAS_AprajiataRetails.Models.Data
         [Display(Name = "Is Working")]
         public bool IsWorking { get; set; }
 
-
         public ICollection<TailorAttendance> Attendances { get; set; }
         public ICollection<TailoringSalaryPayment> SalaryPayments { get; set; }
         public ICollection<TailoringStaffAdvancePayment> AdvancePayments { get; set; }
         public ICollection<TailoringStaffAdvanceReceipt> AdvanceReceipts { get; set; }
-
-
     }
-
 
     public class TailorAttendance
     {
@@ -43,6 +39,7 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [Display(Name = "Staff Name")]
         public int TailoringEmployeeId { get; set; }
+
         public TailoringEmployee Employee { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -54,7 +51,6 @@ namespace TAS_AprajiataRetails.Models.Data
 
         public AttUnits Status { get; set; }
         public string Remarks { get; set; }
-
     }
 
     public class TailoringSalaryPayment
@@ -63,6 +59,7 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [Display(Name = "Tailor Name")]
         public int TailoringEmployeeId { get; set; }
+
         public TailoringEmployee Employee { get; set; }
 
         [Display(Name = "Salary/Year")]
@@ -82,8 +79,6 @@ namespace TAS_AprajiataRetails.Models.Data
         public PayModes PayMode { get; set; }
 
         public string Details { get; set; }
-
-
     }
 
     public class TailoringStaffAdvancePayment
@@ -92,6 +87,7 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [Display(Name = "Tailor Name")]
         public int TailoringEmployeeId { get; set; }
+
         public TailoringEmployee Employee { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -106,12 +102,14 @@ namespace TAS_AprajiataRetails.Models.Data
 
         public string Details { get; set; }
     }
+
     public class TailoringStaffAdvanceReceipt
     {
         public int TailoringStaffAdvanceReceiptId { get; set; }
 
         [Display(Name = "Staff Name")]
         public int TailoringEmployeeId { get; set; }
+
         public TailoringEmployee Employee { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -123,9 +121,9 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [Display(Name = "Payment Mode")]
         public PayModes PayMode { get; set; }
+
         public string Details { get; set; }
     }
-
 
     public class TalioringDelivery
     {
@@ -145,7 +143,6 @@ namespace TAS_AprajiataRetails.Models.Data
         public decimal Amount { get; set; }
 
         public string Remarks { get; set; }
-
     }
 
     public class TalioringBooking
@@ -172,44 +169,46 @@ namespace TAS_AprajiataRetails.Models.Data
 
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Total Amount")]
         public decimal TotalAmount { get; set; }
+
         [Display(Name = "Total Qty")]
         public int TotalQty { get; set; }
 
         [Display(Name = "Shirt Qty")]
         public int ShirtQty { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Shirt Price")]
         public decimal ShirtPrice { get; set; }
+
         [Display(Name = "Pant Qty")]
         public int PantQty { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Pant Price")]
         public decimal PantPrice { get; set; }
 
         [Display(Name = "Coat Qty")]
         public int CoatQty { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Coat Price")]
         public decimal CoatPrice { get; set; }
 
         [Display(Name = "Kurta Qty")]
         public int KurtaQty { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Kurta Price")]
         public decimal KurtaPrice { get; set; }
 
         [Display(Name = "Bundi Qty")]
         public int BundiQty { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Bundi Price")]
         public decimal BundiPrice { get; set; }
 
         [Display(Name = "Others Qty")]
         public int Others { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Others Price")]
         public decimal OthersPrice { get; set; }
 
         public virtual ICollection<TalioringDelivery> Deliveries { get; set; }
-
     }
-
-
-
-
-
 }

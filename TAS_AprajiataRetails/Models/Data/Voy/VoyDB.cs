@@ -11,14 +11,14 @@ namespace TAS_AprajiataRetails.Models.Data.Voy
         public VoyDB() : base("VoyImportDB")
         {
             Database.SetInitializer<VoyDB>(new CreateDatabaseIfNotExists<VoyDB>());
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<VoyDB, Migrations.VoyConfiguration>());
+           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<VoyDB, Migrations.VoyConfiguration>());
         }
 
         public DbSet<VoyagerBill> Bills { get; set; }
 
     }
 
-    public enum VPayModes { CA, DC, CC, Mix, Wal, CRD, OTH }
+   
 
     public class VoyagerBill
     {

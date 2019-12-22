@@ -84,9 +84,29 @@
                         </ul>
 
                     </li>
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Version2</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Store", "Index", "Stores")</li>
+                            <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                            <br />
+                            <li>@Html.ActionLink("ImportInWards", "Index", "ImportInWards")</li>
+                            <li>@Html.ActionLink("ImportPurchases", "Index", "ImportPurchases")</li>
+                            <li>@Html.ActionLink("ImportSaleItemWises", "Index", "ImportSaleItemWises")</li>
+                            <li>@Html.ActionLink("ImportSaleRegisters", "Index", "ImportSaleRegisters")</li>
+                        </ul>
 
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">About</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+
+                    </li>
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -97,8 +117,8 @@
         <hr />
         <footer>
             <p class="text-right  text-success">Current Time: @DateTime.Now</p>
-            
-          <p>  &copy; @DateTime.Now.Year - The Arvind Store, Dumka(Aprajita Retails)</p>
+
+            <p>  &copy; @DateTime.Now.Year - The Arvind Store, Dumka(Aprajita Retails)</p>
         </footer>
     </div>
 
