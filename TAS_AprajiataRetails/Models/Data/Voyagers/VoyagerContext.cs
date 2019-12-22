@@ -21,6 +21,16 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
     //Enums
     public enum Genders { Male, Female, TransGender }
     public enum Units { Meters, Nos, Pcs, Packets }
+    public enum TaxType { Vat, GST, SGST, CGST, IGST }
+    public enum SalePayMode { Cash, Card, Mix }
+    internal class ProductCategory
+    {//TODO: Make is enum
+        //TODO: Add option of trims, promo items, coupons, others
+        public static readonly int Fabric = 1;
+        public static readonly int RMZ = 2;
+        public static readonly int Accessiories = 3;
+        public static readonly int Tailoring = 4;
+    }
 
     //Import tables.
     public class Purchase
@@ -180,18 +190,157 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
     //Processed Tables
 
-    public class Item { }
+    public class Item {
+        public int ID { set; get; }
+        public string StyleCode { get; set; }
+        public string Barcode { get; set; }
+
+        public string SupplierId { get; set; }
+
+        public string BrandName { get; set; }
+        public string ProductName { get; set; }
+        public string ItemDesc { get; set; }
+
+        public double MRP { get; set; }
+        public double Tax { get; set; }    // TODO:Need to Review in final Edition
+        public double Cost { get; set; }
+
+        public string Size { get; set; }
+        public double Qty { get; set; }
+
+        //GST Implementation    Version 1.0
+        //TODO: GST implementation should use Taxes Class
+        //public double HSNCode { get; set; }
+        //public int PreGST { get; set; }
+        //public double SGST { get; set; }
+        //public double CGST { get; set; }
+        //public double IGST { get; set; }
+    }
     public class Category
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public int? SubCategoryId { get; set; }
     }
-    public class Stock { }
+    public class Stock
+    {
+        public int StockID { set; get; }
+        public int ProductId { set; get; }
+        public double QTY { set; get; }
+    }
     public class Brand
     {
         public int BrandId { get; set; }
         public string BrandName { get; set; }
+    }
+    class Salesman
+    {
+        public int ID
+        {
+            set; get;
+        }
+
+        public string SMCode { get; set; }
+        public string SalesmanName { get; set; }
+    }
+
+    internal class Supplier
+    {
+        public int ID { get; set; }
+        public string SuppilerName { get; set; }
+        public string Warehouse { get; set; }
+    }
+
+    internal class SaleReturnInvoice
+    {
+        public int ID { get; set; }
+        public int CustomerID { get; set; }
+        public string SaleInvoiceNo { get; set; }
+        public string ReturnInvoiceNo { get; set; }
+        public double TotalQty { get; set; }
+        public int TotalReturnItem { get; set; }
+        public double Amount { get; set; }
+        public double TaxAmount { get; set; }
+        public double DiscountAmount { get; set; }
+        public DateTime OnDate { get; set; }
+        public string NewSaleInvoiceNo { get; set; }
+        public string Debit_CreditNotesNo { get; set; }
+        public int SalesmanId { get; set; }
+    }
+
+    internal class SaleInvoice
+    {
+        public int ID { get; set; }
+        public int CustomerId { get; set; }
+        public DateTime OnDate { get; set; }
+        public string InvoiceNo { get; set; }
+        public int TotalItems { get; set; }
+        public double TotalQty { get; set; }
+        public double TotalBillAmount { get; set; }
+        public double TotalDiscountAmount { get; set; }
+        public double RoundOffAmount { get; set; }
+        public double TotalTaxAmount { get; set; }
+    }
+
+    internal class PaymentDetails
+    {
+        public int ID { get; set; }
+        public string InvoiceNo { get; set; }
+        public int PayMode { get; set; }
+        public double CashAmount { get; set; }
+        public double CardAmount { get; set; }
+        public int CardDetailsID { get; set; }
+    }
+
+    internal class SalePaymentDetails
+    {
+        public int ID { get; set; }
+        public string InvoiceNo { get; set; }
+        public int PayMode { get; set; }
+        public double CashAmount { get; set; }
+        public double CardAmount { get; set; }
+        public CardPaymentDetails CardDetails { get; set; }
+    }
+
+    internal class CardMode
+    {
+        public static readonly int DebitCard = 1;
+        public static readonly int CreditCard = 2;
+        public static readonly int AmexCard = 3;
+    }
+
+    internal class CardType
+    {
+        public static readonly int Visa = 1;
+        public static readonly int MasterCard = 2;
+        public static readonly int Mastro = 3;
+        public static readonly int Amex = 4;
+        public static readonly int Dinners = 5;
+        public static readonly int Rupay = 6;
+    }
+
+    internal class CardPaymentDetails
+    {
+        public int ID { get; set; }
+        public string InvoiceNo { get; set; }
+        public int CardType { get; set; }
+        public double Amount { get; set; }
+        public int AuthCode { get; set; }
+        public int LastDigit { get; set; }
+    }
+
+    internal class SaleItem
+    {
+        public int ID { get; set; }
+        public string InvoiceNo { get; set; }
+        public string BarCode { get; set; }
+        public double Qty { get; set; }
+        public double MRP { get; set; }
+        public double BasicAmount { get; set; }
+        public double Discount { get; set; }
+        public double Tax { get; set; }
+        public double BillAmount { get; set; }
+        public int SalesmanID { get; set; }
     }
 
 
@@ -242,3 +391,33 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
     }
 
 }
+
+//future code for reference 
+/*public InvoiceNo GenerateInvoiceNo()
+{
+    InvoiceNo inv = new InvoiceNo(ManualSeries);
+    //TODO: series Start should be changed every Finnical Year;
+    //TODO: Should have option to check data and based on that generate it
+    string iNo = sDB.GetLastInvoiceNo();
+    if (iNo.Length > 0)
+    {
+        if (iNo != "0")
+        {
+            Logs.LogMe("Inv=" + iNo);
+            iNo = iNo.Substring(5);
+            Logs.LogMe("Inv=" + iNo);
+            long i = long.Parse(iNo);
+            Logs.LogMe("Inv=" + i);
+            inv.TP = i + 1;
+        }
+        else
+        { inv.TP = SeriesStart + 1; }
+    }
+    else
+    {
+        //TODO: check future what happens and what condtion  come here
+        inv.TP = SeriesStart + 1;
+        Logs.LogMe("Future check :Inv=" + inv.TP);
+    }
+    return inv;
+}*/
