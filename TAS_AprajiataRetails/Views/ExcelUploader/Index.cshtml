@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.Voyagers.ImportInWard>
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.Voyagers.ImportInWardVM>
 
 @{
     ViewBag.Title = "Index";
@@ -63,7 +63,7 @@
             @Html.DisplayNameFor(model => model.TotalCost)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImportDate)
+            @*@Html.DisplayNameFor(model => model.ImportDate)*@
         </th>
         <th></th>
     </tr>
@@ -74,7 +74,7 @@
             @Html.DisplayFor(modelItem => item.InWardNo)
         </td>
         <td>
-            @*@Html.DisplayFor(modelItem => item.InWardDate)*@
+            @Html.DisplayFor(modelItem => item.InWardDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.InvoiceNo)
@@ -95,12 +95,12 @@
             @Html.DisplayFor(modelItem => item.TotalCost)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImportDate)
+            @*@Html.DisplayFor(modelItem => item.ImportDate)*@
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ImportInWardId }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ImportInWardId }) |
             @Html.ActionLink("Details", "Details", new { id=item.ImportInWardId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ImportInWardId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.ImportInWardId })*@
         </td>
     </tr>
 }

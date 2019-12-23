@@ -53,24 +53,24 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
     {
         //Inward No	Inward Date	Invoice No	Invoice Date	Party Name	Total Qty	Total MRP Value	Total Cost
 
-        public int ImportInWardId { get; set; }
+        public int ImportInWardVMId { get; set; }
 
         [ExcelColumn("Inward No")]
         public string InWardNo { get; set; }
 
         // 4/4/2018  5:34:56 PM
       
-        [ExcelColumn("Inward Dat")]
+        [ExcelColumn("Inward Date")]
       
         public string InWardDate { get; set; }
 
         [ExcelColumn("Invoice No")]
         public string InvoiceNo { get; set; }
 
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        //[Column(TypeName = "DateTime2")]
         [ExcelColumn("Invoice Date")]
-        [Column(TypeName = "DateTime2")]
-        public DateTime InvoiceDate { get; set; }
+        public string InvoiceDate { get; set; }
 
         [ExcelColumn("Party Name")]
         public string PartyName { get; set; }
@@ -84,8 +84,8 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         [ExcelColumn("Total Cost")]
         public decimal TotalCost { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? ImportDate { get; set; } = DateTime.Now;
+       // [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+       // public DateTime? ImportDate { get; set; } = DateTime.Now;
 
 
     }

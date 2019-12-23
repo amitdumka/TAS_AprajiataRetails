@@ -42,6 +42,8 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public DbSet<ImportSaleItemWise> ImportSaleItemWises { get; set; }
         public DbSet<ImportSaleRegister> ImportSaleRegisters { get; set; }
 
+        public DbSet<ImportInWardVM> TestInwards { get; set; }
+
     }
 
 
