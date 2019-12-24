@@ -18,7 +18,7 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: ExcelUploader
         public ActionResult Index()
         {
-            var vm = db.TestInwards.OrderByDescending(c => c.ImportInWardVMId);
+            var vm = db.ImportInWards.OrderByDescending(c => c.ImportInWardId);
             return View(vm);
         }
 
@@ -55,17 +55,18 @@ namespace TAS_AprajiataRetails.Controllers
                     string sheetName = "Sheet1";
 
                     var excelFile = new ExcelQueryFactory(pathToExcelFile);
-                    var currentImports = from a in excelFile.Worksheet<ImportInWardVM>(sheetName) select a;
+                    var currentImports = from a in excelFile.Worksheet<ImportInWard>(sheetName) select a;
                     foreach (var a in currentImports)
                     {
                         try
                         {
                             // Inward No   Inward Date Invoice No  Invoice Date    Party Name  Total Qty   Total MRP Value Total Cost
-                            ImportInWardVM inw = new ImportInWardVM { 
+                            ImportInWard inw = new ImportInWard { 
+                                ImportDate=DateTime.Today,
                                  InvoiceDate=a.InvoiceDate, InvoiceNo=a.InvoiceNo,InWardDate=a.InWardDate, InWardNo=a.InWardNo,
                                  PartyName=a.PartyName, TotalCost=a.TotalCost, TotalMRPValue=a.TotalMRPValue, TotalQty=a.TotalQty
                             };
-                            db.TestInwards.Add(inw);
+                            db.ImportInWards.Add(inw);
                             db.SaveChanges();
 
 

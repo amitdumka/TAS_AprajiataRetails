@@ -1,34 +1,36 @@
-﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.Voyagers.ImportInWardVM>
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.Voyagers.ImportInWard>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Uploaded Inward Register</h2>
 
 <p>
-    <h4>Add Users via Excel</h4>
+    <h4>Upload Inward Register(Excel)</h4>
     <hr />
     @using (Html.BeginForm("UploadExcel", "ExcelUploader", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
     {
         <div class="form-horizontal">
-            <div class="form-group">
+            @*<div class="form-group">
                 <div class="control-label col-md-2">Download Format:</div>
                 <div class="col-md-10">
                     <a href="/ExcelUploader/DownloadExcel/"><img src="~/excel.ico" width="25" height="25" title="Download Excel format" alt="excel" /></a>
                 </div>
-            </div>
+            </div>*@
 
 
             <div class="form-group">
 
                 <div class="control-label col-md-2">Excel:</div>
-                <div class="col-md-10">
+                <div class="col-md-4">
                     <input type="file" id="FileUpload" name="FileUpload" class="" />
+                    
+
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+            @*</div>
+            <div class="form-group">*@
+                <div @*class="col-md-offset-2"*@>
                     <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
 
                 </div>
@@ -36,8 +38,8 @@
         </div>
     }
 </p>
-<table class="table">
-    <tr>
+<table class="table table-bordered table-condensed table-hover" >
+    <tr class="bg-success">
         <th>
             @Html.DisplayNameFor(model => model.InWardNo)
         </th>
@@ -63,46 +65,47 @@
             @Html.DisplayNameFor(model => model.TotalCost)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.ImportDate)*@
+           @Html.DisplayNameFor(model => model.ImportDate)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.InWardNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InWardDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvoiceNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvoiceDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PartyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalMRPValue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalCost)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.ImportDate)*@
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.ImportInWardId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ImportInWardId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ImportInWardId })*@
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InWardNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InWardDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalMRPValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImportDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ImportInWardId }) |
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.ImportInWardId })
+            </td>
+        </tr>
+    }
 
 </table>
