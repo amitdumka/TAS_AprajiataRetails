@@ -12,17 +12,18 @@
     @using (Html.BeginForm("UploadExcel", "ExcelUploader", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
     {
         <div class="form-horizontal">
-            @*<div class="form-group">
-                <div class="control-label col-md-2">Download Format:</div>
+            <div class="form-group">
+                <div class="control-label col-md-2 text-success">Upload Type:</div>
                 <div class="col-md-10">
-                    <a href="/ExcelUploader/DownloadExcel/"><img src="~/excel.ico" width="25" height="25" title="Download Excel format" alt="excel" /></a>
+                    @*<a href="/ExcelUploader/DownloadExcel/"><img src="~/excel.ico" width="25" height="25" title="Download Excel format" alt="excel" /></a>*@
+                    @Html.DropDownList("UploadType")
                 </div>
-            </div>*@
+            </div>
 
 
             <div class="form-group">
 
-                <div class="control-label col-md-2">Excel:</div>
+                <div class="control-label col-md-2 text-primary">Excel File:</div>
                 <div class="col-md-4">
                     <input type="file" id="FileUpload" name="FileUpload" class="" />
                     

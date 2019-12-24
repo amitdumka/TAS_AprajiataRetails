@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LinqToExcel.Attributes;
+using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,28 +17,55 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
         public int ImportPurchaseId { get; set; }
 
+        [ExcelColumn("GRNNo")]
         public string GRNNo { get; set; }
+
+        [ExcelColumn("GRNDate")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime GRNDate { get; set; }
+
+        [ExcelColumn("Invoice No")]
         public string InvoiceNo { get; set; }
+
+        [ExcelColumn("Invoice Date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime InvoiceDate { get; set; }
 
+        [ExcelColumn("Supplier Name")]
         public string SupplierName { get; set; }
+
+        [ExcelColumn("Barcode")]
         public string Barcode { get; set; }
+
+        [ExcelColumn("Product Name")]
         public string ProductName { get; set; }
+
+        [ExcelColumn("Style Code")]
         public string StyleCode { get; set; }
+
+        [ExcelColumn("Item Desc")]
         public string ItemDesc { get; set; }
+
+        [ExcelColumn("Quantity")]
         public double Quantity { get; set; }
 
-        [DataType(DataType.Currency), Column(TypeName = "money")]
+        [ExcelColumn("MRP")]
+               [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal MRP { get; set; }
+
+        [ExcelColumn("MRP Value")]
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal MRPValue { get; set; }
+
+        [ExcelColumn("Cost")]
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal Cost { get; set; }
+
+        [ExcelColumn("Cost Value")]
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CostValue { get; set; }
+
+        [ExcelColumn("TaxAmt")]
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TaxAmt { get; set; }
 
@@ -47,10 +76,11 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         //[DataType(DataType.Currency), Column(TypeName = "money")]
         //public decimal SGSTAmt { get; set; }
 
-
-        public bool IsDataConsumed { get; set; }// is data imported to relevent table
+        [DefaultValue(false)]
+        public bool IsDataConsumed { get; set; } = false;// is data imported to relevent table
+        
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)] 
-        public DateTime ImportTime { get; set; } = DateTime.Now; // Date of Import
+        public DateTime? ImportTime { get; set; } = DateTime.Now; // Date of Import
 
 
 

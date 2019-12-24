@@ -101,6 +101,9 @@ namespace TAS_AprajiataRetails.Controllers
                 //Need to create table to create Coupn and Royalty point.
                 // Points will go in head for Direct Expenses 
                 // Coupon Table will be colloum for TAS Coupon and Apajita Retails. 
+                //TODO: Need to handle is. 
+                // If payment is cash and cashamount is zero then need to handle this option also 
+                // may be error entry , might be due.
                 throw new Exception(); 
             }
         }

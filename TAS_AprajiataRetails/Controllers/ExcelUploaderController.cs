@@ -19,12 +19,19 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult Index()
         {
             var vm = db.ImportInWards.OrderByDescending(c => c.ImportInWardId);
+            List<string> tyl = new List<string>();
+            tyl.Add("InWard");
+            tyl.Add("Purchase");
+            tyl.Add("SaleItemWise");
+            tyl.Add("SaleRegister");
+            ViewBag.UploadType = new SelectList(tyl);
             return View(vm);
         }
 
         [HttpPost]
-        public JsonResult UploadExcel(ImportInWard inWard, HttpPostedFileBase FileUpload)
+        public JsonResult UploadExcel(string UploadType, HttpPostedFileBase FileUpload)
         {
+            //UploadType = "InWard";
             List<string> data = new List<string>();
             if (FileUpload != null)
             {
@@ -55,29 +62,90 @@ namespace TAS_AprajiataRetails.Controllers
                     string sheetName = "Sheet1";
 
                     var excelFile = new ExcelQueryFactory(pathToExcelFile);
-                    var currentImports = from a in excelFile.Worksheet<ImportInWard>(sheetName) select a;
-                    foreach (var a in currentImports)
+                    if (UploadType == "Purchase")
                     {
-                        try
+                        var currentImports = from a in excelFile.Worksheet<ImportPurchase>(sheetName) select a;
+                        foreach (var a in currentImports)
                         {
-                            // Inward No   Inward Date Invoice No  Invoice Date    Party Name  Total Qty   Total MRP Value Total Cost
-                            ImportInWard inw = new ImportInWard { 
-                                ImportDate=DateTime.Today,
-                                 InvoiceDate=a.InvoiceDate, InvoiceNo=a.InvoiceNo,InWardDate=a.InWardDate, InWardNo=a.InWardNo,
-                                 PartyName=a.PartyName, TotalCost=a.TotalCost, TotalMRPValue=a.TotalMRPValue, TotalQty=a.TotalQty
-                            };
-                            db.ImportInWards.Add(inw);
-                            db.SaveChanges();
+                            try
+                            {
+                                a.ImportTime = DateTime.Now;
+                                db.ImportPurchases.Add(a);
+                                db.SaveChanges();
+                            }
+                            catch (DbEntityValidationException)
+                            {
 
-
-                        }
-                        catch (DbEntityValidationException ex)
-                        {
-
-                            throw;
+                                throw;
+                            }
                         }
                     }
+                    else if (UploadType == "SaleItemWise")
+                    {
+                        var currentImports = from a in excelFile.Worksheet<ImportSaleItemWise>(sheetName) select a;
+                        foreach (var a in currentImports)
+                        {
+                            try
+                            {
+                                a.ImportTime = DateTime.Now;
+                                a.IsDataConsumed = false;
+                                db.ImportSaleItemWises.Add(a);
+                                db.SaveChanges();
+                            }
+                            catch (DbEntityValidationException)
+                            {
+
+                                throw;
+                            }
+                        }
+                    }
+
+
+                    else if (UploadType == "InWard")
+                    {
+                        var currentImports = from a in excelFile.Worksheet<ImportInWard>(sheetName) select a;
+                        foreach (var a in currentImports)
+                        {
+                            try
+                            {
+                                // Inward No   Inward Date Invoice No  Invoice Date    Party Name  Total Qty   Total MRP Value Total Cost
+                                ImportInWard inw = new ImportInWard
+                                {
+                                    ImportDate = DateTime.Today,
+                                    InvoiceDate = a.InvoiceDate,
+                                    InvoiceNo = a.InvoiceNo,
+                                    InWardDate = a.InWardDate,
+                                    InWardNo = a.InWardNo,
+                                    PartyName = a.PartyName,
+                                    TotalCost = a.TotalCost,
+                                    TotalMRPValue = a.TotalMRPValue,
+                                    TotalQty = a.TotalQty
+                                };
+                                db.ImportInWards.Add(inw);
+                                db.SaveChanges();
+
+
+                            }
+                            catch (DbEntityValidationException ex)
+                            {
+
+                                throw;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //alert message for invalid file format  
+                        data.Add("<ul>");
+                        data.Add("<li>Upload Type select is not supported</li>");
+                        data.Add("</ul>");
+                        data.ToArray();
+                        return Json(data, JsonRequestBehavior.AllowGet);
+                    }
+
                     //deleting excel file from folder  
+
+
                     if ((System.IO.File.Exists(pathToExcelFile)))
                     {
                         System.IO.File.Delete(pathToExcelFile);

@@ -244,10 +244,10 @@ namespace TAS_AprajiataRetails.Models.Helpers
             }
             else
             {
-                if (db.CashInHands.Count() > 0)
-                    throw new Exception();
+                //if (db.CashInHands.Count() > 0)
+                //    throw new Exception();
                 //TODO: if yesterday one or day back data not present handel this
-                else
+                //else
                 {
                     today.ClosingBalance = today.OpenningBalance = 0;
                     db.CashInHands.Add(today);
@@ -278,9 +278,10 @@ namespace TAS_AprajiataRetails.Models.Helpers
             }
             else
             {
-                if (db.CashInBanks.Count() > 0)
-                    throw new Exception();
-                else
+                //TODO: need to option to create cashinbank entry for all missing entry and correct
+                //if (db.CashInBanks.Count() > 0)
+                //    throw new Exception();
+                //else
                 {
                     today.ClosingBalance = today.OpenningBalance = 0;
                     db.CashInBanks.Add(today);

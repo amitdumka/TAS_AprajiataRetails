@@ -30,7 +30,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         [Display(Name = "Payment Type")]
         public string PaymentType { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime ImportTime { get; set; } = DateTime.Now; // Date of Import
+        public DateTime? ImportTime { get; set; } = DateTime.Now; // Date of Import
     }
 
 }
