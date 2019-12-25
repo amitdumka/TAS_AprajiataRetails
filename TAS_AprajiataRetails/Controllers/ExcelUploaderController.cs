@@ -18,13 +18,13 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: ExcelUploader
         public ActionResult Index()
         {
-            ViewBag.UploadType = new SelectList (UploadType.Types);
-            var vm = db.ImportInWards.OrderByDescending (c => c.ImportInWardId);
-            return View (vm);
+            //ViewBag.UploadType = new SelectList (UploadType.Types);
+            //var vm = db.ImportInWards.OrderByDescending (c => c.ImportInWardId);
+            return View ();
         }
 
         [HttpPost]
-        public JsonResult UploadExcel(string UploadType, HttpPostedFileBase FileUpload)
+        public JsonResult UploadExcel(/*string UploadType,*/ UploadTypes UploadType, HttpPostedFileBase FileUpload)
         {
             //UploadType = "InWard";
             List<string> data = new List<string> ();
@@ -57,7 +57,18 @@ namespace TAS_AprajiataRetails.Controllers
                     string sheetName = "Sheet1";
 
                     var excelFile = new ExcelQueryFactory (pathToExcelFile);
-                    if ( UploadType == "Purchase" )
+                    //if (OfTypes != null && OfTypes == UploadTypes.SaleItemWise)
+                    //{
+                    //    //alert message for invalid file format  
+                    //    data.Add("<ul>");
+                    //    data.Add("<li>SaleItemWise of UploadType Was Selected</li>");
+                    //    data.Add("</ul>");
+                    //    data.ToArray();
+                    //    return Json(data, JsonRequestBehavior.AllowGet);
+                    //}
+                    //else
+
+                    if ( UploadType == UploadTypes.Purchase )
                     {
                         var currentImports = from a in excelFile.Worksheet<ImportPurchase> (sheetName) select a;
                         foreach ( var a in currentImports )
@@ -75,7 +86,7 @@ namespace TAS_AprajiataRetails.Controllers
                             }
                         }
                     }
-                    else if ( UploadType == "SaleItemWise" )
+                    else if ( UploadType == UploadTypes.SaleItemWise )
                     {
                         var currentImports = from a in excelFile.Worksheet<ImportSaleItemWise> (sheetName) select a;
                         foreach ( var a in currentImports )
@@ -94,7 +105,7 @@ namespace TAS_AprajiataRetails.Controllers
                             }
                         }
                     }
-                    else if ( UploadType == "SaleRegister" )
+                    else if ( UploadType == UploadTypes.SaleRegister)
                     {
                         var currentImports = from a in excelFile.Worksheet<ImportSaleRegister> (sheetName) select a;
                         foreach ( var a in currentImports )
@@ -113,7 +124,7 @@ namespace TAS_AprajiataRetails.Controllers
                             }
                         }
                     }
-                    else if ( UploadType == "InWard" )
+                    else if ( UploadType == UploadTypes.InWard)
                     {
                         var currentImports = from a in excelFile.Worksheet<ImportInWard> (sheetName) select a;
                         foreach ( var a in currentImports )
