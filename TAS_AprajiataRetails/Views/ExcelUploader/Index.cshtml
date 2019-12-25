@@ -17,6 +17,9 @@
                 <div class="col-md-10">
                     @*<a href="/ExcelUploader/DownloadExcel/"><img src="~/excel.ico" width="25" height="25" title="Download Excel format" alt="excel" /></a>*@
                     @Html.DropDownList("UploadType")
+
+                    @Html.DropDownList("UploadTypes",           EnumHelper.GetSelectList( typeof(UploadTypes)),           "Select My Type", new { @class = "form-control" })
+
                 </div>
             </div>
 

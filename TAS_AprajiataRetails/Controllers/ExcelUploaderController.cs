@@ -19,12 +19,12 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult Index()
         {
             var vm = db.ImportInWards.OrderByDescending(c => c.ImportInWardId);
-            List<string> tyl = new List<string>();
-            tyl.Add("InWard");
-            tyl.Add("Purchase");
-            tyl.Add("SaleItemWise");
-            tyl.Add("SaleRegister");
-            ViewBag.UploadType = new SelectList(tyl);
+            //List<string> tyl = new List<string>();
+            //tyl.Add("InWard");
+            //tyl.Add("Purchase");
+            //tyl.Add("SaleItemWise");
+            //tyl.Add("SaleRegister");
+            ViewBag.UploadType = new SelectList(UploadType.Types);
             return View(vm);
         }
 
@@ -76,6 +76,7 @@ namespace TAS_AprajiataRetails.Controllers
                             catch (DbEntityValidationException)
                             {
 
+                                //TODO: need to handel this
                                 throw;
                             }
                         }
@@ -95,11 +96,30 @@ namespace TAS_AprajiataRetails.Controllers
                             catch (DbEntityValidationException)
                             {
 
+                                //TODO: need to handel this
                                 throw;
                             }
                         }
                     }
-
+                    else if (UploadType == "SaleRegister")
+                    {
+                        var currentImports = from a in excelFile.Worksheet<ImportSaleRegister>(sheetName) select a;
+                        foreach (var a in currentImports)
+                        {
+                            try
+                            {
+                                a.ImportTime = DateTime.Now;
+                                a.IsConsumed = false;
+                                db.ImportSaleRegisters.Add(a);
+                                db.SaveChanges();
+                            }
+                            catch (DbEntityValidationException)
+                            {
+                                //TODO: need to handel this
+                                throw;
+                            }
+                        }
+                    }
 
                     else if (UploadType == "InWard")
                     {
@@ -126,8 +146,9 @@ namespace TAS_AprajiataRetails.Controllers
 
 
                             }
-                            catch (DbEntityValidationException ex)
+                            catch (DbEntityValidationException)
                             {
+                                //TODO: need to handel this
 
                                 throw;
                             }

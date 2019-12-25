@@ -1,4 +1,6 @@
-﻿public enum Genders { Male, Female, TransGender }
+﻿using System.Collections.Generic;
+
+public enum Genders { Male, Female, TransGender }
 public enum Units { Meters, Nos, Pcs, Packets }
 public enum TaxType { Vat, GST, SGST, CGST, IGST }
 
@@ -24,3 +26,11 @@ public enum PaymentModes { Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, Deman
 public enum AttUnits { Present, Absent, HalfDay, Sunday };
 public enum SalaryComponet { NetSalary, LastPcs, WOWBill, SundaySalary, Incentive, Others }
 public enum BankPayModes { Cash, Card, Cheques, RTGS, NEFT, IMPS, Wallets, Others }
+
+public enum UploadTypes { Purchase, SaleRegister, SaleItemWise, InWard, Customer }
+
+public class UploadType
+{
+
+    public static List<string> Types = new List<string> { "Purchase", "SaleItemWise", "SaleRegister", "InWard", "Customer" };
+}
