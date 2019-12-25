@@ -109,8 +109,10 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: EndOfDays/Create
         public ActionResult Create()
         {
-            EndOfDay day = new EndOfDay();
-            day.EOD_Date = DateTime.Today;
+            EndOfDay day = new EndOfDay
+            {
+                EOD_Date = DateTime.Today
+            };
             return View(day);
         }
 

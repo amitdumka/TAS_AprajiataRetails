@@ -107,7 +107,7 @@ namespace TAS_AprajiataRetails.Controllers
             if (ModelState.IsValid)
             {
                 //TODO: Rectifed This ProcessAccounts(bankDeposit);
-                bankDeposit.Remarks = bankDeposit.Remarks + " Edit, Match with original data";
+                bankDeposit.Remarks += " Edit, Match with original data";
                 db.Entry(bankDeposit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

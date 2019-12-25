@@ -43,7 +43,7 @@ namespace TAS_AprajiataRetails.Controllers
                 }
                 else
                 {
-                    decimal dueAmt = 0;
+                    decimal dueAmt;
                     if (dailySale.Amount != dailySale.CashAmount)
                     {
                         dueAmt = dailySale.Amount - dailySale.CashAmount;
@@ -215,8 +215,10 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult Create()
         {
             ViewBag.SalesmanId = new SelectList(db.Salesmen, "SalesmanId", "SalesmanName");
-            DailySale dailySale = new DailySale();
-            dailySale.SaleDate = DateTime.Today;
+            DailySale dailySale = new DailySale
+            {
+                SaleDate = DateTime.Today
+            };
             //return View();
             return PartialView(dailySale);
         }

@@ -38,10 +38,12 @@ namespace TAS_AprajiataRetails.Models.Helpers
         {
             using (AprajitaRetailsContext db = new AprajitaRetailsContext())
             {
-                DailySaleReport record = new DailySaleReport();
-                record.DailySale = (decimal?)db.DailySales.Where(C => DbFunctions.TruncateTime(C.SaleDate) == DbFunctions.TruncateTime(DateTime.Today)).Sum(c => (decimal?)c.Amount) ?? 0;
-                record.MonthlySale = (decimal?)db.DailySales.Where(C => DbFunctions.TruncateTime(C.SaleDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Sum(c => (decimal?)c.Amount) ?? 0;
-                record.YearlySale = (decimal?)db.DailySales.Where(C => DbFunctions.TruncateTime(C.SaleDate).Value.Year == DbFunctions.TruncateTime(DateTime.Today).Value.Year).Sum(c => (decimal?)c.Amount) ?? 0;
+                DailySaleReport record = new DailySaleReport
+                {
+                    DailySale = (decimal?) db.DailySales.Where (C => DbFunctions.TruncateTime (C.SaleDate) == DbFunctions.TruncateTime (DateTime.Today)).Sum (c => (decimal?) c.Amount) ?? 0,
+                    MonthlySale = (decimal?) db.DailySales.Where (C => DbFunctions.TruncateTime (C.SaleDate).Value.Month == DbFunctions.TruncateTime (DateTime.Today).Value.Month).Sum (c => (decimal?) c.Amount) ?? 0,
+                    YearlySale = (decimal?) db.DailySales.Where (C => DbFunctions.TruncateTime (C.SaleDate).Value.Year == DbFunctions.TruncateTime (DateTime.Today).Value.Year).Sum (c => (decimal?) c.Amount) ?? 0
+                };
 
                 return record;
             }

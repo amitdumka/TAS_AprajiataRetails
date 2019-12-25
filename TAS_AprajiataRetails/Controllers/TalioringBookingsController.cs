@@ -39,10 +39,12 @@ namespace TAS_AprajiataRetails.Controllers
         // GET: TalioringBookings/Create
         public ActionResult Create()
         {
-            TalioringBooking booking = new TalioringBooking();
-            booking.BookingDate = DateTime.Today;
-            booking.TryDate = DateTime.Today.AddDays(3);
-            booking.DeliveryDate = DateTime.Today.AddDays(6);
+            TalioringBooking booking = new TalioringBooking
+            {
+                BookingDate = DateTime.Today,
+                TryDate = DateTime.Today.AddDays (3),
+                DeliveryDate = DateTime.Today.AddDays (6)
+            };
             return PartialView(booking);
         }
 

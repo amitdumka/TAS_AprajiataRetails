@@ -9,16 +9,16 @@
 <p>
     <h4>Upload Inward Register(Excel)</h4>
     <hr />
-    @using (Html.BeginForm("UploadExcel", "ExcelUploader", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+    @using ( Html.BeginForm ("UploadExcel", "ExcelUploader", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }) )
     {
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="control-label col-md-2 text-success">Upload Type:</div>
                 <div class="col-md-10">
                     @*<a href="/ExcelUploader/DownloadExcel/"><img src="~/excel.ico" width="25" height="25" title="Download Excel format" alt="excel" /></a>*@
-                    @Html.DropDownList("UploadType")
+                    @Html.DropDownList ("UploadType")
 
-                    @Html.DropDownList("UploadTypes",           EnumHelper.GetSelectList( typeof(UploadTypes)),           "Select My Type", new { @class = "form-control" })
+                    @*@Html.DropDownList ("UploadTypes", EnumHelper.GetSelectList (typeof (UploadTypes)), "Select My Type", new { @class = "form-control" })*@
 
                 </div>
             </div>
@@ -29,87 +29,111 @@
                 <div class="control-label col-md-2 text-primary">Excel File:</div>
                 <div class="col-md-4">
                     <input type="file" id="FileUpload" name="FileUpload" class="" />
-                    
+
 
                 </div>
-            @*</div>
-            <div class="form-group">*@
+                @*</div>
+                    <div class="form-group">*@
                 <div @*class="col-md-offset-2"*@>
-                    <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
+                    <input type="button" value="Upload" id="btnSubmit" class="btn btn-primary" />
 
                 </div>
             </div>
         </div>
     }
 </p>
-<table class="table table-bordered table-condensed table-hover" >
+<table class="table table-bordered table-condensed table-hover">
     <tr class="bg-success">
         <th>
-            @Html.DisplayNameFor(model => model.InWardNo)
+            @Html.DisplayNameFor (model => model.InWardNo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InWardDate)
+            @Html.DisplayNameFor (model => model.InWardDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InvoiceNo)
+            @Html.DisplayNameFor (model => model.InvoiceNo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InvoiceDate)
+            @Html.DisplayNameFor (model => model.InvoiceDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PartyName)
+            @Html.DisplayNameFor (model => model.PartyName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalQty)
+            @Html.DisplayNameFor (model => model.TotalQty)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalMRPValue)
+            @Html.DisplayNameFor (model => model.TotalMRPValue)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalCost)
+            @Html.DisplayNameFor (model => model.TotalCost)
         </th>
         <th>
-           @Html.DisplayNameFor(model => model.ImportDate)
+            @Html.DisplayNameFor (model => model.ImportDate)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach ( var item in Model )
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.InWardNo)
+                @Html.DisplayFor (modelItem => item.InWardNo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InWardDate)
+                @Html.DisplayFor (modelItem => item.InWardDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceNo)
+                @Html.DisplayFor (modelItem => item.InvoiceNo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceDate)
+                @Html.DisplayFor (modelItem => item.InvoiceDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PartyName)
+                @Html.DisplayFor (modelItem => item.PartyName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalQty)
+                @Html.DisplayFor (modelItem => item.TotalQty)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalMRPValue)
+                @Html.DisplayFor (modelItem => item.TotalMRPValue)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalCost)
+                @Html.DisplayFor (modelItem => item.TotalCost)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImportDate)
+                @Html.DisplayFor (modelItem => item.ImportDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ImportInWardId }) |
+                @Html.ActionLink ("Edit", "Edit", new { id = item.ImportInWardId }) |
 
-                @Html.ActionLink("Delete", "Delete", new { id = item.ImportInWardId })
+                @Html.ActionLink ("Delete", "Delete", new { id = item.ImportInWardId })
             </td>
         </tr>
     }
 
 </table>
+
+
+<script lang="en" type="text/javascript">
+   
+        $("btnSubmit").ajax({
+            type: "POST",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: '/ExcelUploader/UploadExcel',
+            context: document.body,
+            data: getReportColumnsParams,
+            success: function (result) {
+                alert(result);
+            },
+            error: function (xhr) {
+                //debugger;
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        });
+  
+
+</script>

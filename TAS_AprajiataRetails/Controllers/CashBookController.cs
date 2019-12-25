@@ -12,7 +12,7 @@ namespace TAS_AprajiataRetails.Controllers
 {
     public class CashBookController : Controller
     {
-        private AprajitaRetailsContext db = new AprajitaRetailsContext();
+       // private AprajitaRetailsContext db = new AprajitaRetailsContext();
         // GET: CashBook
         public ActionResult Index(DateTime? EDate)
         {

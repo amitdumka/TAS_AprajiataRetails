@@ -10,28 +10,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
             Database.SetInitializer<VoyagerContext>(new CreateDatabaseIfNotExists<VoyagerContext>());
             // Database.SetInitializer(new MigrateDatabaseToLatestVersion<VoyagerContext, Migrations.Configuration>());
         }
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Customer>()
-        //        .Property(b => b.CreatedDate)
-        //        .HasDefaultValueSql("getdate()");
-
-        //    modelBuilder.Entity<ImportInWard>()
-        //        .Property(b => b.ImportDate)
-        //        .HasDefaultValueSql("getdate()");
-
-        //    modelBuilder.Entity<ImportPurchase>()
-        //        .Property(b => b.InvoiceDate)
-        //        .HasDefaultValueSql("getdate()");
-
-        //    modelBuilder.Entity<ImportSaleRegister>()
-        //        .Property(b => b.ImportTime)
-        //        .HasDefaultValueSql("getdate()");
-
-        //    modelBuilder.Entity<ImportSaleItemWise>()
-        //        .Property(b => b.ImportTime)
-        //        .HasDefaultValueSql("getdate()");
-        //}
+        
 
         public DbSet<Store> Stores { get; set; }
         public DbSet<Customer> Customers { get; set; }
