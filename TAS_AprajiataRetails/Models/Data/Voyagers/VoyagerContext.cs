@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 
 namespace TAS_AprajiataRetails.Models.Data.Voyagers
@@ -10,7 +11,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
             Database.SetInitializer<VoyagerContext>(new CreateDatabaseIfNotExists<VoyagerContext>());
             // Database.SetInitializer(new MigrateDatabaseToLatestVersion<VoyagerContext, Migrations.Configuration>());
         }
-        
+
 
         public DbSet<Store> Stores { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -20,6 +21,17 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public DbSet<ImportPurchase> ImportPurchases { get; set; }
         public DbSet<ImportSaleItemWise> ImportSaleItemWises { get; set; }
         public DbSet<ImportSaleRegister> ImportSaleRegisters { get; set; }
+
+
+
+        public DbSet<ProductItem> ProductItems { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
+
+
     }
 
 
@@ -27,9 +39,32 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
     //Processed Tables
 
-    public class Item
+    public class PurchaseInWard
     {
-        public int ItemId { set; get; }
+        //GRNNo	GRNDate	Invoice No	Invoice Date
+
+        public int ID { get; set; }
+
+        public string GRNNo { get; set; }
+
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime GRNDate { get; set; }
+
+
+        public string InvoiceNo { get; set; }
+
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime InvoiceDate { get; set; }
+
+
+
+    }
+
+    public class ProductItem
+    {
+        public int ProductItemId { set; get; }
         public string Barcode { get; set; }
 
         public int BrandId { get; set; }
@@ -39,17 +74,22 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public string ProductName { get; set; }
         public string ItemDesc { get; set; }
 
-        public string SupplierId { get; set; }
+        public int SupplierId { get; set; }
 
         public ProductCategorys Categorys { get; set; }
 
+        public Category MainCategory { get; set; }
+        public Category ProductCategory { get; set; }
+        public Category ProductType { get; set; }
+
 
         public decimal MRP { get; set; }
-        public decimal Tax { get; set; }    // TODO:Need to Review in final Edition
+        public decimal TaxRate { get; set; }    // TODO:Need to Review in final Edition
         public decimal Cost { get; set; }
 
         public Sizes Size { get; set; }
-        public double Qty { get; set; } //TODO: Check for use
+
+        //public double Qty { get; set; } //TODO: Check for use
 
         //GST Implementation    Version 1.0
         //TODO: GST implementation should use Taxes Class
@@ -59,22 +99,33 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         //public double CGST { get; set; }
         //public double IGST { get; set; }
     }
+
+    public class Supplier
+    {
+        public int SupplierID { get; set; }
+        public string SuppilerName { get; set; }
+        public string Warehouse { get; set; }
+    }
     public class Category
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public ProductCategorys PrimaryCategorys { get; set; }
+        public bool IsPrimaryCategory { get; set; }
+        public bool IsSecondaryCategory { get; set; }
     }
     public class Stock
     {
         public int StockID { set; get; }
-        public int ItemId { set; get; }
+        public int ProductItemId { set; get; }
         public double Quantity { set; get; }
+        public double SaleQty { get; set; }
+        public double PurchaseQty { get; set; }
     }
     public class Brand
     {
         public int BrandId { get; set; }
         public string BrandName { get; set; }
+        public string BCode { get; set; }
     }
     class Salesman
     {
@@ -83,12 +134,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public string SalesmanName { get; set; }
     }
 
-    internal class Supplier
-    {
-        public int SupplierID { get; set; }
-        public string SuppilerName { get; set; }
-        public string Warehouse { get; set; }
-    }
+
 
     internal class SaleReturnInvoice
     {
