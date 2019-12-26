@@ -11,10 +11,99 @@ namespace TAS_AprajiataRetails.Ops.TAS
     /// </summary>
     public class InventoryManger
     {
+        private List<int> GetCategoryId(VoyagerContext db, string pCat, string sCat, string tCat)
+        {
+            List<int> CatIdList = new List<int>();
+            int id = (int?)db.Categories.Where(c => c.CategoryName==pCat && c.IsPrimaryCategory).FirstOrDefault().CategoryId ?? -1;
+            if (id == -1)
+            {
+                Category cat1 = new Category { CategoryName = pCat, IsPrimaryCategory = true };
+                db.Categories.Add(cat1);
+                db.SaveChanges();
+                CatIdList.Add(cat1.CategoryId);
+
+            }
+            else if (id > 0)
+            {
+                CatIdList.Add(id);
+            }
+            else { }
+
+            id = 0;
+            id = (int?)db.Categories.Where(c => c.CategoryName==sCat && c.IsSecondaryCategory).FirstOrDefault().CategoryId ?? -1;
+            if (id == -1)
+            {
+                Category cat2 = new Category { CategoryName = sCat, IsSecondaryCategory = true };
+                db.Categories.Add(cat2);
+                db.SaveChanges();
+                CatIdList.Add(cat2.CategoryId);
+
+            }
+            else if (id > 0)
+            {
+                CatIdList.Add(id);
+            }
+            else { }
+            id = 0;
+
+
+            id = (int?)db.Categories.Where(c => c.CategoryName==tCat && c.IsPrimaryCategory && !c.IsSecondaryCategory).FirstOrDefault().CategoryId ?? -1;
+            if (id == -1)
+            {
+                Category cat3 = new Category { CategoryName = tCat };
+                db.Categories.Add(cat3);
+                db.SaveChanges();
+                CatIdList.Add(cat3.CategoryId);
+
+            }
+            else if (id > 0)
+            {
+                CatIdList.Add(id);
+            }
+            else { }
+            id = 0;
+
+            return CatIdList;
+
+
+
+
+        }
+
         private int GetBrandID(VoyagerContext db, string code)
         {
             int ids = (int?)db.Brands.Where(c => c.BCode == code).FirstOrDefault().BrandId ?? -1;
             return ids;
+        }
+        private int GetBrand(VoyagerContext db, string StyleCode)
+        {
+            if (StyleCode.StartsWith("U"))
+            {
+                //USPAit    
+                return GetBrandID(db, "USPA");
+
+            }
+            else if (StyleCode.StartsWith("AR"))
+            {
+                //Arvind RTW
+                return GetBrandID(db, "RTW");
+            }
+            else if (StyleCode.StartsWith("A"))
+            {
+                //Arrow
+                return GetBrandID(db, "ARW");
+            }
+            else if (StyleCode.StartsWith("FM"))
+            {
+                //FM
+                return GetBrandID(db, "FM");
+            }
+            else
+            {
+                // Arvind Store
+                return GetBrandID(db, "AS");
+            }
+
         }
 
         private int GetSupplierIdOrAdd(VoyagerContext db, string sup)
@@ -39,7 +128,31 @@ namespace TAS_AprajiataRetails.Ops.TAS
 
         // Converting purchase items to stock 
 
-        public void CreateProductItem(ImportPurchase purchase)
+        public int ProcessPurchaseInward(DateTime inDate)
+        {
+            using (VoyagerContext db = new VoyagerContext())
+            {
+                int ctr = 0;
+                var data = db.ImportPurchases.Where(c => c.IsDataConsumed == false && c.GRNDate == inDate);
+                if(data !=null && data.Count() > 0)
+                {
+                    foreach (var item in data)
+                    {
+
+                       int pid= CreateProductItem(item);
+                        if(pid!=-999)
+                            CreateStockItem(item, pid);
+                        ctr++;
+                    }
+                }
+                return ctr;
+
+
+            }//end of using
+        }
+
+
+        public int CreateProductItem(ImportPurchase purchase)
         {
 
             using (VoyagerContext db = new VoyagerContext())
@@ -55,8 +168,12 @@ namespace TAS_AprajiataRetails.Ops.TAS
                         StyleCode = purchase.StyleCode,
                         ProductName = purchase.ProductName,
                         ItemDesc = purchase.ItemDesc,
-                        SupplierId = GetSupplierIdOrAdd(db, purchase.SupplierName)
+                        SupplierId = GetSupplierIdOrAdd(db, purchase.SupplierName),
+
+                        BrandId = GetBrand(db, purchase.StyleCode)
+
                     };
+
                     //spliting ProductName
                     string[] PN = purchase.ProductName.Split('/');
 
@@ -65,45 +182,20 @@ namespace TAS_AprajiataRetails.Ops.TAS
                     else if (PN[0] == "Suiting" || PN[0] == "Shirting") item.Categorys = ProductCategorys.Fabric;
                     else item.Categorys = ProductCategorys.Others; //TODO: For time being
 
-                    Category cat1 = new Category { CategoryName = PN[0], IsPrimaryCategory = true };
-                    Category cat2 = new Category { CategoryName = PN[1], IsSecondaryCategory = true };
-                    Category cat3 = new Category { CategoryName = PN[2] };
-                    // Add or Update 
+                    List<int> catIds = GetCategoryId(db, PN[0], PN[1], PN[2]);
+                    item.MainCategory = catIds[0];
+                    item.ProductCategory = catIds[1];
+                    item.ProductType = catIds[2];
 
+                    db.ProductItems.Add(item);
+                    db.SaveChanges();
+                    return item.ProductItemId;
 
-                    //Adding BrandName, 
-                    if (purchase.StyleCode.StartsWith("U"))
-                    {
-                        //USPAit    
-                        item.BrandId = GetBrandID(db, "USPA");
-
-                    }
-                    else if (purchase.StyleCode.StartsWith("AR"))
-                    {
-                        //Arvind RTW
-                        item.BrandId = GetBrandID(db, "RTW");
-                    }
-                    else if (purchase.StyleCode.StartsWith("A"))
-                    {
-                        //Arrow
-                        item.BrandId = GetBrandID(db, "ARW");
-                    }
-                    else if (purchase.StyleCode.StartsWith("FM"))
-                    {
-                        //FM
-                        item.BrandId = GetBrandID(db, "FM");
-                    }
-                    else
-                    {
-                        // Arvind Store
-                        item.BrandId = GetBrandID(db, "AS");
-                    }
-
-                    //Adding Suppliers
 
                 }
                 else
                 {
+                    return -999;//TODO: Handel this options
                     //Allready added.
                 }
 
@@ -144,7 +236,7 @@ namespace TAS_AprajiataRetails.Ops.TAS
         {
             using (VoyagerContext db = new VoyagerContext())
             {
-                
+
             }
         }
         #endregion

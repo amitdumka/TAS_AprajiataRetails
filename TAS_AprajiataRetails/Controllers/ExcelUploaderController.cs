@@ -8,12 +8,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TAS_AprajiataRetails.Models.Data.Voyagers;
+using TAS_AprajiataRetails.Ops.TAS;
 
 namespace TAS_AprajiataRetails.Controllers
 {
     public class ExcelUploaderController : Controller
     {
         private VoyagerContext db = new VoyagerContext ();
+
+
+        public ActionResult ProcessPurchase(DateTime dDate)
+        {
+            InventoryManger iManage = new InventoryManger();
+            int a=iManage.ProcessPurchaseInward(dDate);
+
+            if (a > 0)
+                return View();
+            else return View();
+        }
+        public ActionResult PurchaseList()
+        {
+            var md = db.ImportPurchases.Where(c => c.IsDataConsumed == false).OrderByDescending(c => c.GRNDate);
+            return View(md);
+        }
+
 
         // GET: ExcelUploader
         public ActionResult Index()

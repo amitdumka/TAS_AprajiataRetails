@@ -776,6 +776,7 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\ExcelUploader\Index.cshtml" />
     <Content Include="Views\ExcelUploader\TestPage.cshtml" />
+    <Content Include="Views\ExcelUploader\PurchaseList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -78,9 +78,9 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
         public ProductCategorys Categorys { get; set; }
 
-        public Category MainCategory { get; set; }
-        public Category ProductCategory { get; set; }
-        public Category ProductType { get; set; }
+        public int MainCategory { get; set; }
+        public int ProductCategory { get; set; }
+        public int ProductType { get; set; }
 
 
         public decimal MRP { get; set; }
