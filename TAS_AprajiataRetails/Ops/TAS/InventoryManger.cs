@@ -11,10 +11,69 @@ namespace TAS_AprajiataRetails.Ops.TAS
     /// </summary>
     public class InventoryManger
     {
+        private List<Category> GetCategory(VoyagerContext db, string pCat, string sCat, string tCat)
+        {
+            List<Category> CatIdList = new List<Category>();
+            Category Cid = db.Categories.Where(c => c.CategoryName == pCat && c.IsPrimaryCategory).FirstOrDefault();
+            if (Cid == null)
+            {
+                Category cat1 = new Category { CategoryName = pCat, IsPrimaryCategory = true };
+                db.Categories.Add(cat1);
+                db.SaveChanges();
+                CatIdList.Add(cat1);
+
+            }
+            else if (Cid!=null)
+            {
+                CatIdList.Add(Cid);
+            }
+            else { }
+
+            //id = 0;
+            Category Cid2 = db.Categories.Where(c => c.CategoryName == sCat && c.IsSecondaryCategory).FirstOrDefault();
+            if (Cid2 == null)
+            {
+                Category cat2 = new Category { CategoryName = sCat, IsSecondaryCategory = true };
+                db.Categories.Add(cat2);
+                db.SaveChanges();
+                CatIdList.Add(cat2);
+
+            }
+            else if (Cid2 != null)
+            {
+                CatIdList.Add(Cid2);
+            }
+            else { }
+
+
+
+            Category Cid3 = db.Categories.Where(c => c.CategoryName == tCat && c.IsPrimaryCategory && !c.IsSecondaryCategory).FirstOrDefault();
+            if (Cid3 == null)
+            {
+                Category cat3 = new Category { CategoryName = tCat };
+                db.Categories.Add(cat3);
+                db.SaveChanges();
+                CatIdList.Add(cat3);
+
+            }
+            else if (Cid3 != null)
+            {
+                CatIdList.Add(Cid3);
+            }
+            else { }
+            
+
+            return CatIdList;
+
+
+
+
+        }
+
         private List<int> GetCategoryId(VoyagerContext db, string pCat, string sCat, string tCat)
         {
             List<int> CatIdList = new List<int>();
-            int id = (int?)db.Categories.Where(c => c.CategoryName==pCat && c.IsPrimaryCategory).FirstOrDefault().CategoryId ?? -1;
+            int id = (int?)db.Categories.Where(c => c.CategoryName == pCat && c.IsPrimaryCategory).FirstOrDefault().CategoryId ?? -1;
             if (id == -1)
             {
                 Category cat1 = new Category { CategoryName = pCat, IsPrimaryCategory = true };
@@ -30,7 +89,7 @@ namespace TAS_AprajiataRetails.Ops.TAS
             else { }
 
             id = 0;
-            id = (int?)db.Categories.Where(c => c.CategoryName==sCat && c.IsSecondaryCategory).FirstOrDefault().CategoryId ?? -1;
+            id = (int?)db.Categories.Where(c => c.CategoryName == sCat && c.IsSecondaryCategory).FirstOrDefault().CategoryId ?? -1;
             if (id == -1)
             {
                 Category cat2 = new Category { CategoryName = sCat, IsSecondaryCategory = true };
@@ -47,7 +106,7 @@ namespace TAS_AprajiataRetails.Ops.TAS
             id = 0;
 
 
-            id = (int?)db.Categories.Where(c => c.CategoryName==tCat && c.IsPrimaryCategory && !c.IsSecondaryCategory).FirstOrDefault().CategoryId ?? -1;
+            id = (int?)db.Categories.Where(c => c.CategoryName == tCat && c.IsPrimaryCategory && !c.IsSecondaryCategory).FirstOrDefault().CategoryId ?? -1;
             if (id == -1)
             {
                 Category cat3 = new Category { CategoryName = tCat };
@@ -134,13 +193,13 @@ namespace TAS_AprajiataRetails.Ops.TAS
             {
                 int ctr = 0;
                 var data = db.ImportPurchases.Where(c => c.IsDataConsumed == false && c.GRNDate == inDate);
-                if(data !=null && data.Count() > 0)
+                if (data != null && data.Count() > 0)
                 {
                     foreach (var item in data)
                     {
 
-                       int pid= CreateProductItem(item);
-                        if(pid!=-999)
+                        int pid = CreateProductItem(item);
+                        if (pid != -999)
                             CreateStockItem(item, pid);
                         ctr++;
                     }
@@ -168,7 +227,7 @@ namespace TAS_AprajiataRetails.Ops.TAS
                         StyleCode = purchase.StyleCode,
                         ProductName = purchase.ProductName,
                         ItemDesc = purchase.ItemDesc,
-                        SupplierId = GetSupplierIdOrAdd(db, purchase.SupplierName),
+                        //SupplierId = GetSupplierIdOrAdd(db, purchase.SupplierName),
 
                         BrandId = GetBrand(db, purchase.StyleCode)
 
@@ -182,7 +241,7 @@ namespace TAS_AprajiataRetails.Ops.TAS
                     else if (PN[0] == "Suiting" || PN[0] == "Shirting") item.Categorys = ProductCategorys.Fabric;
                     else item.Categorys = ProductCategorys.Others; //TODO: For time being
 
-                    List<int> catIds = GetCategoryId(db, PN[0], PN[1], PN[2]);
+                    List<Category> catIds = GetCategory(db, PN[0], PN[1], PN[2]);
                     item.MainCategory = catIds[0];
                     item.ProductCategory = catIds[1];
                     item.ProductType = catIds[2];

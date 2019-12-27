@@ -26,74 +26,31 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
         public DbSet<ProductItem> ProductItems { get; set; }
         public DbSet<Brand> Brands { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
+
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Stock> Stocks { get; set; }
 
 
+        //Purchase Entry System
+        public DbSet<ProductPurchase> ProductPurchases { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<PurchaseItem> PurchaseItems { get; set; }
+        public DbSet<PurchaseTaxType> PurchaseTaxTypes { get; set; }
+
+
+        // Sale Entry System
+
+        public DbSet<Salesman> Salesmen { get; set; }
+        public DbSet<SaleInvoice> SaleInvoices { get; set; }
+        public DbSet<SaleItem> SaleItems { get; set; }
     }
 
 
 
 
     //Processed Tables
-
-    public class PurchaseInWard
-    {
-        //GRNNo	GRNDate	Invoice No	Invoice Date
-
-        public int ID { get; set; }
-
-        public string GRNNo { get; set; }
-
-
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime GRNDate { get; set; }
-
-
-        public string InvoiceNo { get; set; }
-
-
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime InvoiceDate { get; set; }
-
-
-
-    }
-
     
-
-    
-    public class Category
-    {
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public bool IsPrimaryCategory { get; set; }
-        public bool IsSecondaryCategory { get; set; }
-    }
-    public class Stock
-    {
-        public int StockID { set; get; }
-        public int ProductItemId { set; get; }
-        public double Quantity { set; get; }
-        public double SaleQty { get; set; }
-        public double PurchaseQty { get; set; }
-    }
-    public class Brand
-    {
-        public int BrandId { get; set; }
-        public string BrandName { get; set; }
-        public string BCode { get; set; }
-    }
-    class Salesman
-    {
-        public int SalesmanId { set; get; }
-        public string SMCode { get; set; }
-        public string SalesmanName { get; set; }
-    }
-
-
 
     internal class SaleReturnInvoice
     {
@@ -112,19 +69,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public int SalesmanId { get; set; }
     }
 
-    internal class SaleInvoice
-    {
-        public int SaleInvoiceID { get; set; }
-        public int CustomerId { get; set; }
-        public DateTime OnDate { get; set; }
-        public string InvoiceNo { get; set; }
-        public int TotalItems { get; set; }
-        public double TotalQty { get; set; }
-        public double TotalBillAmount { get; set; }
-        public double TotalDiscountAmount { get; set; }
-        public double RoundOffAmount { get; set; }
-        public double TotalTaxAmount { get; set; }
-    }
+    
 
     internal class PaymentDetails
     {
@@ -158,19 +103,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public int LastDigit { get; set; }
     }
 
-    public class SaleItem
-    {
-        public int SaleItemID { get; set; }
-        public string InvoiceNo { get; set; }
-        public string BarCode { get; set; }
-        public double Qty { get; set; }
-        public double MRP { get; set; }
-        public double BasicAmount { get; set; }
-        public double Discount { get; set; }
-        public double Tax { get; set; }
-        public double BillAmount { get; set; }
-        public int SalesmanID { get; set; }
-    }
+    
 
 }
 

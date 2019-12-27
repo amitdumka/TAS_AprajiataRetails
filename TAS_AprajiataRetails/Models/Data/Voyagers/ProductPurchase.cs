@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace TAS_AprajiataRetails.Models.Data.Voyagers
 {
+    class Test
+    {
+        public void TestMe()
+        {
+
+
+        }
+    }
     public class Supplier
     {
         public int SupplierID { get; set; }
@@ -16,48 +25,66 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
     public class ProductPurchase
     {
-        public int ProductPurchaseID { get; set; }
+        public int ProductPurchaseId { get; set; }
+
+        public string InWardNo { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime InWardDate { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime PurchaseDate { get; set; }
         public string InvoiceNo { get; set; }
+
         public decimal TotalQty { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalBasicAmount { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal ShippingCost { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalTax { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalAmount { get; set; }
+
         public string Remarks { get; set; }
+
         public int SupplierID { get; set; }
         public virtual Supplier Supplier { get; set; }
+
         public bool IsPaid { get; set; }
-        public virtual PurchaseInwardsRegister PurchaseInwardsRegister { get; set; }
+
+        public ICollection<PurchaseItem> PurchaseItems { get; set; }
 
     }
 
-    public class PurchaseInwardsRegister
-    {
-        public int PurchaseInwardsRegisterId { get; set; }
-        public string GRNNo { get; set; }
-        public DateTime GRNDate { get; set; }
-        public string InvoiceNo { get; set; }
-        public DateTime InvoiceDate { get; set; }
-        public int ProductPurchaseId { get; set; }
-        public virtual ProductPurchase ProductPurchase { get; set; }
-
-    }
     public class PurchaseItem
     {
         public int PurchaseItemId { get; set; }
+
         public int ProductPurchaseId { get; set; }
-        [ForeignKey("ProductItem")]
-        public string Barcode { get; set; }
+        
+        //[ForeignKey("ProductItem")]
+        public string Barcode { get; set; }// TODO: if not working then link with productitemid
+        
         public decimal Qty { get; set; }
+        public Units Unit { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal Cost { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TaxAmout { get; set; }
+
         public int PurchaseTaxTypeId { get; set; }
         public virtual PurchaseTaxType PurchaseTaxType { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CostValue { get; set; }
 
-        public virtual ProductItem ProductItem { get; set; }
 
+        //Navigation Properties
+        public virtual ProductItem ProductItem { get; set; }
         public virtual ProductPurchase ProductPurchase { get; set; }
     }
     public class PurchaseTaxType
@@ -65,7 +92,12 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public int PurchaseTaxTypeId { get; set; }
         public string TaxName { get; set; }
         public TaxType TaxType { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CompositeRate { get; set; }
+
+        //Navigation
+        public ICollection<PurchaseItem> PurchaseItems { get; set; }
     }
 
     public class ProductItem
@@ -82,9 +114,9 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
         public ProductCategorys Categorys { get; set; }
 
-        public int MainCategory { get; set; }
-        public int ProductCategory { get; set; }
-        public int ProductType { get; set; }
+        public Category MainCategory { get; set; }
+        public Category ProductCategory { get; set; }
+        public Category ProductType { get; set; }
 
 
         public decimal MRP { get; set; }
@@ -92,11 +124,37 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public decimal Cost { get; set; }
 
         public Sizes Size { get; set; }
-
-        public virtual ICollection<ProductPurchase> ProductPurchases { get; set; }
+        public Units Units { get; set; }
+       
         public virtual ICollection<PurchaseItem> PurchaseItems { get; set; }
 
-        
+
+    }
+
+    public class Category
+    {
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public bool IsPrimaryCategory { get; set; }
+        public bool IsSecondaryCategory { get; set; }
+    }
+    public class Brand
+    {
+        public int BrandId { get; set; }
+        public string BrandName { get; set; }
+        public string BCode { get; set; }
+    }
+
+    public class Stock
+    {
+        public int StockID { set; get; }
+        public int ProductItemId { set; get; }
+        public double Quantity { set; get; }
+        public double SaleQty { get; set; }
+        public double PurchaseQty { get; set; }
+        public Units Units { get; set; }
+
+        public virtual ProductItem ProductItem { get; set; }
     }
 
 }

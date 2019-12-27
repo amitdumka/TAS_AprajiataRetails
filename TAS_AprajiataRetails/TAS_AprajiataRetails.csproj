@@ -361,14 +361,16 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Data\Accounts\AccountsContext.cs" />
     <Compile Include="Models\Data\AprajitaRetailsContext.cs" />
+    <Compile Include="Models\Data\HRM.cs" />
     <Compile Include="Models\Data\TableList.cs" />
-    <Compile Include="Models\Data\TASDB.cs" />
+    <Compile Include="Models\Data\Tailoring.cs" />
     <Compile Include="Models\Data\Voyagers\Customer.cs" />
     <Compile Include="Models\Data\Voyagers\ImportInWard.cs" />
     <Compile Include="Models\Data\Voyagers\ImportPurchase.cs" />
     <Compile Include="Models\Data\Voyagers\ImportSaleItemWise.cs" />
     <Compile Include="Models\Data\Voyagers\ImportSaleRegister.cs" />
     <Compile Include="Models\Data\Voyagers\ProductPurchase.cs" />
+    <Compile Include="Models\Data\Voyagers\Sales.cs" />
     <Compile Include="Models\Data\Voyagers\Store.cs" />
     <Compile Include="Models\Data\Voyagers\VoyagerContext.cs" />
     <Compile Include="Models\Data\Voy\VoyDB.cs" />

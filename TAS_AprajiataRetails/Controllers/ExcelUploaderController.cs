@@ -22,16 +22,16 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult ProcessPurchase(int? id, DateTime dDate)
         {
 
-            InventoryManger iManage = new InventoryManger();
-            int a = iManage.ProcessPurchaseInward(dDate);
-
-            if (a > 0)
-            {
-                var dm = db.ProductItems;
-                ViewBag.MessageHead = "No of Product Item added and stock is created are " + a;
-                return View(dm);
-            }
-            else
+            //  InventoryManger iManage = new InventoryManger();
+            //int a = iManage.ProcessPurchaseInward(dDate);
+            int a = 0;
+            //if (a > 0)
+            //{
+            //    var dm = db.ProductItems;
+            //    ViewBag.MessageHead = "No of Product Item added and stock is created are " + a;
+            //    return View(dm);
+            //}
+            //else
             {
                 ViewBag.MessageHead = "No Product items added. Some error might has been occured. a=" + a;
                 return View();
