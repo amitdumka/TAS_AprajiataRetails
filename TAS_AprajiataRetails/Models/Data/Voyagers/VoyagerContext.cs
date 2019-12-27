@@ -62,50 +62,9 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
     }
 
-    public class ProductItem
-    {
-        public int ProductItemId { set; get; }
-        public string Barcode { get; set; }
+    
 
-        public int BrandId { get; set; }
-        public virtual Brand BrandName { get; set; }
-
-        public string StyleCode { get; set; }
-        public string ProductName { get; set; }
-        public string ItemDesc { get; set; }
-
-        public int SupplierId { get; set; }
-
-        public ProductCategorys Categorys { get; set; }
-
-        public int MainCategory { get; set; }
-        public int ProductCategory { get; set; }
-        public int ProductType { get; set; }
-
-
-        public decimal MRP { get; set; }
-        public decimal TaxRate { get; set; }    // TODO:Need to Review in final Edition
-        public decimal Cost { get; set; }
-
-        public Sizes Size { get; set; }
-
-        //public double Qty { get; set; } //TODO: Check for use
-
-        //GST Implementation    Version 1.0
-        //TODO: GST implementation should use Taxes Class
-        //public double HSNCode { get; set; }
-        //public int PreGST { get; set; }
-        //public double SGST { get; set; }
-        //public double CGST { get; set; }
-        //public double IGST { get; set; }
-    }
-
-    public class Supplier
-    {
-        public int SupplierID { get; set; }
-        public string SuppilerName { get; set; }
-        public string Warehouse { get; set; }
-    }
+    
     public class Category
     {
         public int CategoryId { get; set; }

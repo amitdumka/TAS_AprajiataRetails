@@ -368,6 +368,7 @@
     <Compile Include="Models\Data\Voyagers\ImportPurchase.cs" />
     <Compile Include="Models\Data\Voyagers\ImportSaleItemWise.cs" />
     <Compile Include="Models\Data\Voyagers\ImportSaleRegister.cs" />
+    <Compile Include="Models\Data\Voyagers\ProductPurchase.cs" />
     <Compile Include="Models\Data\Voyagers\Store.cs" />
     <Compile Include="Models\Data\Voyagers\VoyagerContext.cs" />
     <Compile Include="Models\Data\Voy\VoyDB.cs" />
@@ -777,6 +778,7 @@
     <Content Include="Views\ExcelUploader\Index.cshtml" />
     <Content Include="Views\ExcelUploader\TestPage.cshtml" />
     <Content Include="Views\ExcelUploader\PurchaseList.cshtml" />
+    <Content Include="Views\ExcelUploader\ProcessPurchase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

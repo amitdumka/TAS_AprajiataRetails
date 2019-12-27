@@ -14,19 +14,30 @@ namespace TAS_AprajiataRetails.Controllers
 {
     public class ExcelUploaderController : Controller
     {
-        private VoyagerContext db = new VoyagerContext ();
+        private VoyagerContext db = new VoyagerContext();
 
 
-        public ActionResult ProcessPurchase(DateTime dDate)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProcessPurchase(int? id, DateTime dDate)
         {
+
             InventoryManger iManage = new InventoryManger();
-            int a=iManage.ProcessPurchaseInward(dDate);
+            int a = iManage.ProcessPurchaseInward(dDate);
 
             if (a > 0)
+            {
+                var dm = db.ProductItems;
+                ViewBag.MessageHead = "No of Product Item added and stock is created are " + a;
+                return View(dm);
+            }
+            else
+            {
+                ViewBag.MessageHead = "No Product items added. Some error might has been occured. a=" + a;
                 return View();
-            else return View();
+            }
         }
-        public ActionResult PurchaseList()
+        public ActionResult PurchaseList(int? id)
         {
             var md = db.ImportPurchases.Where(c => c.IsDataConsumed == false).OrderByDescending(c => c.GRNDate);
             return View(md);
@@ -38,43 +49,43 @@ namespace TAS_AprajiataRetails.Controllers
         {
             //ViewBag.UploadType = new SelectList (UploadType.Types);
             //var vm = db.ImportInWards.OrderByDescending (c => c.ImportInWardId);
-            return View ();
+            return View();
         }
 
         [HttpPost]
         public JsonResult UploadExcel(/*string UploadType,*/ UploadTypes UploadType, HttpPostedFileBase FileUpload)
         {
             //UploadType = "InWard";
-            List<string> data = new List<string> ();
-            if ( FileUpload != null )
+            List<string> data = new List<string>();
+            if (FileUpload != null)
             {
                 // tdata.ExecuteCommand("truncate table OtherCompanyAssets");  
-                if ( FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" )
+                if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     string filename = FileUpload.FileName;
-                    string targetpath = Server.MapPath ("~/Doc/");
-                    FileUpload.SaveAs (targetpath + filename);
+                    string targetpath = Server.MapPath("~/Doc/");
+                    FileUpload.SaveAs(targetpath + filename);
                     string pathToExcelFile = targetpath + filename;
                     var connectionString = "";
-                    if ( filename.EndsWith (".xls") )
+                    if (filename.EndsWith(".xls"))
                     {
-                        connectionString = string.Format ("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", pathToExcelFile);
+                        connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", pathToExcelFile);
                     }
-                    else if ( filename.EndsWith (".xlsx") )
+                    else if (filename.EndsWith(".xlsx"))
                     {
-                        connectionString = string.Format ("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\";", pathToExcelFile);
+                        connectionString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\";", pathToExcelFile);
                     }
 
-                    var adapter = new OleDbDataAdapter ("SELECT * FROM [Sheet1$]", connectionString);
-                    var ds = new DataSet ();
+                    var adapter = new OleDbDataAdapter("SELECT * FROM [Sheet1$]", connectionString);
+                    var ds = new DataSet();
 
-                    adapter.Fill (ds, "ExcelTable");
+                    adapter.Fill(ds, "ExcelTable");
 
-                    DataTable dtable = ds.Tables ["ExcelTable"];
+                    DataTable dtable = ds.Tables["ExcelTable"];
 
                     string sheetName = "Sheet1";
 
-                    var excelFile = new ExcelQueryFactory (pathToExcelFile);
+                    var excelFile = new ExcelQueryFactory(pathToExcelFile);
                     //if (OfTypes != null && OfTypes == UploadTypes.SaleItemWise)
                     //{
                     //    //alert message for invalid file format  
@@ -86,66 +97,66 @@ namespace TAS_AprajiataRetails.Controllers
                     //}
                     //else
 
-                    if ( UploadType == UploadTypes.Purchase )
+                    if (UploadType == UploadTypes.Purchase)
                     {
-                        var currentImports = from a in excelFile.Worksheet<ImportPurchase> (sheetName) select a;
-                        foreach ( var a in currentImports )
+                        var currentImports = from a in excelFile.Worksheet<ImportPurchase>(sheetName) select a;
+                        foreach (var a in currentImports)
                         {
                             try
                             {
                                 a.ImportTime = DateTime.Now;
-                                db.ImportPurchases.Add (a);
-                                db.SaveChanges ();
+                                db.ImportPurchases.Add(a);
+                                db.SaveChanges();
                             }
-                            catch ( DbEntityValidationException )
+                            catch (DbEntityValidationException)
                             {
                                 //TODO: need to handel this
                                 throw;
                             }
                         }
                     }
-                    else if ( UploadType == UploadTypes.SaleItemWise )
+                    else if (UploadType == UploadTypes.SaleItemWise)
                     {
-                        var currentImports = from a in excelFile.Worksheet<ImportSaleItemWise> (sheetName) select a;
-                        foreach ( var a in currentImports )
+                        var currentImports = from a in excelFile.Worksheet<ImportSaleItemWise>(sheetName) select a;
+                        foreach (var a in currentImports)
                         {
                             try
                             {
                                 a.ImportTime = DateTime.Now;
                                 a.IsDataConsumed = false;
-                                db.ImportSaleItemWises.Add (a);
-                                db.SaveChanges ();
+                                db.ImportSaleItemWises.Add(a);
+                                db.SaveChanges();
                             }
-                            catch ( DbEntityValidationException )
+                            catch (DbEntityValidationException)
                             {
                                 //TODO: need to handel this
                                 throw;
                             }
                         }
                     }
-                    else if ( UploadType == UploadTypes.SaleRegister)
+                    else if (UploadType == UploadTypes.SaleRegister)
                     {
-                        var currentImports = from a in excelFile.Worksheet<ImportSaleRegister> (sheetName) select a;
-                        foreach ( var a in currentImports )
+                        var currentImports = from a in excelFile.Worksheet<ImportSaleRegister>(sheetName) select a;
+                        foreach (var a in currentImports)
                         {
                             try
                             {
                                 a.ImportTime = DateTime.Now;
                                 a.IsConsumed = false;
-                                db.ImportSaleRegisters.Add (a);
-                                db.SaveChanges ();
+                                db.ImportSaleRegisters.Add(a);
+                                db.SaveChanges();
                             }
-                            catch ( DbEntityValidationException )
+                            catch (DbEntityValidationException)
                             {
                                 //TODO: need to handel this
                                 throw;
                             }
                         }
                     }
-                    else if ( UploadType == UploadTypes.InWard)
+                    else if (UploadType == UploadTypes.InWard)
                     {
-                        var currentImports = from a in excelFile.Worksheet<ImportInWard> (sheetName) select a;
-                        foreach ( var a in currentImports )
+                        var currentImports = from a in excelFile.Worksheet<ImportInWard>(sheetName) select a;
+                        foreach (var a in currentImports)
                         {
                             try
                             {
@@ -162,12 +173,12 @@ namespace TAS_AprajiataRetails.Controllers
                                     TotalMRPValue = a.TotalMRPValue,
                                     TotalQty = a.TotalQty
                                 };
-                                db.ImportInWards.Add (inw);
-                                db.SaveChanges ();
+                                db.ImportInWards.Add(inw);
+                                db.SaveChanges();
 
 
                             }
-                            catch ( DbEntityValidationException )
+                            catch (DbEntityValidationException)
                             {
                                 //TODO: need to handel this
 
@@ -178,21 +189,21 @@ namespace TAS_AprajiataRetails.Controllers
                     else
                     {
                         //alert message for invalid file format  
-                        data.Add ("<ul>");
-                        data.Add ("<li>Upload Type select is not supported</li>");
-                        data.Add ("</ul>");
-                        data.ToArray ();
-                        return Json (data, JsonRequestBehavior.AllowGet);
+                        data.Add("<ul>");
+                        data.Add("<li>Upload Type select is not supported</li>");
+                        data.Add("</ul>");
+                        data.ToArray();
+                        return Json(data, JsonRequestBehavior.AllowGet);
                     }
 
                     //deleting excel file from folder  
 
 
-                    if ( ( System.IO.File.Exists (pathToExcelFile) ) )
+                    if ((System.IO.File.Exists(pathToExcelFile)))
                     {
-                        System.IO.File.Delete (pathToExcelFile);
+                        System.IO.File.Delete(pathToExcelFile);
                     }
-                    return Json ("success", JsonRequestBehavior.AllowGet);
+                    return Json("success", JsonRequestBehavior.AllowGet);
 
 
 
@@ -200,22 +211,22 @@ namespace TAS_AprajiataRetails.Controllers
                 else
                 {
                     //alert message for invalid file format  
-                    data.Add ("<ul>");
-                    data.Add ("<li>Only Excel file format is allowed</li>");
-                    data.Add ("</ul>");
-                    data.ToArray ();
-                    return Json (data, JsonRequestBehavior.AllowGet);
+                    data.Add("<ul>");
+                    data.Add("<li>Only Excel file format is allowed</li>");
+                    data.Add("</ul>");
+                    data.ToArray();
+                    return Json(data, JsonRequestBehavior.AllowGet);
                 }
 
             }//end of if fileupload
             else
             {
-                data.Add ("<ul>");
-                if ( FileUpload == null )
-                    data.Add ("<li>Please choose Excel file</li>");
-                data.Add ("</ul>");
-                data.ToArray ();
-                return Json (data, JsonRequestBehavior.AllowGet);
+                data.Add("<ul>");
+                if (FileUpload == null)
+                    data.Add("<li>Please choose Excel file</li>");
+                data.Add("</ul>");
+                data.ToArray();
+                return Json(data, JsonRequestBehavior.AllowGet);
             }
         }//end of function
     }//end of class

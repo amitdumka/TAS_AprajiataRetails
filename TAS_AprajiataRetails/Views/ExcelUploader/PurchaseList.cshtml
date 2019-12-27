@@ -74,7 +74,7 @@
             @Html.DisplayFor(modelItem => item.CostValue)
         </td>
         <td>
-            @Html.ActionLink("Process", "ProcessPurchase", new { id=item.ImportPurchaseId }) |
+            @Html.ActionLink("Process", "ProcessPurchase", new { id=item.ImportPurchaseId, dDate=item.GRNDate }) |
             @Html.ActionLink("Details", "Details", new { id=item.ImportPurchaseId }) |
             @*@Html.ActionLink("Delete", "Delete", new { id=item.ImportPurchaseId })*@
         </td>
