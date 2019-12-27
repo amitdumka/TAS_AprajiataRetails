@@ -11,9 +11,9 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public int SupplierID { get; set; }
         public string SuppilerName { get; set; }
         public string Warehouse { get; set; }
-
         public ICollection<ProductPurchase> ProductPurchases { get; set; }
     }
+
     public class ProductPurchase
     {
         public int ProductPurchaseID { get; set; }
@@ -25,11 +25,11 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public decimal TotalTax { get; set; }
         public decimal TotalAmount { get; set; }
         public string Remarks { get; set; }
-        // TODO: Add Vendor/Supplier Info
         public int SupplierID { get; set; }
-        public virtual Supplier Supplier{get;set;}
+        public virtual Supplier Supplier { get; set; }
         public bool IsPaid { get; set; }
         public virtual PurchaseInwardsRegister PurchaseInwardsRegister { get; set; }
+
     }
 
     public class PurchaseInwardsRegister
@@ -57,7 +57,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public decimal CostValue { get; set; }
 
         public virtual ProductItem ProductItem { get; set; }
-        
+
         public virtual ProductPurchase ProductPurchase { get; set; }
     }
     public class PurchaseTaxType
@@ -93,15 +93,10 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
         public Sizes Size { get; set; }
 
-        //public double Qty { get; set; } //TODO: Check for use
+        public virtual ICollection<ProductPurchase> ProductPurchases { get; set; }
+        public virtual ICollection<PurchaseItem> PurchaseItems { get; set; }
 
-        //GST Implementation    Version 1.0
-        //TODO: GST implementation should use Taxes Class
-        //public double HSNCode { get; set; }
-        //public int PreGST { get; set; }
-        //public double SGST { get; set; }
-        //public double CGST { get; set; }
-        //public double IGST { get; set; }
+        
     }
 
 }
