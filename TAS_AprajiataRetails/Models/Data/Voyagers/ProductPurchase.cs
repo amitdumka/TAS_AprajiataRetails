@@ -7,14 +7,6 @@ using System.Web;
 
 namespace TAS_AprajiataRetails.Models.Data.Voyagers
 {
-    class Test
-    {
-        public void TestMe()
-        {
-
-
-        }
-    }
     public class Supplier
     {
         public int SupplierID { get; set; }
@@ -63,10 +55,10 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public int PurchaseItemId { get; set; }
 
         public int ProductPurchaseId { get; set; }
-        
+
         //[ForeignKey("ProductItem")]
         public string Barcode { get; set; }// TODO: if not working then link with productitemid
-        
+
         public decimal Qty { get; set; }
         public Units Unit { get; set; }
 
@@ -125,7 +117,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
 
         public Sizes Size { get; set; }
         public Units Units { get; set; }
-       
+
         public virtual ICollection<PurchaseItem> PurchaseItems { get; set; }
 
 

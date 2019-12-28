@@ -44,6 +44,10 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public DbSet<Salesman> Salesmen { get; set; }
         public DbSet<SaleInvoice> SaleInvoices { get; set; }
         public DbSet<SaleItem> SaleItems { get; set; }
+
+
+        public DbSet<SalePaymentDetail> SalePaymentDetails { get; set; }
+        public DbSet<CardPaymentDetail> CardPaymentDetails { get; set; }
     }
 
 
@@ -81,27 +85,7 @@ namespace TAS_AprajiataRetails.Models.Data.Voyagers
         public int CardDetailsID { get; set; }
     }
 
-    internal class SalePaymentDetails
-    {
-        public int SalePaymentDetailsID { get; set; }
-        public string InvoiceNo { get; set; }
-        public int PayMode { get; set; }
-        public double CashAmount { get; set; }
-        public double CardAmount { get; set; }
-        public CardPaymentDetail CardDetails { get; set; }
-    }
-
-
-
-    internal class CardPaymentDetail
-    {
-        public int CardPaymentDetailID { get; set; }
-        public string InvoiceNo { get; set; }
-        public int CardType { get; set; }
-        public double Amount { get; set; }
-        public int AuthCode { get; set; }
-        public int LastDigit { get; set; }
-    }
+   
 
     
 
