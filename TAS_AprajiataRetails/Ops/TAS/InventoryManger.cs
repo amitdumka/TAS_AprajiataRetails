@@ -23,7 +23,7 @@ namespace TAS_AprajiataRetails.Ops.TAS
                 CatIdList.Add(cat1);
 
             }
-            else if (Cid!=null)
+            else if (Cid != null)
             {
                 CatIdList.Add(Cid);
             }
@@ -61,7 +61,7 @@ namespace TAS_AprajiataRetails.Ops.TAS
                 CatIdList.Add(Cid3);
             }
             else { }
-            
+
 
             return CatIdList;
 
@@ -319,6 +319,50 @@ namespace TAS_AprajiataRetails.Ops.TAS
         public bool IsItemCreated { get; set; }
         public bool IsPurchaseEntry { get; set; }
         public bool IsAccoutingEntry { get; set; }
+    }
+
+
+    public class SalePurchaseManager
+    {
+        /// <summary>
+        /// UpDate Stock when Sale or Purchase Happen
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="ItemCode"></param>
+        /// <param name="Qty"></param>
+        /// <param name="IsPurchased"></param>
+        /// <returns></returns>
+        public bool UpDateStock(VoyagerContext db, int ItemCode, double Qty, bool IsPurchased)
+        {
+            var stock = db.Stocks.Where(c => c.ProductItemId == ItemCode).FirstOrDefault();
+
+            if (stock != null)
+            {
+                if (IsPurchased)
+                {
+                    // Purchase Stock;
+                    stock.PurchaseQty += Qty;
+                    stock.Quantity += Qty;
+
+                }
+                else
+                {
+                    //Sale Stock.
+                    stock.SaleQty += Qty;
+                    stock.Quantity -= Qty;
+                }
+                db.Entry(stock).State = System.Data.Entity.EntityState.Modified;
+
+                return true;
+            }
+            else 
+                return false;
+
+        }
+
+
+
+
     }
 
 }
