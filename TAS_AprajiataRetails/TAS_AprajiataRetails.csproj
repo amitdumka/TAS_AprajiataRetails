@@ -381,6 +381,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Types\DataTypes.cs" />
     <Compile Include="Models\Views\ViewList.cs" />
+    <Compile Include="Ops\TAS\EmailHelper.cs" />
     <Compile Include="Ops\TAS\InventoryManger.cs" />
     <Compile Include="Printers\PDFPrinter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
