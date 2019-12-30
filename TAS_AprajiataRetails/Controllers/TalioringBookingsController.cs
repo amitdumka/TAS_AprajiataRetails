@@ -21,6 +21,16 @@ namespace TAS_AprajiataRetails.Controllers
             return View(db.Bookings.ToList());
         }
 
+        public ActionResult PendingBooking()
+        {
+            var vd = db.Bookings.Include (c => c.Deliveries);
+            
+            if ( vd != null )
+                return View (vd);
+            else
+                return View (db.Bookings);
+        }
+
         // GET: TalioringBookings/Details/5
         public ActionResult Details(int? id)
         {

@@ -209,6 +209,8 @@ namespace TAS_AprajiataRetails.Models.Data
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Others Price")]
         public decimal OthersPrice { get; set; }
 
+        //public bool IsDelivered { get; set; }
+
         public virtual ICollection<TalioringDelivery> Deliveries { get; set; }
     }
 }

@@ -783,6 +783,7 @@
     <Content Include="Views\ExcelUploader\PurchaseList.cshtml" />
     <Content Include="Views\ExcelUploader\ProcessPurchase.cshtml" />
     <Content Include="Views\Attendances\EmpDetails.cshtml" />
+    <Content Include="Views\TalioringBookings\PendingBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
