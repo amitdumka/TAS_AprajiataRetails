@@ -395,6 +395,25 @@ namespace TAS_AprajiataRetails.Models.Helpers
                 Utils.ProcessOpenningClosingBankBalance(db, DateTime.Today, true, true);
             }
         }
+    
+        public static void UpdateDelivery()
+        {
+            using (AprajitaRetailsContext db= new AprajitaRetailsContext())
+            {
+                var tab = db.Deliveries.Include(c => c.Booking).OrderBy(c => c.TalioringBookingId);
+                if (tab != null)
+                {
+                    foreach (var item in tab)
+                    {
+                        item.Booking.IsDelivered = true;
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+                    db.SaveChanges();
+                }
+
+            }
+        }
+    
     }
 
 

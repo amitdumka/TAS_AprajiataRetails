@@ -23,12 +23,11 @@ namespace TAS_AprajiataRetails.Controllers
 
         public ActionResult PendingBooking()
         {
-            var vd = db.Bookings.Include (c => c.Deliveries);
+            var vd = db.Bookings.Where(c=>c.IsDelivered==false);
             
             if ( vd != null )
-                return View (vd);
-            else
-                return View (db.Bookings);
+                return PartialView (vd);
+            else return HttpNotFound();
         }
 
         // GET: TalioringBookings/Details/5
@@ -72,7 +71,7 @@ namespace TAS_AprajiataRetails.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(talioringBooking);
+            return PartialView(talioringBooking);
         }
 
         // GET: TalioringBookings/Edit/5
@@ -87,7 +86,7 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(talioringBooking);
+            return PartialView(talioringBooking);
         }
 
         // POST: TalioringBookings/Edit/5
@@ -103,7 +102,7 @@ namespace TAS_AprajiataRetails.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(talioringBooking);
+            return PartialView(talioringBooking);
         }
 
         // GET: TalioringBookings/Delete/5
@@ -118,7 +117,7 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound();
             }
-            return View(talioringBooking);
+            return PartialView(talioringBooking);
         }
 
         // POST: TalioringBookings/Delete/5

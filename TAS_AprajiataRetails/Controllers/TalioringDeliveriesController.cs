@@ -14,6 +14,21 @@ namespace TAS_AprajiataRetails.Controllers
     public class TalioringDeliveriesController : Controller
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
+        private void ProcessData(int id, bool isDelete = false)
+        {
+            TalioringBooking booking = db.Bookings.Find(id);
+            if (booking != null && isDelete == false)
+            {
+                booking.IsDelivered = true;
+                db.Entry(booking).State = EntityState.Modified;
+            }
+            else if (booking != null && isDelete)
+            {
+                booking.IsDelivered = false;
+                db.Entry(booking).State = EntityState.Modified;
+            }
+
+        }
 
         // GET: TalioringDeliveries
         public ActionResult Index()
@@ -53,6 +68,7 @@ namespace TAS_AprajiataRetails.Controllers
         {
             if (ModelState.IsValid)
             {
+                ProcessData(talioringDelivery.TalioringBookingId);
                 db.Deliveries.Add(talioringDelivery);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -116,6 +132,7 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             TalioringDelivery talioringDelivery = db.Deliveries.Find(id);
+            ProcessData(talioringDelivery.TalioringBookingId, true);
             db.Deliveries.Remove(talioringDelivery);
             db.SaveChanges();
             return RedirectToAction("Index");

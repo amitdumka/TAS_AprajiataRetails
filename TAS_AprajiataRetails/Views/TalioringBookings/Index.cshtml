@@ -4,14 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Bookings</h2>
+<h2 class="text-danger">Bookings</h2>
 
 <p>
-    @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })   |
-    @Html.ActionLink("Pending ", "PendingBooking", null, new { data_modal = "" })
+
+    @Html.ActionLink("Create New ", "Create", null, new { data_modal = "", @class = "btn btn-info " })
+    @Html.ActionLink("Pending ", "PendingBooking", null, new { data_modal = "", @class = "btn btn-warning " })
+    
 </p>
-<table class="table">
-    <tr>
+<table class="table table-bordered table-condensed table-hover">
+    <tr class="bg-success">
         <th>
             @Html.DisplayNameFor(model => model.BookingDate)
         </th>
@@ -33,7 +35,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TotalQty)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.ShirtQty)
         </th>
         <th>
@@ -68,13 +70,13 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OthersPrice)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="bg-info">
             <td>
                 @Html.DisplayFor(modelItem => item.BookingDate)
             </td>
@@ -96,7 +98,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TotalQty)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.ShirtQty)
             </td>
             <td>
@@ -131,11 +133,11 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OthersPrice)
-            </td>
+            </td>*@
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TalioringBookingId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TalioringBookingId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TalioringBookingId })
+                @Html.ActionLink("Edit", "Edit", new { id = item.TalioringBookingId } ,new { data_modal = "", @class = "btn btn-primary btn-sm" }) 
+                @Html.ActionLink("Details", "Details", new { id = item.TalioringBookingId },new { data_modal = "", @class = "btn btn-info btn-sm " })
+                @Html.ActionLink("Delete", "Delete", new { id = item.TalioringBookingId },new { data_modal = "", @class = "btn btn-danger btn-sm " })
             </td>
         </tr>
     }

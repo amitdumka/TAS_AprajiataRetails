@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -209,7 +210,8 @@ namespace TAS_AprajiataRetails.Models.Data
         [DataType(DataType.Currency), Column(TypeName = "money"), Display(Name = "Others Price")]
         public decimal OthersPrice { get; set; }
 
-        //public bool IsDelivered { get; set; }
+        [DefaultValue(false)]
+        public bool IsDelivered { get; set; }
 
         public virtual ICollection<TalioringDelivery> Deliveries { get; set; }
     }

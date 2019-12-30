@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.TalioringBooking>
 
 @{
-    ViewBag.Title = "PendingBooking";
+    ViewBag.Title = "Pending Booking";
 }
 
-<h2>PendingBooking</h2>
+<h2 class="text-danger">Pending Booking</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
+</p>*@
+<table class="table table-bordered table-condensed">
+    <tr class="bg-success">
         <th>
             @Html.DisplayNameFor(model => model.BookingDate)
         </th>
@@ -33,14 +33,14 @@
             @Html.DisplayNameFor(model => model.TotalQty)
         </th>
         
-        <th></th>
+        @*<th></th>*@
     </tr>
 
 @foreach ( var item in Model ) {
 
     if ( item.TalioringBookingId>0)
     {
-    <tr>
+    <tr class="bg-info">
         <td>
             @Html.DisplayFor(modelItem => item.BookingDate)
         </td>
@@ -63,12 +63,13 @@
             @Html.DisplayFor(modelItem => item.TotalQty)
         </td>
         
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { id = item.TalioringBookingId }) |
             @Html.ActionLink("Details", "Details", new { id = item.TalioringBookingId }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.TalioringBookingId })
-        </td>
+        </td>*@
     </tr>
-    } }
+    } 
+}
 
 </table>

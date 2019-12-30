@@ -347,6 +347,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Data\AprajitaRetailsContext.cs" />
     <Compile Include="Models\Data\HRM.cs" />
