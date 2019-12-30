@@ -19,11 +19,12 @@ namespace TAS_AprajiataRetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ProcessPurchase(int? id, DateTime dDate)
+        public ActionResult ProcessPurchase( string dDate)
         {
+            DateTime ddDate = DateTime.Parse(dDate).Date;
 
               InventoryManger iManage = new InventoryManger();
-            int a = iManage.ProcessPurchaseInward(dDate);
+            int a = iManage.ProcessPurchaseInward(ddDate);
 
             if (a > 0)
             {
