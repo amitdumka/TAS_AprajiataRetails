@@ -782,6 +782,7 @@
     <Content Include="Views\ExcelUploader\TestPage.cshtml" />
     <Content Include="Views\ExcelUploader\PurchaseList.cshtml" />
     <Content Include="Views\ExcelUploader\ProcessPurchase.cshtml" />
+    <Content Include="Views\Attendances\EmpDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
