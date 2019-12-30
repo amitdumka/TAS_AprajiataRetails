@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpProject", "DumpProject\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetailsWebAPi", "AprajitaRetailsWebAPi\AprajitaRetailsWebAPi.csproj", "{2524CB73-06FB-4F28-BF30-B532CF6ADE96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetails", "AprajitaRetails\AprajitaRetails.csproj", "{CF8D3153-CA9D-4E8E-9F56-C85FAC5E1A82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2524CB73-06FB-4F28-BF30-B532CF6ADE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2524CB73-06FB-4F28-BF30-B532CF6ADE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2524CB73-06FB-4F28-BF30-B532CF6ADE96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF8D3153-CA9D-4E8E-9F56-C85FAC5E1A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8D3153-CA9D-4E8E-9F56-C85FAC5E1A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8D3153-CA9D-4E8E-9F56-C85FAC5E1A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8D3153-CA9D-4E8E-9F56-C85FAC5E1A82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

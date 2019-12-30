@@ -1,0 +1,66 @@
+﻿@model AprajitaRetails.Models.Data.Accounts.LedgerEntry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LedgerEntry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PartyName.PartyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartyName.PartyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EntryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Particulars)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Particulars)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LedgerEntryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AprajitaRetails.Models.Data.Accounts.LedgerEntry>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartyName.PartyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Particulars)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartyName.PartyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EntryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Particulars)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountIn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountOut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LedgerEntryId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LedgerEntryId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LedgerEntryId })
+        </td>
+    </tr>
+}
+
+</table>

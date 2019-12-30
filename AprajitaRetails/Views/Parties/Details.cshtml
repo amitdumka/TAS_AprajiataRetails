@@ -1,0 +1,74 @@
+﻿@model AprajitaRetails.Models.Data.Accounts.Party
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Party</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PartyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpenningDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpenningDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpenningBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpenningBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PANNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PANNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GSTNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GSTNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LedgerType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LedgerType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PartyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

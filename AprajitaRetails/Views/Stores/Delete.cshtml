@@ -1,0 +1,136 @@
+﻿@model AprajitaRetails.Models.Data.Voyagers.Store
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Store</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PinCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PinCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreManagerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreManagerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StoreManagerPhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StoreManagerPhoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PanNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PanNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GSTNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GSTNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfEmployees)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfEmployees)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpeningDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpeningDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClosingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClosingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
