@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using AprajitaRetails.Models.Data.Voyagers;
@@ -129,10 +130,26 @@ namespace AprajitaRetailsOps.TAS
 
         }
 
+        
         private int GetBrandID(VoyagerContext db, string code)
         {
-            int ids = (int?)db.Brands.Where(c => c.BCode == code).FirstOrDefault().BrandId ?? -1;
-            return ids;
+            //TODO: Null Object is found
+            //TODO: create if not exsits
+            try
+            {
+                int ids = (int?)db.Brands.Where(c => c.BCode == code).FirstOrDefault().BrandId ?? -1;
+                return ids;
+            }
+            catch (Exception)
+            {
+                Brand brand = new Brand { 
+                    BCode=code, BrandName=code
+                };
+                db.Brands.Add(brand);
+                db.SaveChanges();
+                return brand.BrandId;
+            }
+            
         }
         private int GetBrand(VoyagerContext db, string StyleCode)
         {
@@ -192,7 +209,7 @@ namespace AprajitaRetailsOps.TAS
             using (VoyagerContext db = new VoyagerContext())
             {
                 int ctr = 0;
-                var data = db.ImportPurchases.Where(c => c.IsDataConsumed == false && c.GRNDate == inDate);
+                var data = db.ImportPurchases.Where(c => c.IsDataConsumed == false && DbFunctions.TruncateTime( c.GRNDate) == DbFunctions.TruncateTime(inDate));
                 if (data != null && data.Count() > 0)
                 {
                     foreach (var item in data)
@@ -217,7 +234,7 @@ namespace AprajitaRetailsOps.TAS
             using (VoyagerContext db = new VoyagerContext())
             {
                 int barc = db.ProductItems.Where(c => c.Barcode == purchase.Barcode).Count();
-                if (barc > 0)
+                if (barc <= 0)
                 {
                     ProductItem item = new ProductItem
                     {
@@ -227,9 +244,7 @@ namespace AprajitaRetailsOps.TAS
                         StyleCode = purchase.StyleCode,
                         ProductName = purchase.ProductName,
                         ItemDesc = purchase.ItemDesc,
-                        //SupplierId = GetSupplierIdOrAdd(db, purchase.SupplierName),
-
-                        BrandId = GetBrand(db, purchase.StyleCode)
+                         BrandId = GetBrand(db, purchase.StyleCode)
 
                     };
 
@@ -252,10 +267,17 @@ namespace AprajitaRetailsOps.TAS
 
 
                 }
+                else if (barc > 0)
+                {
+                     barc = db.ProductItems.Where(c => c.Barcode == purchase.Barcode).First().ProductItemId;
+
+                    return barc;
+                    // Already Added 
+                }
                 else
                 {
                     return -999;//TODO: Handel this options
-                    //Allready added.
+                    // See ever here come. 
                 }
 
             }
@@ -295,7 +317,13 @@ namespace AprajitaRetailsOps.TAS
         {
             using (VoyagerContext db = new VoyagerContext())
             {
+                //ProductPurchase product = new ProductPurchase {
+                //    InvoiceNo=purchase.InvoiceNo, InWardDate=purchase.GRNDate, InWardNo=purchase.GRNNo,
+                //     IsPaid=false, PurchaseDate=purchase.InvoiceDate, ShippingCost=0,  TotalBasicAmount=purchase.CostValue,
+                //      TotalTax=purchase.TaxAmt, TotalQty=purchase.Quantity, 
+                //      TotalAmount=purchase.CostValue+purchase.TaxAmt,Remarks=""
 
+                //};
             }
         }
         #endregion

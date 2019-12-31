@@ -22,19 +22,19 @@ namespace TAS_AprajiataRetails.Migrations
     }
 
 
-    internal sealed class Configuration1 : DbMigrationsConfiguration<TAS_AprajiataRetails.Models.ApplicationDbContext>
-    {
-        public Configuration1()
-        {
-            AutomaticMigrationsEnabled = true;
-        }
+    //internal sealed class Configuration1 : DbMigrationsConfiguration<TAS_AprajiataRetails.Models.ApplicationDbContext>
+    //{
+    //    public Configuration1()
+    //    {
+    //        AutomaticMigrationsEnabled = true;
+    //    }
 
-        protected override void Seed(TAS_AprajiataRetails.Models.ApplicationDbContext context)
-        {
-            //  This method will be called after migrating to the latest version.
+    //    protected override void Seed(TAS_AprajiataRetails.Models.ApplicationDbContext context)
+    //    {
+    //        //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-        }
-    }
+    //        //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+    //        //  to avoid creating duplicate seed data.
+    //    }
+    //}
 }

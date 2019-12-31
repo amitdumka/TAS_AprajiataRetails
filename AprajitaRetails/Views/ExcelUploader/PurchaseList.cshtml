@@ -80,8 +80,8 @@
                     @Html.DisplayFor(modelItem => item.CostValue)
                 </td>
                 <td>
-                    @Html.ActionLink("Process", "ProcessPurchase", new { dDate = item.GRNDate }) |
-                    <input type="hidden" id="dDate" name="dDate" value=""+item.GRNDate />
+                    @Html.ActionLink("Process", "ProcessPurchase", new { dDate = item.GRNDate.ToShortDateString() }) |
+                    <input type="hidden" id="dDate" name="dDate" value=@item.GRNDate.ToShortDateString() />
                     <input type="submit" value="Process" class="btn btn-warning" />
 
                     @Html.ActionLink("Details", "Details", new { id = item.ImportPurchaseId }) |
