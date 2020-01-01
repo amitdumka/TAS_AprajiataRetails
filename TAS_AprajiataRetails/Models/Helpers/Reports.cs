@@ -21,8 +21,9 @@ namespace TAS_AprajiataRetails.Models.Helpers
 
                     MonthlyBooking = (int?)db.Bookings.Where(c => DbFunctions.TruncateTime(c.BookingDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Count() ?? 0,
                     MonthlyUnit = (int?)db.Bookings.Where(c => DbFunctions.TruncateTime(c.BookingDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Sum(c => (int?)c.TotalQty) ?? 0,
-                    YearlyBooking = (int?)db.Bookings.Where(c => DbFunctions.TruncateTime(c.BookingDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Count() ?? 0,
-                    YearlyUnit = (int?)db.Bookings.Where(c => DbFunctions.TruncateTime(c.BookingDate).Value.Month == DbFunctions.TruncateTime(DateTime.Today).Value.Month).Sum(c => (int?)c.TotalQty) ?? 0,
+                    
+                    YearlyBooking = (int?)db.Bookings.Where(c => DbFunctions.TruncateTime(c.BookingDate).Value.Year == DbFunctions.TruncateTime(DateTime.Today).Value.Year).Count() ?? 0,
+                    YearlyUnit = (int?)db.Bookings.Where(c => DbFunctions.TruncateTime(c.BookingDate).Value.Year == DbFunctions.TruncateTime(DateTime.Today).Value.Year).Sum(c => (int?)c.TotalQty) ?? 0,
 
                     TodaySale = (decimal?)db.Deliveries.Where(c => DbFunctions.TruncateTime(c.DeliveryDate) == DbFunctions.TruncateTime(DateTime.Today)).Sum(c => (decimal?)c.Amount) ?? 0,
                     YearlySale = (decimal?)db.Deliveries.Where(c => DbFunctions.TruncateTime(c.DeliveryDate).Value.Year == DbFunctions.TruncateTime(DateTime.Today).Value.Year).Sum(c => (decimal?)c.Amount) ?? 0,

@@ -16,7 +16,21 @@ namespace TAS_AprajiataRetails.Controllers
     {
         private AprajitaRetailsContext db = new AprajitaRetailsContext();
 
-        
+        public ActionResult HomeExpenses()
+        {
+            var vd = db.CashPayments.Include(c => c.Mode)
+                .Where(c => c.Mode.Transcation == "Home Expenses" && DbFunctions.TruncateTime(c.PaymentDate).Value.Month==DbFunctions.TruncateTime(DateTime.Today).Value.Month);
+
+            if (vd != null)
+            {
+                var amt= vd.Sum(c=>c.Amount);
+                ViewBag.TotalAmount = amt;
+                return PartialView(vd); 
+            }
+            else
+                return PartialView(new CashPayment());
+        }
+
         // GET: CashPayments
         public ActionResult Index()
         {
@@ -55,7 +69,7 @@ namespace TAS_AprajiataRetails.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 db.CashPayments.Add(cashPayment);
                 Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, cashPayment.Amount);
                 db.SaveChanges();
@@ -91,7 +105,7 @@ namespace TAS_AprajiataRetails.Controllers
         {
             if (ModelState.IsValid)
             {
-               //TODO: Edit in cash balance need to update Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, cashPayment.Amount);
+                //TODO: Edit in cash balance need to update Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, cashPayment.Amount);
                 db.Entry(cashPayment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -121,7 +135,7 @@ namespace TAS_AprajiataRetails.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             CashPayment cashPayment = db.CashPayments.Find(id);
-            Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, 0-cashPayment.Amount);
+            Utils.UpDateCashOutHand(db, cashPayment.PaymentDate, 0 - cashPayment.Amount);
             db.CashPayments.Remove(cashPayment);
             db.SaveChanges();
             return RedirectToAction("Index");

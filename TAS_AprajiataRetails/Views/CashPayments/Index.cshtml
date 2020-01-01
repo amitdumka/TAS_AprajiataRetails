@@ -4,12 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Cash Payments</h2>
 
 <p>
-     @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
+    @Html.ActionLink("Create New ", "Create", null, new { data_modal = "", @class = "btn btn-primary btn-sm" })
+    @Html.ActionLink("Home Expenses ", "HomeExpenses", null, new { data_modal = "", @class = "btn btn-success btn-sm" })
 </p>
-<table class="table">
+<table class="table table-bordered table-condensed table-hover bg-success">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Mode.Transcation)
@@ -26,12 +27,12 @@
         <th>
             @Html.DisplayNameFor(model => model.SlipNo)
         </th>
-        <th></th>
+        @*<th></th>*@
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="bg-info">
             <td>
                 @Html.DisplayFor(modelItem => item.Mode.Transcation)
             </td>
@@ -47,11 +48,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SlipNo)
             </td>
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.CashPaymentId }) |
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CashPaymentId }) |
                     @Html.ActionLink("Details", "Details", new { id=item.CashPaymentId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.CashPaymentId })*@
-            </td>
+                    @Html.ActionLink("Delete", "Delete", new { id=item.CashPaymentId })
+            </td>*@
         </tr>
     }
 

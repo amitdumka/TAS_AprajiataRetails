@@ -7,9 +7,9 @@
 <h2>Bank Accounts</h2>
 
 <p>
-     @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
+     @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" , @class = "btn btn-primary btn-sm"})
 </p>
-<table class="table">
+<table class="table table-bordered table-condensed table-hover bg-success">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Bank.BankName)
@@ -22,7 +22,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="bg-info">
             <td>
                 @Html.DisplayFor(modelItem => item.Bank.BankName)
             </td>
@@ -30,9 +30,9 @@
                 @Html.DisplayFor(modelItem => item.Account)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AccountNumberId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AccountNumberId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AccountNumberId })
+                @Html.ActionLink("Edit", "Edit", new { id = item.AccountNumberId },new {  @class = "btn btn-warning btn-sm" }) 
+                @Html.ActionLink("Details", "Details", new { id = item.AccountNumberId},new { @class="btn btn-info btn-sm" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.AccountNumberId},new { @class="btn btn-danger btn-sm" })
             </td>
         </tr>
     }
