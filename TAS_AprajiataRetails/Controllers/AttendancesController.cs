@@ -50,8 +50,13 @@ namespace TAS_AprajiataRetails.Controllers
         private AprajitaRetailsContext db = new AprajitaRetailsContext ();
 
         // GET: Attendances
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+            if (id == 101)
+            {
+                var att = db.Attendances.Include(a => a.Employee).OrderByDescending(c => c.AttDate);
+                return View(att.ToList());
+            }
             var attendances = db.Attendances.Include (a => a.Employee).Where (c => DbFunctions.TruncateTime (c.AttDate) == DbFunctions.TruncateTime (DateTime.Today)).OrderByDescending (c => c.AttDate);
             return View (attendances.ToList ());
         }
