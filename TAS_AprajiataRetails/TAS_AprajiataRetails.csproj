@@ -353,6 +353,7 @@
     <Compile Include="Models\Data\HRM.cs" />
     <Compile Include="Models\Data\TableList.cs" />
     <Compile Include="Models\Data\Tailoring.cs" />
+    <Compile Include="Models\Helpers\MonthEnd.cs" />
     <Compile Include="Models\Helpers\Reports.cs" />
     <Compile Include="Models\Helpers\Utils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
