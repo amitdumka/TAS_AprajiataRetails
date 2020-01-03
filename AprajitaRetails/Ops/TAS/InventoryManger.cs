@@ -246,6 +246,7 @@ namespace AprajitaRetailsOps.TAS
                         if (pid != -999)
                             CreateStockItem(db, item, pid);
                         PurchasedProduct = CreatePurchaseInWard(db, item, PurchasedProduct);
+                        PurchasedProduct.PurchaseItems.Add(CreatePurchaseItem(db,item,pid));
                         item.IsDataConsumed = true;
                         db.Entry(item).State = EntityState.Modified;
                         ctr++;
@@ -275,7 +276,8 @@ namespace AprajitaRetailsOps.TAS
                     StyleCode = purchase.StyleCode,
                     ProductName = purchase.ProductName,
                     ItemDesc = purchase.ItemDesc,
-                    BrandId = GetBrand(db, purchase.StyleCode)
+                    BrandId = GetBrand(db, purchase.StyleCode),
+
 
                 };
 
@@ -283,11 +285,24 @@ namespace AprajitaRetailsOps.TAS
                 string[] PN = purchase.ProductName.Split('/');
 
                 // Apparel / Work / Blazers
-                if (PN[0] == "Apparel") item.Categorys = ProductCategorys.ReadyMade;
-                else if (PN[0] == "Suiting" || PN[0] == "Shirting") item.Categorys = ProductCategorys.Fabric;
-                else item.Categorys = ProductCategorys.Others; //TODO: For time being
+                if (PN[0] == "Apparel")
+                {
+                    item.Units = Units.Pcs;
+                    item.Categorys = ProductCategorys.ReadyMade;
+                }
+                else if (PN[0] == "Suiting" || PN[0] == "Shirting")
+                {
+                    item.Units = Units.Meters;
+                    item.Categorys = ProductCategorys.Fabric;
+                }
+                else
+                {
+                    item.Units = Units.Nos;
+                    item.Categorys = ProductCategorys.Others; //TODO: For time being
+                }
 
                 List<Category> catIds = GetCategory(db, PN[0], PN[1], PN[2]);
+
                 item.MainCategory = catIds[0];
                 item.ProductCategory = catIds[1];
                 item.ProductType = catIds[2];
@@ -328,7 +343,8 @@ namespace AprajitaRetailsOps.TAS
                     PurchaseQty = purchase.Quantity,
                     Quantity = purchase.Quantity,
                     ProductItemId = pItemId,
-                    SaleQty = 0
+                    SaleQty = 0,
+                    Units = db.ProductItems.Find(pItemId).Units
                 };
                 db.Stocks.Add(stock);
             }
@@ -367,8 +383,11 @@ namespace AprajitaRetailsOps.TAS
                         TotalQty = purchase.Quantity,
                         TotalAmount = purchase.CostValue + purchase.TaxAmt,// TODO: Check for actual DATA. 
                         Remarks = "",
-                        SupplierID = GetSupplierIdOrAdd(db, purchase.SupplierName)
+                        SupplierID = GetSupplierIdOrAdd(db, purchase.SupplierName), 
+                        
+                        
                     };
+                    product.PurchaseItems = new List<PurchaseItem>();
 
 
 
@@ -393,10 +412,29 @@ namespace AprajitaRetailsOps.TAS
                     SupplierID = GetSupplierIdOrAdd(db, purchase.SupplierName)
 
                 };
+                product.PurchaseItems = new List<PurchaseItem>();
 
             }
             return product;
         }
+
+        public PurchaseItem CreatePurchaseItem(VoyagerContext db, ImportPurchase purchase, int productId)
+        {
+            PurchaseItem item = new PurchaseItem
+            {
+                Barcode = purchase.Barcode,
+                Cost = purchase.Cost,
+                CostValue = purchase.CostValue,
+                Qty = purchase.Quantity,
+                TaxAmout = purchase.TaxAmt,
+                Unit = db.ProductItems.Find(productId).Units,
+                PurchaseTaxTypeId = 1,// TODO: Calculate option needed.
+                ProductItemId=productId
+            };
+            return item;
+        }
+
+
         #endregion
 
         #region Sale

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 public enum Genders { Male, Female, TransGender }
-public enum Units { Meters, Nos, Pcs, Packets }
+public enum Units {  Nos, Meters, Pcs, Packets }
 public enum TaxType {  GST, SGST, CGST, IGST, VAT }
 
 public enum SalePayMode { Cash, Card, Mix }//TODO: check update based on data present

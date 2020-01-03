@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Windows.Input;
 
 namespace AprajitaRetails.Models.Data.Voyagers
 {
@@ -55,14 +56,16 @@ namespace AprajitaRetails.Models.Data.Voyagers
 
     public class PurchaseItem
     {
-        public int PurchaseItemId { get; set; }
+        public int PurchaseItemId { get; set; }//Pk
 
-        public int ProductPurchaseId { get; set; }
+        public int ProductPurchaseId { get; set; }//FK
+        public virtual ProductPurchase ProductPurchase { get; set; }
 
-        //[ForeignKey("ProductItem")]
+        public int ProductItemId { get; set; } //FK 
+        public virtual ProductItem ProductItem { get; set; }
         public string Barcode { get; set; }// TODO: if not working then link with productitemid
 
-        public decimal Qty { get; set; }
+        public double Qty { get; set; }
         public Units Unit { get; set; }
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
@@ -71,7 +74,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TaxAmout { get; set; }
 
-        public int PurchaseTaxTypeId { get; set; }
+        public int? PurchaseTaxTypeId { get; set; } //TODO: Temp Purpose. need to calculate tax here
         public virtual PurchaseTaxType PurchaseTaxType { get; set; }
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
@@ -79,8 +82,8 @@ namespace AprajitaRetails.Models.Data.Voyagers
 
 
         //Navigation Properties
-        public virtual ProductItem ProductItem { get; set; }
-        public virtual ProductPurchase ProductPurchase { get; set; }
+      
+        
     }
     public class PurchaseTaxType
     {
@@ -98,6 +101,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
     public class ProductItem
     {
         public int ProductItemId { set; get; }
+        
         public string Barcode { get; set; }
 
         public int BrandId { get; set; }
@@ -121,6 +125,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
         public Sizes Size { get; set; }
         public Units Units { get; set; }
 
+       
         public virtual ICollection<PurchaseItem> PurchaseItems { get; set; }
 
 
@@ -143,13 +148,16 @@ namespace AprajitaRetails.Models.Data.Voyagers
     public class Stock
     {
         public int StockID { set; get; }
+
         public int ProductItemId { set; get; }
+        public virtual ProductItem ProductItem { get; set; }
+        
         public double Quantity { set; get; }
         public double SaleQty { get; set; }
         public double PurchaseQty { get; set; }
         public Units Units { get; set; }
 
-        public virtual ProductItem ProductItem { get; set; }
+       
     }
 
 }

@@ -14,12 +14,25 @@ namespace AprajitaRetails.Controllers
     {
         private VoyagerContext db = new VoyagerContext();
 
+
+        public ActionResult PurchaseDetails(int? id)
+        {
+            if (id > 0)
+            {
+                var productPurchases1 = db.ProductPurchases.Include(p => p.Supplier).Include(c => c.PurchaseItems).Where(c => c.ProductPurchaseId == id);
+                ViewBag.Details = "Invoice No: "+productPurchases1.FirstOrDefault().InvoiceNo;
+                return View(productPurchases1.ToList());
+            }
+            ViewBag.Details = "";
+          var productPurchases = db.ProductPurchases.Include(p => p.Supplier).Include(c=>c.PurchaseItems);
+            return View(productPurchases.ToList());
+        }
         // GET: ProductPurchases
         public ActionResult Index()
         {
             var productPurchases = db.ProductPurchases.Include(p => p.Supplier);
-            var ok = productPurchases.ToList();
-            return View(ok); ;
+           
+            return View(productPurchases.ToList()); 
         }
 
         // GET: ProductPurchases/Details/5

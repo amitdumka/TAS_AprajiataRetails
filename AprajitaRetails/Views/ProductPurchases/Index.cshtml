@@ -8,6 +8,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-sm btn-primary " })
+    @Html.ActionLink("PurchaseDetails", "PurchaseDetails", null, new { @class = "btn btn-sm btn-success " })
 </p>
 <table class="table  table-bordered table-hover table-primary  table-sm  ">
     <tr class="bg-success">
@@ -90,9 +91,10 @@
                 @Html.DisplayFor(modelItem => item.IsPaid)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductPurchaseId }, new { @class="btn btn-sm btn-outline-warning "})
-                @Html.ActionLink("Details", "Details", new { id = item.ProductPurchaseId }, new { @class="btn btn-sm btn-outline-info "})
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductPurchaseId }, new { @class="btn btn-sm btn-outline-danger "})
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductPurchaseId }, new { @class = "btn btn-sm btn-outline-warning " })
+                @*@Html.ActionLink("Details", "Details", new { id = item.ProductPurchaseId }, new { @class = "btn btn-sm btn-outline-info " })*@
+                @Html.ActionLink("Details", "PurchaseDetails", new { id = item.ProductPurchaseId }, new { @class = "btn btn-sm btn-outline-primary " })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductPurchaseId }, new { @class = "btn btn-sm btn-outline-danger " })
             </td>
         </tr>
     }
