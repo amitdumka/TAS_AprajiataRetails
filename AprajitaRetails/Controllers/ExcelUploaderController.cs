@@ -20,11 +20,11 @@ namespace AprajitaRetailsControllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ProcessPurchase( string dDate)
+        public ActionResult ProcessPurchase(string dDate)
         {
             DateTime ddDate = DateTime.Parse(dDate).Date;
 
-              InventoryManger iManage = new InventoryManger();
+            InventoryManger iManage = new InventoryManger();
             int a = iManage.ProcessPurchaseInward(ddDate);
             //TODO: instead of product item . it should list purchase invoice with item
 
@@ -37,7 +37,7 @@ namespace AprajitaRetailsControllers
             else
             {
                 ViewBag.MessageHead = "No Product items added. Some error might has been occured. a=" + a;
-                return View();
+                return View(new ProductItem());
             }
         }
         public ActionResult PurchaseList(int? id)
@@ -49,13 +49,37 @@ namespace AprajitaRetailsControllers
             }
             else if (id == 100)
             {
-                var md1 = db.ImportPurchases.OrderByDescending(c => c.GRNDate).ThenBy(c=>c.IsDataConsumed);
+                var md1 = db.ImportPurchases.OrderByDescending(c => c.GRNDate).ThenBy(c => c.IsDataConsumed);
                 return View(md1);
             }
             var md = db.ImportPurchases.Where(c => c.IsDataConsumed == false).OrderByDescending(c => c.GRNDate);
             return View(md);
         }
 
+        public ActionResult SaleList(int? id)
+        {
+            var md = db.ImportSaleItemWises.Where(c => c.IsDataConsumed == false).OrderByDescending(c => c.InvoiceDate);
+            return View(md);
+        }
+        public ActionResult ProcessSale(string dDate)
+        {
+            DateTime ddDate = DateTime.Parse(dDate).Date;
+
+            InventoryManger iManage = new InventoryManger();
+            int a = iManage.CreateSaleEntry(ddDate);
+            if (a > 0)
+            {
+                var dm = db.SaleItems;
+                ViewBag.MessageHead = "No of Product Item added and stock is created are " + a;
+                return View(dm.ToList());
+            }
+            else
+            {
+                ViewBag.MessageHead = "No Product items added. Some error might has been occured. a=" + a;
+                return View(new SaleItem());
+            }
+            
+        }
 
         // GET: ExcelUploader
         public ActionResult Index()

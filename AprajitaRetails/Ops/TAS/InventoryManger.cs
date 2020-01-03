@@ -438,6 +438,13 @@ namespace AprajitaRetailsOps.TAS
         #endregion
 
         #region Sale
+        public int CreateSaleEntry(DateTime onDate)
+        {
+
+            return 0;
+        }
+
+
 
         #endregion
 
