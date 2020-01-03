@@ -12,10 +12,16 @@ namespace AprajitaRetailsOps.TAS
     /// </summary>
     public class InventoryManger
     {
+
+        #region HelperFunctions
+
+
         private List<Category> GetCategory(VoyagerContext db, string pCat, string sCat, string tCat)
         {
             List<Category> CatIdList = new List<Category>();
+
             Category Cid = db.Categories.Where(c => c.CategoryName == pCat && c.IsPrimaryCategory).FirstOrDefault();
+
             if (Cid == null)
             {
                 Category cat1 = new Category { CategoryName = pCat, IsPrimaryCategory = true };
@@ -48,7 +54,7 @@ namespace AprajitaRetailsOps.TAS
 
 
 
-            Category Cid3 = db.Categories.Where(c => c.CategoryName == tCat && c.IsPrimaryCategory && !c.IsSecondaryCategory).FirstOrDefault();
+            Category Cid3 = db.Categories.Where(c => c.CategoryName == tCat && !c.IsPrimaryCategory && !c.IsSecondaryCategory).FirstOrDefault();
             if (Cid3 == null)
             {
                 Category cat3 = new Category { CategoryName = tCat };
@@ -140,7 +146,7 @@ namespace AprajitaRetailsOps.TAS
                 int ids = (int?)db.Brands.Where(c => c.BCode == code).FirstOrDefault().BrandId ?? -1;
                 return ids;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Brand brand = new Brand
                 {
@@ -186,9 +192,24 @@ namespace AprajitaRetailsOps.TAS
 
         private int GetSupplierIdOrAdd(VoyagerContext db, string sup)
         {
-            int ids = (int?)db.Suppliers.Where(c => c.SuppilerName == sup).FirstOrDefault().SupplierID ?? -1;
-            if (ids > 0) return ids;
-            else if (ids == -1)
+            try
+            {
+                int ids = (int?)db.Suppliers.Where(c => c.SuppilerName == sup).FirstOrDefault().SupplierID ?? -1;
+                if (ids > 0) return ids;
+                else if (ids == -1)
+                {
+                    Supplier supplier = new Supplier
+                    {
+                        SuppilerName = sup,
+                        Warehouse = sup
+                    };
+                    db.Suppliers.Add(supplier);
+                    db.SaveChanges();
+                    return supplier.SupplierID;
+                }
+                else return 1;// Suspense Supplier
+            }
+            catch (Exception)
             {
                 Supplier supplier = new Supplier
                 {
@@ -199,8 +220,10 @@ namespace AprajitaRetailsOps.TAS
                 db.SaveChanges();
                 return supplier.SupplierID;
             }
-            else return 1;// Suspense Supplier
+
         }
+
+        #endregion
 
         #region Purchase
 
@@ -211,23 +234,23 @@ namespace AprajitaRetailsOps.TAS
             using (VoyagerContext db = new VoyagerContext())
             {
                 int ctr = 0;
-                var data = db.ImportPurchases.Where(c => c.IsDataConsumed == false && DbFunctions.TruncateTime(c.GRNDate) == DbFunctions.TruncateTime(inDate)).OrderBy(c=>c.InvoiceNo);
+                var data = db.ImportPurchases.Where(c => c.IsDataConsumed == false && DbFunctions.TruncateTime(c.GRNDate) == DbFunctions.TruncateTime(inDate)).OrderBy(c => c.InvoiceNo).ToList();
+
                 if (data != null && data.Count() > 0)
                 {
                     ProductPurchase PurchasedProduct = null;
 
                     foreach (var item in data)
                     {
-
-                        int pid = CreateProductItem(item);
+                        int pid = CreateProductItem(db, item);
                         if (pid != -999)
-                            CreateStockItem(item, pid);
-                        CreatePurchaseInWard(item,PurchasedProduct);
+                            CreateStockItem(db, item, pid);
+                        PurchasedProduct = CreatePurchaseInWard(db, item, PurchasedProduct);
                         item.IsDataConsumed = true;
                         db.Entry(item).State = EntityState.Modified;
                         ctr++;
                     }
-                    if (PurchasedProduct != null) 
+                    if (PurchasedProduct != null)
                         db.ProductPurchases.Add(PurchasedProduct);
                     db.SaveChanges();
                 }
@@ -238,132 +261,99 @@ namespace AprajitaRetailsOps.TAS
         }
 
 
-        public int CreateProductItem(ImportPurchase purchase)
+        public int CreateProductItem(VoyagerContext db, ImportPurchase purchase)
         {
+            int barc = db.ProductItems.Where(c => c.Barcode == purchase.Barcode).Count();
 
-            using (VoyagerContext db = new VoyagerContext())
+            if (barc <= 0)
             {
-                int barc = db.ProductItems.Where(c => c.Barcode == purchase.Barcode).Count();
-                if (barc <= 0)
+                ProductItem item = new ProductItem
                 {
-                    ProductItem item = new ProductItem
-                    {
-                        Barcode = purchase.Barcode,
-                        Cost = purchase.Cost,
-                        MRP = purchase.MRP,
-                        StyleCode = purchase.StyleCode,
-                        ProductName = purchase.ProductName,
-                        ItemDesc = purchase.ItemDesc,
-                        BrandId = GetBrand(db, purchase.StyleCode)
+                    Barcode = purchase.Barcode,
+                    Cost = purchase.Cost,
+                    MRP = purchase.MRP,
+                    StyleCode = purchase.StyleCode,
+                    ProductName = purchase.ProductName,
+                    ItemDesc = purchase.ItemDesc,
+                    BrandId = GetBrand(db, purchase.StyleCode)
 
-                    };
+                };
 
-                    //spliting ProductName
-                    string[] PN = purchase.ProductName.Split('/');
+                //spliting ProductName
+                string[] PN = purchase.ProductName.Split('/');
 
-                    // Apparel / Work / Blazers
-                    if (PN[0] == "Apparel") item.Categorys = ProductCategorys.ReadyMade;
-                    else if (PN[0] == "Suiting" || PN[0] == "Shirting") item.Categorys = ProductCategorys.Fabric;
-                    else item.Categorys = ProductCategorys.Others; //TODO: For time being
+                // Apparel / Work / Blazers
+                if (PN[0] == "Apparel") item.Categorys = ProductCategorys.ReadyMade;
+                else if (PN[0] == "Suiting" || PN[0] == "Shirting") item.Categorys = ProductCategorys.Fabric;
+                else item.Categorys = ProductCategorys.Others; //TODO: For time being
 
-                    List<Category> catIds = GetCategory(db, PN[0], PN[1], PN[2]);
-                    item.MainCategory = catIds[0];
-                    item.ProductCategory = catIds[1];
-                    item.ProductType = catIds[2];
+                List<Category> catIds = GetCategory(db, PN[0], PN[1], PN[2]);
+                item.MainCategory = catIds[0];
+                item.ProductCategory = catIds[1];
+                item.ProductType = catIds[2];
 
-                    db.ProductItems.Add(item);
-                    db.SaveChanges();
-                    return item.ProductItemId;
-
-
-                }
-                else if (barc > 0)
-                {
-                    barc = db.ProductItems.Where(c => c.Barcode == purchase.Barcode).First().ProductItemId;
-
-                    return barc;
-                    // Already Added 
-                }
-                else
-                {
-                    return -999;//TODO: Handel this options
-                    // See ever here come. 
-                }
-
-            }
-
-
-        }
-
-        public void CreateStockItem(ImportPurchase purchase, int pItemId)
-        {
-            using (VoyagerContext db = new VoyagerContext())
-            {
-                Stock stcks = db.Stocks.Where(c => c.ProductItemId == pItemId).FirstOrDefault();
-                if (stcks != null)
-                {
-                    stcks.PurchaseQty += purchase.Quantity;
-                    stcks.Quantity += purchase.Quantity;
-                    db.Entry(stcks).State = System.Data.Entity.EntityState.Modified;
-                }
-                else
-                {
-                    Stock stock = new Stock
-                    {
-                        PurchaseQty = purchase.Quantity,
-                        Quantity = purchase.Quantity,
-                        ProductItemId = pItemId,
-                        SaleQty = 0
-                    };
-                    db.Stocks.Add(stock);
-                }
+                db.ProductItems.Add(item);
                 db.SaveChanges();
+                return item.ProductItemId;
+
 
             }
+            else if (barc > 0)
+            {
+                barc = db.ProductItems.Where(c => c.Barcode == purchase.Barcode).First().ProductItemId;
 
+                return barc;
+                // Already Added 
+            }
+            else
+            {
+                return -999;//TODO: Handel this options
+                            // See ever here come. 
+            }
         }
 
-        public void CreatePurchaseInWard(ImportPurchase purchase, ProductPurchase product)
+        public void CreateStockItem(VoyagerContext db, ImportPurchase purchase, int pItemId)
         {
-            using (VoyagerContext db = new VoyagerContext()) // TODO: No need to create  connection every time. optimized
+            Stock stcks = db.Stocks.Where(c => c.ProductItemId == pItemId).FirstOrDefault();
+            if (stcks != null)
             {
-                
-                
-                if (product != null)
+                stcks.PurchaseQty += purchase.Quantity;
+                stcks.Quantity += purchase.Quantity;
+                db.Entry(stcks).State = System.Data.Entity.EntityState.Modified;
+            }
+            else
+            {
+                Stock stock = new Stock
                 {
-                    if(purchase.InvoiceNo==product.InvoiceNo)
-                    {
-                        product.TotalAmount += (purchase.CostValue + purchase.TaxAmt);
-                        product.ShippingCost += 0;//TODO: add option for adding shipping cost for fabric
-                        product.TotalBasicAmount += purchase.CostValue;
-                        product.TotalTax += purchase.TaxAmt;
-                        product.TotalQty += purchase.Quantity;
-                        db.Entry(product).State = EntityState.Modified;
+                    PurchaseQty = purchase.Quantity,
+                    Quantity = purchase.Quantity,
+                    ProductItemId = pItemId,
+                    SaleQty = 0
+                };
+                db.Stocks.Add(stock);
+            }
+            db.SaveChanges();
+        }
 
-                    }
-                    else
-                    {
-                        db.ProductPurchases.Add(product); db.SaveChanges();
-                        product = new ProductPurchase
-                        {
-                            InvoiceNo = purchase.InvoiceNo,
-                            InWardDate = purchase.GRNDate,
-                            InWardNo = purchase.GRNNo,
-                            IsPaid = false,
-                            PurchaseDate = purchase.InvoiceDate,
-                            ShippingCost = 0,//TODO: add option for adding shipping cost for fabric
-                            TotalBasicAmount = purchase.CostValue,
-                            TotalTax = purchase.TaxAmt,
-                            TotalQty = purchase.Quantity,
-                            TotalAmount = purchase.CostValue + purchase.TaxAmt,// TODO: Check for actual DATA. 
-                            Remarks = ""
+        public ProductPurchase CreatePurchaseInWard(VoyagerContext db, ImportPurchase purchase, ProductPurchase product)
+        {
+            if (product != null)
+            {
+                if (purchase.InvoiceNo == product.InvoiceNo)
+                {
+                    product.TotalAmount += (purchase.CostValue + purchase.TaxAmt);
+                    product.ShippingCost += 0;//TODO: add option for adding shipping cost for fabric
+                    product.TotalBasicAmount += purchase.CostValue;
+                    product.TotalTax += purchase.TaxAmt;
+                    product.TotalQty += purchase.Quantity;
 
-                        };
-                    }
 
                 }
                 else
                 {
+                    db.ProductPurchases.Add(product);
+                    db.SaveChanges();
+
                     product = new ProductPurchase
                     {
                         InvoiceNo = purchase.InvoiceNo,
@@ -376,14 +366,36 @@ namespace AprajitaRetailsOps.TAS
                         TotalTax = purchase.TaxAmt,
                         TotalQty = purchase.Quantity,
                         TotalAmount = purchase.CostValue + purchase.TaxAmt,// TODO: Check for actual DATA. 
-                        Remarks = ""
-
+                        Remarks = "",
+                        SupplierID = GetSupplierIdOrAdd(db, purchase.SupplierName)
                     };
-                    
+
+
+
                 }
-                
 
             }
+            else
+            {
+                product = new ProductPurchase
+                {
+                    InvoiceNo = purchase.InvoiceNo,
+                    InWardDate = purchase.GRNDate,
+                    InWardNo = purchase.GRNNo,
+                    IsPaid = false,
+                    PurchaseDate = purchase.InvoiceDate,
+                    ShippingCost = 0,//TODO: add option for adding shipping cost for fabric
+                    TotalBasicAmount = purchase.CostValue,
+                    TotalTax = purchase.TaxAmt,
+                    TotalQty = purchase.Quantity,
+                    TotalAmount = purchase.CostValue + purchase.TaxAmt,// TODO: Check for actual DATA. 
+                    Remarks = "",
+                    SupplierID = GetSupplierIdOrAdd(db, purchase.SupplierName)
+
+                };
+
+            }
+            return product;
         }
         #endregion
 
