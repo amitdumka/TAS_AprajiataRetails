@@ -68,5 +68,7 @@ namespace TAS_AprajiataRetails.Models.Data
 
         public DbSet<DueRecoverd>Recoverds { get; set; }
         public DbSet<ChequesLog>Cheques { get; set; }
+
+        public DbSet<MonthEnd> MonthEnds { get; set; }
     }
 }

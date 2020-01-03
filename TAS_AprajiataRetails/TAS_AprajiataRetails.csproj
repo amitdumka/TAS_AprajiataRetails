@@ -358,6 +358,7 @@
     <Compile Include="Models\Helpers\Utils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Reports\StaffReports.cs" />
     <Compile Include="Models\Types\DataTypes.cs" />
     <Compile Include="Models\Views\ViewList.cs" />
     <Compile Include="Printers\PDFPrinter.cs" />
