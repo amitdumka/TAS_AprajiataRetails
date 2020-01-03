@@ -1,0 +1,58 @@
+﻿@model AprajitaRetails.Models.Data.Voyagers.Stock
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Stock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductItem.Barcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductItem.Barcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SaleQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SaleQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Units)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Units)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StockID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

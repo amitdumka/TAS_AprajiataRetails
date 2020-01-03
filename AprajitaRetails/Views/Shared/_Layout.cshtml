@@ -96,6 +96,22 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Purchase</a>
+                    <div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            <li class="dropdown-item">@Html.ActionLink("ProductPurchases", "Index", "ProductPurchases")</li>
+                            <li class="dropdown-item">@Html.ActionLink("ProductItems", "Index", "ProductItems")</li>
+                            <li class="dropdown-item">@Html.ActionLink("Stocks", "Index", "Stocks")</li>
+                             @*<li class="dropdown-item">@Html.ActionLink("ImportPurchases", "Index", "ExcelUploader")</li>*@
+                             @*<li class="dropdown-item">@Html.ActionLink("ImportSaleItemWises", "Index", "ExcelUploader")</li>*@
+                             @*<li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ExcelUploader")</li>*@
+                        </ul>
+                    </div>
+                </li>
+
+
+
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="#">Action</a>

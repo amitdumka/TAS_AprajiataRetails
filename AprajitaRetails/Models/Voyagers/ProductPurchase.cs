@@ -32,10 +32,13 @@ namespace AprajitaRetails.Models.Data.Voyagers
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalBasicAmount { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal ShippingCost { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalTax { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalAmount { get; set; }
 

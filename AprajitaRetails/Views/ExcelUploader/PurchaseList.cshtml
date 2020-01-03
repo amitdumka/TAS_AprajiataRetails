@@ -4,15 +4,15 @@
     ViewBag.Title = "PurchaseList";
 }
 
-<h2>PurchaseList</h2>
+<h2>Purchase List</h2>
 
 @using (Html.BeginForm("ProcessPurchase", "ExcelUploader", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
 
-    <table class="table">
-        <tr>
+    <table class="table table-sm table-bordered table-secondary table-striped table-responsive-sm table-hover">
+        <tr class="bg-success">
             <th>
                 @Html.DisplayNameFor(model => model.GRNNo)
             </th>
@@ -80,12 +80,11 @@
                     @Html.DisplayFor(modelItem => item.CostValue)
                 </td>
                 <td>
-                    @Html.ActionLink("Process", "ProcessPurchase", new { dDate = item.GRNDate.ToShortDateString() }) |
+                   
                     <input type="hidden" id="dDate" name="dDate" value=@item.GRNDate.ToShortDateString() />
                     <input type="submit" value="Process" class="btn btn-warning" />
 
-                    @Html.ActionLink("Details", "Details", new { id = item.ImportPurchaseId }) |
-                    @*@Html.ActionLink("Delete", "Delete", new { id=item.ImportPurchaseId })*@
+                   
                 </td>
             </tr>
         }

@@ -33,7 +33,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
         public DateTime OpeningDate { get; set; }
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Closing Date")]
-        public DateTime ClosingDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
         [Display(Name = "Operative")]
         public bool Status { get; set; }
     }

@@ -212,6 +212,9 @@
     <Compile Include="Controllers\LedgerEntriesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PartiesController.cs" />
+    <Compile Include="Controllers\ProductItemsController.cs" />
+    <Compile Include="Controllers\ProductPurchasesController.cs" />
+    <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\VoyagerBillsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -399,6 +402,21 @@
     <Content Include="Views\LedgerEntries\Edit.cshtml" />
     <Content Include="Views\LedgerEntries\Index.cshtml" />
     <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\ProductPurchases\Create.cshtml" />
+    <Content Include="Views\ProductPurchases\Delete.cshtml" />
+    <Content Include="Views\ProductPurchases\Details.cshtml" />
+    <Content Include="Views\ProductPurchases\Edit.cshtml" />
+    <Content Include="Views\ProductPurchases\Index.cshtml" />
+    <Content Include="Views\ProductItems\Create.cshtml" />
+    <Content Include="Views\ProductItems\Delete.cshtml" />
+    <Content Include="Views\ProductItems\Details.cshtml" />
+    <Content Include="Views\ProductItems\Edit.cshtml" />
+    <Content Include="Views\ProductItems\Index.cshtml" />
+    <Content Include="Views\Stocks\Create.cshtml" />
+    <Content Include="Views\Stocks\Delete.cshtml" />
+    <Content Include="Views\Stocks\Details.cshtml" />
+    <Content Include="Views\Stocks\Edit.cshtml" />
+    <Content Include="Views\Stocks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

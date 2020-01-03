@@ -9,16 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using AprajitaRetails.Models.Data.Voyagers;
 using AprajitaRetailsOps.TAS;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Web;
-using System.Web.Mvc;
 
 namespace AprajitaRetailsControllers
 {
@@ -35,6 +26,7 @@ namespace AprajitaRetailsControllers
 
               InventoryManger iManage = new InventoryManger();
             int a = iManage.ProcessPurchaseInward(ddDate);
+            //TODO: instead of product item . it should list purchase invoice with item
 
             if (a > 0)
             {
@@ -50,6 +42,16 @@ namespace AprajitaRetailsControllers
         }
         public ActionResult PurchaseList(int? id)
         {
+            if (id == 101)
+            {
+                var md1 = db.ImportPurchases.Where(c => c.IsDataConsumed == true).OrderByDescending(c => c.GRNDate);
+                return View(md1);
+            }
+            else if (id == 100)
+            {
+                var md1 = db.ImportPurchases.OrderByDescending(c => c.GRNDate).ThenBy(c=>c.IsDataConsumed);
+                return View(md1);
+            }
             var md = db.ImportPurchases.Where(c => c.IsDataConsumed == false).OrderByDescending(c => c.GRNDate);
             return View(md);
         }

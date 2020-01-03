@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AprajitaRetails.Models.Data.Voyagers.Stock>
+
+@{
+    ViewBag.Title = "Stocks";
+}
+
+<h2>Current Stock</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null, new { @class="btn btn-sm btn-primary "})
+</p>
+<table class="table  table-bordered table-hover table-warning  table-sm  ">
+    <tr class="bg-success">
+        <th>SN:</th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductItem.Barcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Units)
+        </th>
+        <th></th>
+    </tr>
+    @{ int ctr = 0;}
+@foreach (var item in Model) {
+     ctr++;
+    <tr>
+        <td>@ctr</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductItem.Barcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchaseQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Units)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StockID }, new { @class="btn btn-sm btn-outline-warning "}) |
+            @Html.ActionLink("Details", "Details", new { id=item.StockID },new { @class="btn btn-sm btn-outline-info "}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StockID },new { @class="btn btn-sm btn-outline-danger "})
+        </td>
+    </tr>
+}
+
+</table>

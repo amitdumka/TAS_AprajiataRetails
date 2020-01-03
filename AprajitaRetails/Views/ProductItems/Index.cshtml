@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<AprajitaRetails.Models.Data.Voyagers.ProductItem>
 
 @{
-    ViewBag.Title = "Process Purchase";
+    ViewBag.Title = "Products";
 }
 
-<h2>ProcessPurchase</h2>
+<h2>Product List</h2>
 
 <p>
-    <h4 class="text-center text-success" > @ViewBag.MessageHead</h4>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-sm btn-primary " })
 </p>
-<table class="table table-sm table-bordered table-danger table-striped table-responsive-sm table-hover">
+<table class="table  table-bordered table-hover table-primary  table-sm  ">
     <tr class="bg-success">
         <th>
             @Html.DisplayNameFor(model => model.BrandName.BrandName)
@@ -20,39 +20,39 @@
         <th>
             @Html.DisplayNameFor(model => model.StyleCode)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.ProductName)
-        </th>
+        </th>*@
         @*<th>
             @Html.DisplayNameFor(model => model.ItemDesc)
         </th>*@
         @*<th>
-                @Html.DisplayNameFor(model => model.SupplierId)
-            </th>*@
-        <th>
             @Html.DisplayNameFor(model => model.Categorys)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.MainCategory)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.ProductCategory)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProductType)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.MRP)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.TaxRate)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Cost)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.Size)
-        </th>*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Units)
+        </th>
         <th></th>
     </tr>
 
@@ -68,43 +68,43 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StyleCode)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
+            </td>*@
             @*<td>
                 @Html.DisplayFor(modelItem => item.ItemDesc)
             </td>*@
             @*<td>
-                    @Html.DisplayFor(modelItem => item.SupplierId)
-                </td>*@
-            <td>
                 @Html.DisplayFor(modelItem => item.Categorys)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.MainCategory.CategoryName)
             </td>
-            @*<td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ProductCategory.CategoryName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductType.CategoryName)
-            </td>*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MRP)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.TaxRate)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>*@
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductItemId }, new { @class="btn btn-sm btn-outline-secondary"}) 
-                @Html.ActionLink("Details", "Details", new { id = item.ProductItemId }, new { @class="btn btn-sm btn-outline-info"})
-                @*@Html.ActionLink("Delete", "Delete", new { id = item.ProductItemId }, new { @class="btn btn-sm btn-outline-danger"})*@
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Units)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductItemId },new { @class="btn btn-sm btn-outline-warning "})
+                @Html.ActionLink("Details", "Details", new { id = item.ProductItemId },new { @class="btn btn-sm btn-outline-info "})
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductItemId },new { @class="btn btn-sm btn-outline-danger "})
             </td>
         </tr>
     }
