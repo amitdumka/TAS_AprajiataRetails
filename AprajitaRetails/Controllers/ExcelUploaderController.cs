@@ -9,6 +9,16 @@ using System.Web;
 using System.Web.Mvc;
 using AprajitaRetails.Models.Data.Voyagers;
 using AprajitaRetailsOps.TAS;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Threading;
+using System.Web;
+using System.Web.Mvc;
 
 namespace AprajitaRetailsControllers
 {
@@ -28,7 +38,7 @@ namespace AprajitaRetailsControllers
 
             if (a > 0)
             {
-                var dm = db.ProductItems;
+                var dm = db.ProductItems.Include(c => c.MainCategory);
                 ViewBag.MessageHead = "No of Product Item added and stock is created are " + a;
                 return View(dm);
             }

@@ -130,7 +130,7 @@ namespace AprajitaRetailsOps.TAS
 
         }
 
-        
+
         private int GetBrandID(VoyagerContext db, string code)
         {
             //TODO: Null Object is found
@@ -142,14 +142,16 @@ namespace AprajitaRetailsOps.TAS
             }
             catch (Exception)
             {
-                Brand brand = new Brand { 
-                    BCode=code, BrandName=code
+                Brand brand = new Brand
+                {
+                    BCode = code,
+                    BrandName = code
                 };
                 db.Brands.Add(brand);
                 db.SaveChanges();
                 return brand.BrandId;
             }
-            
+
         }
         private int GetBrand(VoyagerContext db, string StyleCode)
         {
@@ -209,17 +211,25 @@ namespace AprajitaRetailsOps.TAS
             using (VoyagerContext db = new VoyagerContext())
             {
                 int ctr = 0;
-                var data = db.ImportPurchases.Where(c => c.IsDataConsumed == false && DbFunctions.TruncateTime( c.GRNDate) == DbFunctions.TruncateTime(inDate));
+                var data = db.ImportPurchases.Where(c => c.IsDataConsumed == false && DbFunctions.TruncateTime(c.GRNDate) == DbFunctions.TruncateTime(inDate)).OrderBy(c=>c.InvoiceNo);
                 if (data != null && data.Count() > 0)
                 {
+                    ProductPurchase PurchasedProduct = null;
+
                     foreach (var item in data)
                     {
 
                         int pid = CreateProductItem(item);
                         if (pid != -999)
                             CreateStockItem(item, pid);
+                        CreatePurchaseInWard(item,PurchasedProduct);
+                        item.IsDataConsumed = true;
+                        db.Entry(item).State = EntityState.Modified;
                         ctr++;
                     }
+                    if (PurchasedProduct != null) 
+                        db.ProductPurchases.Add(PurchasedProduct);
+                    db.SaveChanges();
                 }
                 return ctr;
 
@@ -244,7 +254,7 @@ namespace AprajitaRetailsOps.TAS
                         StyleCode = purchase.StyleCode,
                         ProductName = purchase.ProductName,
                         ItemDesc = purchase.ItemDesc,
-                         BrandId = GetBrand(db, purchase.StyleCode)
+                        BrandId = GetBrand(db, purchase.StyleCode)
 
                     };
 
@@ -269,7 +279,7 @@ namespace AprajitaRetailsOps.TAS
                 }
                 else if (barc > 0)
                 {
-                     barc = db.ProductItems.Where(c => c.Barcode == purchase.Barcode).First().ProductItemId;
+                    barc = db.ProductItems.Where(c => c.Barcode == purchase.Barcode).First().ProductItemId;
 
                     return barc;
                     // Already Added 
@@ -313,17 +323,66 @@ namespace AprajitaRetailsOps.TAS
 
         }
 
-        public void CreatePurchaseInWard(ImportPurchase purchase)
+        public void CreatePurchaseInWard(ImportPurchase purchase, ProductPurchase product)
         {
-            using (VoyagerContext db = new VoyagerContext())
+            using (VoyagerContext db = new VoyagerContext()) // TODO: No need to create  connection every time. optimized
             {
-                //ProductPurchase product = new ProductPurchase {
-                //    InvoiceNo=purchase.InvoiceNo, InWardDate=purchase.GRNDate, InWardNo=purchase.GRNNo,
-                //     IsPaid=false, PurchaseDate=purchase.InvoiceDate, ShippingCost=0,  TotalBasicAmount=purchase.CostValue,
-                //      TotalTax=purchase.TaxAmt, TotalQty=purchase.Quantity, 
-                //      TotalAmount=purchase.CostValue+purchase.TaxAmt,Remarks=""
+                
+                
+                if (product != null)
+                {
+                    if(purchase.InvoiceNo==product.InvoiceNo)
+                    {
+                        product.TotalAmount += (purchase.CostValue + purchase.TaxAmt);
+                        product.ShippingCost += 0;//TODO: add option for adding shipping cost for fabric
+                        product.TotalBasicAmount += purchase.CostValue;
+                        product.TotalTax += purchase.TaxAmt;
+                        product.TotalQty += purchase.Quantity;
+                        db.Entry(product).State = EntityState.Modified;
 
-                //};
+                    }
+                    else
+                    {
+                        db.ProductPurchases.Add(product); db.SaveChanges();
+                        product = new ProductPurchase
+                        {
+                            InvoiceNo = purchase.InvoiceNo,
+                            InWardDate = purchase.GRNDate,
+                            InWardNo = purchase.GRNNo,
+                            IsPaid = false,
+                            PurchaseDate = purchase.InvoiceDate,
+                            ShippingCost = 0,//TODO: add option for adding shipping cost for fabric
+                            TotalBasicAmount = purchase.CostValue,
+                            TotalTax = purchase.TaxAmt,
+                            TotalQty = purchase.Quantity,
+                            TotalAmount = purchase.CostValue + purchase.TaxAmt,// TODO: Check for actual DATA. 
+                            Remarks = ""
+
+                        };
+                    }
+
+                }
+                else
+                {
+                    product = new ProductPurchase
+                    {
+                        InvoiceNo = purchase.InvoiceNo,
+                        InWardDate = purchase.GRNDate,
+                        InWardNo = purchase.GRNNo,
+                        IsPaid = false,
+                        PurchaseDate = purchase.InvoiceDate,
+                        ShippingCost = 0,//TODO: add option for adding shipping cost for fabric
+                        TotalBasicAmount = purchase.CostValue,
+                        TotalTax = purchase.TaxAmt,
+                        TotalQty = purchase.Quantity,
+                        TotalAmount = purchase.CostValue + purchase.TaxAmt,// TODO: Check for actual DATA. 
+                        Remarks = ""
+
+                    };
+                    
+                }
+                
+
             }
         }
         #endregion
@@ -383,7 +442,7 @@ namespace AprajitaRetailsOps.TAS
 
                 return true;
             }
-            else 
+            else
                 return false;
 
         }

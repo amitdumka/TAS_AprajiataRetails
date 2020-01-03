@@ -28,7 +28,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
         public DateTime PurchaseDate { get; set; }
         public string InvoiceNo { get; set; }
 
-        public decimal TotalQty { get; set; }
+        public double TotalQty { get; set; }
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalBasicAmount { get; set; }
