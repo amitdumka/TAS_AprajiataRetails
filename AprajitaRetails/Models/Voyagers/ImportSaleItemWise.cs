@@ -15,7 +15,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
 
         [ExcelColumn("Invoice Date")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public string InvoiceDate { get; set; }
+        public DateTime InvoiceDate { get; set; }
 
         [ExcelColumn("Invoice No")]
         [Display(Name = "Invoice No")]

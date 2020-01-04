@@ -246,7 +246,7 @@ namespace AprajitaRetailsOps.TAS
                         if (pid != -999)
                             CreateStockItem(db, item, pid);
                         PurchasedProduct = CreatePurchaseInWard(db, item, PurchasedProduct);
-                        PurchasedProduct.PurchaseItems.Add(CreatePurchaseItem(db,item,pid));
+                        PurchasedProduct.PurchaseItems.Add(CreatePurchaseItem(db, item, pid));
                         item.IsDataConsumed = true;
                         db.Entry(item).State = EntityState.Modified;
                         ctr++;
@@ -383,9 +383,9 @@ namespace AprajitaRetailsOps.TAS
                         TotalQty = purchase.Quantity,
                         TotalAmount = purchase.CostValue + purchase.TaxAmt,// TODO: Check for actual DATA. 
                         Remarks = "",
-                        SupplierID = GetSupplierIdOrAdd(db, purchase.SupplierName), 
-                        
-                        
+                        SupplierID = GetSupplierIdOrAdd(db, purchase.SupplierName),
+
+
                     };
                     product.PurchaseItems = new List<PurchaseItem>();
 
@@ -429,7 +429,7 @@ namespace AprajitaRetailsOps.TAS
                 TaxAmout = purchase.TaxAmt,
                 Unit = db.ProductItems.Find(productId).Units,
                 PurchaseTaxTypeId = 1,// TODO: Calculate option needed.
-                ProductItemId=productId
+                ProductItemId = productId
             };
             return item;
         }
@@ -440,12 +440,136 @@ namespace AprajitaRetailsOps.TAS
         #region Sale
         public int CreateSaleEntry(DateTime onDate)
         {
+            using (VoyagerContext db = new VoyagerContext())
+            {
+                int ctr = 0;
+                SaleInvoice saleInvoice = null;
+                var data = db.ImportSaleItemWises.Where(c => c.IsDataConsumed == false && DbFunctions.TruncateTime(c.InvoiceDate) == DbFunctions.TruncateTime(onDate)).OrderBy(c => c.InvoiceNo).ToList();
+                if (data != null)
+                {
+
+
+                }
+                else
+                {
+                    return ctr;
+                }
+
+            }
 
             return 0;
         }
+        //Invoice No	Invoice Date	Invoice Type	
+        //Brand Name	Product Name	Item Desc	
+        //HSN Code	BAR CODE	Style Code	Quantity	
+        //MRP	Discount Amt	Basic Amt	Tax Amt	SGST Amt	CGST Amt	Line Total	Round Off	
+        //Bill Amt	Payment Mode	SalesMan Name	
+        public void UpdateHSNCode(VoyagerContext db, string HSNCode, int itemCode) { }
+
+        public int GetSalesmanId(VoyagerContext db, string salesman)
+        {
+            try
+            {
+                var id = db.Salesmen.Where(c => c.SalesmanName == salesman).FirstOrDefault().SalesmanId;
+                if (id > 0)
+                {
+                    return id;
+                }
+                else
+                {
+                    Salesman sm = new Salesman { SalesmanName = salesman, SMCode = "SM00" };
+                    db.Salesmen.Add(sm); db.SaveChanges();
+                    return sm.SalesmanId;
+                }
+            }
+            catch (Exception)
+            {
+
+                Salesman sm = new Salesman { SalesmanName = salesman, SMCode = "SM00" };
+                db.Salesmen.Add(sm); db.SaveChanges();
+                return sm.SalesmanId;
+            }
+
+        }
+
+        public void CreateSaleInvoice(VoyagerContext db, ImportSaleItemWise item, SaleInvoice invoice)
+        {
+            if (invoice != null)
+            {
+                if (invoice.InvoiceNo == item.InvoiceNo)
+                {
+                    
+                }
+                else
+                {
+                    db.SaleInvoices.Add(invoice);
+                    db.SaveChanges();
+                    SaleInvoice sale = new SaleInvoice
+                    {
+                        InvoiceNo = item.InvoiceNo,
+                        OnDate = item.InvoiceDate,
+                        TotalDiscountAmount=item.Discount, 
+                        TotalBillAmount=item.LineTotal,
+                        TotalItems=1,//TODO: Check for count
+                        TotalQty=item.Quantity, RoundOffAmount=item.RoundOff, 
+                        TotalTaxAmount=item.SGST, //TODO: Check
+
+
+                    };
+                }
+
+            }
+            else
+            {
+                SaleInvoice sale = new SaleInvoice
+                {
+                    InvoiceNo = item.InvoiceNo,
+                    OnDate = item.InvoiceDate,
+                };
+            }
+            
 
 
 
+           
+        }
+
+        public void CreateSaleItem(VoyagerContext db, ImportSaleItemWise item)
+        {
+            var pi = db.ProductItems.Where(c => c.Barcode == item.Barcode).Select(c => new { c.ProductItemId, c.Units }).FirstOrDefault();
+            SaleItem saleItem = new SaleItem
+            {
+                BarCode = item.Barcode,
+                MRP = item.MRP,
+                BasicAmount = item.BasicRate,
+                Discount = item.Discount,
+                Qty = item.Quantity,
+                TaxAmount = item.SGST,
+                BillAmount = item.LineTotal,
+                Units = pi.Units,
+                ProductItemId = pi.ProductItemId,
+                SalesmanId = GetSalesmanId(db, item.Saleman),
+                SaleTaxTypeId = CreateSaleTax(db, item)
+            };
+        }
+
+        public int CreateSaleTax(VoyagerContext db, ImportSaleItemWise item, bool isIGST = false)
+        {
+            if (item.Tax != 0 && item.SGST != 0)
+            {
+                //GST Bill
+            }
+            else if (item.Tax == 0 && item.SGST == 0)
+            {
+                //TODO: Tax implementation
+            }
+            else
+            {
+
+            }
+
+            return 0;
+        }
         #endregion
 
         #region Stocks

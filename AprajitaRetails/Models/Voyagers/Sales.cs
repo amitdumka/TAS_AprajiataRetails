@@ -18,7 +18,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
 
         public int TotalItems { get; set; }
 
-        public decimal TotalQty { get; set; }
+        public double TotalQty { get; set; }
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TotalBillAmount { get; set; }
@@ -45,30 +45,37 @@ namespace AprajitaRetails.Models.Data.Voyagers
 
     public class SaleItem
     {
-        public int SaleItemID { get; set; }
+        public int SaleItemId { get; set; }
 
-        public int SaleInvoiceID { get; set; }
+        public int SaleInvoiceId { get; set; }
 
+        public int ProductItemId { get; set; }
+        public virtual ProductItem ProductItem { get; set; }
         public string BarCode { get; set; }
-        public decimal Qty { get; set; }
+
+        public double Qty { get; set; }
         public Units Units { get; set; }
 
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal MRP { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal BasicAmount { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal Discount { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TaxAmount { get; set; }
 
-        public int SaleTaxTypeId { get; set; }
+        public int? SaleTaxTypeId { get; set; }
         public virtual SaleTaxType SaleTaxType { get; set; }
+
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal BillAmount { get; set; }
         // SaleTax options and it will Done
 
-        public int SalesmanID { get; set; }
+        public int SalesmanId { get; set; }
 
         public virtual SaleInvoice SaleInvoice { get; set; }
         public virtual Salesman Salesman { get; set; }
@@ -91,9 +98,9 @@ namespace AprajitaRetails.Models.Data.Voyagers
     {
         [ForeignKey("SaleInvoice")]
         public int SalePaymentDetailId { get; set; }
-              
+
         //public int SaleInvoiceId { get; set; }
-        
+
         public SalePayMode PayMode { get; set; }
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CashAmount { get; set; }
@@ -101,7 +108,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
         public decimal CardAmount { get; set; }
 
         public virtual CardPaymentDetail CardDetails { get; set; }
-       
+
         public virtual SaleInvoice SaleInvoice { get; set; }
 
     }
