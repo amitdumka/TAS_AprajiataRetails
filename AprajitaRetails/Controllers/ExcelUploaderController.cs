@@ -69,14 +69,14 @@ namespace AprajitaRetailsControllers
             int a = iManage.CreateSaleEntry(ddDate);
             if (a > 0)
             {
-                var dm = db.SaleItems;
-                ViewBag.MessageHead = "No of Product Item added and stock is created are " + a;
+                var dm = db.SaleInvoices.Where(c=>c.OnDate==ddDate);
+                ViewBag.MessageHead = "No. Of Sale Invoice Created  and item processed are " + a;
                 return View(dm.ToList());
             }
             else
             {
-                ViewBag.MessageHead = "No Product items added. Some error might has been occured. a=" + a;
-                return View(new SaleItem());
+                ViewBag.MessageHead = "No Sale items added. Some error might has been occured. a=" + a;
+                return View(new SaleInvoice());
             }
             
         }

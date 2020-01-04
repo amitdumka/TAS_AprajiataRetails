@@ -4,7 +4,7 @@ public enum Genders { Male, Female, TransGender }
 public enum Units {  Nos, Meters, Pcs, Packets }
 public enum TaxType {  GST, SGST, CGST, IGST, VAT }
 
-public enum SalePayMode { Cash, Card, Mix }//TODO: check update based on data present
+public enum SalePayMode { Cash, Card, Mix, SR }//TODO: check update based on data present
 
 public enum Sizes { S, M, L, XL, XXL, XXXL, T28, T30, T32, T34, T36, T38, T40, T41, T42, T44, T46, T48 }
 

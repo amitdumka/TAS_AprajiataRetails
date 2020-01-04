@@ -14,7 +14,35 @@ namespace AprajitaRetailsOps.TAS
     {
 
         #region HelperFunctions
+        public void UpdateHSNCode(VoyagerContext db, string HSNCode, int itemCode) { }
 
+        public int GetSalesmanId(VoyagerContext db, string salesman)
+        {
+            try
+            {
+                var id = db.Salesmen.Where(c => c.SalesmanName == salesman).FirstOrDefault().SalesmanId;
+                if (id > 0)
+                {
+                    return id;
+                }
+                else
+                {
+                    Salesman sm = new Salesman { SalesmanName = salesman };
+                    db.Salesmen.Add(sm); db.SaveChanges();
+                    return sm.SalesmanId;
+                }
+            }
+            catch (Exception)
+            {
+
+                Salesman sm = new Salesman { SalesmanName = salesman };
+                db.Salesmen.Add(sm); db.SaveChanges();
+                return sm.SalesmanId;
+            }
+
+        }
+
+        public int GetCustomerId(VoyagerContext db, ImportSaleItemWise item) { return 1; }
 
         private List<Category> GetCategory(VoyagerContext db, string pCat, string sCat, string tCat)
         {
@@ -447,7 +475,18 @@ namespace AprajitaRetailsOps.TAS
                 var data = db.ImportSaleItemWises.Where(c => c.IsDataConsumed == false && DbFunctions.TruncateTime(c.InvoiceDate) == DbFunctions.TruncateTime(onDate)).OrderBy(c => c.InvoiceNo).ToList();
                 if (data != null)
                 {
-
+                    foreach (var item in data)
+                    {
+                        saleInvoice = CreateSaleInvoice(db, item, saleInvoice);
+                        saleInvoice.SaleItems.Add(CreateSaleItem(db, item));
+                        ctr++;
+                    }
+                    if (saleInvoice != null)
+                    {
+                        db.SaleInvoices.Add(saleInvoice);
+                        db.SaveChanges();
+                    }
+                    return ctr;
 
                 }
                 else
@@ -457,62 +496,106 @@ namespace AprajitaRetailsOps.TAS
 
             }
 
-            return 0;
+
         }
+
         //Invoice No	Invoice Date	Invoice Type	
         //Brand Name	Product Name	Item Desc	
         //HSN Code	BAR CODE	Style Code	Quantity	
         //MRP	Discount Amt	Basic Amt	Tax Amt	SGST Amt	CGST Amt	Line Total	Round Off	
         //Bill Amt	Payment Mode	SalesMan Name	
-        public void UpdateHSNCode(VoyagerContext db, string HSNCode, int itemCode) { }
 
-        public int GetSalesmanId(VoyagerContext db, string salesman)
+
+        public SalePaymentDetail CreatePaymentDetails(VoyagerContext db, ImportSaleItemWise item)
         {
-            try
-            {
-                var id = db.Salesmen.Where(c => c.SalesmanName == salesman).FirstOrDefault().SalesmanId;
-                if (id > 0)
-                {
-                    return id;
-                }
-                else
-                {
-                    Salesman sm = new Salesman { SalesmanName = salesman, SMCode = "SM00" };
-                    db.Salesmen.Add(sm); db.SaveChanges();
-                    return sm.SalesmanId;
-                }
-            }
-            catch (Exception)
-            {
 
-                Salesman sm = new Salesman { SalesmanName = salesman, SMCode = "SM00" };
-                db.Salesmen.Add(sm); db.SaveChanges();
-                return sm.SalesmanId;
+            if (item.PaymentType == null || item.PaymentType == "")
+            {
+                return null;
             }
+            else if (item.PaymentType == "CAS")
+            {
+                //cash Payment
+                SalePaymentDetail payment = new SalePaymentDetail
+                {
+                    CashAmount = item.BillAmnt,
+                    PayMode = SalePayMode.Cash
+                };
+
+                return payment;
+            }
+            else if (item.PaymentType == "CRD")
+            {
+                SalePaymentDetail payment = new SalePaymentDetail
+                {
+                    CardAmount = item.BillAmnt,
+                    PayMode = SalePayMode.Card
+                };
+                //Mix Payment
+                return payment;
+            }
+            else if (item.PaymentType == "MIX")
+            {
+                SalePaymentDetail payment = new SalePaymentDetail
+                {
+                    MixAmount = item.BillAmnt,
+                    PayMode = SalePayMode.Mix
+                };
+                //CASH
+                return payment;
+            }
+            else if (item.PaymentType == "SR")
+            {
+                SalePaymentDetail payment = new SalePaymentDetail
+                {
+                    CashAmount = item.BillAmnt,
+                    PayMode = SalePayMode.SR
+                };
+                return payment;
+            }
+            else return null;
+
 
         }
 
-        public void CreateSaleInvoice(VoyagerContext db, ImportSaleItemWise item, SaleInvoice invoice)
+        public SaleInvoice CreateSaleInvoice(VoyagerContext db, ImportSaleItemWise item, SaleInvoice invoice)
         {
             if (invoice != null)
             {
                 if (invoice.InvoiceNo == item.InvoiceNo)
                 {
-                    
+                    // invoice.InvoiceNo = item.InvoiceNo;
+                    //invoice.OnDate = item.InvoiceDate;
+                    invoice.TotalDiscountAmount += item.Discount;
+                    invoice.TotalBillAmount += item.LineTotal;
+                    invoice.TotalItems += 1;//TODO: Check for count
+                    invoice.TotalQty += item.Quantity;
+                    invoice.RoundOffAmount += item.RoundOff;
+                    invoice.TotalTaxAmount += item.SGST; //TODO: Check
+
+                    invoice.PaymentDetail = CreatePaymentDetails(db, item);
+                    invoice.CustomerId = GetCustomerId(db, item);
+
                 }
                 else
                 {
                     db.SaleInvoices.Add(invoice);
                     db.SaveChanges();
-                    SaleInvoice sale = new SaleInvoice
+
+                    invoice = new SaleInvoice
                     {
                         InvoiceNo = item.InvoiceNo,
                         OnDate = item.InvoiceDate,
-                        TotalDiscountAmount=item.Discount, 
-                        TotalBillAmount=item.LineTotal,
-                        TotalItems=1,//TODO: Check for count
-                        TotalQty=item.Quantity, RoundOffAmount=item.RoundOff, 
-                        TotalTaxAmount=item.SGST, //TODO: Check
+                        TotalDiscountAmount = item.Discount,
+                        TotalBillAmount = item.LineTotal,
+                        TotalItems = 1,//TODO: Check for count
+                        TotalQty = item.Quantity,
+                        RoundOffAmount = item.RoundOff,
+                        TotalTaxAmount = item.SGST, //TODO: Check
+                        PaymentDetail = CreatePaymentDetails(db, item),
+                        CustomerId = GetCustomerId(db, item),
+                        SaleItems = new List<SaleItem>()
+
 
 
                     };
@@ -521,22 +604,31 @@ namespace AprajitaRetailsOps.TAS
             }
             else
             {
-                SaleInvoice sale = new SaleInvoice
+                invoice = new SaleInvoice
                 {
                     InvoiceNo = item.InvoiceNo,
                     OnDate = item.InvoiceDate,
+                    TotalDiscountAmount = item.Discount,
+                    TotalBillAmount = item.LineTotal,
+                    TotalItems = 1,//TODO: Check for count
+                    TotalQty = item.Quantity,
+                    RoundOffAmount = item.RoundOff,
+                    TotalTaxAmount = item.SGST, //TODO: Check
+                    PaymentDetail = CreatePaymentDetails(db, item),
+                    CustomerId = GetCustomerId(db, item),
+                    SaleItems = new List<SaleItem>()
                 };
             }
-            
+
+            return invoice;
 
 
-
-           
         }
 
-        public void CreateSaleItem(VoyagerContext db, ImportSaleItemWise item)
+        public SaleItem CreateSaleItem(VoyagerContext db, ImportSaleItemWise item)
         {
             var pi = db.ProductItems.Where(c => c.Barcode == item.Barcode).Select(c => new { c.ProductItemId, c.Units }).FirstOrDefault();
+
             SaleItem saleItem = new SaleItem
             {
                 BarCode = item.Barcode,
@@ -550,7 +642,10 @@ namespace AprajitaRetailsOps.TAS
                 ProductItemId = pi.ProductItemId,
                 SalesmanId = GetSalesmanId(db, item.Saleman),
                 SaleTaxTypeId = CreateSaleTax(db, item)
+
             };
+            SalePurchaseManager.UpDateStock(db, pi.ProductItemId, item.Quantity, false);// TODO: Check for this working
+            return saleItem;
         }
 
         public int CreateSaleTax(VoyagerContext db, ImportSaleItemWise item, bool isIGST = false)
@@ -568,7 +663,7 @@ namespace AprajitaRetailsOps.TAS
 
             }
 
-            return 0;
+            return 1;
         }
         #endregion
 
@@ -600,7 +695,7 @@ namespace AprajitaRetailsOps.TAS
         /// <param name="Qty"></param>
         /// <param name="IsPurchased"></param>
         /// <returns></returns>
-        public bool UpDateStock(VoyagerContext db, int ItemCode, double Qty, bool IsPurchased)
+        public static bool UpDateStock(VoyagerContext db, int ItemCode, double Qty, bool IsPurchased)
         {
             var stock = db.Stocks.Where(c => c.ProductItemId == ItemCode).FirstOrDefault();
 
