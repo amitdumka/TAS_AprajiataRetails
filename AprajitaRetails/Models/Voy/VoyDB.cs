@@ -75,7 +75,7 @@ namespace AprajitaRetails.Models.Data.Voy
         private string _CustomerMobile;
 
         private string _StoreID;
-    }
+    }  
     public class PaymentDetails {
         private int _ID;
 
