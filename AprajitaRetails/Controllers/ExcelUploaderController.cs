@@ -25,7 +25,7 @@ namespace AprajitaRetailsControllers
             DateTime ddDate = DateTime.Parse(dDate).Date;
 
             InventoryManger iManage = new InventoryManger();
-            int a = iManage.ProcessPurchaseInward(ddDate);
+            int a = iManage.ProcessPurchaseInward(ddDate, false);
             //TODO: instead of product item . it should list purchase invoice with item
 
             if (a > 0)

@@ -30,6 +30,7 @@ public enum BankPayModes { Cash, Card, Cheques, RTGS, NEFT, IMPS, Wallets, Other
 
 
 public enum UploadTypes { Purchase, SaleRegister, SaleItemWise, InWard, Customer }
+public enum UploadReturns { Success, Error, FileNotFound, NotExcelType, ImportNotSupported }
 
 public class UploadType
 {

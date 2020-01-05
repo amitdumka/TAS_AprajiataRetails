@@ -1,0 +1,90 @@
+﻿@model IEnumerable<AprajitaRetails.Models.Data.Voyagers.ImportPurchase>
+
+@{
+    ViewBag.Title = "PurchaseList";
+}
+
+<h2>Purchase List</h2>
+
+<table class="table table-sm table-bordered table-secondary table-striped table-responsive-sm table-hover">
+    <tr class="bg-success">
+        <th>
+            @Html.DisplayNameFor(model => model.GRNNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GRNDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Barcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StyleCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MRP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostValue)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GRNNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GRNDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Barcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StyleCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MRP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostValue)
+            </td>
+            <td>
+                @using (Html.BeginForm("ProcessPurchase", "ExcelUploader", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" name="dDate" value=@item.GRNDate.ToShortDateString() />
+                    <input type="submit" value="Process" class="btn btn-warning" />
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>

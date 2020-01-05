@@ -257,7 +257,7 @@ namespace AprajitaRetailsOps.TAS
 
         // Converting purchase items to stock 
 
-        public int ProcessPurchaseInward(DateTime inDate)
+        public int ProcessPurchaseInward(DateTime inDate, bool IsLocal)
         {
             using (VoyagerContext db = new VoyagerContext())
             {
@@ -274,7 +274,7 @@ namespace AprajitaRetailsOps.TAS
                         if (pid != -999)
                             CreateStockItem(db, item, pid);
                         PurchasedProduct = CreatePurchaseInWard(db, item, PurchasedProduct);
-                        PurchasedProduct.PurchaseItems.Add(CreatePurchaseItem(db, item, pid));
+                        PurchasedProduct.PurchaseItems.Add(CreatePurchaseItem(db, item, pid,IsLocal));
                         item.IsDataConsumed = true;
                         db.Entry(item).State = EntityState.Modified;
                         ctr++;
@@ -446,7 +446,7 @@ namespace AprajitaRetailsOps.TAS
             return product;
         }
 
-        public PurchaseItem CreatePurchaseItem(VoyagerContext db, ImportPurchase purchase, int productId)
+        public PurchaseItem CreatePurchaseItem(VoyagerContext db, ImportPurchase purchase, int productId, bool IsLocal = false)
         {
             PurchaseItem item = new PurchaseItem
             {
@@ -456,13 +456,51 @@ namespace AprajitaRetailsOps.TAS
                 Qty = purchase.Quantity,
                 TaxAmout = purchase.TaxAmt,
                 Unit = db.ProductItems.Find(productId).Units,
-                PurchaseTaxTypeId = 1,// TODO: Calculate option needed.
+                PurchaseTaxTypeId = CreatePurchaseTaxType(db,purchase,IsLocal),
                 ProductItemId = productId
             };
             return item;
         }
 
+        public int CreatePurchaseTaxType(VoyagerContext db, ImportPurchase purchase, bool IsLocal=false)
+        {
+            //Calculate tax rate
+            int taxRate = 0;
+            taxRate =(int) (purchase.TaxAmt * purchase.CostValue) / 100;
 
+            if (IsLocal)
+            {
+                try
+                {
+                    int id = db.PurchaseTaxTypes.Where(c => c.CompositeRate == taxRate).Select(c => c.PurchaseTaxTypeId).FirstOrDefault();
+                    return id;
+                }
+                catch (Exception)
+                {
+
+                    PurchaseTaxType taxType = new PurchaseTaxType { CompositeRate = taxRate, TaxType = TaxType.GST, TaxName = "Input Tax GST(SGST+CGST) @" + taxRate };
+                    db.PurchaseTaxTypes.Add(taxType);
+                    db.SaveChanges();
+                    return taxType.PurchaseTaxTypeId;
+                }
+            }
+
+
+            try
+            {
+                int id = db.PurchaseTaxTypes.Where(c => c.CompositeRate == taxRate).Select(c => c.PurchaseTaxTypeId).FirstOrDefault();
+                return id;
+            }
+            catch (Exception)
+            {
+
+                PurchaseTaxType taxType = new PurchaseTaxType {CompositeRate=taxRate, TaxType=TaxType.IGST, TaxName="Input Tax IGST @"+taxRate };
+                db.PurchaseTaxTypes.Add(taxType);
+                db.SaveChanges();
+                return taxType.PurchaseTaxTypeId;
+            }
+               
+        }
         #endregion
 
         #region Sale

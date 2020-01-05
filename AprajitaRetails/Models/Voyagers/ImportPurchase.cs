@@ -69,12 +69,8 @@ namespace AprajitaRetails.Models.Data.Voyagers
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TaxAmt { get; set; }
 
-        //[DataType(DataType.Currency), Column(TypeName = "money")]
-        //public decimal IGSTAmt { get; set; }
-        //[DataType(DataType.Currency), Column(TypeName = "money")]
-        //public decimal CSGTAmt { get; set; }
-        //[DataType(DataType.Currency), Column(TypeName = "money")]
-        //public decimal SGSTAmt { get; set; }
+        public bool IsVatBill { get; set; }
+        public bool IsLocal { get; set; }
 
         [DefaultValue(false)]
         public bool IsDataConsumed { get; set; } = false;// is data imported to relevent table
