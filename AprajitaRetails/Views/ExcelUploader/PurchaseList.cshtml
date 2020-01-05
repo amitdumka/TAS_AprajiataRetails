@@ -6,11 +6,6 @@
 
 <h2>Purchase List</h2>
 
-@using (Html.BeginForm("ProcessPurchase", "ExcelUploader", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-
     <table class="table table-sm table-bordered table-secondary table-striped table-responsive-sm table-hover">
         <tr class="bg-success">
             <th>
@@ -80,14 +75,16 @@
                     @Html.DisplayFor(modelItem => item.CostValue)
                 </td>
                 <td>
-                   
-                    <input type="hidden"  name="dDate" value=@item.GRNDate.ToShortDateString() />
-                    <input type="submit" value=@item.GRNDate.ToShortDateString() class="btn btn-warning" />
+                    @using (Html.BeginForm("ProcessPurchase", "ExcelUploader", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
 
-                   
+                        <input type="hidden" name="dDate" value=@item.GRNDate.ToShortDateString() />
+                        <input type="submit" value="Process" class="btn btn-warning" />
+                    }
+
                 </td>
             </tr>
         }
 
     </table>
-}

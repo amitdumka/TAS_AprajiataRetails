@@ -157,13 +157,10 @@
                 @using (Html.BeginForm("ProcessSale", "ExcelUploader", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="hidden" id=@item.InvoiceDate.ToShortDateString() name="dDate" value=@item.InvoiceDate.ToShortDateString() />
-                    <input type="submit" value=@item.InvoiceDate.ToShortDateString() class="btn btn-warning" />
+                    <input type="hidden"  name="dDate" value=@item.InvoiceDate.ToShortDateString() />
+                    <input type="submit" value="Process" class="btn btn-warning" />
                 }
-                @*@Html.ActionLink("PP", "ProcessSale", new { dDate = item.InvoiceDate.ToShortDateString() })*@
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.ImportSaleItemWiseId }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.ImportSaleItemWiseId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.ImportSaleItemWiseId })*@
+              
             </td>
         </tr>
     }
