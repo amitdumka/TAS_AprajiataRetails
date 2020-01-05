@@ -154,14 +154,14 @@ namespace AprajitaRetailsControllers
                     }
                     else if (UploadType == UploadTypes.SaleItemWise)
                     {
-                        var currentImports = from a in excelFile.Worksheet<ImportSaleItemWise>(sheetName) select a;
+                        var currentImports = from a in excelFile.Worksheet<ImportSaleItemWiseVM>(sheetName) select a;
                         foreach (var a in currentImports)
                         {
                             try
                             {
                                 a.ImportTime = DateTime.Now;
                                 a.IsDataConsumed = false;
-                                db.ImportSaleItemWises.Add(a);
+                                db.ImportSaleItemWises.Add(ImportSaleItemWiseVM.ToTable(a));
                                 db.SaveChanges();
                             }
                             catch (DbEntityValidationException)

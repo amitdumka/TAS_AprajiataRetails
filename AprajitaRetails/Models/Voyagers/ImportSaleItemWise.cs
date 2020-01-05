@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace AprajitaRetails.Models.Data.Voyagers
 {
@@ -106,7 +107,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? ImportTime { get; set; } = DateTime.Now; // Date of Import
-                                                                 // is data imported to relevent table
+                                                                  // is data imported to relevent table
 
 
     }
@@ -114,7 +115,39 @@ namespace AprajitaRetails.Models.Data.Voyagers
     public class ImportSaleItemWiseVM
     {
         //Invoice No	Invoice Date	Invoice Type	Brand Name	Product Name	Item Desc	HSN Code	BAR CODE	Style Code	Quantity	MRP	Discount Amt	Basic Amt	Tax Amt	SGST Amt	CGST Amt	Line Total	Round Off	Bill Amt	Payment Mode	SalesMan Name	Coupon %	Coupon Amt	SUB TYPE	Bill Discount	LP Flag	Inst Order CD	TAILORING FLAG
+        public static ImportSaleItemWise ToTable(ImportSaleItemWiseVM data)
+        {
+           
 
+            ImportSaleItemWise item = new ImportSaleItemWise
+            {
+                Barcode = data.Barcode,
+                BasicRate = data.BasicRate,
+                BillAmnt = data.BillAmnt,
+                BrandName = data.BrandName,
+                CGST = data.CGST,
+                Discount = data.Discount,
+                HSNCode = data.HSNCode,
+                InvoiceDate = DateTime.ParseExact(data.InvoiceDate.Trim(),"dd-MM-yyyy", CultureInfo.InvariantCulture),
+                InvoiceNo = data.InvoiceNo,
+                InvoiceType = data.InvoiceType,
+                IsDataConsumed = data.IsDataConsumed,
+                ImportSaleItemWiseId = data.ImportSaleItemWiseId,
+                Quantity = data.Quantity,
+                ItemDesc = data.ItemDesc,
+                LineTotal = data.LineTotal,
+                MRP = data.MRP,
+                PaymentType = data.PaymentType,
+                ImportTime = data.ImportTime,
+                ProductName = data.ProductName,
+                RoundOff = data.RoundOff,
+                Saleman = data.Saleman,
+                SGST = data.SGST,
+                StyleCode = data.StyleCode,
+                Tax = data.Tax
+            };
+            return item;
+        }
 
         public int ImportSaleItemWiseId { get; set; }
 
