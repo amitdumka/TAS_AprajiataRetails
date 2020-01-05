@@ -61,6 +61,9 @@ namespace AprajitaRetailsControllers
             var md = db.ImportSaleItemWises.Where(c => c.IsDataConsumed == false).OrderByDescending(c => c.InvoiceDate);
             return View(md);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ProcessSale(string dDate)
         {
             DateTime ddDate = DateTime.Parse(dDate).Date;
@@ -69,7 +72,7 @@ namespace AprajitaRetailsControllers
             int a = iManage.CreateSaleEntry(ddDate);
             if (a > 0)
             {
-                var dm = db.SaleInvoices.Where(c=>c.OnDate==ddDate);
+                var dm = db.SaleInvoices.Include(c=>c.PaymentDetail).Where(c=>c.OnDate==ddDate);
                 ViewBag.MessageHead = "No. Of Sale Invoice Created  and item processed are " + a;
                 return View(dm.ToList());
             }

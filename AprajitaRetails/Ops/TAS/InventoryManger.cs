@@ -471,24 +471,29 @@ namespace AprajitaRetailsOps.TAS
             using (VoyagerContext db = new VoyagerContext())
             {
                 int ctr = 0;
-                bool isVat = false;
-                if(onDate < new DateTime(2017, 7, 1))
+
+                //bool isVat = false;
+                if (onDate < new DateTime(2017, 7, 1))
                 {
-                    isVat = true;
+                    //  isVat = true;
+                    return -1;// TODO: Temp implemenent for vat system
                 }
+
                 SaleInvoice saleInvoice = null;
+
                 var data = db.ImportSaleItemWises.Where(c => c.IsDataConsumed == false && DbFunctions.TruncateTime(c.InvoiceDate) == DbFunctions.TruncateTime(onDate)).OrderBy(c => c.InvoiceNo).ToList();
+
                 if (data != null)
                 {
                     foreach (var item in data)
                     {
-                        saleInvoice = CreateSaleInvoice(db, item, saleInvoice);
-                        saleInvoice.SaleItems.Add(CreateSaleItem(db, item ));
+                        saleInvoice = CreateSaleInvoice(db, item, saleInvoice);  //Create SaleInvoice
+                        saleInvoice.SaleItems.Add(CreateSaleItem(db, item)); // Create SaleItems
                         ctr++;
                     }
                     if (saleInvoice != null)
                     {
-                        db.SaleInvoices.Add(saleInvoice);
+                        db.SaleInvoices.Add(saleInvoice); // Save Last Sale Invoice
                         db.SaveChanges();
                     }
                     return ctr;
@@ -509,6 +514,57 @@ namespace AprajitaRetailsOps.TAS
         //HSN Code	BAR CODE	Style Code	Quantity	
         //MRP	Discount Amt	Basic Amt	Tax Amt	SGST Amt	CGST Amt	Line Total	Round Off	
         //Bill Amt	Payment Mode	SalesMan Name	
+        private int StockItem(VoyagerContext db, ImportSaleItemWise item, out Units unit)
+        {
+            ProductItem pItem = new ProductItem
+            {
+                Barcode = item.Barcode,
+                Cost = -999,
+                MRP = item.MRP,
+                StyleCode = item.StyleCode,
+                ProductName = item.ProductName,
+                ItemDesc = item.ItemDesc,
+                BrandId = GetBrand(db, item.StyleCode),
+
+
+            };
+
+            //spliting ProductName
+            string[] PN = item.ProductName.Split('/');
+
+            // Apparel / Work / Blazers
+            if (PN[0] == "Apparel")
+            {
+                pItem.Units = Units.Pcs;
+                pItem.Categorys = ProductCategorys.ReadyMade;
+            }
+            else if (PN[0] == "Suiting" || PN[0] == "Shirting")
+            {
+                pItem.Units = Units.Meters;
+                pItem.Categorys = ProductCategorys.Fabric;
+            }
+            else
+            {
+                pItem.Units = Units.Nos;
+                pItem.Categorys = ProductCategorys.Others; //TODO: For time being
+            }
+
+            List<Category> catIds = GetCategory(db, PN[0], PN[1], PN[2]);
+
+            pItem.MainCategory = catIds[0];
+            pItem.ProductCategory = catIds[1];
+            pItem.ProductType = catIds[2];
+
+            db.ProductItems.Add(pItem);
+            db.SaveChanges();
+
+            unit = pItem.Units;
+            return pItem.ProductItemId;
+
+
+        }
+
+
 
 
         private SalePaymentDetail CreatePaymentDetails(VoyagerContext db, ImportSaleItemWise item)
@@ -518,6 +574,7 @@ namespace AprajitaRetailsOps.TAS
             {
                 return null;
             }
+
             else if (item.PaymentType == "CAS")
             {
                 //cash Payment
@@ -572,13 +629,14 @@ namespace AprajitaRetailsOps.TAS
                     // invoice.InvoiceNo = item.InvoiceNo;
                     //invoice.OnDate = item.InvoiceDate;
                     invoice.TotalDiscountAmount += item.Discount;
-                    invoice.TotalBillAmount += item.LineTotal;
+                    invoice.TotalBillAmount += item.LineTotal;   // Check for if it is empty
                     invoice.TotalItems += 1;//TODO: Check for count
                     invoice.TotalQty += item.Quantity;
                     invoice.RoundOffAmount += item.RoundOff;
-                    invoice.TotalTaxAmount += item.SGST; //TODO: Check
+                    invoice.TotalTaxAmount += (item.SGST + item.CGST); //TODO: Check Future make it tax 
 
-                    invoice.PaymentDetail = CreatePaymentDetails(db, item);
+                    if (invoice.PaymentDetail == null)
+                        invoice.PaymentDetail = CreatePaymentDetails(db, item);
                     invoice.CustomerId = GetCustomerId(db, item);
 
                 }
@@ -596,7 +654,7 @@ namespace AprajitaRetailsOps.TAS
                         TotalItems = 1,//TODO: Check for count
                         TotalQty = item.Quantity,
                         RoundOffAmount = item.RoundOff,
-                        TotalTaxAmount = item.SGST, //TODO: Check
+                        TotalTaxAmount = (item.SGST + item.CGST), //TODO: Check
                         PaymentDetail = CreatePaymentDetails(db, item),
                         CustomerId = GetCustomerId(db, item),
                         SaleItems = new List<SaleItem>()
@@ -618,7 +676,7 @@ namespace AprajitaRetailsOps.TAS
                     TotalItems = 1,//TODO: Check for count
                     TotalQty = item.Quantity,
                     RoundOffAmount = item.RoundOff,
-                    TotalTaxAmount = item.SGST, //TODO: Check
+                    TotalTaxAmount = (item.SGST + item.CGST), //TODO: Check
                     PaymentDetail = CreatePaymentDetails(db, item),
                     CustomerId = GetCustomerId(db, item),
                     SaleItems = new List<SaleItem>()
@@ -630,9 +688,16 @@ namespace AprajitaRetailsOps.TAS
 
         }
 
-        private  SaleItem CreateSaleItem(VoyagerContext db, ImportSaleItemWise item)
+        private SaleItem CreateSaleItem(VoyagerContext db, ImportSaleItemWise item)
         {
             var pi = db.ProductItems.Where(c => c.Barcode == item.Barcode).Select(c => new { c.ProductItemId, c.Units }).FirstOrDefault();
+            if (pi == null)
+            {
+                //TODO: Handle for ProductItem Doesnt Exsist. 
+                //create item and stock
+                int id = StockItem(db, item, out Units UNTS);
+                pi = new { ProductItemId = id, Units = UNTS };
+            }
 
             SaleItem saleItem = new SaleItem
             {
@@ -641,7 +706,7 @@ namespace AprajitaRetailsOps.TAS
                 BasicAmount = item.BasicRate,
                 Discount = item.Discount,
                 Qty = item.Quantity,
-                TaxAmount = item.SGST,
+                TaxAmount = item.SGST + item.CGST,
                 BillAmount = item.LineTotal,
                 Units = pi.Units,
                 ProductItemId = pi.ProductItemId,
@@ -650,25 +715,36 @@ namespace AprajitaRetailsOps.TAS
 
             };
             SalePurchaseManager.UpDateStock(db, pi.ProductItemId, item.Quantity, false);// TODO: Check for this working
+            item.IsDataConsumed = true;
+            db.Entry(item).State = EntityState.Modified;
             return saleItem;
         }
 
-        private int CreateSaleTax(VoyagerContext db, ImportSaleItemWise item, bool isIGST = false)
+        private int CreateSaleTax(VoyagerContext db, ImportSaleItemWise item)
         {
-            if (item.Tax != 0 && item.SGST != 0)
+            // Always GST and with Local Sale
+
+            //Calulate Rate
+            decimal rate = 0;
+            rate = ((item.SGST + item.CGST) * 100) / item.BasicRate;
+            int taxId = 1;
+
+            try
             {
-                //GST Bill
+                taxId = db.SaleTaxTypes.Where(c => c.CompositeRate == rate).FirstOrDefault().SaleTaxTypeId;
+                return taxId;
             }
-            else if (item.Tax == 0 && item.SGST == 0)
-            {
-                //TODO: Tax implementation
-            }
-            else
+            catch (Exception)
             {
 
+                SaleTaxType taxType = new SaleTaxType { CompositeRate = rate, TaxName = "OutPut Tax  GST(CGST+SGST) @" + rate, TaxType = TaxType.GST };
+                db.SaleTaxTypes.Add(taxType);
+                db.SaveChanges();
+                return taxType.SaleTaxTypeId;
             }
 
-            return 1;
+
+
         }
         #endregion
 
@@ -733,6 +809,7 @@ namespace AprajitaRetailsOps.TAS
 
     }
 
+    #region VatSalePurchase
     public class VatSalePurchase
     {
         public int GetSalesmanId(VoyagerContext db, string salesman)
@@ -924,4 +1001,8 @@ namespace AprajitaRetailsOps.TAS
         }
 
     }
+    #endregion
+
+
+
 }

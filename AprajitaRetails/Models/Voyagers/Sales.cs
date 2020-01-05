@@ -85,6 +85,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
     public class SaleTaxType
     {
         public int SaleTaxTypeId { get; set; }
+
         public string TaxName { get; set; }
         public TaxType TaxType { get; set; }
 

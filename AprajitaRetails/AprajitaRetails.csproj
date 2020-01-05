@@ -422,6 +422,7 @@
     <Content Include="Views\Stocks\Index.cshtml" />
     <Content Include="Views\ProductPurchases\PurchaseDetails.cshtml" />
     <Content Include="Views\ExcelUploader\SaleList.cshtml" />
+    <Content Include="Views\ExcelUploader\ProcessSale.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,6 +44,7 @@ namespace AprajitaRetails.Models.Data.Voyagers
         public DbSet<Salesman> Salesmen { get; set; }
         public DbSet<SaleInvoice> SaleInvoices { get; set; }
         public DbSet<SaleItem> SaleItems { get; set; }
+        public DbSet<SaleTaxType> SaleTaxTypes { get; set; }
 
 
         public DbSet<SalePaymentDetail> SalePaymentDetails { get; set; }

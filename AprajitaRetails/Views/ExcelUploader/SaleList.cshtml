@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<AprajitaRetails.Models.Data.Voyagers.ImportSaleItemWise>
 
 @{
-    ViewBag.Title = "SaleList";
+    ViewBag.Title = "Sale Invoice";
 }
 
-<h2>SaleList</h2>
+<h2>Sale Invoice List</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-bordered table-danger table-sm ">
+
+<table class="table table-bordered table-danger table-responsive-sm">
     <tr class="bg-success">
         <th>
             @Html.DisplayNameFor(model => model.InvoiceDate)
@@ -20,24 +18,24 @@
         <th>
             @Html.DisplayNameFor(model => model.InvoiceType)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BrandName)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.BrandName)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HSNCode)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ItemDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HSNCode)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Barcode)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StyleCode)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.StyleCode)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
@@ -50,118 +48,136 @@
         <th>
             @Html.DisplayNameFor(model => model.BasicRate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tax)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Tax)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.SGST)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CGST)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.CGST)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.LineTotal)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoundOff)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.RoundOff)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.BillAmnt)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Saleman)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDataConsumed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImportTime)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.PaymentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Saleman)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDataConsumed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImportTime)
+            </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvoiceDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvoiceNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InvoiceType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemDesc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HSNCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Barcode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StyleCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MRP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BasicRate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SGST)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CGST)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LineTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoundOff)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BillAmnt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Saleman)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDataConsumed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImportTime)
-        </td>
-        <td>
-            <input type="hidden" id="dDate" name="dDate" value=@item.InvoiceDate.ToShortDateString() />
-            <input type="submit" value="Process" class="btn btn-warning" />
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.ImportSaleItemWiseId }) |
-        @Html.ActionLink("Details", "Details", new { id=item.ImportSaleItemWiseId }) |
-        @Html.ActionLink("Delete", "Delete", new { id=item.ImportSaleItemWiseId })*@
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceType)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ItemDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HSNCode)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Barcode)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.StyleCode)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MRP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasicRate)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Tax)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.SGST)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.CGST)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.LineTotal)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.RoundOff)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.BillAmnt)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.PaymentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Saleman)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDataConsumed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImportTime)
+                </td>*@
+            <td>
+                @using (Html.BeginForm("ProcessSale", "ExcelUploader", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id=@item.InvoiceDate.ToShortDateString() name="dDate" value=@item.InvoiceDate.ToShortDateString() />
+                    <input type="submit" value=@item.InvoiceDate.ToShortDateString() class="btn btn-warning" />
+                }
+                @*@Html.ActionLink("PP", "ProcessSale", new { dDate = item.InvoiceDate.ToShortDateString() })*@
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.ImportSaleItemWiseId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ImportSaleItemWiseId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ImportSaleItemWiseId })*@
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+@*<%= Ajax.ActionLink("Edit", "ItemEdit",
+                         new {
+                             itemId = item.RecordId,
+                             workstationId = myWorkStationId
+                         },
+                         new AjaxOptions {
+                             HttpMethod="POST",
+                             UpdateTargetId="ResultsGoHere",
+                             InsertionMode = InsertionMode.Replace
+                         }) %>*@
