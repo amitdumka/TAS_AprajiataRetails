@@ -75,7 +75,7 @@
                 @Html.DisplayFor(modelItem => item.CostValue)
             </td>
             <td>
-                @using (Html.BeginForm("ProcessPurchase", "ExcelUploader", FormMethod.Post))
+                @using (Html.BeginForm("ProcessPurchase", "PurchaseUploader", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 

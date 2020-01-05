@@ -216,6 +216,7 @@
     <Compile Include="Controllers\ProductItemsController.cs" />
     <Compile Include="Controllers\ProductPurchasesController.cs" />
     <Compile Include="Controllers\PurchaseUploaderController.cs" />
+    <Compile Include="Controllers\SalesUploaderController.cs" />
     <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\VoyagerBillsController.cs" />
@@ -428,6 +429,11 @@
     <Content Include="Views\PurchaseUploader\Index.cshtml" />
     <Content Include="Views\PurchaseUploader\UploadPurchase.cshtml" />
     <Content Include="Views\PurchaseUploader\ListUpload.cshtml" />
+    <Content Include="Views\PurchaseUploader\ProcessPurchase.cshtml" />
+    <Content Include="Views\PurchaseUploader\Details.cshtml" />
+    <Content Include="Views\SalesUploader\Index.cshtml" />
+    <Content Include="Views\SalesUploader\SaleList.cshtml" />
+    <Content Include="Views\SalesUploader\ProcessSale.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

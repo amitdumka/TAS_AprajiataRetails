@@ -1,0 +1,105 @@
+﻿@model IEnumerable<AprajitaRetails.Models.Data.Voyagers.ProductPurchase>
+
+@{
+    ViewBag.Title = "ProcessPurchase";
+}
+
+<h2>Purchase Invoice Processed</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<p>
+    <h4 class="text-center text-success"> @ViewBag.MessageHead</h4>
+</p>
+<table class="table table-sm table-bordered table-danger table-striped table-responsive-sm table-hover">
+    <tr class="bg-success">
+
+        @*<th>
+            @Html.DisplayNameFor(model => model.InWardNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InWardDate)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalBasicAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShippingCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalTax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPaid)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Supplier.SuppilerName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+    @*<td>
+        @Html.DisplayFor(modelItem => item.InWardNo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InWardDate)
+    </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.PurchaseDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InvoiceNo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalQty)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalBasicAmount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShippingCost)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalTax)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalAmount)
+    </td>
+    @*<td>
+        @Html.DisplayFor(modelItem => item.Remarks)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsPaid)
+    </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.Supplier.SuppilerName)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ProductPurchaseId }, new { @class = "btn btn-sm btn-outline-secondary" })
+        @Html.ActionLink("Details", "Details", new { id = item.ProductPurchaseId }, new { @class = "btn btn-sm btn-outline-info" })
+       
+    </td>
+</tr>
+    }
+
+</table>

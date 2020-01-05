@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using System.Data.Entity;
+using System.Collections.Generic;
+using System.Net;
 
 namespace AprajitaRetails.Controllers
 {
@@ -26,19 +28,21 @@ namespace AprajitaRetails.Controllers
             bool IsVat = false;
             bool IsLocal = false;
 
-            if (BillType == "VAT") {
+            if (BillType == "VAT")
+            {
                 IsVat = true;
             }
-                     
 
-            if (InterState == "WithInState") {
+
+            if (InterState == "WithInState")
+            {
                 IsLocal = true;
             }
 
-            UploadReturns response= uploader.UploadExcel(UploadTypes.Purchase, FileUpload, Server.MapPath("~/Doc/") , IsVat, IsLocal);
+            UploadReturns response = uploader.UploadExcel(UploadTypes.Purchase, FileUpload, Server.MapPath("~/Doc/"), IsVat, IsLocal);
 
             ViewBag.Status = response.ToString();
-            if (response ==UploadReturns.Success)
+            if (response == UploadReturns.Success)
             {
                 return RedirectToAction("ListUpload");
             }
@@ -47,25 +51,48 @@ namespace AprajitaRetails.Controllers
 
         }
         // GET: PurchaseUploader/Details/5
+        public ActionResult Details(int? id)
+        {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            if (id > 0)
+            {
+                var productPurchases1 = db.ProductPurchases.Include(p => p.Supplier).Include(c => c.PurchaseItems).Where(c => c.ProductPurchaseId == id);
+                if (productPurchases1 == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.Details = "Invoice No: " + productPurchases1.FirstOrDefault().InvoiceNo;
+                return View(productPurchases1.ToList());
+            }
+            ViewBag.Details = "";
+            var productPurchases = db.ProductPurchases.Include(p => p.Supplier).Include(c => c.PurchaseItems);
+            if (productPurchases == null)
+            {
+                return HttpNotFound();
+            }
+            return View(productPurchases.ToList());
+        }
         public ActionResult ListUpload(int? id)
         {
-           
-           
-                if (id == 101)
-                {
-                    var md1 = db.ImportPurchases.Where(c => c.IsDataConsumed == true).OrderByDescending(c => c.GRNDate);
-                    return View(md1);
-                }
-                else if (id == 100)
-                {
-                    var md1 = db.ImportPurchases.OrderByDescending(c => c.GRNDate).ThenBy(c => c.IsDataConsumed);
-                    return View(md1);
-                }
-                var md = db.ImportPurchases.Where(c => c.IsDataConsumed == false).OrderByDescending(c => c.GRNDate);
-                return View(md);
-            
-           
-            
+
+            if (id == 101)
+            {
+                var md1 = db.ImportPurchases.Where(c => c.IsDataConsumed == true).OrderByDescending(c => c.GRNDate);
+                return View(md1);
+            }
+            else if (id == 100)
+            {
+                var md1 = db.ImportPurchases.OrderByDescending(c => c.GRNDate).ThenBy(c => c.IsDataConsumed);
+                return View(md1);
+            }
+            var md = db.ImportPurchases.Where(c => c.IsDataConsumed == false).OrderByDescending(c => c.GRNDate);
+            return View(md);
+
+
+
         }
 
         [HttpPost]
@@ -80,18 +107,19 @@ namespace AprajitaRetails.Controllers
 
             if (a > 0)
             {
-               
-               
-                    var dm = db.ProductItems.Include(c => c.MainCategory);
-                    ViewBag.MessageHead = "No of Product Item added and stock is created are " + a;
-                    return View(dm);
-               
-                
+
+
+                var dm = db.ProductPurchases.Include(c => c.PurchaseItems).Where(c => DbFunctions.TruncateTime(c.InWardDate) == DbFunctions.TruncateTime(ddDate));
+                ViewBag.MessageHead = "Invoices added and No. Of Items Added are " + a;
+                return View(dm.ToList());
+
+
             }
             else
             {
+                //TODO: In view Check for Model is null or not
                 ViewBag.MessageHead = "No Product items added. Some error might has been occured. a=" + a;
-                return View(new ProductItem());
+                return View(new List<ProductPurchase>());
             }
         }
 

@@ -466,13 +466,20 @@ namespace AprajitaRetailsOps.TAS
         {
             //Calculate tax rate
             int taxRate = 0;
-            taxRate =(int) (purchase.TaxAmt * purchase.CostValue) / 100;
+            taxRate =(int) ((purchase.TaxAmt * 100) / purchase.CostValue);
 
             if (IsLocal)
             {
                 try
                 {
                     int id = db.PurchaseTaxTypes.Where(c => c.CompositeRate == taxRate).Select(c => c.PurchaseTaxTypeId).FirstOrDefault();
+                    if (id == 0)
+                    {
+                        PurchaseTaxType taxType = new PurchaseTaxType { CompositeRate = taxRate, TaxType = TaxType.GST, TaxName = "Input Tax GST(SGST+CGST) @" + taxRate };
+                        db.PurchaseTaxTypes.Add(taxType);
+                        db.SaveChanges();
+                        return taxType.PurchaseTaxTypeId;
+                    }
                     return id;
                 }
                 catch (Exception)
@@ -489,6 +496,13 @@ namespace AprajitaRetailsOps.TAS
             try
             {
                 int id = db.PurchaseTaxTypes.Where(c => c.CompositeRate == taxRate).Select(c => c.PurchaseTaxTypeId).FirstOrDefault();
+                if (id == 0)
+                {
+                    PurchaseTaxType taxType = new PurchaseTaxType { CompositeRate = taxRate, TaxType = TaxType.IGST, TaxName = "Input Tax IGST @" + taxRate };
+                    db.PurchaseTaxTypes.Add(taxType);
+                    db.SaveChanges();
+                    return taxType.PurchaseTaxTypeId;
+                }
                 return id;
             }
             catch (Exception)

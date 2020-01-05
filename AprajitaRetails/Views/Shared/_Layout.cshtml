@@ -47,7 +47,7 @@
     <link href="jumbotron.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-info">
         @*<a class="navbar-brand" href="#">*@
         @Html.ActionLink("Aprajita Retails", "Index", "Home", new { area = "" }, new { @class = "navbar-brand " })
         @*</a>*@
@@ -89,9 +89,22 @@
                             <li class="dropdown-item">@Html.ActionLink("ExcelUploader", "Index", "ExcelUploader")</li>
                             <li class="dropdown-item">@Html.ActionLink("Purchase List", "PurchaseList", "ExcelUploader")</li>
                             <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "ExcelUploader")</li>
-                    @*<li class="dropdown-item">@Html.ActionLink("ImportPurchases", "Index", "ExcelUploader")</li>
+                            @*<li class="dropdown-item">@Html.ActionLink("ImportPurchases", "Index", "ExcelUploader")</li>
                     <li class="dropdown-item">@Html.ActionLink("ImportSaleItemWises", "Index", "ExcelUploader")</li>
                     <li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ExcelUploader")</li>*@
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sales</a>
+                    <div>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                            @*<li class="dropdown-item">@Html.ActionLink("ProductPurchases", "Index", "ProductPurchases")</li>
+                            <li class="dropdown-item">@Html.ActionLink("ProductItems", "Index", "ProductItems")</li>
+                            <li class="dropdown-item">@Html.ActionLink("Stocks", "Index", "Stocks")</li>*@
+                            <li class="dropdown-item">@Html.ActionLink("Sale Upload", "Index", "SalesUploader")</li>
+                            <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "SalesUploader")</li>
+                            @*<li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ExcelUploader")</li>*@
                         </ul>
                     </div>
                 </li>
@@ -102,9 +115,9 @@
                             <li class="dropdown-item">@Html.ActionLink("ProductPurchases", "Index", "ProductPurchases")</li>
                             <li class="dropdown-item">@Html.ActionLink("ProductItems", "Index", "ProductItems")</li>
                             <li class="dropdown-item">@Html.ActionLink("Stocks", "Index", "Stocks")</li>
-                             @*<li class="dropdown-item">@Html.ActionLink("ImportPurchases", "Index", "ExcelUploader")</li>*@
-                             @*<li class="dropdown-item">@Html.ActionLink("ImportSaleItemWises", "Index", "ExcelUploader")</li>*@
-                             @*<li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ExcelUploader")</li>*@
+                            <li class="dropdown-item">@Html.ActionLink("Purchase Upload", "Index", "PurchaseUploader")</li>
+                            <li class="dropdown-item">@Html.ActionLink("List Uploaded", "ListUpLoad", "PurchaseUploader")</li>
+                            @*<li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ExcelUploader")</li>*@
                         </ul>
                     </div>
                 </li>
@@ -132,7 +145,7 @@
 
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
             </form>
             @Html.Partial("_LoginPartial")  
         </div>

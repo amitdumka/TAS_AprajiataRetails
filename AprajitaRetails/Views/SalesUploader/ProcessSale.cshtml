@@ -1,0 +1,90 @@
+﻿@model IEnumerable<AprajitaRetails.Models.Data.Voyagers.SaleInvoice>
+
+@{
+    ViewBag.Title = "ProcessSale";
+}
+
+<h2>Process Sale Invoice</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table table-bordered table-sm table-success">
+    <tr class="bg-warning">
+
+        @*<th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.OnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalItems)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalBillAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalDiscountAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoundOffAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalTaxAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentDetail.PayMode)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            @*<td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.OnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalItems)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalBillAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalDiscountAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoundOffAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalTaxAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentDetail.PayMode)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SaleInvoiceId }, new { @class="btn btn-sm btn-outline-secondary"})
+                @Html.ActionLink("Details", "Details", new { id = item.SaleInvoiceId }, new { @class="btn btn-sm btn-outline-info"})
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.SaleInvoiceId }, new { @class="btn btn-sm btn-outline-danger"})*@
+            </td>
+        </tr>
+    }
+
+</table>
