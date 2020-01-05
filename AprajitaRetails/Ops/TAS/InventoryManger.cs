@@ -274,7 +274,7 @@ namespace AprajitaRetailsOps.TAS
                         if (pid != -999)
                             CreateStockItem(db, item, pid);
                         PurchasedProduct = CreatePurchaseInWard(db, item, PurchasedProduct);
-                        PurchasedProduct.PurchaseItems.Add(CreatePurchaseItem(db, item, pid,IsLocal));
+                        PurchasedProduct.PurchaseItems.Add(CreatePurchaseItem(db, item, pid, IsLocal));
                         item.IsDataConsumed = true;
                         db.Entry(item).State = EntityState.Modified;
                         ctr++;
@@ -456,17 +456,17 @@ namespace AprajitaRetailsOps.TAS
                 Qty = purchase.Quantity,
                 TaxAmout = purchase.TaxAmt,
                 Unit = db.ProductItems.Find(productId).Units,
-                PurchaseTaxTypeId = CreatePurchaseTaxType(db,purchase,IsLocal),
+                PurchaseTaxTypeId = CreatePurchaseTaxType(db, purchase, IsLocal),
                 ProductItemId = productId
             };
             return item;
         }
 
-        public int CreatePurchaseTaxType(VoyagerContext db, ImportPurchase purchase, bool IsLocal=false)
+        public int CreatePurchaseTaxType(VoyagerContext db, ImportPurchase purchase, bool IsLocal = false)
         {
             //Calculate tax rate
             int taxRate = 0;
-            taxRate =(int) ((purchase.TaxAmt * 100) / purchase.CostValue);
+            taxRate = (int)((purchase.TaxAmt * 100) / purchase.CostValue);
 
             if (IsLocal)
             {
@@ -508,12 +508,12 @@ namespace AprajitaRetailsOps.TAS
             catch (Exception)
             {
 
-                PurchaseTaxType taxType = new PurchaseTaxType {CompositeRate=taxRate, TaxType=TaxType.IGST, TaxName="Input Tax IGST @"+taxRate };
+                PurchaseTaxType taxType = new PurchaseTaxType { CompositeRate = taxRate, TaxType = TaxType.IGST, TaxName = "Input Tax IGST @" + taxRate };
                 db.PurchaseTaxTypes.Add(taxType);
                 db.SaveChanges();
                 return taxType.PurchaseTaxTypeId;
             }
-               
+
         }
         #endregion
 
@@ -615,9 +615,6 @@ namespace AprajitaRetailsOps.TAS
 
 
         }
-
-
-
 
         private SalePaymentDetail CreatePaymentDetails(VoyagerContext db, ImportSaleItemWise item)
         {
@@ -766,11 +763,38 @@ namespace AprajitaRetailsOps.TAS
                 SaleTaxTypeId = CreateSaleTax(db, item)
 
             };
-            SalePurchaseManager.UpDateStock(db, pi.ProductItemId, item.Quantity, false);// TODO: Check for this working
+            if (!SalePurchaseManager.UpDateStock(db, pi.ProductItemId, item.Quantity, false))
+            {
+                //TODO: Create Stock and update
+                CreateStockItem(db, saleItem.Qty, saleItem.ProductItemId,saleItem.Units);
+            }
             item.IsDataConsumed = true;
             db.Entry(item).State = EntityState.Modified;
             return saleItem;
         }
+       
+        /// <summary>
+        /// For Creating Stock list for Sale . which can be later ajusted
+        /// </summary>
+        /// <param name="db">Database Context</param>
+        /// <param name="qty"> Sale Qty</param>
+        /// <param name="pItemId">Item Code</param>
+        /// <param name="unts">Units</param>
+        public void CreateStockItem(VoyagerContext db, double qty, int pItemId, Units unts)
+        {
+            Stock stock = new Stock
+            {
+                PurchaseQty = 0,
+                Quantity = 0-qty,
+                ProductItemId = pItemId,
+                SaleQty = qty,
+                Units = unts
+            };
+            db.Stocks.Add(stock);
+
+            db.SaveChanges();
+        }
+
 
         private int CreateSaleTax(VoyagerContext db, ImportSaleItemWise item)
         {
