@@ -1,0 +1,42 @@
+﻿@model AprajitaRetails.Models.Data.Voyagers.PurchaseTaxType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PurchaseTaxType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaxType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompositeRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompositeRate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PurchaseTaxTypeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

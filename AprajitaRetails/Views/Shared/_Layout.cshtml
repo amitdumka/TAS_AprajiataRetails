@@ -71,8 +71,8 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdown01">
                                 <li class="dropdown-item"> @Html.ActionLink("Parties", "Index", "Parties")</li>
                                 <li class="dropdown-item"> @Html.ActionLink("Ledger Entries", "Index", "LedgerEntries")</li>
-                                <li class="dropdown-item"> @Html.ActionLink("Input Tax", "Index", "")</li>
-                                <li class="dropdown-item"> @Html.ActionLink("Output Tax", "Index", "")</li>
+                                <li class="dropdown-item"> @Html.ActionLink("Input Tax", "Index", "PurchaseTaxTypes")</li>
+                                <li class="dropdown-item"> @Html.ActionLink("Output Tax", "Index", "SaleTaxTypes")</li>
                             </ul>
                         </div>
                     </li>
@@ -164,12 +164,12 @@
                         <div>
                             <ul class="dropdown-menu" aria-labelledby="dropdown01">
                                 <li class="dropdown-item">@Html.ActionLink("ExcelUploader", "Index", "ExcelUploader")</li>
-                                <li class="dropdown-item">@Html.ActionLink("Purchase List", "PurchaseList", "ExcelUploader")</li>
-                                <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "ExcelUploader")</li>
+                                @*<li class="dropdown-item">@Html.ActionLink("Purchase List", "PurchaseList", "ExcelUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "ExcelUploader")</li>*@
                                 <li class="dropdown-item">@Html.ActionLink("Sale Upload", "Index", "SalesUploader")</li>
                                 <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "SalesUploader")</li>
                                 <li class="dropdown-item">@Html.ActionLink("Purchase Upload", "Index", "PurchaseUploader")</li>
-                                <li class="dropdown-item">@Html.ActionLink("List Uploaded", "ListUpLoad", "PurchaseUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Purchase List", "ListUpLoad", "PurchaseUploader")</li>
                                 <li class="dropdown-item">@Html.ActionLink("ImportInWards", "Index", "ImportInWards")</li>
                                 <li class="dropdown-item">@Html.ActionLink("ImportPurchases", "Index", "ImportPurchases")</li>
                                 <li class="dropdown-item">@Html.ActionLink("ImportSaleItemWises", "Index", "ImportSaleItemWises")</li>
@@ -202,7 +202,7 @@
 
             </div>
         </nav>
-        <div class="nav-scroller bg-white shadow-sm">
+        <div class="nav-scroller bg-white shadow-sm ">
             <nav class="nav nav-underline">
                 <a class="nav-link active" href="#"> <span data-feather="home"></span>Dashboard</a>
                 <a class="nav-link" href="#">

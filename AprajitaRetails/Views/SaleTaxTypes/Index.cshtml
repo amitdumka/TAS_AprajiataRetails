@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AprajitaRetails.Models.Data.Voyagers.SaleTaxType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-danger text-center">Output Tax List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+
+</p>
+<table class="table table-bordered table-hover table-sm table-striped table-info">
+    <tr class="bg-success">
+        <th>
+            @Html.DisplayNameFor(model => model.TaxName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompositeRate)
+        </th>
+        <th ></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TaxName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TaxType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CompositeRate)
+    </td>
+    
+    <td class="btn-group btn-outline-info">
+        @Html.ActionLink("Edit", "Edit", new { id = item.SaleTaxTypeId }, new { @class = "btn  btn-outline-warning" })
+        @Html.ActionLink("Details", "Details", new { id = item.SaleTaxTypeId }, new { @class = "btn btn-outline-secondary" })
+        @Html.ActionLink("Delete", "Delete", new { id = item.SaleTaxTypeId }, new { @class = "btn btn-outline-danger" })
+    </td>
+</tr>
+    }
+
+</table>

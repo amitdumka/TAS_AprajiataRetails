@@ -51,7 +51,13 @@ namespace AprajitaRetails.Controllers
                 _userManager = value;
             }
         }
-
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult LoginAvator(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]

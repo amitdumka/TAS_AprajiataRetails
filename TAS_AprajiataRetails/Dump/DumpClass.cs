@@ -109,6 +109,7 @@ namespace TAS_AprajiataRetails.Dump
     //    <!--/.Content-->
     //  </div>
     //</div>
+
     //<!--Modal: Login with Avatar Form-->
 
     //<div class="text-center">
