@@ -1,11 +1,11 @@
 ﻿body {
-    padding-top: 100px;
+    padding-top: 50px;
     padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
+    padding-left: 10px;
     padding-right: 15px;
 }
 
@@ -32,7 +32,7 @@ textarea {
     margin-bottom: 1px !important;
 }*/
 
-.navbar-inverse {
+/*.navbar-inverse {
     background-color: #000;
     border-color: #eeeeee;
 }
@@ -58,9 +58,25 @@ textarea {
         font-size: 15px;
         background-color: transparent;
         /*text-shadow: 1px 1px 1px #ffffff;*/
-    }
+    /*}*/
 
-        .navbar-inverse .navbar-nav > li > a:hover,
+        /*.navbar-inverse .navbar-nav > li > a:hover,
         .navbar-inverse .navbar-nav > li > a:focus {
             color: forestgreen;
-        }
+        }*/
+
+
+
+.themed-grid-col {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgba(86, 61, 124, .15);
+    border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.themed-container {
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: rgba(0, 123, 255, .15);
+    border: 1px solid rgba(0, 123, 255, .2);
+}

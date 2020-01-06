@@ -21,8 +21,10 @@
         <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
         <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">*@
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/sticky.css")
+    @Styles.Render("~/Content/offcanvas.css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Styles.Render("~/Content/jumbotron.css")
     <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#563d7c">
 
@@ -43,124 +45,215 @@
         }
       }*@
     </style>
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
+
 </head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        @*<a class="navbar-brand" href="#"></a>*@
-        <strong> <b>@Html.ActionLink("Aprajita Retails", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-danger  text-monospace" })</b></strong>
-        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<body class="d-flex flex-column h-100">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            @*<a class="navbar-brand" href="#"></a>*@
+            <strong> <b>@Html.ActionLink("Aprajita Retails", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-danger  text-monospace" })</b></strong>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    @*<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>*@
-                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
-                </li>
-                <li class="nav-item"><a class="nav-link" href="#">Tailoring</a></li>
-                <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Banking</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
-                    <div>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li class="dropdown-item">@Html.ActionLink("Store", "Index", "Stores")</li>
-                            <li class="dropdown-item">@Html.ActionLink("Customers", "Index", "Customers")</li>
-                            <li class="dropdown-item">End of Day</li>
-                            <li class="dropdown-item">End of Month</li>
-                            <li class="dropdown-item">Cash Book</li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Imports</a>
-                    <div>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li class="dropdown-item">@Html.ActionLink("ExcelUploader", "Index", "ExcelUploader")</li>
-                            <li class="dropdown-item">@Html.ActionLink("Purchase List", "PurchaseList", "ExcelUploader")</li>
-                            <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "ExcelUploader")</li>
-                            <li class="dropdown-item">@Html.ActionLink("Sale Upload", "Index", "SalesUploader")</li>
-                            <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "SalesUploader")</li>
-                            <li class="dropdown-item">@Html.ActionLink("Purchase Upload", "Index", "PurchaseUploader")</li>
-                            <li class="dropdown-item">@Html.ActionLink("List Uploaded", "ListUpLoad", "PurchaseUploader")</li>
-                            <li class="dropdown-item">@Html.ActionLink("ImportInWards", "Index", "ImportInWards")</li>
-                            <li class="dropdown-item">@Html.ActionLink("ImportPurchases", "Index", "ImportPurchases")</li>
-                            <li class="dropdown-item">@Html.ActionLink("ImportSaleItemWises", "Index", "ImportSaleItemWises")</li>
-                            <li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ImportSaleRegisters")</li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
-                    <div>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li class="dropdown-item"> @Html.ActionLink("Parties", "Index", "Parties", null, new { @class = "nav-link" })</li>
-                            <li class="dropdown-item"> @Html.ActionLink("Ledger Entries", "Index", "LedgerEntries", null, new { @class = "nav-link" })</li>
-                            <li class="dropdown-item"> Suspenses</li>
-                            <li class="dropdown-item"> </li>
-                            <li class="dropdown-item"> </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sale/Purchase</a>
-                    <div>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li class="dropdown-item">@Html.ActionLink("ProductPurchases", "Index", "ProductPurchases")</li>
-                            <li class="dropdown-item">@Html.ActionLink("ProductItems", "Index", "ProductItems")</li>
-                            <li class="dropdown-item">@Html.ActionLink("Stocks", "Index", "Stocks")</li>
-                            @*<li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ExcelUploader")</li>*@
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        @Html.ActionLink("About", "About", "Home", null, new { @class = " dropdown-item nav-link text-warning" })
-                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "dropdown-item nav-link text-warning" })
-                        @Html.ActionLink("Chat", "Chat", "Home", null, new { @class = "nav-link" })
-                    </div>
-                </li>
-                <li class="nav-item text-warning"><a class="nav-link" href="#">PayRoll</a> </li>
-                <li class="nav-item text-warning"><a class="nav-link" href="#">DailySale</a></li>
-                <li class="nav-item text-warning"><a class="nav-link" href="#"> Cash In/Out  </a>    </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        @*<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>*@
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item text-warning"><a class="nav-link" href="#">DailySale</a></li>
 
-            @*<form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-            </form>*@
-            @Html.Partial("_LoginPartial")
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
+                        <div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li class="dropdown-item"> @Html.ActionLink("Parties", "Index", "Parties")</li>
+                                <li class="dropdown-item"> @Html.ActionLink("Ledger Entries", "Index", "LedgerEntries")</li>
+                                <li class="dropdown-item"> @Html.ActionLink("Input Tax", "Index", "")</li>
+                                <li class="dropdown-item"> @Html.ActionLink("Output Tax", "Index", "")</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sale/Purchase</a>
+                        <div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li class="dropdown-item">@Html.ActionLink("ProductPurchases", "Index", "ProductPurchases")</li>
+                                <li class="dropdown-item">@Html.ActionLink("ProductItems", "Index", "ProductItems")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Stocks", "Index", "Stocks")</li>
+                                @*<li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ExcelUploader")</li>*@
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tailoring</a>
+                        <div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li class="dropdown-item">@Html.ActionLink("Tailoring Booking", "Index", "TalioringBookings")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Tailoring Delivery", "Index", "TalioringDeliveries")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Tailoring Salary Payments", "Index", "TailoringSalaryPayments")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Tailors", "Index", "TailoringEmployees")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Attendance", "Index", "TailorAttendances")</li>
+
+                                <li class="dropdown-item">@Html.ActionLink("Tailor Adv Payment", "Index", "TailoringStaffAdvancePayments")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Tailor Adv Receipt", "Index", "TailoringStaffAdvanceReceipts")</li>
+                            </ul>
+
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Banking</a>
+                        <div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li class="dropdown-item">@Html.ActionLink("Bank Deposits", "Index", "BankDeposits")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Bank Accounts", "Index", "AccountNumbers")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Cheques", "Index", "ChequesLogs")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Cash Withdrawals", "Index", "BankWithdrawals")</li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PayRoll</a>
+                        <div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+
+                                <li class="dropdown-item">@Html.ActionLink("Employee", "Index", "Employees")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Attendances", "Index", "Attendances")</li>
+                                <li class="dropdown-item">@Html.ActionLink("SalaryPayments", "Index", "SalaryPayments")</li>
+                                <li class="dropdown-item">@Html.ActionLink("StaffAdvancePayments", "Index", "StaffAdvancePayments")</li>
+                                <li class="dropdown-item">@Html.ActionLink("StaffAdvanceReceipts", "Index", "StaffAdvanceReceipts")</li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cash In/Out</a>
+                        <div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li class="dropdown-item">@Html.ActionLink("Expenses", "Index", "Expenses")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Cash Expenses", "Index", "PettyCashExpenses")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Cash Payments", "Index", "CashPayments")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Cash Receipts", "Index", "CashReceipts")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Payments", "Index", "Payments")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Receipts", "Index", "Receipts")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Due Recovery", "Index", "DueRecoverds")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Bank Withdrawals", "Index", "BankWithdrawals")</li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+                        <div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li class="dropdown-item">@Html.ActionLink("Store", "Index", "Stores")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Customers", "Index", "Customers")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Suspense", "Index", "SuspenseAccounts")</li>
+                                <li class="dropdown-item">@Html.ActionLink("End of Day", "Create", "EndOfDays")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Cash Book", "Index", "CashBook")</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Imports</a>
+                        <div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li class="dropdown-item">@Html.ActionLink("ExcelUploader", "Index", "ExcelUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Purchase List", "PurchaseList", "ExcelUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "ExcelUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Sale Upload", "Index", "SalesUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Sale List", "SaleList", "SalesUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("Purchase Upload", "Index", "PurchaseUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("List Uploaded", "ListUpLoad", "PurchaseUploader")</li>
+                                <li class="dropdown-item">@Html.ActionLink("ImportInWards", "Index", "ImportInWards")</li>
+                                <li class="dropdown-item">@Html.ActionLink("ImportPurchases", "Index", "ImportPurchases")</li>
+                                <li class="dropdown-item">@Html.ActionLink("ImportSaleItemWises", "Index", "ImportSaleItemWises")</li>
+                                <li class="dropdown-item">@Html.ActionLink("ImportSaleRegisters", "Index", "ImportSaleRegisters")</li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Supports</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item" href="#">Help</a>
+                            <a class="dropdown-item" href="#">Documentations</a>
+                            <a class="dropdown-item" href="#">Sah Groups</a>
+                            @Html.ActionLink("Chat", "Chat", "Home", null, new { @class = "dropdown-item " })
+                            @Html.ActionLink("About", "About", "Home", null, new { @class = "  dropdown-item  text-warning" })
+                            @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "dropdown-item  text-warning" })
+
+                        </div>
+                    </li>
+
+                </ul>
+
+                @*<form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+                    </form>*@
+                @Html.Partial("_LoginPartial")
+
+            </div>
+        </nav>
+        <div class="nav-scroller bg-white shadow-sm">
+            <nav class="nav nav-underline">
+                <a class="nav-link active" href="#"> <span data-feather="home"></span>Dashboard</a>
+                <a class="nav-link" href="#">
+                    DailySale
+                    <span class="badge badge-pill bg-dark align-text-bottom">27</span>
+                </a>
+                <a class="nav-link" href="#">Sale</a>
+                <a class="nav-link" href="#">Purchase</a>
+                <a class="nav-link" href="#">Manual Bill</a>
+                <a class="nav-link" href="#">Attendence</a>
+                <a class="nav-link" href="#">Cash Expenses</a>
+                <a class="nav-link" href="#">Cash Payments</a>
+                <a class="nav-link" href="#">Booking</a>
+                <a class="nav-link" href="#">Delivery</a>
+            </nav>
         </div>
-    </nav>
-
-    <main role="main">
+    </header>
+    <main role="main" class="flex-shrink-0">
         <div class="container body-content">
+
             @RenderBody()
         </div>
         <hr />
     </main>
 
 
-    <footer class="container">
-        <p>&copy; Aprajita Retails 2015-@DateTime.Now.Year</p>
+    <footer class="footer  mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">&copy; Aprajita Retails 2015-@DateTime.Now.Year</span>
+        </div>
     </footer>
+
+
     @*<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>*@
     @*<script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @*@Scripts.Render("~/bundles/jquery-ui.js")*@
+    @Scripts.Render("~/bundles/jquery-ui.js")
+    @Scripts.Render("~/bundles/offcanvas.js")
     @RenderSection("scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script>
+        (function () {
+            'use strict'
 
+            feather.replace()
+       }())
+    </script>
 </body>
 </html>
 
