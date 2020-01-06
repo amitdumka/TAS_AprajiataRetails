@@ -1,0 +1,84 @@
+﻿@model IEnumerable<AprajitaRetails.Areas.TAS.Models.Data.TalioringDelivery>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Deliveries</h2>
+
+<p>
+    @Html.ActionLink("Create New ", "Create", new { id = 0 }, new { data_modal = "" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Booking.CustName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.CustName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TalioringDeliveryId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TalioringDeliveryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TalioringDeliveryId })
+            </td>
+        </tr>
+    }
+
+</table>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("a[data-modal]").on("click", function (e) {
+                $('#myModalContent').load(this.href, function () {
+                    $('#myModal').modal({
+                        keyboard: true
+                    }, 'show');
+                });
+                return false;
+            });
+        });
+
+    </script>
+}

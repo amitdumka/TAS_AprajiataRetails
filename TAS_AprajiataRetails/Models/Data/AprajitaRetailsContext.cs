@@ -30,6 +30,9 @@ namespace TAS_AprajiataRetails.Models.Data
         public DbSet<StaffAdvancePayment> StaffAdvancePayments { get; set; }
         public DbSet<StaffAdvanceReceipt> StaffAdvanceReceipts { get; set; }
 
+        public DbSet<CurrentSalary> CurrentSalaries { get; set; }
+        public DbSet<PaySlip> PaySlips { get; set; }
+
         //Banking
         public DbSet<Bank> Banks { get; set; }
         public DbSet<AccountNumber> BankAccounts { get; set; }

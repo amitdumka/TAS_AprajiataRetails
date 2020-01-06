@@ -1,0 +1,191 @@
+﻿@model AprajitaRetails.Areas.TAS.Models.Views.EndofDayDetails
+
+@{
+    ViewBag.Title = "DailySaleReport";
+}
+
+<h2>Daily Sale Report</h2>
+
+<div>
+    <h4>End of Day Details</h4>
+    <hr />
+    <dl class="dl-horizontal text-primary">
+        <dt>
+            @Html.DisplayNameFor(model => model.EOD_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EOD_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shirting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shirting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Suiting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Suiting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USPA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USPA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FM_Arrow)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FM_Arrow)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RWT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RWT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Access)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Access)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CashInHand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CashInHand)
+        </dd>
+        <br />
+        <hr />
+        <h4 class="text-success">System Generated Data</h4>
+        <hr />
+        <dt>
+
+            @Html.DisplayNameFor(model => model.TodaySale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodaySale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TodayCardSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodayCardSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TodayOtherSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodayOtherSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TodayManualSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodayManualSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TodayTailoringSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodayTailoringSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TodayTailoringBooking)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodayTailoringBooking)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TodayTotalUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodayTotalUnit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TodayTotalExpenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodayTotalExpenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPayments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPayments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalReceipts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalReceipts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TodayCashInHand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TodayCashInHand)
+        </dd>
+
+    </dl>
+</div>
+<div class="form-control">
+
+   
+       @if (Model.CashInHand != Model.TodayCashInHand)
+       {
+           decimal diffa = Model.TodayCashInHand - Model.CashInHand;
+           <p class="text-danger">Differance in cash-in-hand by @diffa</p>
+       }
+   
+</div>
+
+<div class="form-control">
+
+    <p class="text-danger">
+        Note: Click Photo or Take Screenshot for sending eMail or Whatsapp Message, as Data be lost, it is not store.
+    </p>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+        @Html.ActionLink("Back to List", "Index")
+</p>

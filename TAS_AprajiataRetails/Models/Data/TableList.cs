@@ -404,14 +404,7 @@ namespace TAS_AprajiataRetails.Models.Data
         public virtual ICollection<DailySale> DailySales { get; set; }
     }
 
-
-   
-
-
-
     //Banking Section
-
-
     public class Bank
     {
         public int BankId { get; set; }

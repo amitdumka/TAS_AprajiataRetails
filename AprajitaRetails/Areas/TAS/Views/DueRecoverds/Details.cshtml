@@ -1,0 +1,66 @@
+﻿@model AprajitaRetails.Areas.TAS.Models.Data.DueRecoverd
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DueRecoverd</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DuesList.DuesListId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DuesList.DuesListId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaidDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountPaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountPaid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPartialPayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPartialPayment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DueRecoverdId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

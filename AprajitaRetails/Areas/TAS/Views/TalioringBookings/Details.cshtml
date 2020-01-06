@@ -1,0 +1,170 @@
+﻿@model AprajitaRetails.Areas.TAS.Models.Data.TalioringBooking
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TalioringBooking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingSlipNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingSlipNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShirtQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShirtQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShirtPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShirtPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PantQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PantQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PantPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PantPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoatQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoatQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoatPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoatPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KurtaQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KurtaQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KurtaPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KurtaPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BundiQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BundiQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BundiPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BundiPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Others)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Others)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OthersPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OthersPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TalioringBookingId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

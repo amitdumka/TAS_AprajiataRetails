@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AprajitaRetails.Areas.TAS.Models.Data.DueRecoverd>
+
+@{
+    ViewBag.Title = "Due Recovered";
+}
+
+<h2>Due Recovered</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DuesList.DailySale.InvNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaidDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPartialPayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DuesList.DailySale.InvNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaidDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountPaid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPartialPayment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DueRecoverdId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DueRecoverdId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DueRecoverdId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model AprajitaRetails.Areas.TAS.Models.Data.CashPayment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CashPayment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Mode.Transcation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mode.Transcation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaidTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SlipNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SlipNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CashPaymentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

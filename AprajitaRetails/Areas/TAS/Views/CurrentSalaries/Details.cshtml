@@ -1,0 +1,114 @@
+﻿@model AprajitaRetails.Areas.TAS.Models.Data.CurrentSalary
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CurrentSalary</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.StaffName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.StaffName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BasicSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BasicSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SundaySalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SundaySalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LPRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LPRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncentiveRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncentiveRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncentiveTarget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncentiveTarget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WOWBillRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WOWBillRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WOWBillTarget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WOWBillTarget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSundayBillable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsSundayBillable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EffectiveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CloseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CloseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEffective)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEffective)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CurrentSalaryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

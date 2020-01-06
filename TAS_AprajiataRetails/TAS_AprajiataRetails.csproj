@@ -320,6 +320,7 @@
     <Compile Include="Controllers\CashPaymentsController.cs" />
     <Compile Include="Controllers\CashReceiptsController.cs" />
     <Compile Include="Controllers\ChequesLogsController.cs" />
+    <Compile Include="Controllers\CurrentSalariesController.cs" />
     <Compile Include="Controllers\DailySalesController.cs" />
     <Compile Include="Controllers\DueRecoverdsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -328,6 +329,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
+    <Compile Include="Controllers\PaySlipsController.cs" />
     <Compile Include="Controllers\PettyCashExpensesController.cs" />
     <Compile Include="Controllers\ReceiptsController.cs" />
     <Compile Include="Controllers\RoleAssignController.cs" />
@@ -720,10 +722,19 @@
     <Content Include="Views\Attendances\EmpDetails.cshtml" />
     <Content Include="Views\TalioringBookings\PendingBooking.cshtml" />
     <Content Include="Views\CashPayments\HomeExpenses.cshtml" />
+    <Content Include="Views\PaySlips\Create.cshtml" />
+    <Content Include="Views\PaySlips\Delete.cshtml" />
+    <Content Include="Views\PaySlips\Details.cshtml" />
+    <Content Include="Views\PaySlips\Edit.cshtml" />
+    <Content Include="Views\PaySlips\Index.cshtml" />
+    <Content Include="Views\CurrentSalaries\Create.cshtml" />
+    <Content Include="Views\CurrentSalaries\Delete.cshtml" />
+    <Content Include="Views\CurrentSalaries\Details.cshtml" />
+    <Content Include="Views\CurrentSalaries\Edit.cshtml" />
+    <Content Include="Views\CurrentSalaries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\RoleAssign\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

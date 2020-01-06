@@ -1,0 +1,75 @@
+﻿@model IEnumerable<AprajitaRetails.Areas.TAS.Models.Data.TalioringBooking>
+
+@{
+    ViewBag.Title = "Pending Booking";
+}
+
+<h2 class="text-danger">Pending Booking</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table table-bordered table-condensed">
+    <tr class="bg-success">
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingSlipNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalQty)
+        </th>
+        
+        @*<th></th>*@
+    </tr>
+
+@foreach ( var item in Model ) {
+
+    if ( item.TalioringBookingId>0)
+    {
+    <tr class="bg-info">
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingSlipNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalQty)
+        </td>
+        
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.TalioringBookingId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.TalioringBookingId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.TalioringBookingId })
+        </td>*@
+    </tr>
+    } 
+}
+
+</table>

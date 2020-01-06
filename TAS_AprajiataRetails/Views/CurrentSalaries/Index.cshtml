@@ -1,0 +1,99 @@
+﻿@model IEnumerable<TAS_AprajiataRetails.Models.Data.CurrentSalary>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.StaffName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BasicSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SundaySalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LPRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncentiveRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncentiveTarget)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WOWBillRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WOWBillTarget)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsSundayBillable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CloseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsEffective)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.StaffName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BasicSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SundaySalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LPRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncentiveRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncentiveTarget)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WOWBillRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WOWBillTarget)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSundayBillable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EffectiveDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CloseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsEffective)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CurrentSalaryId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CurrentSalaryId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CurrentSalaryId })
+        </td>
+    </tr>
+}
+
+</table>

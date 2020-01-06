@@ -1,0 +1,186 @@
+﻿@model TAS_AprajiataRetails.Models.Data.PaySlip
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PaySlip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentSalary.CurrentSalaryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentSalary.CurrentSalaryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.StaffName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.StaffName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BasicSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BasicSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfDaysPresent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfDaysPresent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SaleIncentive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SaleIncentive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WOWBillAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WOWBillAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WOWBillIncentive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WOWBillIncentive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastPcsAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastPcsAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastPCsIncentive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastPCsIncentive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OthersIncentive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OthersIncentive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GrossSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GrossSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StandardDeductions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StandardDeductions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TDSDeductions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDSDeductions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PFDeductions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PFDeductions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvanceDeducations)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvanceDeducations)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherDeductions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherDeductions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PaySlipId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,171 @@
+﻿@model IEnumerable<AprajitaRetails.Areas.TAS.Models.Data.TalioringBooking>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-danger">Bookings</h2>
+
+<p>
+
+    @Html.ActionLink("Create New ", "Create", null, new { data_modal = "", @class = "btn btn-info " })
+    @Html.ActionLink("Pending ", "PendingBooking", null, new { data_modal = "", @class = "btn btn-warning " })
+    
+</p>
+<table class="table table-bordered table-condensed table-hover">
+    <tr class="bg-success">
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookingSlipNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalQty)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ShirtQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShirtPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PantQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PantPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoatQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoatPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KurtaQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KurtaPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BundiQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BundiPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Others)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OthersPrice)
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="bg-info">
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingSlipNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalQty)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ShirtQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShirtPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PantQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PantPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoatQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoatPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KurtaQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KurtaPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BundiQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BundiPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Others)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OthersPrice)
+            </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TalioringBookingId } ,new { data_modal = "", @class = "btn btn-primary btn-sm" }) 
+                @Html.ActionLink("Details", "Details", new { id = item.TalioringBookingId },new { data_modal = "", @class = "btn btn-info btn-sm " })
+                @Html.ActionLink("Delete", "Delete", new { id = item.TalioringBookingId },new { data_modal = "", @class = "btn btn-danger btn-sm " })
+            </td>
+        </tr>
+    }
+
+</table>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("a[data-modal]").on("click", function (e) {
+                $('#myModalContent').load(this.href, function () {
+                    $('#myModal').modal({
+                        keyboard: true
+                    }, 'show');
+                });
+                return false;
+            });
+        });
+
+    </script>
+}

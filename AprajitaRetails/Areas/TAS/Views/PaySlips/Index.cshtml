@@ -1,0 +1,153 @@
+﻿@model IEnumerable<AprajitaRetails.Areas.TAS.Models.Data.PaySlip>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentSalary.CurrentSalaryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.StaffName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Month)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BasicSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoOfDaysPresent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleIncentive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WOWBillAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WOWBillIncentive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastPcsAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastPCsIncentive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OthersIncentive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrossSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StandardDeductions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TDSDeductions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PFDeductions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdvanceDeducations)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OtherDeductions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentSalary.CurrentSalaryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.StaffName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Month)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BasicSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfDaysPresent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalSale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleIncentive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WOWBillAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WOWBillIncentive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastPcsAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastPCsIncentive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OthersIncentive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrossSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StandardDeductions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TDSDeductions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PFDeductions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdvanceDeducations)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OtherDeductions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PaySlipId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PaySlipId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PaySlipId })
+        </td>
+    </tr>
+}
+
+</table>

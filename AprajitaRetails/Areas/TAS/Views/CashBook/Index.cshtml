@@ -1,0 +1,86 @@
+﻿@model IEnumerable<AprajitaRetails.Areas.TAS.Models.Views.CashBook>
+
+@{
+    ViewBag.Title = "Cash Book";
+}
+
+<h2>Cash Book</h2>
+
+<div>
+    @using (Html.BeginForm("Index", "CashBook", FormMethod.Get))
+    {
+        <p class="">
+          
+            By Date: @Html.EditorFor(model => model.FirstOrDefault().EDate, new { htmlAttributes = new { @value = DateTime.Now.ToShortDateString() } })
+            @Html.ValidationMessageFor(model => model.FirstOrDefault().EDate, "", new { @class = "text-danger" })
+            <input type="submit" value="Filter" class="btn btn-primary"/><br />
+            
+        </p>
+
+    }
+</div>
+<table class="table table-striped table-bordered table-condensed  bg-warning">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Particulars)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CashIn)
+        </th>
+        <th class="text-danger">
+            @Html.DisplayNameFor(model => model.CashOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CashBalance)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+<tr class="bg-info">
+    <td>
+        @Html.DisplayFor(modelItem => item.EDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Particulars)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CashIn)
+    </td>
+    @if (item.CashOut > 0)
+    {
+        <td class="text-danger">
+            @Html.DisplayFor(modelItem => item.CashOut)
+        </td>
+    }
+    else
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.CashOut)
+        </td>
+    }
+
+    @if (item.CashBalance < 0)
+    {
+        <td class="text-danger">
+            @Html.DisplayFor(modelItem => item.CashBalance)
+        </td>
+
+    }else{
+    <td class="text-success">
+        @Html.DisplayFor(modelItem => item.CashBalance)
+    </td>
+    }
+
+    @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+</tr>
+}
+
+</table>

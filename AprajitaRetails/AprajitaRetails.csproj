@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="LinqToExcel, Version=1.11.0.0, Culture=neutral, PublicKeyToken=9c8ea65a58f03f1f, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\LinqToExcel.dll</HintPath>
     </Reference>
@@ -58,6 +61,9 @@
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RawPrint, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RawPrint.0.5.0\lib\net40\RawPrint.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
     </Reference>
@@ -202,6 +208,54 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\TAS\Controllers\AccountNumbersController.cs" />
+    <Compile Include="Areas\TAS\Controllers\AttendancesController.cs" />
+    <Compile Include="Areas\TAS\Controllers\BankDepositsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\BankWithdrawalsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\CashBookController.cs" />
+    <Compile Include="Areas\TAS\Controllers\CashInBanksController.cs" />
+    <Compile Include="Areas\TAS\Controllers\CashInHandsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\CashPaymentsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\CashReceiptsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\ChequesLogsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\CurrentSalariesController.cs" />
+    <Compile Include="Areas\TAS\Controllers\DailySalesController.cs" />
+    <Compile Include="Areas\TAS\Controllers\DueRecoverdsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\TAS\Controllers\EndOfDaysController.cs" />
+    <Compile Include="Areas\TAS\Controllers\ExpensesController.cs" />
+    <Compile Include="Areas\TAS\Controllers\TasHomeContoller.cs" />
+    <Compile Include="Areas\TAS\Controllers\PaymentsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\PaySlipsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\PettyCashExpensesController.cs" />
+    <Compile Include="Areas\TAS\Controllers\ReceiptsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\RoleAssignController.cs" />
+    <Compile Include="Areas\TAS\Controllers\SalaryPaymentsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\SalesmenAPIController.cs" />
+    <Compile Include="Areas\TAS\Controllers\StaffAdvancePaymentsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\StaffAdvanceReceiptsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\SuspenseAccountsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\TailorAttendancesController.cs" />
+    <Compile Include="Areas\TAS\Controllers\TailoringEmployeesController.cs" />
+    <Compile Include="Areas\TAS\Controllers\TailoringSalaryPaymentsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\TailoringStaffAdvancePaymentsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\TailoringStaffAdvanceReceiptsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\TalioringBookingsController.cs" />
+    <Compile Include="Areas\TAS\Controllers\TalioringDeliveriesController.cs" />
+    <Compile Include="Areas\TAS\Migrations\Configuration.cs" />
+    <Compile Include="Areas\TAS\Models\Data\AprajitaRetailsContext.cs" />
+    <Compile Include="Areas\TAS\Models\Data\HRM.cs" />
+    <Compile Include="Areas\TAS\Models\Data\TableList.cs" />
+    <Compile Include="Areas\TAS\Models\Data\Tailoring.cs" />
+    <Compile Include="Areas\TAS\Models\Helpers\MonthEnd.cs" />
+    <Compile Include="Areas\TAS\Models\Helpers\Reports.cs" />
+    <Compile Include="Areas\TAS\Models\Helpers\Utils.cs" />
+    <Compile Include="Areas\TAS\Models\Reports\StaffReports.cs" />
+    <Compile Include="Areas\TAS\Models\Types\DataTypes.cs" />
+    <Compile Include="Areas\TAS\Models\Views\ViewList.cs" />
+    <Compile Include="Ops\Printers\PDFPrinter.cs" />
+    <Compile Include="Areas\TAS\TASAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\ExcelUploaderController.cs" />
@@ -266,6 +320,7 @@
     <Content Include="Content\md\addons\rating.min.css" />
     <Content Include="Content\md\bootstrap.css" />
     <Content Include="Content\md\bootstrap.min.css" />
+    <Content Include="Content\md\mdb-pro-min.css" />
     <Content Include="Content\md\mdb.css" />
     <Content Include="Content\md\mdb.lite.css" />
     <Content Include="Content\md\mdb.lite.min.css" />
@@ -355,6 +410,174 @@
     <Content Include="Content\font\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff" />
     <Content Include="Content\font\roboto\Roboto-Thin.woff2" />
+    <Content Include="Areas\TAS\Views\web.config" />
+    <Content Include="Areas\TAS\Views\AccountNumbers\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\AccountNumbers\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\AccountNumbers\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\AccountNumbers\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\AccountNumbers\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\Attendances\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\Attendances\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\Attendances\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\Attendances\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\Attendances\EmpDetails.cshtml" />
+    <Content Include="Areas\TAS\Views\Attendances\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\BankDeposits\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\BankDeposits\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\BankDeposits\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\BankDeposits\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\BankDeposits\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\BankWithdrawals\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\BankWithdrawals\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\BankWithdrawals\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\BankWithdrawals\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\BankWithdrawals\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\CashBook\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\CashBook\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInBanks\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInBanks\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInBanks\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInBanks\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInBanks\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInHands\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInHands\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInHands\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInHands\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\CashInHands\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\CashPayments\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\CashPayments\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\CashPayments\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\CashPayments\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\CashPayments\HomeExpenses.cshtml" />
+    <Content Include="Areas\TAS\Views\CashPayments\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\CashReceipts\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\CashReceipts\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\CashReceipts\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\CashReceipts\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\CashReceipts\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\ChequesLogs\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\ChequesLogs\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\ChequesLogs\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\ChequesLogs\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\ChequesLogs\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\CurrentSalaries\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\CurrentSalaries\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\CurrentSalaries\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\CurrentSalaries\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\CurrentSalaries\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\DailySales\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\DailySales\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\DailySales\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\DailySales\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\DailySales\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\DueRecoverds\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\DueRecoverds\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\DueRecoverds\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\DueRecoverds\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\DueRecoverds\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\Employees\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\Employees\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\Employees\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\Employees\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\Employees\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\EndOfDays\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\EndOfDays\DailySaleReport.cshtml" />
+    <Content Include="Areas\TAS\Views\EndOfDays\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\EndOfDays\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\EndOfDays\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\EndOfDays\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\Expenses\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\Expenses\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\Expenses\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\Expenses\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\Expenses\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\Home\About.cshtml" />
+    <Content Include="Areas\TAS\Views\Home\Contact.cshtml" />
+    <Content Include="Areas\TAS\Views\Home\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\Home\Index4.cshtml" />
+    <Content Include="Areas\TAS\Views\Payments\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\Payments\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\Payments\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\Payments\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\Payments\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\PaySlips\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\PaySlips\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\PaySlips\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\PaySlips\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\PaySlips\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\PettyCashExpenses\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\PettyCashExpenses\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\PettyCashExpenses\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\PettyCashExpenses\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\PettyCashExpenses\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\Receipts\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\Receipts\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\Receipts\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\Receipts\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\Receipts\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\SalaryPayments\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\SalaryPayments\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\SalaryPayments\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\SalaryPayments\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\SalaryPayments\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\TAS\Views\Shared\_Layout4.cshtml" />
+    <Content Include="Areas\TAS\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\TAS\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\TAS\Views\Shared\Lockout.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvancePayments\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvancePayments\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvancePayments\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvancePayments\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvancePayments\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvanceReceipts\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvanceReceipts\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvanceReceipts\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvanceReceipts\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\StaffAdvanceReceipts\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\SuspenseAccounts\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\SuspenseAccounts\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\SuspenseAccounts\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\SuspenseAccounts\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\SuspenseAccounts\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\TailorAttendances\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\TailorAttendances\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\TailorAttendances\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\TailorAttendances\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\TailorAttendances\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringEmployees\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringEmployees\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringEmployees\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringEmployees\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringEmployees\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringSalaryPayments\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringSalaryPayments\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringSalaryPayments\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringSalaryPayments\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringSalaryPayments\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvancePayments\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvancePayments\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvancePayments\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvancePayments\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvancePayments\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvanceReceipts\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvanceReceipts\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvanceReceipts\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvanceReceipts\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\TailoringStaffAdvanceReceipts\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringBookings\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringBookings\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringBookings\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringBookings\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringBookings\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringBookings\PendingBooking.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringDeliveries\Create.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringDeliveries\Delete.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringDeliveries\Details.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringDeliveries\Edit.cshtml" />
+    <Content Include="Areas\TAS\Views\TalioringDeliveries\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -512,6 +735,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>

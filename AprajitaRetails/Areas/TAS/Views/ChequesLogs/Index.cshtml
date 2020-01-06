@@ -1,0 +1,128 @@
+﻿@model IEnumerable<AprajitaRetails.Areas.TAS.Models.Data.ChequesLog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cheques Book Log</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null, new { data_modal = "" , @class="btn btn-success " })
+</p>
+<table class="table  table-bordered table-condensed  table-hover bg-info  ">
+    <tr class="bg-success">
+        <th>
+            @Html.DisplayNameFor(model => model.BankName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequesDate)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.DepositDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClearedDate)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.IssuedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssuedTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.IsPDC)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.IsIssuedByAprajitaRetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDepositedOnAprajitaRetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BankName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChequesDate)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.DepositDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClearedDate)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IssuedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IssuedTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.IsPDC)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsIssuedByAprajitaRetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDepositedOnAprajitaRetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ChequesLogId }, new { data_modal = ""  , @class="btn btn-primary "})
+                @Html.ActionLink("Details", "Details", new { id = item.ChequesLogId }, new { data_modal = ""  , @class="btn btn-info "})
+                @Html.ActionLink("Delete", "Delete", new { id = item.ChequesLogId }, new { data_modal = "" , @class="btn btn-danger " })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $("a[data-modal]").on("click", function (e) {
+                $('#myModalContent').load(this.href, function () {
+                    $('#myModal').modal({
+                        keyboard: true
+                    }, 'show');
+                });
+                return false;
+            });
+        });
+
+
+    </script>
+}

@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace TAS_AprajiataRetails.Models.Data
 {
-    public class HRM
-    {
-    }
-
     //Payroll
     public class Employee
     {
@@ -38,6 +35,8 @@ namespace TAS_AprajiataRetails.Models.Data
         public ICollection<PettyCashExpense> CashExpenses { get; set; }
         public ICollection<Expense> Expenses { get; set; }
 
+        public virtual ICollection<CurrentSalary> CurrentSalaries { get; set; }
+
     }
 
     public class Attendance
@@ -64,52 +63,90 @@ namespace TAS_AprajiataRetails.Models.Data
     {
         //TODO: Think some thing others also 
         public int CurrentSalaryId { get; set; }
+
         public int EmployeeId { get; set; }
+        public virtual Employee Employee { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal BasicSalary { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal SundaySalary { get; set; }
+        
         public decimal LPRate { get; set; }
+        
         public decimal IncentiveRate { get; set; }
+        
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal IncentiveTarget { get; set; }
+        
         public decimal WOWBillRate { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal WOWBillTarget { get; set; }
-        public int NoOfWorkingDays { get; set; }
+        
         public bool IsSundayBillable { get; set; }
 
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EffectiveDate { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CloseDate { get; set; }
+
         public bool IsEffective { get; set; }
-        public virtual Employee Employee { get; set; }
+
+        public virtual ICollection<PaySlip> PaySlips { get; set; }
+        
     }
 
     public class PaySlip
     {
         public int PaySlipId { get; set; }
+
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime OnDate { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
 
         public int EmployeeId { get; set; }
-        public decimal BasicSalary { get; set; }
-        public int NoOfDaysPresent { get; set; }
-        public decimal TotalSale { get; set; }
-        public decimal SaleIncentive { get; set; }
-        public decimal WOWBillAmount { get; set; }
-        public decimal WOWBillIncentive { get; set; }
-        public decimal LastPcsAmount { get; set; }
-        public decimal LastPCsIncentive { get; set; }
-        public decimal OthersIncentive { get; set; }
-
-        public decimal GrossSalary { get; set; }
+        public virtual Employee Employee { get; set; }
         
+        public int? CurrentSalaryId { get; set; }
+        public virtual CurrentSalary CurrentSalary { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal BasicSalary { get; set; }
+        
+        public int NoOfDaysPresent { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalSale { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal SaleIncentive { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal WOWBillAmount { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal WOWBillIncentive { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal LastPcsAmount { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal LastPCsIncentive { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal OthersIncentive { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal GrossSalary { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal StandardDeductions { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal TDSDeductions { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal PFDeductions { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal AdvanceDeducations { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal OtherDeductions { get; set; }
 
         public string Remarks { get; set; }
 
-        public virtual Employee Employee { get; set; }
+        
 
 
     }
