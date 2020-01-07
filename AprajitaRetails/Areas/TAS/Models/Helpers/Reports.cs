@@ -8,7 +8,7 @@ using AprajitaRetails.Areas.TAS.Models.Views;
 
 namespace AprajitaRetails.Areas.TAS.Models.Helpers
 {
-    public class Reports
+    public class Report
     {
         public static TailoringReport GetTailoringReport()
         {

@@ -17,7 +17,7 @@ namespace AprajitaRetails.Areas.TAS
             context.MapRoute(
                 "TAS_default",
                 "TAS/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller="ARHome", action = "Index", id = UrlParameter.Optional }
             );
            
         }

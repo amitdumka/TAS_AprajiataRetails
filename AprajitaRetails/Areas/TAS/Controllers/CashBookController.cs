@@ -18,7 +18,7 @@ namespace AprajitaRetails.Areas.TAS.Controllers
         {
             DateTime date = EDate ?? DateTime.Today.AddDays(-1);
 
-            List<CashBook> book = Reports.GetMontlyCashBook(date);
+            List<CashBook> book = Report.GetMontlyCashBook(date);
             if (book != null)
                 return View(book);
             else
@@ -32,7 +32,7 @@ namespace AprajitaRetails.Areas.TAS.Controllers
 
             if (id != null && id == 101)
             {
-                List<CashBook> book1 = Reports.CorrectCashInHand_OnDB(date);
+                List<CashBook> book1 = Report.CorrectCashInHand_OnDB(date);
                 if (book1 != null)
                     return View(book1);
                 else
@@ -40,7 +40,7 @@ namespace AprajitaRetails.Areas.TAS.Controllers
             }
 
 
-            List<CashBook> book = Reports.GetMontlyCashBook(date);
+            List<CashBook> book = Report.GetMontlyCashBook(date);
             if (book != null)
                 return View(book);
             else

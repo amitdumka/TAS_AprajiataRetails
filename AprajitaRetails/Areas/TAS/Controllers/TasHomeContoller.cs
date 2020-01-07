@@ -8,16 +8,16 @@ using AprajitaRetails.Areas.TAS.Models.Views;
 
 namespace AprajitaRetails.Areas.TAS.Controllers
 {
-    public class HomeContoller : Controller
+    public class ARHomeContoller : Controller
     {
         public ActionResult Index()
         {
             MasterViewReport reportView = new MasterViewReport
             {
-                SaleReport = Reports.GetSaleRecord(),
-                TailoringReport = Reports.GetTailoringReport(),
-                EmpInfoList = Reports.GetEmpInfo(),
-                AccountsInfo = Reports.GetAccoutingRecord()
+                SaleReport = Report.GetSaleRecord(),
+                TailoringReport = Report.GetTailoringReport(),
+                EmpInfoList = Report.GetEmpInfo(),
+                AccountsInfo = Report.GetAccoutingRecord()
             };
             return View(reportView);
         }

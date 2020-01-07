@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using AprajitaRetails.Areas.TAS.Models.Data;
 
-namespace AprajitaRetails.Areas.TAS.Models.Reports
+namespace AprajitaRetails.Areas.TAS.Models.Report
 {
     public class StaffPayments
     {

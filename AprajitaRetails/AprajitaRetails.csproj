@@ -208,7 +208,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Accounts\AccountsAreaRegistration.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="Areas\HRM\HRMAreaRegistration.cs" />
+    <Compile Include="Areas\Reports\ReportsAreaRegistration.cs" />
     <Compile Include="Areas\TAS\Controllers\AccountNumbersController.cs" />
     <Compile Include="Areas\TAS\Controllers\AttendancesController.cs" />
     <Compile Include="Areas\TAS\Controllers\BankDepositsController.cs" />
@@ -251,7 +256,7 @@
     <Compile Include="Areas\TAS\Models\Helpers\MonthEnd.cs" />
     <Compile Include="Areas\TAS\Models\Helpers\Reports.cs" />
     <Compile Include="Areas\TAS\Models\Helpers\Utils.cs" />
-    <Compile Include="Areas\TAS\Models\Reports\StaffReports.cs" />
+    <Compile Include="Areas\TAS\Models\Report\StaffReports.cs" />
     <Compile Include="Areas\TAS\Models\Types\DataTypes.cs" />
     <Compile Include="Areas\TAS\Models\Views\ViewList.cs" />
     <Compile Include="Ops\Printers\PDFPrinter.cs" />
@@ -491,10 +496,10 @@
     <Content Include="Areas\TAS\Views\Expenses\Details.cshtml" />
     <Content Include="Areas\TAS\Views\Expenses\Edit.cshtml" />
     <Content Include="Areas\TAS\Views\Expenses\Index.cshtml" />
-    <Content Include="Areas\TAS\Views\Home\About.cshtml" />
-    <Content Include="Areas\TAS\Views\Home\Contact.cshtml" />
-    <Content Include="Areas\TAS\Views\Home\Index.cshtml" />
-    <Content Include="Areas\TAS\Views\Home\Index4.cshtml" />
+    <Content Include="Areas\TAS\Views\ARHome\About.cshtml" />
+    <Content Include="Areas\TAS\Views\ARHome\Contact.cshtml" />
+    <Content Include="Areas\TAS\Views\ARHome\Index.cshtml" />
+    <Content Include="Areas\TAS\Views\ARHome\Index4.cshtml" />
     <Content Include="Areas\TAS\Views\Payments\Create.cshtml" />
     <Content Include="Areas\TAS\Views\Payments\Delete.cshtml" />
     <Content Include="Areas\TAS\Views\Payments\Details.cshtml" />
@@ -578,6 +583,14 @@
     <Content Include="Areas\TAS\Views\TalioringDeliveries\Index.cshtml" />
     <Content Include="Areas\TAS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\WelCome.cshtml" />
+    <Content Include="Areas\Reports\Views\web.config" />
+    <Content Include="Areas\HRM\Views\web.config" />
+    <Content Include="Areas\Accounts\Views\web.config" />
+    <Content Include="Areas\Dashboard\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -735,9 +748,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Accounts\Controllers\" />
+    <Folder Include="Areas\Accounts\Data\" />
+    <Folder Include="Areas\Accounts\Views\Shared\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Dashboard\Controllers\" />
+    <Folder Include="Areas\Dashboard\Data\" />
+    <Folder Include="Areas\Dashboard\Views\Shared\" />
+    <Folder Include="Areas\HRM\Controllers\" />
+    <Folder Include="Areas\HRM\Data\" />
+    <Folder Include="Areas\HRM\Views\Shared\" />
+    <Folder Include="Areas\Reports\Controllers\" />
+    <Folder Include="Areas\Reports\Data\" />
+    <Folder Include="Areas\Reports\Views\Shared\" />
     <Folder Include="Test\" />
   </ItemGroup>
   <ItemGroup>
