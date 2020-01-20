@@ -62,7 +62,7 @@ namespace TAS_AprajiataRetails.Controllers
                     //TODO: in future make it more robust
                     if (dailySale.PayMode != PayModes.Cash && dailySale.PayMode != PayModes.Coupons && dailySale.PayMode != PayModes.Points)
                     {
-                        Utils.UpDateCashInBank(db, dailySale.SaleDate, dailySale.Amount - dailySale.CashAmount);
+                        Utils.UpDateCashInBank(db, dailySale.SaleDate,  dailySale.CashAmount); //TODO: Here adding card amount in cash amoutn
                     }
                 }
             }
