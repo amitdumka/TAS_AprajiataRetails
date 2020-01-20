@@ -216,4 +216,80 @@ namespace TAS_AprajiataRetails.Models.Views
         [DataType(DataType.Currency), Column(TypeName = "money")]
         public decimal CashBalance { get; set; }
     }
+
+
+    public class IncomeExpensesReport
+    {
+        public int IncomeExpensesReportId { get; set; }
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "On Date")]
+
+        public DateTime OnDate { get; set; }
+
+        //Income
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalSale { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalTailoringSale { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalManualSale { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalRecipts { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalCashRecipts { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalOtherIncome { get; set; }
+
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalIncome { get { return (TotalSale + TotalTailoringSale + TotalManualSale + TotalRecipts + TotalCashRecipts + TotalOtherIncome); } }
+
+
+        //Expenses
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalStaffPayments { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalTailoringPayments { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalExpenses { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalHomeExpenses { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalPayments { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalCashPayments { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalOthersExpenses { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalAllExpenses { get { return (TotalStaffPayments + TotalTailoringPayments + TotalExpenses + TotalPayments + TotalCashPayments + TotalOthersExpenses + TotalHomeExpenses); } }
+
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalDues { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalRecovery { get; set; }
+        [DataType(DataType.Currency), Column(TypeName = "money")]
+        public decimal TotalPendingDues { get; set; }
+
+    }
+
+
+    public class IERVM
+    {
+        public IncomeExpensesReport Today { get; set; }
+        public IncomeExpensesReport CurrentWeek { get; set; }
+        public IncomeExpensesReport Monthly { get; set; }
+        public IncomeExpensesReport Yearly { get; set; }
+    }
 }

@@ -327,6 +327,7 @@
     <Compile Include="Controllers\EndOfDaysController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncomeExpenseReportController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\PaySlipsController.cs" />
@@ -355,6 +356,7 @@
     <Compile Include="Models\Data\HRM.cs" />
     <Compile Include="Models\Data\TableList.cs" />
     <Compile Include="Models\Data\Tailoring.cs" />
+    <Compile Include="Models\Helpers\IEReport.cs" />
     <Compile Include="Models\Helpers\MonthEnd.cs" />
     <Compile Include="Models\Helpers\Reports.cs" />
     <Compile Include="Models\Helpers\Utils.cs" />
@@ -731,6 +733,7 @@
     <Content Include="Views\CurrentSalaries\Details.cshtml" />
     <Content Include="Views\CurrentSalaries\Edit.cshtml" />
     <Content Include="Views\CurrentSalaries\Index.cshtml" />
+    <Content Include="Views\IncomeExpenseReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

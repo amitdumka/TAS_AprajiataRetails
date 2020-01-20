@@ -1,0 +1,173 @@
+﻿@model TAS_AprajiataRetails.Models.Views.IncomeExpensesReport
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Balance</h2>
+
+<div>
+    <h4>Income Expenses Report</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalTailoringSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalTailoringSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalManualSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalManualSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalRecipts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalRecipts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCashRecipts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCashRecipts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalOtherIncome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalOtherIncome)
+        </dd>
+
+        <dt  class="text-danger text-left">
+            @Html.DisplayNameFor(model => model.TotalIncome)
+        </dt>
+
+        <dd  class="text-danger text-left">
+            @Html.DisplayFor(model => model.TotalIncome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalStaffPayments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalStaffPayments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalTailoringPayments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalTailoringPayments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalExpenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalExpenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalHomeExpenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalHomeExpenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPayments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPayments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCashPayments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCashPayments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalOthersExpenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalOthersExpenses)
+        </dd>
+
+        <dt class="text-danger text-left">
+            @Html.DisplayNameFor(model => model.TotalAllExpenses)
+        </dt>
+
+        <dd class="text-dange text-leftr">
+            @Html.DisplayFor(model => model.TotalAllExpenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalDues)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalDues)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalRecovery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalRecovery)
+        </dd>
+
+        <dt class="text-danger text-left">
+            @Html.DisplayNameFor(model => model.TotalPendingDues)
+        </dt>
+
+        <dd class="text-danger text-left">
+            @Html.DisplayFor(model => model.TotalPendingDues)
+        </dd>
+
+    </dl>
+</div>
+<p class="btn-group btn-group-sm">
+    @Html.ActionLink("Today", "Index", new { id = 1 }, new { @class = "btn btn-info btn-sm" })
+    @Html.ActionLink("Weekly", "Index", new { id = 7 }, new { @class = "btn btn-success btn-sm" })
+    @Html.ActionLink("Monthly", "Index", new { id = 30 }, new { @class = "btn btn-primary btn-sm" })
+    @Html.ActionLink("Yearly", "Index", new { id = 365 }, new { @class = "btn btn-warning btn-sm" })
+
+</p>
