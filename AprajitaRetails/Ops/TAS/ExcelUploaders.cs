@@ -35,7 +35,9 @@ namespace AprajitaRetails.Ops.TAS
                         //TODO: pass from calling function of http post
                        // string targetpath = Server.MapPath("~/Doc/"); 
                         FileUpload.SaveAs(targetpath + filename);
+
                         string pathToExcelFile = targetpath + filename;
+                        
                         var connectionString = "";
                         if (filename.EndsWith(".xls"))
                         {
