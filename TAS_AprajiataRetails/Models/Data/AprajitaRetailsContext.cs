@@ -5,7 +5,7 @@ namespace TAS_AprajiataRetails.Models.Data
     // DBContext Sections
     public class AprajitaRetailsContext : DbContext
     {
-        public AprajitaRetailsContext() : base("AprajitaRetails")
+        public AprajitaRetailsContext() : base("Amitkumar")
         {
             Database.SetInitializer<AprajitaRetailsContext>(new CreateDatabaseIfNotExists<AprajitaRetailsContext>());
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<AprajitaRetailsContext, Migrations.Configuration>());

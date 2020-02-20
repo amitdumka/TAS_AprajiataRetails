@@ -95,6 +95,7 @@ namespace TAS_AprajiataRetails.Controllers
             {
                 return HttpNotFound ();
             }
+            if(attList.Count()>0)
             ViewBag.EmpName = attList.First ().Employee.StaffName;
             return PartialView (attList);
         }
